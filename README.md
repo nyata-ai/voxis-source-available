@@ -15,7 +15,7 @@ It is made by PT. Karya Nyata Teknologi (Nyata.AI). Nyata also runs Voxis as a h
 Voxis handles sensitive recordings: client meetings and counselling sessions. People who hold recordings like these should not have to take a privacy policy on trust.
 
 - **You can check our claims.** The code shows how audio, transcripts, and summaries are stored, encrypted, and deleted. Read it yourself, or ask someone you trust to review it.
-- **Your data stays with you.** Recordings, transcripts, and summaries are stored on your own server, under your own access rules.
+- **Your data is stored with you.** Recordings, transcripts, and summaries are stored on your own server, under your own access rules. For transcription, the audio is sent to Speechmatics under your own account, and Voxis asks Speechmatics to delete each job when it finishes. See [how your data moves](#how-your-data-moves).
 - **Transcription is a deliberate choice.** We use Speechmatics because it handles speakers who switch languages mid-sentence, and because it also offers an on-premises option (not yet tested with this edition).
 - **Changes are reviewed.** Updates reach this repository as reviewed changes.
 
