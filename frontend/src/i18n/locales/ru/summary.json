@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "Общее резюме",
+    "keyPoints": "Ключевые моменты",
+    "actionItems": "Действия",
+    "questionsAnswers": "Вопросы и ответы"
+  },
+  "typeMeta": {
+    "general": "Общий",
+    "keyPoints": "Ключевые моменты",
+    "actions": "Действия",
+    "qAndA": "Вопросы и ответы",
+    "fallback": "Краткое содержание"
+  },
+  "profile": {
+    "label": "Профиль",
+    "general_professional": "Общий профессиональный",
+    "legal": "Юридический",
+    "investment_analysis": "Инвестиционный анализ",
+    "journalism": "Журналистика",
+    "negotiation": "Переговоры",
+    "decision_committee": "Комитет по решениям",
+    "investigation": "Расследование"
+  },
+  "viewer": {
+    "loading": "Загрузка сводки...",
+    "noContent": "Нет сводного содержания",
+    "evidence": "Доказательство:",
+    "owner": "Владелец:",
+    "due": "Должный:",
+    "questionPrefix": "Вопрос:",
+    "answerPrefix": "Отвечать:",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "Обработка...",
+    "unknownError": "Произошла неизвестная ошибка",
+    "copied": "Скопировано!",
+    "copy": "Копировать",
+    "showSources": "Показать источники",
+    "hideSources": "Скрыть источники",
+    "citations": "Цитаты",
+    "citation": "Цитата {{id}}",
+    "citationWithSpeaker": "Цитата {{id}}, {{speaker}}",
+    "citationWithTime": "Цитата {{id}}, {{time}}",
+    "citationWithSpeakerTime": "Цитата {{id}}, {{speaker}}, {{time}}",
+    "actionKinds": {
+      "action_item": "Действие",
+      "decision": "Решение",
+      "next_step": "Следующий шаг",
+      "open_issue": "Открытый вопрос"
+    },
+    "notSpecified": "В расшифровке не указано.",
+    "degradationNotice": "Это резюме завершено с резервным или нормализованным выводом. Сверьте его с расшифровкой."
+  },
+  "briefing": {
+    "title": "Сводка",
+    "empty": "Для этой сессии пока нет резюме.",
+    "autoStarted": "Запущено автоматически при открытии этой сессии.",
+    "notGenerated": "Это резюме ещё не создано.",
+    "generateAll": "Создать все",
+    "generatingAll": "Создание…",
+    "generateOne": "Создать: {{type}}",
+    "generatingOne": "Создание…",
+    "error": "Не удалось создать резюме. Попробуйте ещё раз.",
+    "generateTypeError": "Не удалось создать это резюме. Попробуйте ещё раз.",
+    "aiUnavailable": "Резюмирование с помощью ИИ недоступно.",
+    "rateLimited": "Создание ограничено по частоте. Подождите минуту и попробуйте ещё раз.",
+    "regenerateError": "Не удалось создать это резюме заново. Попробуйте ещё раз.",
+    "regenerateTypeError": "Не удалось заново создать резюме «{{type}}». Попробуйте ещё раз.",
+    "regenerate": "Создать заново",
+    "regenerating": "Создание заново…",
+    "loadError": "Не удалось загрузить это резюме. Попробуйте ещё раз.",
+    "status": {
+      "notGenerated": "Не создано",
+      "processing": "Создание…",
+      "ready": "Готово",
+      "failed": "Ошибка"
+    },
+    "tabsLabel": "Тип сводки",
+    "note": "Создано {{date}} · профиль {{profile}} · Имена говорящих определены моделью",
+    "noteWithoutProfile": "Создано {{date}} · Имена говорящих определены моделью"
+  },
+  "summarize": {
+    "button": "Подвести итог",
+    "title": "Создать сводку",
+    "description": "Выберите тип сводки для создания на основе этой транскрипции.",
+    "typeLabel": "Тип сводки",
+    "alreadyExists": "Этот тип сводки уже существует.",
+    "started": "Подведение итогов началось",
+    "failed": "Не удалось начать суммирование. Пожалуйста, попробуйте еще раз.",
+    "generating": "Создание...",
+    "start": "Начать подведение итогов"
+  },
+  "detail": {
+    "loading": "Загрузка сводки..."
+  }
+}

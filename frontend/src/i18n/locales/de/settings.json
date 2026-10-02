@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "Einstellungen",
+    "subtitle": "Verwalten Sie Ihr Konto und Ihre persönlichen Einstellungen."
+  },
+  "nav": {
+    "notifications": "Benachrichtigungen",
+    "profile": "Profil",
+    "appearance": "Aussehen",
+    "language": "Sprache",
+    "transcription": "Transkription",
+    "summary": "Zusammenfassung und Export",
+    "playback": "Wiedergabe",
+    "apiKeys": "API-Schlüssel",
+    "retention": "Aufnahme-Aufbewahrung"
+  },
+  "profile": {
+    "title": "Profil",
+    "description": "Ihre Kontoinformationen",
+    "name": "Name",
+    "email": "E-Mail",
+    "username": "Benutzername",
+    "ssoNote": "Ihr Profil wird von SSO verwaltet. Um Ihre Informationen zu aktualisieren, wenden Sie sich an Ihren Administrator.",
+    "updatePassword": "Passwort aktualisieren/ändern",
+    "manageMfa": "MFA verwalten",
+    "usage": {
+      "title": "Nutzung",
+      "description": "Ressourcennutzung Ihrer Organisation",
+      "error": "Nutzungsstatistiken können nicht geladen werden.",
+      "audioProcessed": "Verarbeitetes Audio",
+      "aiTokens": "Verwendete KI-Token",
+      "remainingToday": "{{count}} heute verbleibend",
+      "liveRecordingRetention": "Aufbewahrung von Live-Aufnahmen (Tage)",
+      "retentionDays_one": "{{count}} Tag",
+      "retentionDays_other": "{{count}} Tage",
+      "notEnabled": "Nicht aktiviert",
+      "storage": "Speichernutzung / Limit",
+      "unlimited": "Unbegrenzt",
+      "remaining": "Verbleibend: {{value}}",
+      "duration": {
+        "zero": "0 Min",
+        "lessThanMinute": "< 1 Min",
+        "minutes": "{{count}} min",
+        "hours": "{{count}} Std",
+        "hoursMinutes": "{{hours}} Std. {{minutes}} Min"
+      }
+    },
+    "securityAction": "Passwort und MFA verwalten"
+  },
+  "appearance": {
+    "title": "Aussehen",
+    "description": "Passen Sie die Darstellung von Voxis an.",
+    "light": "Hell",
+    "lightDescription": "Heller Hintergrund mit dunklem Text",
+    "dark": "Dunkel",
+    "darkDescription": "Dunkler Hintergrund mit hellem Text",
+    "system": "System",
+    "systemDescription": "Übernimmt die Einstellung Ihres Betriebssystems"
+  },
+  "transcription": {
+    "title": "Transkription",
+    "description": "Standardeinstellungen für die Transkription",
+    "defaultLanguage": "Standardsprache für neue Transkriptionen",
+    "diarization": {
+      "label": "Sprechertrennung",
+      "description": "Unterscheidet die Sprecher im Transkript"
+    }
+  },
+  "summary": {
+    "title": "Zusammenfassung und Export",
+    "description": "Standardeinstellungen für Zusammenfassung und Export",
+    "defaultType": "Standardzusammenfassungstyp",
+    "types": {
+      "general": "Allgemein",
+      "keyPoints": "Wichtige Punkte",
+      "actionItems": "Aufgaben",
+      "qAndA": "Fragen und Antworten"
+    },
+    "typeDescription": "Art der für neue Transkriptionen generierten Zusammenfassung",
+    "defaultFormat": "Standardexportformat",
+    "formatDescription": "Standardformat beim Exportieren von Transkriptionen und Zusammenfassungen",
+    "autoBriefings": {
+      "label": "Zusammenfassungen automatisch erstellen",
+      "description": "Erstellt alle vier Zusammenfassungsarten, sobald Sie eine fertige Sitzung öffnen. Standardmäßig aus: Zusammenfassungen werden auf Anfrage erstellt, jeweils eine Art."
+    },
+    "highStakes": {
+      "label": "Besonders sorgfältige Zusammenfassungen",
+      "description": "Für juristische, notarielle und andere Arbeiten, bei denen jedes Detail zählt. Voxis erfasst zuerst alle Namen, Daten, Zahlen und Verpflichtungen und erstellt daraus die Zusammenfassung. Das dauert länger und verbraucht mehr Token, verringert aber das Risiko ausgelassener oder verfälschter Details."
+    },
+    "profile": {
+      "label": "Professionelles Profil",
+      "description": "Legt den Schwerpunkt neuer Zusammenfassungen fest. Es bietet keine Beratung und prüft keine Behauptungen.",
+      "options": {
+        "general_professional": {
+          "label": "Allgemein professionell",
+          "description": "Betont Entscheidungen, Zusagen, Hindernisse und offene Fragen."
+        },
+        "legal": {
+          "label": "Recht",
+          "description": "Betont Ansprüche, Verpflichtungen, streitige Tatsachen und Belege."
+        },
+        "investment_analysis": {
+          "label": "Investmentanalyse",
+          "description": "Betont Zahlen, Prognosen, Annahmen, Risiken und Lücken in der Due Diligence."
+        },
+        "journalism": {
+          "label": "Journalismus",
+          "description": "Betont Quellenzuordnung, Behauptungen, Lücken bei der Verifizierung und Folgefragen."
+        },
+        "negotiation": {
+          "label": "Verhandlung",
+          "description": "Betont Angebote, Bedingungen, Zugeständnisse sowie vereinbarte und offene Punkte."
+        },
+        "decision_committee": {
+          "label": "Entscheidungsgremium",
+          "description": "Betont Vorlagen, Entscheidungen, Auflagen, abweichende Voten und Folgeaufgaben."
+        },
+        "investigation": {
+          "label": "Ermittlung",
+          "description": "Betont Chronologie, Eingeständnisse, Bestreiten, Beweisverweise und Widersprüche."
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "Wiedergabe",
+    "description": "Einstellungen für die Audiowiedergabe",
+    "speed": "Wiedergabegeschwindigkeit"
+  },
+  "apiKeys": {
+    "title": "API-Schlüssel",
+    "description": "Verwalten Sie API-Schlüssel für den Zugriff auf die Voxis-API und den MCP-Server.",
+    "create": "API-Schlüssel erstellen",
+    "empty": "Noch keine API-Schlüssel. Erstellen Sie einen Schlüssel, um externe Tools und Dienste zu verbinden.",
+    "scopesCount": "{{count}} Berechtigungen",
+    "lastUsed": "Zuletzt verwendet: {{value}}",
+    "never": "Läuft nicht ab",
+    "expires": "Gültig bis: {{value}}",
+    "revoke": "Widerrufen",
+    "relativeTime": {
+      "justNow": "Soeben",
+      "minutes": "Vor {{count}}m",
+      "hours": "Vor {{count}}h",
+      "days": "Vor {{count}}d"
+    },
+    "revokeDialog": {
+      "title": "Sind Sie sicher?",
+      "description": "Diese Aktion kann nicht rückgängig gemacht werden. Der API-Schlüssel wird dauerhaft widerrufen und alle Integrationen, die ihn verwenden, funktionieren nicht mehr."
+    },
+    "createDialog": {
+      "title": "Neuen API-Schlüssel erstellen",
+      "description": "Erstellen Sie einen Schlüssel für den Zugriff auf die Voxis-API und den MCP-Server.",
+      "keyName": "Schlüsselname",
+      "keyNamePlaceholder": "z.B. Produktion, Claude Desktop",
+      "scopes": "Bereiche",
+      "expiration": "Ablauf",
+      "expirationOptions": {
+        "30": "30 Tage",
+        "60": "60 Tage",
+        "90": "90 Tage",
+        "none": "Läuft nicht ab"
+      },
+      "error": "Der API-Schlüssel konnte nicht erstellt werden. Prüfen Sie die Angaben und versuchen Sie es erneut.",
+      "creating": "Erstellen...",
+      "submit": "Erstellen"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "Medien anzeigen",
+        "description": "Mediendateien anzeigen und herunterladen"
+      },
+      "mediaWrite": {
+        "label": "Medien verwalten",
+        "description": "Medien hochladen und löschen"
+      },
+      "transcriptionRead": {
+        "label": "Transkripte anzeigen",
+        "description": "Transkripte anzeigen"
+      },
+      "transcriptionWrite": {
+        "label": "Transkriptionen starten",
+        "description": "Neue Transkriptionen starten"
+      },
+      "summaryRead": {
+        "label": "Zusammenfassungen anzeigen",
+        "description": "Zusammenfassungen lesen"
+      },
+      "summaryWrite": {
+        "label": "Zusammenfassungen erstellen",
+        "description": "Zusammenfassungen erstellen; erfordert auch Zugriff auf Transkripte"
+      },
+      "exportRead": {
+        "label": "Export",
+        "description": "Dokumente exportieren; erfordert auch Lesezugriff auf die Quelle"
+      }
+    },
+    "created": {
+      "title": "API-Schlüssel erstellt",
+      "description": "Ihr API-Schlüssel wurde erfolgreich erstellt.",
+      "warning": "Dieser Schlüssel wird nur einmal angezeigt. Kopieren Sie ihn jetzt und bewahren Sie ihn sicher auf.",
+      "snippets": "Verbindungsbeispiele",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Fügen Sie Folgendes zur MCP-Konfiguration von Claude Desktop oder Claude Code hinzu:",
+        "codex": "Fügen Sie Ihrer OpenAI Codex MCP-Konfiguration Folgendes hinzu:",
+        "adk": "Fügen Sie Ihrer Google ADK MCP-Konfiguration Folgendes hinzu:",
+        "cursor": "Fügen Sie Ihrer Cursor- oder VS Code MCP-Konfiguration Folgendes hinzu:",
+        "rest": "Verwenden Sie Ihren API-Schlüssel mit Curl oder einem beliebigen HTTP-Client:",
+        "openapi": "OpenAPI-Spezifikations-URL:",
+        "openapiNote": "Hinweis: Benutzerdefinierte GPTs in ChatGPT benötigen OAuth-Authentifizierung (Phase 2). Verwenden Sie für den direkten Zugriff die REST-API mit Ihrem API-Schlüssel."
+      },
+      "done": "Erledigt",
+      "copy": "Kopieren",
+      "copied": "Kopiert!",
+      "failed": "Fehlgeschlagen",
+      "copySnippet": "Beispiel kopieren",
+      "copyApiKey": "API-Schlüssel kopieren"
+    }
+  },
+  "retention": {
+    "title": "Audioaufbewahrung bei Live-Aufnahmen",
+    "description": "Löscht automatisch die Original-Audiodateien von Live-Aufnahmen. Transkripte und Zusammenfassungen bleiben verfügbar.",
+    "loadError": "Die Einstellungen zur Aufnahme-Aufbewahrung konnten nicht geladen werden.",
+    "enabled": {
+      "label": "Audio von Live-Aufnahmen automatisch löschen",
+      "description": "Löscht das gespeicherte Audio nach der gewählten Frist dauerhaft von diesem Server. Kopien in bestehenden Backups bleiben erhalten, bis diese Backups gelöscht werden."
+    },
+    "days": {
+      "label": "Löschen nach",
+      "description": "Wählen Sie zwischen 1 und 30 Tagen nach Abschluss der Live-Aufnahme."
+    },
+    "applyExisting": {
+      "label": "Auf bestehende Live-Aufnahmen anwenden",
+      "description": "Löscht auch Audio von bereits abgeschlossenen Live-Aufnahmen, die älter als der gewählte Zeitraum sind."
+    },
+    "preview": {
+      "count": "{{count}} Live-Aufnahmen haben Audio, das sofort gelöscht werden kann.",
+      "oldest": "Älteste infrage kommende Aufnahme abgeschlossen am {{date}}."
+    },
+    "confirm": {
+      "label": "Anzahl zur sofortigen Löschung bestätigen",
+      "description": "Geben Sie {{count}} ein, um die sofortige dauerhafte Löschung des Audios zu bestätigen."
+    },
+    "confirmationRequired": "Geben Sie die Anzahl zur sofortigen Löschung ein, bevor Sie speichern.",
+    "save": "Aufbewahrungsrichtlinie speichern",
+    "saving": "Wird gespeichert...",
+    "saved": "Aufbewahrungsrichtlinie gespeichert.",
+    "saveError": "Die Aufbewahrungsrichtlinie konnte nicht gespeichert werden."
+  }
+}

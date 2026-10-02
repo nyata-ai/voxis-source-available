@@ -1,0 +1,25 @@
+{
+  "codes": {
+    "bad_request": "无法处理该请求。请检查详细信息并重试。",
+    "validation_error": "部分信息有误。请检查表单后重试。",
+    "invalid_input": "部分信息有误。请检查表单后重试。",
+    "not_found": "我们找不到该项目。",
+    "forbidden": "您无权访问该项目。",
+    "unauthorized": "您的会话已过期。请重新登录。",
+    "conflict": "另一项操作正在进行，请稍后重试。",
+    "internal_error": "服务出现问题，请重试。",
+    "service_unavailable": "此服务暂时不可用。请稍后重试。",
+    "storage_quota_exceeded": "存储空间已用尽。请先在媒体库中删除不再需要的音频，然后重试。",
+    "rate_limited": "请求太多。请稍等片刻，然后重试。",
+    "scan_pending": "为了安全起见，仍在扫描此文件。请稍后重试。",
+    "scan_failed": "该文件未通过安全扫描，无法使用。",
+    "recent_auth_required": "请在继续之前再次确认您的身份。",
+    "state_invalid": "该项目尚未准备好执行该操作。",
+    "network": "网络错误。请检查您的连接并重试。",
+    "timeout": "请求超时，请重试。",
+    "role_required": "您的账户尚无访问权限。请联系管理员为您开通。",
+    "upload_limit": "正在进行的上传过多。请在其中一个完成后重试。",
+    "media_too_long": "此录音超出了此服务器允许的时长。请将其拆分为较短的部分后重试。",
+    "model_busy": "AI 模型繁忙，请稍后重试。"
+  }
+}

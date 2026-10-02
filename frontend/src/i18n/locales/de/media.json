@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "Bereit",
+    "processing": "In Bearbeitung",
+    "failed": "Fehlgeschlagen",
+    "openFile": "Datei öffnen",
+    "openAnyway": "Trotz laufender Verarbeitung öffnen",
+    "openFailed": "Datei konnte nicht geöffnet werden"
+  },
+  "upload": {
+    "dropzone": "Ziehen Sie Audiodateien hier per Drag & Drop",
+    "browse": "oder Datei auswählen",
+    "browseFiles": "Dateien auswählen",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "Maximal 1 GB pro Datei",
+    "queueLabel": "Upload-Warteschlange",
+    "rejectedTitle": "Abgelehnte Dateien",
+    "rejectedLabel": "Abgelehnte Dateien",
+    "uploading": "{{name}} wird hochgeladen",
+    "processing": "Wird auf dem Server verarbeitet…",
+    "complete": "Upload abgeschlossen",
+    "viewFile": "Datei ansehen",
+    "viewFileNamed": "Datei ansehen: {{name}}",
+    "remove": "{{name}} entfernen",
+    "errors": {
+      "failed": "Der Upload ist fehlgeschlagen"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "Nicht unterstützter Dateityp",
+      "tooLarge": "Die Datei überschreitet die maximale Größe von 1 GB",
+      "storageQuota": "Diese Datei überschreitet das verbleibende Speicherlimit"
+    }
+  },
+  "storageQuota": {
+    "warning": "Der Speicher ist fast voll: {{used}} von {{limit}} verwendet, {{remaining}} verbleibend.",
+    "full": "Das Speicherlimit ist erreicht. Uploads und Aufnahmen sind vorübergehend nicht möglich. Löschen Sie nicht mehr benötigtes Audio aus der Mediathek.",
+    "manageLibrary": "Speicher in der Mediathek verwalten",
+    "admin": {
+      "enabled": "Speicherlimit erzwingen",
+      "enabledDescription": "Wenn deaktiviert, haben Benutzer unbegrenzten Speicher.",
+      "limit": "Standardlimit (GiB)",
+      "limitDescription": "Geben Sie einen beliebigen positiven GiB-Wert ein. Dezimalwerte werden unterstützt. Der Standardwert ist 2 GiB.",
+      "limitError": "Geben Sie ein positives Speicherlimit ein.",
+      "backend": "Speicher-Backend",
+      "warningThreshold": "Warnschwelle",
+      "inactive": "Inaktiv: Bei {{backend}}-Speicher werden keine Limits erzwungen.",
+      "save": "Speicherlimit speichern",
+      "saving": "Wird gespeichert...",
+      "saved": "Speicherlimit gespeichert.",
+      "saveError": "Speicherlimit konnte nicht gespeichert werden.",
+      "loadError": "Speicherlimit-Einstellungen konnten nicht geladen werden."
+    }
+  },
+  "pagination": {
+    "showing": "Zeigt {{from}}–{{to}} von {{total}}",
+    "previous": "Vorherige Seite",
+    "next": "Nächste Seite"
+  },
+  "player": {
+    "pause": "Pause",
+    "play": "Abspielen",
+    "position": "Wiedergabeposition",
+    "unmute": "Stummschaltung aufheben",
+    "mute": "Stummschalten",
+    "speed": "Wiedergabegeschwindigkeit",
+    "speedValue": "{{speed}}x",
+    "skipBack": "{{seconds}} Sekunden zurück",
+    "skipForward": "{{seconds}} Sekunden vor",
+    "dock": "Audioplayer",
+    "backToTranscript": "Zurück zum Transkript",
+    "speedPill": "Tempo {{speed}}x"
+  },
+  "inlineEdit": {
+    "clickToEdit": "Klicken Sie zum Bearbeiten"
+  },
+  "analysis": {
+    "trust": {
+      "high": "Hohe Zuverlässigkeit",
+      "medium": "Mittlere Zuverlässigkeit",
+      "low": "Geringe Zuverlässigkeit",
+      "unknown": "Unbekannt"
+    },
+    "title": "Audiointegrität",
+    "checksPassed": "{{passed}} von {{total}} Prüfungen bestanden",
+    "recorded": "Aufgezeichnet",
+    "integrityDetails": "Integritätsdetails",
+    "technicalDetails": "Technische Details",
+    "fileHash": "Datei-Hash",
+    "tech": {
+      "format": "Format",
+      "codec": "Codec",
+      "encoder": "Encoder",
+      "source": "Quelle"
+    }
+  },
+  "delete": {
+    "title": "Mediendatei löschen?",
+    "descriptionBefore": "Damit wird dauerhaft gelöscht: ",
+    "descriptionAfter": ". Audio, Transkripte, Zusammenfassungen, Titel und Dateiname werden von diesem Server entfernt. Kopien in bestehenden Backups bleiben erhalten, bis diese Backups gelöscht werden. Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleting": "Löschen...",
+    "failed": "Mediendatei konnte nicht gelöscht werden",
+    "success": "Mediendatei gelöscht"
+  },
+  "download": {
+    "downloading": "Herunterladen...",
+    "label": "Audio herunterladen",
+    "success": "Audio heruntergeladen",
+    "error": "Audio konnte nicht heruntergeladen werden. Bitte versuchen Sie es erneut."
+  },
+  "detail": {
+    "audioFiles": "Audiodateien",
+    "loading": "Mediendetails werden geladen...",
+    "notFound": "Medien nicht gefunden oder konnten nicht geladen werden.",
+    "encrypted": "Verschlüsselt",
+    "scanPending": "Die Datei wird aus Sicherheitsgründen gescannt. Die Wiedergabe ist verfügbar, sobald der Scan abgeschlossen ist.",
+    "scanFailed": "Die Sicherheitsüberprüfung der Datei ist fehlgeschlagen und sie kann nicht abgespielt werden.",
+    "streamFailed": "Der Audiostream ist fehlgeschlagen. Möglicherweise muss die Datei erneut hochgeladen werden.",
+    "viewTranscription": "Transkription anzeigen",
+    "updateTitleError": "Titel konnte nicht aktualisiert werden",
+    "updateDescriptionError": "Beschreibung konnte nicht aktualisiert werden",
+    "audioDeleted": "Audio gemäß Aufbewahrungsrichtlinie für Live-Aufnahmen gelöscht. Transkript und Zusammenfassungen bleiben verfügbar."
+  }
+}

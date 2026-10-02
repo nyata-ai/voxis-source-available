@@ -1,0 +1,19 @@
+# CI-only overlay: starts the API against a private Caddy stub instead of
+# downloading or serving model weights. It does not alter the operator recipe.
+services:
+  gemma-download:
+    profiles: !override [model-download]
+
+  gemma:
+    build: !reset null
+    image: ${VOXIS_OSS_CADDY_IMAGE:-voxis-oss-caddy:2.11.4-voxis.1-e2eee6a7}
+    entrypoint: ["caddy"]
+    command: ["respond", "--listen", ":8080", "--body", "{\"object\":\"list\",\"data\":[]}"]
+    depends_on: !reset []
+    volumes: !reset []
+    tmpfs:
+      - /data:rw,noexec,nosuid,nodev,size=8m,uid=10001,gid=10001,mode=0700
+      - /config:rw,noexec,nosuid,nodev,size=8m,uid=10001,gid=10001,mode=0700
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/health"]
+      start_period: 0s

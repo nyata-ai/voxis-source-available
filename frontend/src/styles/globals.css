@@ -1,0 +1,409 @@
+@import 'tailwindcss';
+
+/* ═══════════════════════════════════════════════════════════
+   TAILWIND v4 THEME — shadcn/ui color tokens + editorial extras
+   ═══════════════════════════════════════════════════════════ */
+
+@theme {
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
+  --color-success: hsl(var(--success));
+  --color-success-foreground: hsl(var(--success-foreground));
+  --color-warning: hsl(var(--warning));
+  --color-warning-foreground: hsl(var(--warning-foreground));
+  --color-info: hsl(var(--info));
+  --color-info-foreground: hsl(var(--info-foreground));
+
+  /* Signature surfaces — fixed hex, theme-independent (same in light + dark),
+     shared with the landing page's Airtable-derived paper-and-ink system.
+     Each carries an explicit foreground pair for contrast. */
+  --color-coral: #aa2d00;
+  --color-coral-foreground: #ffffff;
+  --color-forest: #0a2e0e;
+  --color-forest-foreground: #ffffff;
+  /* The reader's audio card surface. Named because three files referenced the
+     same hex literal; `bg-ink` is the only way to spell it now. */
+  --color-ink: #181d26;
+  --color-cream: #f5e9d4;
+  --color-cream-foreground: #181d26;
+  --color-paper-soft: #f8fafc;
+  --color-ink-muted: #41454d;
+  --color-ink-body: #333840;
+  --color-peach: #fcab79;
+  --color-peach-foreground: #181d26;
+  --color-mint: #a8d8c4;
+  --color-mint-foreground: #181d26;
+  /* Live/recording indicator — fixed, not theme-driven. Per-theme --destructive
+     is tuned for error surfaces and isn't guaranteed to stay vivid in both
+     themes; the recording dot is a safety-relevant glance signal and must
+     read as unambiguously "live" regardless of light/dark. */
+  --color-live: #dc2626;
+  --color-live-foreground: #ffffff;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+
+  --radius-lg: var(--radius);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-sm: calc(var(--radius) - 4px);
+
+  --animate-accordion-down: accordion-down 0.2s ease-out;
+  --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+@keyframes accordion-down {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordion-up {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes waveform-sweep {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.85;
+  }
+  90% {
+    opacity: 0.85;
+  }
+  100% {
+    left: calc(100% - 1px);
+    opacity: 0;
+  }
+}
+
+.hero-waveform:hover .hero-waveform__playhead {
+  animation: waveform-sweep 2.2s linear infinite;
+}
+
+.hero-waveform:hover .hero-waveform__bar {
+  opacity: 0.9;
+  transition: opacity 200ms ease-out;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Archive card playhead — runs on hover only, scoped to
+   .archive-card__signature so it cannot leak to hero waveforms
+   or unrelated Tailwind groups.
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes archive-card-sweep {
+  0% {
+    left: 0;
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.9;
+  }
+  88% {
+    opacity: 0.9;
+  }
+  100% {
+    left: calc(100% - 1px);
+    opacity: 0;
+  }
+}
+
+.archive-card:hover .archive-card__playhead {
+  animation: archive-card-sweep 1.3s linear infinite;
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(1.15);
+  }
+}
+
+.status-pulse {
+  animation: status-pulse 1.8s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   ActionTriad — two intake channels (Record / Upload)
+   Owned by components/dashboard/ActionTriad.tsx. The .group:hover
+   selectors below match only when an .action-glyph__* descendant
+   is present, so they cannot leak into unrelated Tailwind groups.
+   Hover-only motion; the scoped reduced-motion block disables all
+   four animations explicitly (defense-in-depth beyond the global
+   universal `*` duration squash further below).
+   ═══════════════════════════════════════════════════════════ */
+
+@keyframes arc-pulse {
+  0%,
+  100% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes rec-blink {
+  0%,
+  100% {
+    opacity: 0.85;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes intake-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+@keyframes signal-travel {
+  0% {
+    transform: translateX(0);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  82% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(66px);
+    opacity: 0;
+  }
+}
+
+/* Hover-only triggers. The .group selector is set on the cell wrapper. */
+.group:hover .action-glyph__arc {
+  animation: arc-pulse 1.6s ease-in-out infinite;
+}
+
+.group:hover .action-glyph__rec-dot {
+  animation: rec-blink 1.1s ease-in-out infinite;
+}
+
+.action-glyph__intake-arrows > g {
+  transform-box: fill-box;
+  transform-origin: center;
+}
+
+.group:hover .action-glyph__intake-arrows > g {
+  animation: intake-bob 1.1s ease-in-out infinite;
+}
+
+/* Signal dot is parked off-screen-ish at cx=0; without this it would render
+   solid at the SVG's left edge before any animation runs. The travel keyframe
+   ramps opacity 0→1→0, so resting opacity must be 0 to avoid a stuck dot. */
+.action-glyph__signal-dot {
+  opacity: 0;
+}
+
+.group:hover .action-glyph__signal-dot {
+  animation: signal-travel 1.9s linear infinite;
+}
+
+/* Scoped reduced-motion disable — kills the hover animations explicitly so
+   the final-frame state of signal-travel (opacity 0) never flashes when the
+   global `0.01ms` duration squash compresses the keyframe to a single tick. */
+@media (prefers-reduced-motion: reduce) {
+  .group:hover .action-glyph__arc,
+  .group:hover .action-glyph__rec-dot,
+  .group:hover .action-glyph__intake-arrows > g,
+  .group:hover .action-glyph__signal-dot,
+  .archive-card:hover .archive-card__playhead {
+    animation: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   Accessibility — honor prefers-reduced-motion
+   Per WCAG 2.3.3 and the project's stated 2.1 AA target,
+   collapse animation/transition durations for users who have
+   requested reduced motion at the OS level.
+   ═══════════════════════════════════════════════════════════ */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════
+   LIGHT THEME — Paper & Ink: editorial light
+   White paper canvas, near-black ink foreground, quiet hairline
+   borders. Coral is the only accent (see @theme signature colors);
+   these tokens stay strictly neutral. Matches the shipped landing
+   page's Airtable-derived system.
+   ═══════════════════════════════════════════════════════════ */
+
+:root {
+  color-scheme: light;
+  --background: 0 0% 100%;
+  --foreground: 218 23% 12%;
+  --card: 0 0% 100%;
+  --card-foreground: 218 23% 12%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 218 23% 12%;
+  --primary: 218 23% 12%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 220 11% 89%;
+  --secondary-foreground: 218 23% 12%;
+  /* muted = inert fills (skeletons, quiet backgrounds); accent = interaction
+     states (hover/focus/selected). Both were 98% (near-invisible on white)
+     until this fix — kept distinct now so hover/focus/selected read visibly
+     against the white canvas without competing with each other. */
+  --muted: 210 25% 96%;
+  --muted-foreground: 219 6% 44%;
+  --accent: 210 20% 93%;
+  --accent-foreground: 218 23% 12%;
+  --destructive: 0 49% 49%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 0 0% 87%;
+  --input: 0 0% 87%;
+  --ring: 218 23% 12%;
+  --success: 152 48% 28%;
+  --success-foreground: 0 0% 100%;
+  --warning: 30 74% 34%;
+  --warning-foreground: 0 0% 100%;
+  --info: 206 58% 34%;
+  --info-foreground: 0 0% 100%;
+  --radius: 0.75rem;
+
+  /* App chrome dimensions, so a sticky offset elsewhere cannot drift from the
+     bar it hides behind. `Header` is `h-14` and `MainLayout`'s sidebar is
+     `w-56`; change those and these two must follow. Not @theme tokens — they
+     generate no utilities and are only read inside calc(). */
+  --app-header-h: 3.5rem;
+  --app-sidebar-w: 14rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   DARK THEME — ink inverted
+   Near-ink canvas, #181d26-family card surfaces, white primary
+   button (Airtable's on-dark pattern), neutral cool borders.
+   Uses a neutral system-font hierarchy.
+   ═══════════════════════════════════════════════════════════ */
+
+.dark {
+  color-scheme: dark;
+  --background: 217 20% 8%;
+  --foreground: 220 16% 96%;
+  --card: 218 23% 12%;
+  --card-foreground: 220 16% 96%;
+  --popover: 218 23% 12%;
+  --popover-foreground: 220 16% 96%;
+  --primary: 0 0% 100%;
+  --primary-foreground: 218 23% 12%;
+  --secondary: 219 21% 17%;
+  --secondary-foreground: 220 16% 96%;
+  --muted: 218 20% 10%;
+  --muted-foreground: 218 8% 62%;
+  --accent: 219 21% 17%;
+  --accent-foreground: 220 16% 96%;
+  --destructive: 354 46% 66%;
+  --destructive-foreground: 24 25% 92%;
+  --border: 218 15% 22%;
+  --input: 218 15% 22%;
+  --ring: 218 8% 62%;
+  --success: 152 36% 58%;
+  --success-foreground: 0 0% 8%;
+  --warning: 36 68% 60%;
+  --warning-foreground: 0 0% 8%;
+  --info: 206 52% 64%;
+  --info-foreground: 0 0% 8%;
+  --radius: 0.75rem;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BASE STYLES — Editorial foundations
+   ═══════════════════════════════════════════════════════════ */
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: color-mix(in srgb, var(--color-coral) 18%, transparent);
+  color: hsl(var(--foreground));
+}
+
+/* ─── Scrollbar — minimal, editorial ─── */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--muted-foreground) / 0.4);
+}

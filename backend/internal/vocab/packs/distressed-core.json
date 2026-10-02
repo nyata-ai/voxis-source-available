@@ -1,0 +1,31 @@
+{
+  "id": "distressed-core",
+  "description": "Cross-regional distressed debt, leveraged finance and liability-management terminology.",
+  "terms": [
+    { "value": "PIK", "pronunciations": ["pick"], "gloss": "payment-in-kind" },
+    { "value": "DIP financing", "pronunciations": ["dip financing"], "gloss": "debtor-in-possession funding" },
+    { "value": "RSA", "pronunciations": ["ar es ay"], "gloss": "restructuring support agreement" },
+    { "value": "LME", "pronunciations": ["el em ee"], "gloss": "liability management exercise" },
+    { "value": "cov-lite", "gloss": "no maintenance covenants" },
+    { "value": "EBITDA", "pronunciations": ["ee-bit-dah"], "gloss": "earnings metric" },
+    { "value": "adjusted EBITDA", "pronunciations": ["adjusted ee-bit-dah"], "gloss": "earnings metric after add-backs" },
+    { "value": "pari passu", "gloss": "equal ranking" },
+    { "value": "cram-down", "gloss": "binding dissenters" },
+    { "value": "HoldCo", "pronunciations": ["hold co"], "gloss": "holding company" },
+    { "value": "OpCo", "pronunciations": ["op co"], "gloss": "operating company" },
+    { "value": "waterfall", "gloss": "payment priority" },
+    { "value": "amend-and-extend", "gloss": "maturity extension" },
+    { "value": "drop-down", "gloss": "collateral transfer transaction" },
+    { "value": "uptier", "gloss": "priority-jumping exchange" },
+    { "value": "priming lien", "gloss": "new senior lien" },
+    { "value": "super-senior", "gloss": "ranking ahead" },
+    { "value": "fulcrum security", "gloss": "where value breaks" },
+    { "value": "intercreditor agreement", "gloss": "creditor ranking contract" },
+    { "value": "ICA", "pronunciations": ["eye see ay"], "gloss": "intercreditor agreement acronym" },
+    { "value": "basis points", "pronunciations": ["bips"], "gloss": "hundredths of a percent" },
+    { "value": "turns of leverage", "gloss": "debt/EBITDA multiples" },
+    { "value": "standstill", "gloss": "creditor forbearance" },
+    { "value": "haircut", "gloss": "principal write-down" },
+    { "value": "term sheet", "gloss": "indicative terms" }
+  ]
+}

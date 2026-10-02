@@ -1,0 +1,112 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-monologue-pauses",
+    "duration": 12.0
+  },
+  "results": [
+    {
+      "type": "word",
+      "start_time": 0.10,
+      "end_time": 0.45,
+      "alternatives": [{"content": "Pada", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.46,
+      "end_time": 0.95,
+      "alternatives": [{"content": "tanggal", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.96,
+      "end_time": 1.25,
+      "alternatives": [{"content": "dua", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.26,
+      "end_time": 1.70,
+      "alternatives": [{"content": "belas", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 1.70,
+      "end_time": 1.72,
+      "attaches_to": "previous",
+      "alternatives": [{"content": ",", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 2.10,
+      "end_time": 2.60,
+      "alternatives": [{"content": "korban", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 2.61,
+      "end_time": 3.30,
+      "alternatives": [{"content": "disekap", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 3.30,
+      "end_time": 3.35,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 5.20,
+      "end_time": 5.80,
+      "alternatives": [{"content": "Kemudian", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 5.81,
+      "end_time": 6.30,
+      "alternatives": [{"content": "polisi", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 6.31,
+      "end_time": 6.90,
+      "alternatives": [{"content": "datang", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 6.90,
+      "end_time": 6.95,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 8.30,
+      "end_time": 8.70,
+      "alternatives": [{"content": "Tidak", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 8.71,
+      "end_time": 9.00,
+      "alternatives": [{"content": "ada", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 9.01,
+      "end_time": 9.60,
+      "alternatives": [{"content": "saksi", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 9.60,
+      "end_time": 9.65,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id", "speaker": "S1"}]
+    }
+  ]
+}

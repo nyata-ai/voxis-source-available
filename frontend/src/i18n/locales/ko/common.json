@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "구하다",
+    "cancel": "취소",
+    "delete": "삭제",
+    "close": "닫다",
+    "retry": "다시 시도하세요"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "페이지를 찾을 수 없습니다"
+  },
+  "placeholder": {
+    "defaultDescription": "이 기능은 곧 제공될 예정입니다. 나중에 다시 확인해 보세요!",
+    "body": "우리는 이 기능을 제공하기 위해 열심히 노력하고 있습니다."
+  },
+  "export": {
+    "downloaded": "내보내기가 다운로드됨",
+    "failed": "내보내지 못했습니다. 다시 시도해 주세요.",
+    "bapError": "먼저 질문과 답변 브리핑을 생성하거나, 화자 이름이 변경된 경우 다시 생성하세요.",
+    "panelTitle": "내보내기",
+    "pillLabel": "{{row}}을(를) {{format}}(으)로 내보내기",
+    "briefingUnavailable": "이 요약을 먼저 생성해야 내보낼 수 있습니다.",
+    "rows": {
+      "transcript": "전사",
+      "briefing": "요약 · {{lens}}",
+      "bap": "심문조서 초안",
+      "audio": "원본 오디오"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "언어",
+    "description": "Voxis 인터페이스의 언어를 선택하세요",
+    "saveFailed": "언어 선택을 저장하지 못했습니다. 다음 방문 시 이전 설정으로 되돌아갈 수 있습니다."
+  },
+  "languageGroups": {
+    "english": "영어",
+    "asia": "아시아",
+    "europe": "유럽",
+    "middleEastAfrica": "중동 및 아프리카"
+  },
+  "languageNames": {
+    "auto": "자동",
+    "autoDetect": "자동 감지",
+    "en": "영어",
+    "id": "인도네시아 인",
+    "jv": "자바어",
+    "su": "순다어",
+    "ms": "말레이 사람",
+    "tl": "타갈로그어",
+    "th": "태국어",
+    "vi": "베트남 사람",
+    "zh": "중국인",
+    "ja": "일본어",
+    "ko": "한국인",
+    "fr": "프랑스 국민",
+    "de": "독일 사람",
+    "it": "이탈리아 사람",
+    "pl": "광택",
+    "pt": "포르투갈 인",
+    "ru": "러시아인",
+    "es": "스페인 사람",
+    "sv": "스웨덴어",
+    "da": "덴마크 말",
+    "no": "노르웨이 인",
+    "fi": "핀란드어",
+    "la": "라틴어",
+    "ar": "아라비아 말",
+    "he": "헤브라이 사람",
+    "af": "아프리카 어"
+  },
+  "errorBoundary": {
+    "title": "문제가 발생했습니다.",
+    "description": "예상치 못한 오류가 발생했습니다. 다시 시도해 주세요.",
+    "details": "오류 세부정보(개발자 전용)"
+  },
+  "activity": {
+    "title": "Activity",
+    "count": "{{count}} processing",
+    "more": "+{{count}} more",
+    "ready": "Ready",
+    "view": "View",
+    "dismiss": "Dismiss",
+    "recordingTitle": "Live recording",
+    "inMotion": {
+      "title": "처리 중"
+    },
+    "stage": {
+      "stitching": "Processing recording…",
+      "transcribing": "Transcribing…",
+      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "ready": "Ready"
+    },
+    "failed": {
+      "recording": "Recording couldn't be processed",
+      "transcription": "Transcription failed"
+    },
+    "toast": {
+      "recordingReady": "Recording ready",
+      "transcriptionReady": "Transcript ready"
+    }
+  },
+  "status": {
+    "pending": "대기 중",
+    "encrypting": "암호화 중",
+    "ready": "준비됨",
+    "failed": "실패",
+    "deleted": "삭제됨",
+    "submitted": "제출됨",
+    "processing": "처리 중",
+    "completed": "완료됨",
+    "scanPending": "검사 대기 중",
+    "scanInfected": "감염됨",
+    "scanError": "검사 오류",
+    "scanClean": "정상"
+  },
+  "session": {
+    "source": {
+      "audio": "오디오"
+    },
+    "speaker_one": "화자 {{count}}명",
+    "speaker_other": "화자 {{count}}명",
+    "words": "단어 {{n}}개",
+    "lens_one": "렌즈 {{count}}개",
+    "lens_other": "렌즈 {{count}}개",
+    "languages": "언어: {{codes}}",
+    "untitled": "제목 없는 세션"
+  }
+}

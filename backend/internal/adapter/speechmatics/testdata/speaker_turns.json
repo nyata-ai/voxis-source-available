@@ -1,0 +1,63 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-speaker-turns",
+    "duration": 10.0
+  },
+  "results": [
+    {
+      "type": "word",
+      "start_time": 0.10,
+      "end_time": 0.60,
+      "alternatives": [{"content": "Selamat", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.60,
+      "end_time": 1.00,
+      "alternatives": [{"content": "pagi", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 1.00,
+      "end_time": 1.05,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.30,
+      "end_time": 1.70,
+      "alternatives": [{"content": "Kita", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.70,
+      "end_time": 2.20,
+      "alternatives": [{"content": "mulai", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 2.20,
+      "end_time": 2.25,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 2.50,
+      "end_time": 2.90,
+      "alternatives": [{"content": "Baik", "language": "id", "speaker": "S2"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 2.90,
+      "end_time": 2.95,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id", "speaker": "S2"}]
+    }
+  ]
+}

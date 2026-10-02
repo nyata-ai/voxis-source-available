@@ -1,0 +1,493 @@
+name: ${COMPOSE_PROJECT_NAME:-voxis-oss}
+
+x-keycloak-runtime: &keycloak-runtime
+  build:
+    context: ../../editions/oss/runtime/keycloak
+    args:
+      KEYCLOAK_IMAGE: ${KEYCLOAK_IMAGE:?set KEYCLOAK_IMAGE to a locked digest}
+      TEMURIN_IMAGE: ${TEMURIN_IMAGE:?set TEMURIN_IMAGE to a locked digest}
+  image: ${VOXIS_OSS_KEYCLOAK_IMAGE:-voxis-oss-keycloak:26.7.5-temurin21-noble}
+
+x-postgres-runtime: &postgres-runtime
+  build:
+    context: ../../editions/oss/runtime/postgres
+    args:
+      POSTGRES_IMAGE: ${POSTGRES_IMAGE:?set POSTGRES_IMAGE to a locked digest}
+  image: ${VOXIS_OSS_POSTGRES_IMAGE:-voxis-oss-postgres:16.15-alpine3.24}
+
+x-caddy-runtime: &caddy-runtime
+  build:
+    context: ../../editions/oss/runtime/caddy
+  image: ${VOXIS_OSS_CADDY_IMAGE:-voxis-oss-caddy:2.11.4-voxis.1-e2eee6a7}
+
+x-openbao-runtime: &openbao-runtime
+  build:
+    context: ../../editions/oss/runtime/openbao
+    args:
+      OPENBAO_IMAGE: ${OPENBAO_IMAGE:?set OPENBAO_IMAGE to a locked digest}
+  image: ${VOXIS_OSS_OPENBAO_IMAGE:-voxis-oss-openbao:2.6.3-security}
+
+x-clamav-runtime: &clamav-runtime
+  build:
+    context: ../../editions/oss/runtime/clamav
+    args:
+      CLAMAV_IMAGE: ${CLAMAV_IMAGE:?set CLAMAV_IMAGE to a locked digest}
+  image: ${VOXIS_OSS_CLAMAV_IMAGE:-voxis-oss-clamav:1.4.6-security}
+
+x-llama-runtime: &llama-runtime
+  build:
+    context: ../../editions/oss/runtime/llama
+    args:
+      LLAMA_CPP_REVISION: ${GEMMA_RUNTIME_REVISION:?set the tested llama.cpp revision}
+  image: voxis-oss-llama:${GEMMA_RUNTIME_REVISION:?set the tested llama.cpp revision}
+
+# Every service: bounded logs, no privilege gain, and no Linux capabilities
+# unless a service adds back the few it needs.
+x-hardened: &hardened
+  logging:
+    driver: json-file
+    options:
+      max-size: 10m
+      max-file: "5"
+  security_opt:
+    - no-new-privileges:true
+  cap_drop:
+    - ALL
+
+x-long-running: &long-running
+  <<: *hardened
+  restart: unless-stopped
+
+services:
+  postgres:
+    <<: [*long-running, *postgres-runtime]
+    # The image's postgres account; the data volume is already owned by it.
+    user: "70:70"
+    read_only: true
+    tmpfs:
+      - /var/run/postgresql:rw,noexec,nosuid,nodev,size=1m,uid=70,gid=70,mode=0775
+      - /tmp:rw,noexec,nosuid,nodev,size=64m,uid=70,gid=70,mode=1777
+    pids_limit: 256
+    environment:
+      POSTGRES_USER: ${POSTGRES_BOOTSTRAP_USER:?run bootstrap.sh}
+      POSTGRES_PASSWORD: ${POSTGRES_BOOTSTRAP_PASSWORD:?run bootstrap.sh}
+      POSTGRES_DB: postgres
+      VOXIS_APP_DB: ${POSTGRES_DB:-voxis}
+      VOXIS_APP_USER: ${POSTGRES_APP_USER:?run bootstrap.sh}
+      VOXIS_APP_PASSWORD: ${POSTGRES_APP_PASSWORD:?run bootstrap.sh}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$VOXIS_APP_USER -d $$VOXIS_APP_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./postgres/init-app-role.sh:/docker-entrypoint-initdb.d/20-init-app-role.sh:ro
+    networks: [app-db]
+
+  keycloak-db:
+    <<: [*long-running, *postgres-runtime]
+    user: "70:70"
+    read_only: true
+    tmpfs:
+      - /var/run/postgresql:rw,noexec,nosuid,nodev,size=1m,uid=70,gid=70,mode=0775
+      - /tmp:rw,noexec,nosuid,nodev,size=64m,uid=70,gid=70,mode=1777
+    pids_limit: 256
+    environment:
+      POSTGRES_USER: ${KEYCLOAK_DB_BOOTSTRAP_USER:?run bootstrap.sh}
+      POSTGRES_PASSWORD: ${KEYCLOAK_DB_BOOTSTRAP_PASSWORD:?run bootstrap.sh}
+      POSTGRES_DB: postgres
+      VOXIS_APP_DB: ${KEYCLOAK_DB:-keycloak}
+      VOXIS_APP_USER: ${KEYCLOAK_DB_USER:?run bootstrap.sh}
+      VOXIS_APP_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?run bootstrap.sh}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$VOXIS_APP_USER -d $$VOXIS_APP_DB"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    volumes:
+      - keycloak-db-data:/var/lib/postgresql/data
+      - ./postgres/init-app-role.sh:/docker-entrypoint-initdb.d/20-init-app-role.sh:ro
+    networks: [identity-db]
+
+  keycloak:
+    <<: [*long-running, *keycloak-runtime]
+    # Keycloak trusts forwarding headers only from the proxy's identity-proxy
+    # network. Its admin console is served only on the proxy's loopback port.
+    command: ["start", "--import-realm", "--http-enabled=true", "--proxy-headers=xforwarded", "--proxy-trusted-addresses=172.30.1.0/24"]
+    pids_limit: 512
+    environment:
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://keycloak-db:5432/${KEYCLOAK_DB:-keycloak}
+      KC_DB_USERNAME: ${KEYCLOAK_DB_USER:?run bootstrap.sh}
+      KC_DB_PASSWORD: ${KEYCLOAK_DB_PASSWORD:?run bootstrap.sh}
+      KC_BOOTSTRAP_ADMIN_USERNAME: ${KEYCLOAK_BOOTSTRAP_ADMIN_USERNAME:?run bootstrap.sh}
+      KC_BOOTSTRAP_ADMIN_PASSWORD: ${KEYCLOAK_BOOTSTRAP_ADMIN_PASSWORD:?run bootstrap.sh}
+      KC_HOSTNAME: ${OSS_KEYCLOAK_PUBLIC_URL:?set the canonical public issuer URL}
+      KC_HOSTNAME_ADMIN: http://localhost:${OSS_KEYCLOAK_ADMIN_PORT:-8081}/auth
+      KC_HOSTNAME_BACKCHANNEL_DYNAMIC: "true"
+      KC_HTTP_RELATIVE_PATH: /auth
+      # Read by the realm import (${...} placeholder in the realm file).
+      KEYCLOAK_USER_LOOKUP_CLIENT_SECRET: ${KEYCLOAK_USER_LOOKUP_CLIENT_SECRET:?run bootstrap.sh}
+    healthcheck:
+      test: ["CMD-SHELL", "bash -lc 'exec 3<>/dev/tcp/127.0.0.1/8080; printf \"GET /auth/realms/${OSS_KEYCLOAK_REALM:-voxis-oss}/.well-known/openid-configuration HTTP/1.1\\r\\nHost: keycloak\\r\\nConnection: close\\r\\n\\r\\n\" >&3; IFS=\" \" read -r protocol status _ <&3; test \"$$protocol\" = HTTP/1.1 -a \"$$status\" = 200'"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    depends_on:
+      keycloak-db:
+        condition: service_healthy
+    volumes:
+      - ${KEYCLOAK_IMPORT_DIR:-./keycloak}/realm-voxis-oss.json:/opt/keycloak/data/import/realm-voxis-oss.json:ro
+    networks: [identity-db, identity, identity-proxy]
+
+  openbao:
+    <<: [*long-running, *openbao-runtime]
+    command: ["server"]
+    read_only: true
+    tmpfs:
+      # Raft snapshots pass through /tmp during backup and restore.
+      - /tmp:rw,noexec,nosuid,nodev,size=256m,uid=100,gid=1000,mode=0700
+    pids_limit: 256
+    environment:
+      BAO_ADDR: http://127.0.0.1:8200
+      SKIP_SETCAP: "true"
+      SKIP_CHOWN: "true"
+    healthcheck:
+      # Healthy means the server answers; it starts sealed after every restart.
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8200/v1/sys/health?sealedcode=200&uninitcode=200&standbycode=200"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    volumes:
+      # Keep the image-owned configuration directory intact. Only the reviewed
+      # configuration file is mounted, and the Raft data directory stays writable.
+      - ./openbao/openbao.hcl:/openbao/config/openbao.hcl:ro
+      - ${OPENBAO_DATA_DIR:?set a persistent path}:/openbao/data
+    networks: [secrets]
+
+  # clamd receives plaintext uploads, so it has no internet access. Signature
+  # updates run in the separate freshclam service, which shares the signature
+  # volume and never sees an upload. clamd checks the volume for new
+  # signatures every 10 minutes (its default SelfCheck) and reloads them.
+  clamav:
+    <<: [*long-running, *clamav-runtime]
+    # The image starts as root to prepare its directories, then runs clamd as
+    # its clamav account.
+    cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETUID, SETGID]
+    read_only: true
+    environment:
+      CLAMAV_NO_FRESHCLAMD: "true"
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+      - /run:rw,noexec,nosuid,nodev,size=8m
+      - /var/log/clamav:rw,noexec,nosuid,nodev,size=16m,uid=100,gid=101
+    pids_limit: 128
+    # clamd holds the signature database in memory and briefly holds two
+    # copies while it reloads an update.
+    mem_limit: 3g
+    healthcheck:
+      test: ["CMD-SHELL", "clamdscan --ping 1 >/dev/null 2>&1"]
+      interval: 30s
+      timeout: 10s
+      retries: 20
+    depends_on:
+      # clamd refuses to start without signatures, and without internet it
+      # cannot fetch the first set itself.
+      freshclam:
+        condition: service_healthy
+    volumes:
+      - clamav-data:/var/lib/clamav
+    networks: [scan]
+
+  freshclam:
+    <<: [*long-running, *clamav-runtime]
+    # The same image, running only freshclam: as root to prepare the volume,
+    # then as its clamav account.
+    cap_add: [CHOWN, DAC_OVERRIDE, FOWNER, SETUID, SETGID]
+    read_only: true
+    environment:
+      CLAMAV_NO_CLAMD: "true"
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m
+      - /run:rw,noexec,nosuid,nodev,size=8m
+      # Owned by the image's clamav account (100:101): freshclam writes its log
+      # after it drops root, and fails to start on a root-owned directory.
+      - /var/log/clamav:rw,noexec,nosuid,nodev,size=16m,uid=100,gid=101
+    pids_limit: 64
+    # freshclam loads each downloaded database once to test it before use.
+    mem_limit: 2g
+    healthcheck:
+      # Healthy once the first full signature set is on the volume. The first
+      # download can take several minutes.
+      test: ["CMD-SHELL", "cd /var/lib/clamav && { test -s main.cvd || test -s main.cld; } && { test -s daily.cvd || test -s daily.cld; } && { test -s bytecode.cvd || test -s bytecode.cld; }"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30m
+    volumes:
+      - clamav-data:/var/lib/clamav
+    networks: [scan-updates]
+
+  gemma-download:
+    <<: [*hardened, *llama-runtime]
+    profiles: ["app"]
+    user: "0:0"
+    cap_add: [CHOWN]
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=16m
+    pids_limit: 64
+    entrypoint: ["/bin/sh", "-ec"]
+    command: >-
+      target=/models/${GEMMA_MODEL_FILE:?set the tested model filename};
+      if [ -f "$$target" ] && echo "${GEMMA_MODEL_SHA256:?set the tested model SHA-256}  $$target" | sha256sum -c -; then exit 0; fi;
+      rm -f "$$target" "$$target.part";
+      curl --fail --location --retry 3 --output "$$target.part"
+      "https://huggingface.co/${GEMMA_MODEL:?set GEMMA_MODEL}/resolve/${GEMMA_MODEL_REVISION:?set GEMMA_MODEL_REVISION}/${GEMMA_MODEL_FILE:?set the tested model filename}";
+      echo "${GEMMA_MODEL_SHA256}  $$target.part" | sha256sum -c -;
+      mv "$$target.part" "$$target";
+      chown 10001:10001 "$$target";
+    volumes:
+      - gemma-model:/models
+    networks: [model-download]
+
+  gemma:
+    <<: [*long-running, *llama-runtime]
+    profiles: ["app"]
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=64m,uid=10001,gid=10001,mode=1770
+    pids_limit: 256
+    depends_on:
+      gemma-download:
+        condition: service_completed_successfully
+    command:
+      [
+        "--model", "/models/${GEMMA_MODEL_FILE:?set the tested model filename}",
+        "--alias", "${GEMMA_MODEL:?set GEMMA_MODEL}",
+        "--host", "0.0.0.0",
+        "--port", "8080",
+        "--ctx-size", "${GEMMA_MAX_CONTEXT_TOKENS:-16384}",
+        "--parallel", "1",
+        "--threads", "8",
+        "--cache-type-k", "q8_0",
+        "--cache-type-v", "q8_0",
+        "--no-mmproj",
+        "--reasoning", "off"
+      ]
+    healthcheck:
+      # llama-server answers 503 until the model is loaded.
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8080/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 10
+      start_period: 5m
+    volumes:
+      - gemma-model:/models:ro
+    networks: [model]
+
+  api:
+    <<: *long-running
+    profiles: ["app"]
+    build:
+      context: ../../backend
+      dockerfile: ../editions/oss/runtime/api/Dockerfile
+    image: ${VOXIS_OSS_API_IMAGE:-voxis-oss-api:local}
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_APP_USER}:${POSTGRES_APP_PASSWORD}@postgres:5432/${POSTGRES_DB:-voxis}?sslmode=disable
+      BIND_ADDRESS: ${BIND_ADDRESS:-0.0.0.0}
+      STORAGE_BACKEND: localfs
+      LOCAL_STORAGE_DIR: /var/lib/voxis/media
+      TMPDIR: /var/lib/voxis/scratch
+      VAULT_ADDR: ${VAULT_ADDR}
+      VAULT_MOUNT_PATH: ${VAULT_MOUNT_PATH:-transit}
+      VAULT_ROLE_ID: ${VAULT_ROLE_ID:-}
+      VAULT_SECRET_ID: ${VAULT_SECRET_ID:-}
+      ENCRYPTION_PROVIDER: ${ENCRYPTION_PROVIDER:-vault}
+      OSS_KEYCLOAK_PUBLIC_URL: ${OSS_KEYCLOAK_PUBLIC_URL:?set the canonical public issuer URL}
+      OSS_KEYCLOAK_FETCH_URL: ${OSS_KEYCLOAK_FETCH_URL:?set the internal discovery URL}
+      OSS_KEYCLOAK_REALM: ${OSS_KEYCLOAK_REALM:-voxis-oss}
+      OSS_KEYCLOAK_WEB_CLIENT_ID: ${OSS_KEYCLOAK_WEB_CLIENT_ID:-voxis-oss-web}
+      OSS_KEYCLOAK_API_CLIENT_ID: ${OSS_KEYCLOAK_API_CLIENT_ID:-voxis-oss-api}
+      OSS_KEYCLOAK_ADDITIONAL_AUDIENCES: ${OSS_KEYCLOAK_ADDITIONAL_AUDIENCES:-}
+      KEYCLOAK_USER_LOOKUP_CLIENT_ID: ${KEYCLOAK_USER_LOOKUP_CLIENT_ID:?set the Keycloak user-lookup client ID}
+      KEYCLOAK_USER_LOOKUP_CLIENT_SECRET: ${KEYCLOAK_USER_LOOKUP_CLIENT_SECRET:?run bootstrap.sh}
+      MCP_RESOURCE_AUDIENCE: ${MCP_RESOURCE_AUDIENCE:?set the public MCP resource audience}
+      GEMMA_BASE_URL: ${GEMMA_BASE_URL:-http://gemma:8080/v1}
+      GEMMA_ALLOW_HTTP_INTERNAL: ${GEMMA_ALLOW_HTTP_INTERNAL:-true}
+      GEMMA_MODEL: ${GEMMA_MODEL}
+      GEMMA_MODEL_REVISION: ${GEMMA_MODEL_REVISION}
+      GEMMA_RUNTIME: ${GEMMA_RUNTIME:?set the local runtime name}
+      GEMMA_RUNTIME_REVISION: ${GEMMA_RUNTIME_REVISION}
+      GEMMA_QUANTIZATION: ${GEMMA_QUANTIZATION}
+      GEMMA_MAX_CONTEXT_TOKENS: ${GEMMA_MAX_CONTEXT_TOKENS:-16384}
+      GEMMA_REQUEST_TIMEOUT_SECONDS: ${GEMMA_REQUEST_TIMEOUT_SECONDS:-360}
+      GEMMA_SUMMARY_JOB_TIMEOUT_MINUTES: ${GEMMA_SUMMARY_JOB_TIMEOUT_MINUTES:-60}
+      GEMMA_MAX_ATTEMPTS: ${GEMMA_MAX_ATTEMPTS:-3}
+      GEMMA_MAX_REQUEST_BYTES: ${GEMMA_MAX_REQUEST_BYTES:-4194304}
+      GEMMA_MAX_RESPONSE_BYTES: ${GEMMA_MAX_RESPONSE_BYTES:-8388608}
+      SUMMARY_HIGH_STAKES_ENABLED: ${SUMMARY_HIGH_STAKES_ENABLED:-false}
+      SUMMARY_PROFILES_ENABLED: ${SUMMARY_PROFILES_ENABLED:-false}
+      SUMMARY_SHARED_ANALYSIS_ENABLED: ${SUMMARY_SHARED_ANALYSIS_ENABLED:-false}
+      CUSTOM_VOCABULARY_ENABLED: ${CUSTOM_VOCABULARY_ENABLED:-false}
+      BAP_EXPORT_ENABLED: ${BAP_EXPORT_ENABLED:-false}
+      TRANSCRIPTION_PROVIDER: speechmatics
+      SPEECHMATICS_MODE: saas
+      SPEECHMATICS_API_URL: ${SPEECHMATICS_API_URL:?set the approved regional HTTPS endpoint}
+      SPEECHMATICS_API_KEY: ${SPEECHMATICS_API_KEY:?set the operator credential}
+      CLAMAV_ADDRESS: ${CLAMAV_ADDRESS:-clamav:3310}
+      SCAN_ENFORCEMENT: required
+      MEDIA_MAX_DURATION: ${MEDIA_MAX_DURATION:-8h}
+      RECORDING_MAX_DURATION_HOURS: ${RECORDING_MAX_DURATION_HOURS:-8}
+      MEDIA_STREAM_TOKEN_SECRET: ${MEDIA_STREAM_TOKEN_SECRET:?run bootstrap.sh}
+      PUBLIC_BASE_URL: ${PUBLIC_BASE_URL:?set the public application URL}
+      PUBLIC_FRONTEND_URL: ${PUBLIC_FRONTEND_URL:?set the public application URL}
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:?set the public application origin}
+      MCP_ALLOWED_ORIGINS: ${MCP_ALLOWED_ORIGINS:?set the public MCP origin}
+      TRUSTED_PROXIES: ${TRUSTED_PROXIES:?set the dedicated Compose edge network CIDR}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      REQUIRE_AUDIO_BINARIES: ${REQUIRE_AUDIO_BINARIES:-true}
+      DEEPFILTER_BIN_PATH: ${DEEPFILTER_BIN_PATH:-/usr/local/bin/deep-filter}
+      DEEPFILTER_ENABLED: ${DEEPFILTER_ENABLED:-false}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+      openbao:
+        condition: service_healthy
+      clamav:
+        condition: service_healthy
+      gemma:
+        condition: service_started
+    volumes:
+      - ${LOCAL_STORAGE_DIR:?set a persistent path}:/var/lib/voxis/media
+      - ${LOCAL_SCRATCH_DIR:?set a dedicated protected scratch path}:/var/lib/voxis/scratch
+    user: "10001:10001"
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m,mode=1770,uid=10001,gid=10001
+    security_opt:
+      - no-new-privileges:true
+      - seccomp=./security/bwrap-moby-v29.7.2-seccomp.json
+      - apparmor=voxis-oss-api-bwrap
+    pids_limit: 512
+    # serve() allows 30 seconds for HTTP shutdown and another 30 seconds for
+    # River workers. Docker must not force-kill the process before that ends.
+    stop_grace_period: 65s
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "--silent", "http://127.0.0.1:8080/ready"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    # edge is the only API network with internet access (Speechmatics).
+    networks: [edge, identity, app-db, secrets, model, scan]
+
+  web:
+    <<: *long-running
+    profiles: ["app"]
+    build:
+      context: ../../frontend
+      dockerfile: ../editions/oss/runtime/web/Dockerfile
+      additional_contexts:
+        caddy-runtime: service:proxy
+      args:
+        CADDY_IMAGE: caddy-runtime
+        VITE_API_URL: /api/v1
+        VITE_KEYCLOAK_URL: /auth
+        VITE_KEYCLOAK_REALM: ${OSS_KEYCLOAK_REALM:-voxis-oss}
+        VITE_KEYCLOAK_CLIENT_ID: ${OSS_KEYCLOAK_WEB_CLIENT_ID:-voxis-oss-web}
+    image: ${VOXIS_OSS_WEB_IMAGE:-voxis-oss-web:local}
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,nodev,size=32m,mode=1770,uid=10001,gid=10001
+    pids_limit: 128
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8080/"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    networks: [web]
+
+  proxy:
+    <<: [*long-running, *caddy-runtime]
+    profiles: ["app"]
+    user: "10001:10001"
+    read_only: true
+    cap_add:
+      - NET_BIND_SERVICE
+    pids_limit: 256
+    environment:
+      PUBLIC_HOSTNAME: ${PUBLIC_HOSTNAME:?set the public application hostname}
+      TLS_EMAIL: ${TLS_EMAIL:?set the ACME notification email}
+      OSS_KEYCLOAK_REALM: ${OSS_KEYCLOAK_REALM:-voxis-oss}
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "/dev/null", "http://127.0.0.1:8099/"]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+    depends_on:
+      keycloak:
+        condition: service_healthy
+      api:
+        condition: service_healthy
+      web:
+        condition: service_healthy
+    ports:
+      - "${PROXY_HTTP_BIND:-80:80}"
+      - "${PROXY_HTTPS_BIND:-443:443}"
+      # Keycloak administration, for an SSH tunnel only. Never publish it
+      # beyond the host's loopback address.
+      - "127.0.0.1:${OSS_KEYCLOAK_ADMIN_PORT:-8081}:8081"
+    volumes:
+      - ${CADDYFILE:-./caddy/Caddyfile}:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+    networks: [edge, web, identity-proxy]
+
+volumes:
+  postgres-data:
+  keycloak-db-data:
+  clamav-data:
+  gemma-model:
+  caddy-data:
+  caddy-config:
+
+# Each network joins only the services that must talk to each other. Only
+# edge, scan-updates, and model-download reach the internet.
+networks:
+  # proxy (published ports, ACME) and api (Speechmatics). Its fixed range is
+  # the API's TRUSTED_PROXIES value.
+  edge:
+    ipam:
+      config:
+        - subnet: 172.30.0.0/24
+  web:
+    internal: true
+  # proxy and keycloak. Keycloak trusts forwarding headers only from here.
+  identity-proxy:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.1.0/24
+  identity:
+    internal: true
+  identity-db:
+    internal: true
+  app-db:
+    internal: true
+  # api and openbao. The application AppRole is bound to this range.
+  secrets:
+    internal: true
+    ipam:
+      config:
+        - subnet: 172.30.2.0/24
+  model:
+    internal: true
+  scan:
+    internal: true
+  # freshclam's signature updates. clamd is not on this network.
+  scan-updates:
+  # gemma-download's one-time model fetch.
+  model-download:

@@ -1,0 +1,17 @@
+# Check out text with LF on every platform: the attack-surface guards pin
+# SHA-256 hashes of raw file bytes, and the shell scripts run in Linux
+# containers.
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+*.wav binary
+*.mp3 binary
+*.webm binary
+*.m4a binary

@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "Ready",
+    "processing": "Processing",
+    "failed": "Failed",
+    "openFile": "Open file",
+    "openAnyway": "Processing — open anyway",
+    "openFailed": "Open file · failed"
+  },
+  "upload": {
+    "dropzone": "Drag & drop audio files here",
+    "browse": "or browse",
+    "browseFiles": "Browse files",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "Max 1 GB per file",
+    "queueLabel": "Upload queue",
+    "rejectedTitle": "Rejected files",
+    "rejectedLabel": "Rejected files",
+    "uploading": "Uploading {{name}}",
+    "processing": "Processing on server...",
+    "complete": "Upload complete",
+    "viewFile": "View file",
+    "viewFileNamed": "View file: {{name}}",
+    "remove": "Remove {{name}}",
+    "errors": {
+      "failed": "Upload failed"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "Unsupported file type",
+      "tooLarge": "File exceeds maximum size of 1 GB",
+      "storageQuota": "This file exceeds the remaining storage quota"
+    }
+  },
+  "storageQuota": {
+    "warning": "Storage is almost full: {{used}} of {{limit}} used, {{remaining}} remaining.",
+    "full": "Storage limit reached. Uploads and recordings are blocked. Free audio storage in your Library.",
+    "manageLibrary": "Manage storage in Library",
+    "admin": {
+      "enabled": "Enforce storage quota",
+      "enabledDescription": "When off, users have unlimited storage.",
+      "limit": "Default limit (GiB)",
+      "limitDescription": "Enter any positive GiB value. Decimals are supported. The default is 2 GiB.",
+      "limitError": "Enter a positive storage limit.",
+      "backend": "Storage backend",
+      "warningThreshold": "Warning threshold",
+      "inactive": "Inactive: quotas are not enforced with {{backend}} storage.",
+      "save": "Save storage quota",
+      "saving": "Saving...",
+      "saved": "Storage quota saved.",
+      "saveError": "Unable to save storage quota.",
+      "loadError": "Unable to load storage quota settings."
+    }
+  },
+  "pagination": {
+    "showing": "Showing {{from}}–{{to}} of {{total}}",
+    "previous": "Previous page",
+    "next": "Next page"
+  },
+  "player": {
+    "pause": "Pause",
+    "play": "Play",
+    "position": "Playback position",
+    "unmute": "Unmute",
+    "mute": "Mute",
+    "speed": "Playback speed",
+    "speedValue": "{{speed}}x",
+    "skipBack": "Back {{seconds}} seconds",
+    "skipForward": "Forward {{seconds}} seconds",
+    "dock": "Audio player",
+    "backToTranscript": "Back to transcript",
+    "speedPill": "{{speed}}x speed"
+  },
+  "inlineEdit": {
+    "clickToEdit": "Click to edit"
+  },
+  "analysis": {
+    "trust": {
+      "high": "High Trust",
+      "medium": "Medium Trust",
+      "low": "Low Trust",
+      "unknown": "Unknown"
+    },
+    "title": "Audio Integrity",
+    "checksPassed": "{{passed}} of {{total}} checks passed",
+    "recorded": "Recorded",
+    "integrityDetails": "Integrity details",
+    "technicalDetails": "Technical details",
+    "fileHash": "File hash",
+    "tech": {
+      "format": "Format",
+      "codec": "Codec",
+      "encoder": "Encoder",
+      "source": "Source"
+    }
+  },
+  "delete": {
+    "title": "Delete media file?",
+    "descriptionBefore": "This will permanently delete ",
+    "descriptionAfter": ". Its audio, transcripts, summaries, title and file name are removed from this server. Copies in existing backups remain until those backups are deleted. This cannot be undone.",
+    "deleting": "Deleting...",
+    "failed": "Failed to delete media file",
+    "success": "Media file deleted"
+  },
+  "download": {
+    "downloading": "Downloading...",
+    "label": "Download Audio",
+    "success": "Audio downloaded",
+    "error": "Failed to download audio. Please try again."
+  },
+  "detail": {
+    "audioFiles": "Audio Files",
+    "loading": "Loading media details...",
+    "notFound": "Media not found or failed to load.",
+    "encrypted": "Encrypted",
+    "scanPending": "File is being scanned for security. Playback will be available once the scan completes.",
+    "scanFailed": "File failed security scan and cannot be played.",
+    "streamFailed": "Audio stream failed. The file may need to be re-uploaded.",
+    "viewTranscription": "View Transcription",
+    "updateTitleError": "Failed to update title",
+    "updateDescriptionError": "Failed to update description",
+    "audioDeleted": "Audio deleted by live recording retention policy. Transcript and summaries remain available."
+  }
+}

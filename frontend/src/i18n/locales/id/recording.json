@@ -1,0 +1,154 @@
+{
+  "layout": {
+    "brand": "Voxis Source-Available",
+    "cancel": "Batal"
+  },
+  "compat": {
+    "title": "Browser tidak didukung",
+    "message": "Browser Anda tidak mendukung perekaman audio. Gunakan Chrome, Firefox, Edge, atau Safari 18.4+ versi terbaru."
+  },
+  "mic": {
+    "none": "Tidak ada mikrofon yang terdeteksi",
+    "select": "Pilih mikrofon"
+  },
+  "micDevices": {
+    "fallbackLabel": "Mikrofon {{id}}",
+    "denied": "Akses mikrofon ditolak. Izinkan akses mikrofon di pengaturan browser Anda.",
+    "notFound": "Mikrofon tidak ditemukan. Silakan sambungkan mikrofon dan coba lagi.",
+    "error": "Kesalahan mikrofon: {{message}}",
+    "failed": "Gagal mengakses perangkat mikrofon."
+  },
+  "recorder": {
+    "unsupported": "Perekaman tidak didukung di browser ini.",
+    "errorStopped": "Kesalahan perekaman. Perekaman telah dihentikan.",
+    "micDenied": "Akses mikrofon ditolak.",
+    "displayDenied": "Berbagi layar atau tab dibatalkan atau ditolak. Pilih sumber rapat dan aktifkan berbagi audio.",
+    "startFailed": "Gagal memulai perekaman.",
+    "noDisplayAudio": "Tidak ada audio yang dibagikan. Audio tab di Chrome atau Edge bekerja dengan andal; audio layar penuh, aplikasi native, dan sistem bergantung pada browser dan sistem operasi Anda.",
+    "audioContextSuspended": "Penangkapan audio tidak dapat dimulai. Klik Mulai merekam sekali lagi dan biarkan tab browser tetap aktif.",
+    "captureEndedBeforeStart": "Sumber rapat yang dibagikan berhenti sebelum perekaman dimulai. Pilih kembali dan coba lagi."
+  },
+  "timer": {
+    "ariaLabel": "Waktu yang berlalu: {{display}}"
+  },
+  "waveform": {
+    "ariaLabel": "Bentuk gelombang audio"
+  },
+  "recover": {
+    "titleSingle": "Perekaman terganggu",
+    "titleMulti": "Rekaman terganggu",
+    "descriptionSingle": "Rekaman sebelumnya terhenti. Apakah Anda ingin memulihkan audio yang tersimpan?",
+    "descriptionMulti": "Anda memiliki {{n}} rekaman yang terputus. Pulihkan atau buang setiap sesi.",
+    "date": "Tanggal:",
+    "estimatedDuration": "Perkiraan durasi:",
+    "microphone": "Mikrofon:",
+    "discard": "Buang",
+    "discarding": "Membuang...",
+    "recover": "Pulihkan",
+    "recovering": "Memulihkan..."
+  },
+  "exit": {
+    "title": "Perekaman sedang berlangsung",
+    "description": "Meninggalkan halaman ini akan menghentikan perekaman. Pilih apa yang ingin dilakukan dengan audio yang sudah terekam — keluar tanpa memilih akan membuat sesi perekaman tertinggal di server.",
+    "keep": "Lanjutkan merekam",
+    "stopAndSave": "Hentikan & simpan",
+    "discard": "Buang rekaman"
+  },
+  "dataLoss": {
+    "savePartialTitle": "Simpan hanya audio yang sudah terkirim?",
+    "savePartialDescription": "Audio yang belum sampai ke server akan hilang permanen. Rekaman hanya akan disimpan dengan bagian yang sudah terkirim.",
+    "discardTitle": "Buang rekaman ini?",
+    "discardDescription": "Rekaman dan seluruh potongan audio yang sudah terkirim akan dihapus permanen. Tindakan ini tidak dapat dibatalkan.",
+    "confirmSavePartial": "Simpan rekaman sebagian",
+    "confirmDiscard": "Buang permanen"
+  },
+  "meetingConsent": {
+    "title": "Rekam audio rapat?",
+    "description": "Pastikan semua orang sudah diberi tahu dan Anda memang diizinkan merekam. Browser dapat menangkap semua audio dari sumber yang Anda pilih, termasuk suara atau notifikasi yang tidak terkait.",
+    "cancel": "Batal",
+    "continue": "Saya sudah mendapat izin — pilih audio"
+  },
+  "activeTakeover": {
+    "title": "Sesi perekaman aktif ditemukan",
+    "description": "Sebuah sesi perekaman masih ditandai aktif. Sesi itu mungkin masih merekam di tab atau jendela lain, atau tertinggal dari tab yang ditutup atau mengalami crash.",
+    "started": "Dimulai:",
+    "chunksUploaded": "{{n}} segmen sudah terunggah",
+    "warning": "Mengambil alih akan menghentikan sesi tersebut. Jika sesi itu masih merekam di tempat lain, perekaman berhenti dan hanya audio yang sudah terunggah dapat dipulihkan.",
+    "takeOver": "Ambil alih",
+    "takingOver": "Mengambil alih...",
+    "leave": "Buka Pustaka"
+  },
+  "idle": {
+    "title": "Siap untuk merekam",
+    "detecting": "Mendeteksi mikrofon...",
+    "start": "Mulai merekam"
+  },
+  "status": {
+    "recording": "Sedang merekam",
+    "paused": "Dijeda"
+  },
+  "controls": {
+    "pause": "Jeda",
+    "resume": "Lanjutkan",
+    "stop": "Hentikan",
+    "minDurationHint": "Rekam setidaknya {{seconds}} detik sebelum berhenti"
+  },
+  "documentTitle": {
+    "paused": "Dijeda",
+    "recording": "Sedang merekam",
+    "withApp": "{{prefix}} — Voxis"
+  },
+  "completing": {
+    "title": "Menyelesaikan rekaman Anda...",
+    "uploadingRemaining": "Mengunggah sisa audio... ({{done}} dari {{total}})",
+    "processing": "Memproses audio...",
+    "uploadFailedTitle": "Pengunggahan gagal",
+    "uploadFailedBody": "Audio yang tersisa tidak dapat diunggah (kesalahan {{status}}), sehingga {{n}} segmen tertahan. Coba lagi, atau lanjutkan dengan audio yang sudah terkirim.",
+    "retryUpload": "Coba unggah lagi",
+    "saveUploaded": "Simpan audio yang sudah terkirim",
+    "discardRecording": "Buang rekaman",
+    "localWriteWarning": "Sebagian audio tidak dapat disimpan di perangkat ini, jadi bagian akhir rekaman mungkin hilang."
+  },
+  "error": {
+    "title": "Kesalahan perekaman",
+    "fallback": "Terjadi kesalahan yang tidak terduga.",
+    "tryAgain": "Coba lagi"
+  },
+  "upload": {
+    "saving": "Menyimpan... ({{n}} belum terkirim)",
+    "saved": "Disimpan"
+  },
+  "toast": {
+    "autoStop": "Perekaman otomatis berhenti setelah 8 jam.",
+    "uploadInterrupted": "Pengunggahan terhenti — perekaman dijeda. Periksa koneksi Anda.",
+    "micDenied": "Akses mikrofon ditolak.",
+    "startSessionFailed": "Gagal memulai sesi perekaman.",
+    "startFailed": "Gagal memulai perekaman.",
+    "completeFailed": "Gagal menyelesaikan perekaman. Audio Anda telah disimpan.",
+    "recovered": "Rekaman dipulihkan. Audio sedang diproses...",
+    "recoverFailed": "Gagal memulihkan rekaman.",
+    "discarded": "Rekaman dibuang.",
+    "discardFailed": "Gagal membuang rekaman.",
+    "completeFailedStore": "Gagal menyelesaikan perekaman.",
+    "captureEnded": "Sumber audio yang dibagikan berhenti. Voxis sedang menyimpan rekaman.",
+    "captureInterrupted": "{{error}} Audio yang tersimpan siap dipulihkan.",
+    "captureRecoveryFailed": "Perekaman berhenti. Sambungkan kembali, lalu coba lagi untuk memulihkan audio yang tersimpan.",
+    "chunkWriteFailed": "Perangkat ini tidak dapat menyimpan audio terbaru. Perekaman dihentikan untuk melindungi audio yang sudah terekam.",
+    "trailingAudioMissing": "Sebagian audio tidak dapat disimpan di perangkat ini, jadi bagian akhir rekaman mungkin hilang.",
+    "meetingWithoutMicrophone": "Audio rapat akan terus terekam tanpa mikrofon Anda.",
+    "meetingAudioMuted": "Audio rapat yang dibagikan disenyapkan. Periksa indikator berbagi di browser.",
+    "microphoneMuted": "Audio mikrofon disenyapkan. Periksa perangkat Anda.",
+    "recoveredAfterOffline": "Koneksi Anda mengganggu perekaman. Audio yang tersimpan sedang diproses sekarang.",
+    "activeSessionExists": "Sesi perekaman lain masih aktif. Pulihkan atau buang sesi tersebut sebelum memulai yang baru.",
+    "recoverPartialUpload": "{{n}} potongan audio lokal tidak dapat dilampirkan. Memulihkan dengan audio yang sudah ada di server.",
+    "releasedActiveSession": "Ada sesi perekaman yang tertinggal terbuka. Anda dapat memulihkan atau membuangnya sekarang.",
+    "takeOverFailed": "Tidak dapat mengambil alih sesi perekaman. Silakan coba lagi."
+  },
+  "captureSource": {
+    "label": "Sumber rekaman",
+    "microphone": "Mikrofon",
+    "mixed": "Audio rapat",
+    "mixedHelp": "Chrome dan Edge dapat membagikan audio tab. Audio layar penuh, aplikasi native, dan sistem bergantung pada browser dan sistem operasi Anda.",
+    "mixedUnsupported": "Browser ini tidak dapat membuka pemilih berbagi. Gunakan Chrome atau Edge untuk membagikan audio tab."
+  }
+}

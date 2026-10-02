@@ -1,0 +1,8 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-empty-with-duration",
+    "duration": 4.0
+  },
+  "results": []
+}

@@ -1,0 +1,40 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-no-diarization"
+  },
+  "results": [
+    {
+      "type": "word",
+      "start_time": 0.0,
+      "end_time": 0.5,
+      "alternatives": [{"content": "Selamat", "language": "id"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.5,
+      "end_time": 1.0,
+      "alternatives": [{"content": "pagi", "language": "id"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 1.0,
+      "end_time": 1.05,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "id"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.20,
+      "end_time": 1.70,
+      "alternatives": [{"content": "Semua", "language": "id"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.70,
+      "end_time": 2.40,
+      "alternatives": [{"content": "hadir", "language": "id"}]
+    }
+  ]
+}

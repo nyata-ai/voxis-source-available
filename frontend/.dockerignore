@@ -1,0 +1,13 @@
+# Local build and test artifacts are never Docker build inputs. The web image
+# runs its own npm ci and build; a host node_modules, dist, or .env file copied
+# by `COPY . .` would replace or change them.
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+tests/e2e/.auth/
+.env
+.env.*
+*.local
+*.tsbuildinfo

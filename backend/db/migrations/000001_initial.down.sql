@@ -1,0 +1,16 @@
+DROP TABLE IF EXISTS mcp_collection_items;
+DROP TABLE IF EXISTS mcp_collections;
+DROP TABLE IF EXISTS user_storage_allocations;
+DROP TABLE IF EXISTS app_storage_quota_policy;
+DROP TABLE IF EXISTS app_recording_retention_policy;
+DROP TABLE IF EXISTS recording_chunks;
+DROP TABLE IF EXISTS recording_sessions;
+DROP TABLE IF EXISTS api_keys;
+DROP TABLE IF EXISTS llm_prompt_overrides;
+DROP TABLE IF EXISTS summaries;
+DROP TABLE IF EXISTS transcription_segments;
+DROP TABLE IF EXISTS transcriptions;
+DROP TABLE IF EXISTS media;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS organizations;
+DROP FUNCTION IF EXISTS update_updated_at_column();

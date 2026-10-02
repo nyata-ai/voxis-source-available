@@ -1,0 +1,154 @@
+{
+  "layout": {
+    "brand": "Voxis Source-Available",
+    "cancel": "Abbrechen"
+  },
+  "compat": {
+    "title": "Browser nicht unterstützt",
+    "message": "Ihr Browser unterstützt keine Audioaufzeichnung. Bitte verwenden Sie eine aktuelle Version von Chrome, Firefox, Edge oder Safari 18.4+."
+  },
+  "mic": {
+    "none": "Kein Mikrofon erkannt",
+    "select": "Mikrofon auswählen"
+  },
+  "micDevices": {
+    "fallbackLabel": "Mikrofon {{id}}",
+    "denied": "Mikrofonzugriff verweigert. Bitte erlauben Sie den Mikrofonzugriff in Ihren Browsereinstellungen.",
+    "notFound": "Kein Mikrofon gefunden. Bitte schließen Sie ein Mikrofon an und versuchen Sie es erneut.",
+    "error": "Mikrofonfehler: {{message}}",
+    "failed": "Zugriff auf Mikrofongeräte fehlgeschlagen."
+  },
+  "recorder": {
+    "unsupported": "Die Aufzeichnung wird in diesem Browser nicht unterstützt.",
+    "errorStopped": "Aufnahmefehler. Die Aufnahme wurde gestoppt.",
+    "micDenied": "Mikrofonzugriff verweigert.",
+    "displayDenied": "Die Bildschirm- oder Tab-Freigabe wurde abgebrochen oder verweigert. Wählen Sie die Meeting-Quelle aus und aktivieren Sie die Audiofreigabe.",
+    "startFailed": "Die Aufnahme konnte nicht gestartet werden.",
+    "noDisplayAudio": "Es wurde kein freigegebenes Audio erkannt. Tab-Audio funktioniert in Chrome oder Edge zuverlässig; Vollbild-, App- und System-Audio hängen von Ihrem Browser und Betriebssystem ab.",
+    "audioContextSuspended": "Die Audioaufnahme konnte nicht gestartet werden. Klicken Sie erneut auf „Starten Sie die Aufnahme“ und lassen Sie den Browser-Tab aktiv.",
+    "captureEndedBeforeStart": "Die freigegebene Meeting-Quelle wurde beendet, bevor die Aufnahme begonnen hat. Wählen Sie sie erneut aus und versuchen Sie es noch einmal."
+  },
+  "timer": {
+    "ariaLabel": "Verstrichene Zeit: {{display}}"
+  },
+  "waveform": {
+    "ariaLabel": "Audio-Wellenform"
+  },
+  "recover": {
+    "titleSingle": "Aufnahme unterbrochen",
+    "titleMulti": "Unterbrochene Aufnahmen",
+    "descriptionSingle": "Eine vorherige Aufnahme wurde unterbrochen. Möchten Sie das gespeicherte Audio wiederherstellen?",
+    "descriptionMulti": "Sie haben {{n}} unterbrochene Aufnahmen. Jede Sitzung wiederherstellen oder verwerfen.",
+    "date": "Datum:",
+    "estimatedDuration": "Geschätzte Dauer:",
+    "microphone": "Mikrofon:",
+    "discard": "Verwerfen",
+    "discarding": "Verwerfen...",
+    "recover": "Wiederherstellen",
+    "recovering": "Wiederherstellung..."
+  },
+  "exit": {
+    "title": "Aufnahme läuft",
+    "description": "Wenn Sie diese Seite verlassen, wird die Aufnahme gestoppt. Wählen Sie, was mit dem bisher aufgenommenen Audio geschehen soll – ohne Auswahl bliebe die Aufnahme auf dem Server hängen.",
+    "keep": "Aufnahme fortsetzen",
+    "stopAndSave": "Stoppen & speichern",
+    "discard": "Aufnahme verwerfen"
+  },
+  "dataLoss": {
+    "savePartialTitle": "Nur das hochgeladene Audio speichern?",
+    "savePartialDescription": "Audio, das den Server nie erreicht hat, geht dauerhaft verloren. Die Aufnahme wird nur mit dem bereits hochgeladenen Teil gespeichert.",
+    "discardTitle": "Diese Aufnahme verwerfen?",
+    "discardDescription": "Die Aufnahme und alle bereits hochgeladenen Segmente werden dauerhaft gelöscht. Dies kann nicht rückgängig gemacht werden.",
+    "confirmSavePartial": "Teilaufnahme speichern",
+    "confirmDiscard": "Dauerhaft verwerfen"
+  },
+  "meetingConsent": {
+    "title": "Meeting-Audio aufnehmen?",
+    "description": "Stellen Sie sicher, dass alle informiert wurden und Sie zur Aufnahme berechtigt sind. Der Browser kann sämtliches Audio der gewählten Quelle erfassen, einschließlich fremder Stimmen oder Benachrichtigungen.",
+    "cancel": "Abbrechen",
+    "continue": "Ich habe die Zustimmung — Audio auswählen"
+  },
+  "activeTakeover": {
+    "title": "Aktive Aufnahme gefunden",
+    "description": "Eine Aufnahmesitzung ist noch als aktiv markiert. Sie läuft möglicherweise noch in einem anderen Tab oder Fenster, oder sie stammt von einem Tab, der geschlossen wurde oder abgestürzt ist.",
+    "started": "Gestartet:",
+    "chunksUploaded": "{{n}} Segment(e) bisher hochgeladen",
+    "warning": "Die Übernahme unterbricht diese Sitzung. Falls dort noch aufgenommen wird, stoppt diese Aufnahme, und nur das bereits hochgeladene Audio kann wiederhergestellt werden.",
+    "takeOver": "Übernehmen",
+    "takingOver": "Wird übernommen...",
+    "leave": "Zur Mediathek"
+  },
+  "idle": {
+    "title": "Bereit zur Aufnahme",
+    "detecting": "Mikrofon wird erkannt...",
+    "start": "Aufnahme starten"
+  },
+  "status": {
+    "recording": "Aufnahme läuft",
+    "paused": "Angehalten"
+  },
+  "controls": {
+    "pause": "Pausieren",
+    "resume": "Fortsetzen",
+    "stop": "Stoppen",
+    "minDurationHint": "Nehmen Sie mindestens {{seconds}} Sekunden auf, bevor Sie stoppen"
+  },
+  "documentTitle": {
+    "paused": "Angehalten",
+    "recording": "Aufnahme",
+    "withApp": "{{prefix}} — Voxis"
+  },
+  "completing": {
+    "title": "Aufnahme wird abgeschlossen…",
+    "uploadingRemaining": "Verbleibendes Audio wird hochgeladen... ({{done}} von {{total}})",
+    "processing": "Audio wird verarbeitet...",
+    "uploadFailedTitle": "Upload fehlgeschlagen",
+    "uploadFailedBody": "Das verbleibende Audio konnte nicht hochgeladen werden (Fehler {{status}}). {{n}} Segment(e) fehlen noch. Versuchen Sie den Upload erneut oder fahren Sie nur mit dem bereits hochgeladenen Audio fort.",
+    "retryUpload": "Upload wiederholen",
+    "saveUploaded": "Hochgeladenes speichern",
+    "discardRecording": "Aufnahme verwerfen",
+    "localWriteWarning": "Ein Teil des Audios konnte auf diesem Gerät nicht gespeichert werden, daher fehlt möglicherweise das Ende dieser Aufnahme."
+  },
+  "error": {
+    "title": "Aufnahmefehler",
+    "fallback": "Es ist ein unerwarteter Fehler aufgetreten.",
+    "tryAgain": "Erneut versuchen"
+  },
+  "upload": {
+    "saving": "Speichern... ({{n}} nicht gesendet)",
+    "saved": "Gespeichert"
+  },
+  "toast": {
+    "autoStop": "Die Aufnahme wird nach 8 Stunden automatisch gestoppt.",
+    "uploadInterrupted": "Upload unterbrochen – Aufnahme pausiert. Überprüfen Sie Ihre Verbindung.",
+    "micDenied": "Mikrofonzugriff verweigert.",
+    "startSessionFailed": "Aufnahmesitzung konnte nicht gestartet werden.",
+    "startFailed": "Die Aufnahme konnte nicht gestartet werden.",
+    "completeFailed": "Die Aufnahme konnte nicht abgeschlossen werden. Ihr Audio wurde gespeichert.",
+    "recovered": "Aufnahme wiederhergestellt. Audio wird verarbeitet...",
+    "recoverFailed": "Die Aufnahme konnte nicht wiederhergestellt werden.",
+    "discarded": "Aufnahme verworfen.",
+    "discardFailed": "Die Aufnahme konnte nicht verworfen werden.",
+    "completeFailedStore": "Die Aufnahme konnte nicht abgeschlossen werden.",
+    "captureEnded": "Die freigegebene Audioquelle wurde beendet. Voxis speichert die Aufnahme.",
+    "captureInterrupted": "{{error}} Ihr gespeichertes Audio kann jetzt wiederhergestellt werden.",
+    "captureRecoveryFailed": "Aufnahme gestoppt. Stellen Sie die Verbindung wieder her und versuchen Sie erneut, das gespeicherte Audio wiederherzustellen.",
+    "chunkWriteFailed": "Dieses Gerät konnte das neueste Audio nicht speichern. Die Aufnahme wurde gestoppt, um das bereits Erfasste zu schützen.",
+    "trailingAudioMissing": "Ein Teil des Audios konnte auf diesem Gerät nicht gespeichert werden, daher fehlt möglicherweise das Ende dieser Aufnahme.",
+    "meetingWithoutMicrophone": "Das Meeting-Audio läuft ohne Ihr Mikrofon weiter.",
+    "meetingAudioMuted": "Das freigegebene Meeting-Audio wurde stummgeschaltet. Überprüfen Sie die Freigabeanzeige des Browsers.",
+    "microphoneMuted": "Das Mikrofonaudio wurde stummgeschaltet. Überprüfen Sie Ihr Gerät.",
+    "recoveredAfterOffline": "Ihre Verbindung hat die Aufnahme unterbrochen. Das gespeicherte Audio wird jetzt verarbeitet.",
+    "activeSessionExists": "Es ist bereits eine andere Aufnahmesitzung aktiv. Stellen Sie sie wieder her oder verwerfen Sie sie, bevor Sie eine neue starten.",
+    "recoverPartialUpload": "{{n}} lokal gespeicherte(s) Segment(e) konnten nicht angehängt werden. Die Wiederherstellung erfolgt mit dem bereits auf dem Server vorhandenen Audio.",
+    "releasedActiveSession": "Eine Aufnahmesitzung wurde offen gelassen. Sie können sie jetzt wiederherstellen oder verwerfen.",
+    "takeOverFailed": "Die Aufnahmesitzung konnte nicht übernommen werden. Bitte versuchen Sie es erneut."
+  },
+  "captureSource": {
+    "label": "Aufnahmequelle",
+    "microphone": "Mikrofon",
+    "mixed": "Meeting-Audio",
+    "mixedHelp": "Chrome und Edge können Tab-Audio freigeben. Vollbild-, App- und System-Audio hängen von Ihrem Browser und Betriebssystem ab.",
+    "mixedUnsupported": "Dieser Browser kann keine Freigabeauswahl öffnen. Verwenden Sie Chrome oder Edge, um Tab-Audio freizugeben."
+  }
+}

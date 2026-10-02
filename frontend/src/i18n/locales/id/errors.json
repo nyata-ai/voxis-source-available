@@ -1,0 +1,25 @@
+{
+  "codes": {
+    "bad_request": "Permintaan tidak dapat diproses. Silakan periksa detailnya dan coba lagi.",
+    "validation_error": "Beberapa detail perlu diperhatikan. Silakan periksa formulir dan coba lagi.",
+    "invalid_input": "Beberapa detail perlu diperhatikan. Silakan periksa formulir dan coba lagi.",
+    "not_found": "Kami tidak dapat menemukan item tersebut.",
+    "forbidden": "Anda tidak memiliki akses ke item ini.",
+    "unauthorized": "Sesi Anda telah berakhir. Silakan masuk lagi.",
+    "conflict": "Proses lain sedang berjalan dan bertentangan dengan tindakan ini. Silakan coba lagi.",
+    "internal_error": "Ada yang tidak beres di pihak kami. Silakan coba lagi.",
+    "service_unavailable": "Layanan ini untuk sementara tidak tersedia. Silakan coba lagi nanti.",
+    "storage_quota_exceeded": "Kuota penyimpanan telah tercapai. Hapus audio di Pustaka untuk mengosongkan ruang, lalu coba lagi.",
+    "rate_limited": "Terlalu banyak permintaan. Harap tunggu sebentar dan coba lagi.",
+    "scan_pending": "File ini masih dipindai untuk keamanan. Silakan coba lagi sebentar lagi.",
+    "scan_failed": "File ini tidak lolos pemindaian keamanan dan tidak dapat digunakan.",
+    "recent_auth_required": "Harap konfirmasikan kembali identitas Anda sebelum melanjutkan.",
+    "state_invalid": "Item ini belum siap untuk tindakan tersebut.",
+    "network": "Kesalahan jaringan. Silakan periksa koneksi Anda dan coba lagi.",
+    "timeout": "Permintaan itu memakan waktu terlalu lama. Silakan coba lagi.",
+    "role_required": "Akun Anda belum memiliki akses. Mintalah administrator Anda untuk memberikan akses.",
+    "upload_limit": "Terlalu banyak unggahan yang sedang berjalan. Silakan coba lagi setelah salah satunya selesai.",
+    "media_too_long": "Rekaman ini lebih panjang daripada batas yang diizinkan server ini. Bagi menjadi beberapa bagian yang lebih pendek, lalu coba lagi.",
+    "model_busy": "Model AI sedang sibuk. Silakan coba lagi sebentar lagi."
+  }
+}

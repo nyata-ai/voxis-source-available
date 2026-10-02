@@ -1,0 +1,154 @@
+{
+  "layout": {
+    "brand": "Voxis Source-Available",
+    "cancel": "Annuler"
+  },
+  "compat": {
+    "title": "Navigateur non pris en charge",
+    "message": "Votre navigateur ne prend pas en charge l'enregistrement audio. Veuillez utiliser une version récente de Chrome, Firefox, Edge ou Safari 18.4+."
+  },
+  "mic": {
+    "none": "Aucun microphone détecté",
+    "select": "Sélectionnez le microphone"
+  },
+  "micDevices": {
+    "fallbackLabel": "Micro {{id}}",
+    "denied": "Accès au microphone refusé. Veuillez autoriser l'accès au microphone dans les paramètres de votre navigateur.",
+    "notFound": "Aucun microphone trouvé. Veuillez connecter un microphone et réessayer.",
+    "error": "Erreur du microphone: {{message}}",
+    "failed": "Échec de l'accès aux périphériques de microphone."
+  },
+  "recorder": {
+    "unsupported": "L'enregistrement n'est pas pris en charge dans ce navigateur.",
+    "errorStopped": "Erreur d'enregistrement. L'enregistrement a été arrêté.",
+    "micDenied": "Accès au microphone refusé.",
+    "displayDenied": "Screen or tab sharing was cancelled or denied. Choose the meeting source and enable audio sharing.",
+    "startFailed": "Échec du démarrage de l'enregistrement.",
+    "noDisplayAudio": "No shared audio was detected. Chrome or Edge tab audio works reliably; full-screen, native-app, and system audio depend on your browser and operating system.",
+    "audioContextSuspended": "Audio capture could not start. Click Start Recording again and keep the browser tab active.",
+    "captureEndedBeforeStart": "The shared meeting source stopped before recording began. Select it again and retry."
+  },
+  "timer": {
+    "ariaLabel": "Temps écoulé: {{display}}"
+  },
+  "waveform": {
+    "ariaLabel": "Forme d'onde audio"
+  },
+  "recover": {
+    "titleSingle": "Enregistrement interrompu",
+    "titleMulti": "Enregistrements interrompus",
+    "descriptionSingle": "Un enregistrement précédent a été interrompu. Souhaitez-vous récupérer l'audio enregistré?",
+    "descriptionMulti": "Vous avez des enregistrements interrompus par {{n}}. Récupérez ou supprimez chaque session.",
+    "date": "Date:",
+    "estimatedDuration": "Durée estimée:",
+    "microphone": "Microphone:",
+    "discard": "Jeter",
+    "discarding": "Jeter...",
+    "recover": "Récupérer",
+    "recovering": "Récupération..."
+  },
+  "exit": {
+    "title": "Recording in progress",
+    "description": "Leaving this page stops the recording. Choose what to do with the audio captured so far — leaving without choosing would strand the recording on the server.",
+    "keep": "Keep recording",
+    "stopAndSave": "Stop & save",
+    "discard": "Discard recording"
+  },
+  "dataLoss": {
+    "savePartialTitle": "Save only the uploaded audio?",
+    "savePartialDescription": "Audio that never reached the server will be permanently lost. The recording will be saved with only the part that was uploaded.",
+    "discardTitle": "Discard this recording?",
+    "discardDescription": "The recording and every chunk already uploaded will be permanently deleted. This cannot be undone.",
+    "confirmSavePartial": "Save partial recording",
+    "confirmDiscard": "Discard permanently"
+  },
+  "meetingConsent": {
+    "title": "Record meeting audio?",
+    "description": "Make sure everyone has been informed and you are allowed to record. The browser may capture all audio from the source you choose, including unrelated voices or notifications.",
+    "cancel": "Cancel",
+    "continue": "I have consent — choose audio"
+  },
+  "activeTakeover": {
+    "title": "Active recording found",
+    "description": "A recording session is still marked active. It may still be recording in another tab or window, or it may be left over from a tab that was closed or crashed.",
+    "started": "Started:",
+    "chunksUploaded": "{{n}} segment(s) uploaded so far",
+    "warning": "Taking over interrupts that session. If it is still recording elsewhere, that recording stops and only the audio already uploaded can be recovered.",
+    "takeOver": "Take over",
+    "takingOver": "Taking over...",
+    "leave": "Go to library"
+  },
+  "idle": {
+    "title": "Prêt à enregistrer",
+    "detecting": "Détection du microphone...",
+    "start": "Commencer l'enregistrement"
+  },
+  "status": {
+    "recording": "Enregistrement",
+    "paused": "En pause"
+  },
+  "controls": {
+    "pause": "Pause",
+    "resume": "CV",
+    "stop": "Arrêt",
+    "minDurationHint": "Record for at least {{seconds}} seconds before stopping"
+  },
+  "documentTitle": {
+    "paused": "En pause",
+    "recording": "Enregistrement",
+    "withApp": "{{prefix}} — Voxis"
+  },
+  "completing": {
+    "title": "Finalisation de votre enregistrement...",
+    "uploadingRemaining": "Téléchargement de l'audio restant... ({{done}} ou {{total}})",
+    "processing": "Traitement du son...",
+    "uploadFailedTitle": "Upload failed",
+    "uploadFailedBody": "The remaining audio could not be uploaded (error {{status}}), so {{n}} segment(s) are stuck. Retry, or continue with the audio already uploaded.",
+    "retryUpload": "Retry upload",
+    "saveUploaded": "Save what's uploaded",
+    "discardRecording": "Discard recording",
+    "localWriteWarning": "Some audio could not be stored on this device, so the end of this recording may be missing."
+  },
+  "error": {
+    "title": "Erreur d'enregistrement",
+    "fallback": "Une erreur inattendue s'est produite.",
+    "tryAgain": "Essayer à nouveau"
+  },
+  "upload": {
+    "saving": "Enregistrement... ({{n}} non envoyé)",
+    "saved": "Enregistré"
+  },
+  "toast": {
+    "autoStop": "L'enregistrement s'est automatiquement arrêté après 8 heures.",
+    "uploadInterrupted": "Téléchargement interrompu – enregistrement en pause. Vérifiez votre connexion.",
+    "micDenied": "Accès au microphone refusé.",
+    "startSessionFailed": "Échec du démarrage de la session d'enregistrement.",
+    "startFailed": "Échec du démarrage de l'enregistrement.",
+    "completeFailed": "Échec de la finalisation de l'enregistrement. Votre audio a été enregistré.",
+    "recovered": "Enregistrement récupéré. Traitement du son...",
+    "recoverFailed": "Échec de la récupération de l'enregistrement.",
+    "discarded": "Enregistrement supprimé.",
+    "discardFailed": "Échec de la suppression de l'enregistrement.",
+    "completeFailedStore": "Échec de la finalisation de l'enregistrement.",
+    "captureEnded": "The shared audio source stopped. Voxis is saving the recording.",
+    "captureInterrupted": "{{error}} Your saved audio is ready to recover.",
+    "captureRecoveryFailed": "Recording stopped. Reconnect, then try again to recover the saved audio.",
+    "chunkWriteFailed": "This device could not store the latest audio. Recording stopped to protect what has already been captured.",
+    "trailingAudioMissing": "Some audio could not be stored on this device, so the end of this recording may be missing.",
+    "meetingWithoutMicrophone": "Meeting audio will continue without your microphone.",
+    "meetingAudioMuted": "Shared meeting audio was muted. Check the browser sharing indicator.",
+    "microphoneMuted": "Microphone audio was muted. Check your device.",
+    "recoveredAfterOffline": "Your connection interrupted the recording. The saved audio is processing now.",
+    "activeSessionExists": "Another recording session is already active. Recover or discard it before starting a new one.",
+    "recoverPartialUpload": "{{n}} locally saved segment(s) could not be attached. Recovering with the audio the server already has.",
+    "releasedActiveSession": "A recording session was left open. You can recover or discard it now.",
+    "takeOverFailed": "Could not take over the recording session. Please try again."
+  },
+  "captureSource": {
+    "label": "Capture source",
+    "microphone": "Microphone",
+    "mixed": "Meeting audio",
+    "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
+    "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  }
+}

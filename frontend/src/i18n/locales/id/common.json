@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "close": "Tutup",
+    "retry": "Coba lagi"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Halaman tidak ditemukan"
+  },
+  "placeholder": {
+    "defaultDescription": "Fitur ini akan segera hadir. Periksa kembali nanti!",
+    "body": "Kami bekerja keras untuk menghadirkan fitur ini kepada Anda."
+  },
+  "export": {
+    "downloaded": "Ekspor diunduh",
+    "failed": "Gagal mengekspor. Silakan coba lagi.",
+    "bapError": "Buat dulu ringkasan Tanya Jawab, atau buat ulang jika nama pembicara berubah.",
+    "panelTitle": "Ekspor",
+    "pillLabel": "{{row}} sebagai {{format}}",
+    "briefingUnavailable": "Buat ringkasan ini dulu untuk mengekspornya.",
+    "rows": {
+      "transcript": "Transkrip",
+      "briefing": "Ringkasan · {{lens}}",
+      "bap": "Draf Berita Acara",
+      "audio": "Audio asli"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "Bahasa",
+    "description": "Pilih bahasa untuk antarmuka Voxis",
+    "saveFailed": "Pilihan bahasa gagal disimpan. Pilihan ini bisa kembali seperti semula pada kunjungan berikutnya."
+  },
+  "languageGroups": {
+    "english": "Inggris",
+    "asia": "Asia",
+    "europe": "Eropa",
+    "middleEastAfrica": "Timur Tengah & Afrika"
+  },
+  "languageNames": {
+    "auto": "Otomatis",
+    "autoDetect": "Deteksi otomatis",
+    "en": "Inggris",
+    "id": "Indonesia",
+    "jv": "Jawa",
+    "su": "Sunda",
+    "ms": "Melayu",
+    "tl": "Tagalog",
+    "th": "Thai",
+    "vi": "Vietnam",
+    "zh": "Mandarin",
+    "ja": "Jepang",
+    "ko": "Korea",
+    "fr": "Prancis",
+    "de": "Jerman",
+    "it": "Italia",
+    "pl": "Polandia",
+    "pt": "Portugis",
+    "ru": "Rusia",
+    "es": "Spanyol",
+    "sv": "Swedia",
+    "da": "Denmark",
+    "no": "Norwegia",
+    "fi": "Finlandia",
+    "la": "Latin",
+    "ar": "Arab",
+    "he": "Ibrani",
+    "af": "Afrikaans"
+  },
+  "errorBoundary": {
+    "title": "Ada yang tidak beres",
+    "description": "Terjadi kesalahan yang tidak terduga. Silakan coba lagi.",
+    "details": "Detail kesalahan (khusus dev)"
+  },
+  "activity": {
+    "title": "Aktivitas",
+    "count": "{{count}} sedang diproses",
+    "more": "+{{count}} lainnya",
+    "ready": "Siap",
+    "view": "Lihat",
+    "dismiss": "Abaikan",
+    "recordingTitle": "Rekaman langsung",
+    "inMotion": {
+      "title": "Sedang diproses"
+    },
+    "stage": {
+      "stitching": "Memproses rekaman…",
+      "transcribing": "Mentranskripsikan…",
+      "summarizing": "Meringkas… {{terminal}} dari {{total}}",
+      "ready": "Siap"
+    },
+    "failed": {
+      "recording": "Rekaman tidak dapat diproses",
+      "transcription": "Transkripsi gagal"
+    },
+    "toast": {
+      "recordingReady": "Rekaman siap",
+      "transcriptionReady": "Transkrip siap"
+    }
+  },
+  "status": {
+    "pending": "Tertunda",
+    "encrypting": "Mengenkripsi",
+    "ready": "Siap",
+    "failed": "Gagal",
+    "deleted": "Dihapus",
+    "submitted": "Terkirim",
+    "processing": "Memproses",
+    "completed": "Selesai",
+    "scanPending": "Pemindaian tertunda",
+    "scanInfected": "Terinfeksi",
+    "scanError": "Kesalahan pemindaian",
+    "scanClean": "Bersih"
+  },
+  "session": {
+    "source": {
+      "audio": "Audio"
+    },
+    "speaker_one": "{{count}} pembicara",
+    "speaker_other": "{{count}} pembicara",
+    "words": "{{n}} kata",
+    "lens_one": "{{count}} ringkasan",
+    "lens_other": "{{count}} ringkasan",
+    "languages": "Bahasa: {{codes}}",
+    "untitled": "Sesi tanpa judul"
+  }
+}

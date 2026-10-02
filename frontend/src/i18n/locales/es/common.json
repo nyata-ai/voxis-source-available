@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "Ahorrar",
+    "cancel": "Cancelar",
+    "delete": "Borrar",
+    "close": "Cerca",
+    "retry": "Intentar otra vez"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Página no encontrada"
+  },
+  "placeholder": {
+    "defaultDescription": "Esta característica estará disponible próximamente. ¡Vuelve a consultar más tarde!",
+    "body": "Estamos trabajando duro para ofrecerle esta función."
+  },
+  "export": {
+    "downloaded": "Exportar descargado",
+    "failed": "No se pudo exportar. Por favor inténtalo de nuevo.",
+    "bapError": "Genere primero el resumen de Preguntas y respuestas, o vuelva a generarlo si los nombres de los interlocutores cambiaron.",
+    "panelTitle": "Exportar",
+    "pillLabel": "{{row}} como {{format}}",
+    "briefingUnavailable": "Genera primero este resumen para exportarlo.",
+    "rows": {
+      "transcript": "Transcripción",
+      "briefing": "Resumen · {{lens}}",
+      "bap": "Borrador de acta de interrogatorio",
+      "audio": "Audio original"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "Idioma",
+    "description": "Elija el idioma para la interfaz Voxis",
+    "saveFailed": "No se pudo guardar tu elección de idioma. Puede revertirse en tu próxima visita."
+  },
+  "languageGroups": {
+    "english": "Inglés",
+    "asia": "Asia",
+    "europe": "Europa",
+    "middleEastAfrica": "Medio Oriente y África"
+  },
+  "languageNames": {
+    "auto": "Auto",
+    "autoDetect": "Detección automática",
+    "en": "Inglés",
+    "id": "indonesio",
+    "jv": "javanés",
+    "su": "sundanés",
+    "ms": "malayo",
+    "tl": "tagalo",
+    "th": "tailandés",
+    "vi": "vietnamita",
+    "zh": "Chino",
+    "ja": "japonés",
+    "ko": "coreano",
+    "fr": "Francés",
+    "de": "Alemán",
+    "it": "italiano",
+    "pl": "Polaco",
+    "pt": "portugués",
+    "ru": "ruso",
+    "es": "Español",
+    "sv": "sueco",
+    "da": "danés",
+    "no": "noruego",
+    "fi": "finlandés",
+    "la": "latín",
+    "ar": "árabe",
+    "he": "hebreo",
+    "af": "africaans"
+  },
+  "errorBoundary": {
+    "title": "algo salió mal",
+    "description": "Se produjo un error inesperado. Por favor inténtalo de nuevo.",
+    "details": "Detalles del error (solo desarrolladores)"
+  },
+  "activity": {
+    "title": "Activity",
+    "count": "{{count}} processing",
+    "more": "+{{count}} more",
+    "ready": "Ready",
+    "view": "View",
+    "dismiss": "Dismiss",
+    "recordingTitle": "Live recording",
+    "inMotion": {
+      "title": "En curso"
+    },
+    "stage": {
+      "stitching": "Processing recording…",
+      "transcribing": "Transcribing…",
+      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "ready": "Ready"
+    },
+    "failed": {
+      "recording": "Recording couldn't be processed",
+      "transcription": "Transcription failed"
+    },
+    "toast": {
+      "recordingReady": "Recording ready",
+      "transcriptionReady": "Transcript ready"
+    }
+  },
+  "status": {
+    "pending": "Pendiente",
+    "encrypting": "Cifrando",
+    "ready": "Listo",
+    "failed": "Fallido",
+    "deleted": "Eliminado",
+    "submitted": "Enviado",
+    "processing": "Procesando",
+    "completed": "Completado",
+    "scanPending": "Análisis pendiente",
+    "scanInfected": "Infectado",
+    "scanError": "Error de análisis",
+    "scanClean": "Limpio"
+  },
+  "session": {
+    "source": {
+      "audio": "Audio"
+    },
+    "speaker_one": "{{count}} interlocutor",
+    "speaker_other": "{{count}} interlocutores",
+    "words": "{{n}} palabras",
+    "lens_one": "{{count}} lente",
+    "lens_other": "{{count}} lentes",
+    "languages": "Idiomas: {{codes}}",
+    "untitled": "Sesión sin título"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "layout": {
+    "brand": "Voxis Source-Available",
+    "cancel": "キャンセル"
+  },
+  "compat": {
+    "title": "ブラウザはサポートされていません",
+    "message": "お使いのブラウザは音声録音をサポートしていません。 Chrome、Firefox、Edge、または Safari 18.4 以降の最新バージョンを使用してください。"
+  },
+  "mic": {
+    "none": "マイクが検出されませんでした",
+    "select": "マイクの選択"
+  },
+  "micDevices": {
+    "fallbackLabel": "マイク {{id}}",
+    "denied": "マイクへのアクセスが拒否されました。ブラウザの設定でマイクへのアクセスを許可してください。",
+    "notFound": "マイクが見つかりません。マイクを接続して再試行してください。",
+    "error": "マイクエラー: {{message}}",
+    "failed": "マイクデバイスへのアクセスに失敗しました。"
+  },
+  "recorder": {
+    "unsupported": "このブラウザでは録画はサポートされていません。",
+    "errorStopped": "録音エラーです。録音は停止されました。",
+    "micDenied": "マイクへのアクセスが拒否されました。",
+    "displayDenied": "Screen or tab sharing was cancelled or denied. Choose the meeting source and enable audio sharing.",
+    "startFailed": "記録の開始に失敗しました。",
+    "noDisplayAudio": "No shared audio was detected. Chrome or Edge tab audio works reliably; full-screen, native-app, and system audio depend on your browser and operating system.",
+    "audioContextSuspended": "Audio capture could not start. Click Start Recording again and keep the browser tab active.",
+    "captureEndedBeforeStart": "The shared meeting source stopped before recording began. Select it again and retry."
+  },
+  "timer": {
+    "ariaLabel": "経過時間: {{display}}"
+  },
+  "waveform": {
+    "ariaLabel": "音声波形"
+  },
+  "recover": {
+    "titleSingle": "録音が中断されました",
+    "titleMulti": "中断された録音",
+    "descriptionSingle": "前回の録音が中断されました。保存した音声を復元しますか?",
+    "descriptionMulti": "{{n}} で録画が中断されました。各セッションを回復または破棄します。",
+    "date": "日付：",
+    "estimatedDuration": "推定期間:",
+    "microphone": "マイクロフォン：",
+    "discard": "破棄",
+    "discarding": "廃棄...",
+    "recover": "回復する",
+    "recovering": "回復..."
+  },
+  "exit": {
+    "title": "Recording in progress",
+    "description": "Leaving this page stops the recording. Choose what to do with the audio captured so far — leaving without choosing would strand the recording on the server.",
+    "keep": "Keep recording",
+    "stopAndSave": "Stop & save",
+    "discard": "Discard recording"
+  },
+  "dataLoss": {
+    "savePartialTitle": "Save only the uploaded audio?",
+    "savePartialDescription": "Audio that never reached the server will be permanently lost. The recording will be saved with only the part that was uploaded.",
+    "discardTitle": "Discard this recording?",
+    "discardDescription": "The recording and every chunk already uploaded will be permanently deleted. This cannot be undone.",
+    "confirmSavePartial": "Save partial recording",
+    "confirmDiscard": "Discard permanently"
+  },
+  "meetingConsent": {
+    "title": "Record meeting audio?",
+    "description": "Make sure everyone has been informed and you are allowed to record. The browser may capture all audio from the source you choose, including unrelated voices or notifications.",
+    "cancel": "Cancel",
+    "continue": "I have consent — choose audio"
+  },
+  "activeTakeover": {
+    "title": "Active recording found",
+    "description": "A recording session is still marked active. It may still be recording in another tab or window, or it may be left over from a tab that was closed or crashed.",
+    "started": "Started:",
+    "chunksUploaded": "{{n}} segment(s) uploaded so far",
+    "warning": "Taking over interrupts that session. If it is still recording elsewhere, that recording stops and only the audio already uploaded can be recovered.",
+    "takeOver": "Take over",
+    "takingOver": "Taking over...",
+    "leave": "Go to library"
+  },
+  "idle": {
+    "title": "録音の準備ができました",
+    "detecting": "マイクを検出中...",
+    "start": "録音を開始する"
+  },
+  "status": {
+    "recording": "録音",
+    "paused": "一時停止中"
+  },
+  "controls": {
+    "pause": "一時停止",
+    "resume": "再開する",
+    "stop": "停止",
+    "minDurationHint": "Record for at least {{seconds}} seconds before stopping"
+  },
+  "documentTitle": {
+    "paused": "一時停止中",
+    "recording": "録音",
+    "withApp": "{{prefix}} — Voxis"
+  },
+  "completing": {
+    "title": "録音を終了しています...",
+    "uploadingRemaining": "残りの音声をアップロード中... ({{done}}/{{total}})",
+    "processing": "音声を処理しています...",
+    "uploadFailedTitle": "Upload failed",
+    "uploadFailedBody": "The remaining audio could not be uploaded (error {{status}}), so {{n}} segment(s) are stuck. Retry, or continue with the audio already uploaded.",
+    "retryUpload": "Retry upload",
+    "saveUploaded": "Save what's uploaded",
+    "discardRecording": "Discard recording",
+    "localWriteWarning": "Some audio could not be stored on this device, so the end of this recording may be missing."
+  },
+  "error": {
+    "title": "記録エラー",
+    "fallback": "予期しないエラーが発生しました。",
+    "tryAgain": "もう一度やり直してください"
+  },
+  "upload": {
+    "saving": "保存中... ({{n}} 未送信)",
+    "saved": "保存されました"
+  },
+  "toast": {
+    "autoStop": "録画は 8 時間後に自動的に停止します。",
+    "uploadInterrupted": "アップロードが中断されました — 記録は一時停止されました。接続を確認してください。",
+    "micDenied": "マイクへのアクセスが拒否されました。",
+    "startSessionFailed": "記録セッションの開始に失敗しました。",
+    "startFailed": "記録の開始に失敗しました。",
+    "completeFailed": "録音を完了できませんでした。音声が保存されました。",
+    "recovered": "録音が回復しました。音声を処理しています...",
+    "recoverFailed": "録画の回復に失敗しました。",
+    "discarded": "録音は破棄されました。",
+    "discardFailed": "記録の破棄に失敗しました。",
+    "completeFailedStore": "録音を完了できませんでした。",
+    "captureEnded": "The shared audio source stopped. Voxis is saving the recording.",
+    "captureInterrupted": "{{error}} Your saved audio is ready to recover.",
+    "captureRecoveryFailed": "Recording stopped. Reconnect, then try again to recover the saved audio.",
+    "chunkWriteFailed": "This device could not store the latest audio. Recording stopped to protect what has already been captured.",
+    "trailingAudioMissing": "Some audio could not be stored on this device, so the end of this recording may be missing.",
+    "meetingWithoutMicrophone": "Meeting audio will continue without your microphone.",
+    "meetingAudioMuted": "Shared meeting audio was muted. Check the browser sharing indicator.",
+    "microphoneMuted": "Microphone audio was muted. Check your device.",
+    "recoveredAfterOffline": "Your connection interrupted the recording. The saved audio is processing now.",
+    "activeSessionExists": "Another recording session is already active. Recover or discard it before starting a new one.",
+    "recoverPartialUpload": "{{n}} locally saved segment(s) could not be attached. Recovering with the audio the server already has.",
+    "releasedActiveSession": "A recording session was left open. You can recover or discard it now.",
+    "takeOverFailed": "Could not take over the recording session. Please try again."
+  },
+  "captureSource": {
+    "label": "Capture source",
+    "microphone": "Microphone",
+    "mixed": "Meeting audio",
+    "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
+    "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  }
+}

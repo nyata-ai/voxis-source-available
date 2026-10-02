@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "Ringkasan umum",
+    "keyPoints": "Poin penting",
+    "actionItems": "Tindak lanjut",
+    "questionsAnswers": "Tanya jawab"
+  },
+  "typeMeta": {
+    "general": "Umum",
+    "keyPoints": "Poin penting",
+    "actions": "Tindak lanjut",
+    "qAndA": "Tanya jawab",
+    "fallback": "Ringkasan"
+  },
+  "profile": {
+    "label": "Profil",
+    "general_professional": "Profesional umum",
+    "legal": "Hukum",
+    "investment_analysis": "Analisis investasi",
+    "journalism": "Jurnalisme",
+    "negotiation": "Negosiasi",
+    "decision_committee": "Komite Keputusan",
+    "investigation": "Investigasi"
+  },
+  "viewer": {
+    "loading": "Memuat ringkasan...",
+    "noContent": "Tidak ada konten ringkasan",
+    "evidence": "Bukti:",
+    "owner": "Pemilik:",
+    "due": "Jatuh tempo:",
+    "questionPrefix": "Pertanyaan: ",
+    "answerPrefix": "Jawaban: ",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "Sedang memproses...",
+    "unknownError": "Terjadi kesalahan yang tidak diketahui",
+    "copied": "Tersalin!",
+    "copy": "Salin",
+    "showSources": "Tampilkan sumber",
+    "hideSources": "Sembunyikan sumber",
+    "citations": "Rujukan",
+    "citation": "Rujukan {{id}}",
+    "citationWithSpeaker": "Rujukan {{id}}, {{speaker}}",
+    "citationWithTime": "Rujukan {{id}}, {{time}}",
+    "citationWithSpeakerTime": "Rujukan {{id}}, {{speaker}}, {{time}}",
+    "actionKinds": {
+      "action_item": "Tindak lanjut",
+      "decision": "Keputusan",
+      "next_step": "Langkah berikutnya",
+      "open_issue": "Isu terbuka"
+    },
+    "notSpecified": "Tidak disebutkan dalam transkrip.",
+    "degradationNotice": "Ringkasan ini dibuat menggunakan keluaran cadangan atau format yang disesuaikan otomatis. Cocokkan kembali dengan transkrip."
+  },
+  "briefing": {
+    "title": "Ringkasan",
+    "empty": "Belum ada ringkasan untuk sesi ini.",
+    "autoStarted": "Dimulai otomatis saat Anda membuka sesi ini.",
+    "notGenerated": "Ringkasan ini belum dibuat.",
+    "generateAll": "Buat semua",
+    "generatingAll": "Sedang membuat…",
+    "generateOne": "Buat {{type}}",
+    "generatingOne": "Sedang membuat…",
+    "error": "Tidak dapat membuat ringkasan. Silakan coba lagi.",
+    "generateTypeError": "Tidak dapat membuat ringkasan ini. Silakan coba lagi.",
+    "aiUnavailable": "Peringkasan AI tidak tersedia.",
+    "rateLimited": "Batas pembuatan ringkasan tercapai. Tunggu sebentar lalu coba lagi.",
+    "regenerateError": "Tidak dapat membuat ulang ringkasan ini. Silakan coba lagi.",
+    "regenerateTypeError": "Tidak dapat membuat ulang ringkasan {{type}}. Silakan coba lagi.",
+    "regenerate": "Buat ulang",
+    "regenerating": "Sedang membuat ulang…",
+    "loadError": "Tidak dapat memuat ringkasan ini. Silakan coba lagi.",
+    "status": {
+      "notGenerated": "Belum dibuat",
+      "processing": "Sedang membuat…",
+      "ready": "Siap",
+      "failed": "Gagal"
+    },
+    "tabsLabel": "Jenis ringkasan",
+    "note": "Dibuat {{date}} · profil {{profile}} · Nama pembicara disimpulkan oleh model",
+    "noteWithoutProfile": "Dibuat {{date}} · Nama pembicara disimpulkan oleh model"
+  },
+  "summarize": {
+    "button": "Buat ringkasan",
+    "title": "Buat ringkasan",
+    "description": "Pilih jenis ringkasan yang akan dibuat dari transkrip ini.",
+    "typeLabel": "Jenis ringkasan",
+    "alreadyExists": "Jenis ringkasan ini sudah ada.",
+    "started": "Pembuatan ringkasan dimulai",
+    "failed": "Gagal memulai ringkasan. Silakan coba lagi.",
+    "generating": "Sedang membuat ringkasan...",
+    "start": "Mulai membuat ringkasan"
+  },
+  "detail": {
+    "loading": "Memuat ringkasan..."
+  }
+}

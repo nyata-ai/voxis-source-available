@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "Listo",
+    "processing": "Tratamiento",
+    "failed": "Fallido",
+    "openFile": "Abrir archivo",
+    "openAnyway": "Procesando: abrir de todos modos",
+    "openFailed": "Abrir archivo · fallido"
+  },
+  "upload": {
+    "dropzone": "Arrastra y suelta archivos de audio aquí",
+    "browse": "o navegar",
+    "browseFiles": "Explorar archivos",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "Máximo 1 GB por archivo",
+    "queueLabel": "Subir cola",
+    "rejectedTitle": "Archivos rechazados",
+    "rejectedLabel": "Archivos rechazados",
+    "uploading": "Subiendo {{name}}",
+    "processing": "Procesando en el servidor...",
+    "complete": "Subida completa",
+    "viewFile": "Ver archivo",
+    "viewFileNamed": "Ver archivo: {{name}}",
+    "remove": "Quitar {{name}}",
+    "errors": {
+      "failed": "Error al subir"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "Tipo de archivo no compatible",
+      "tooLarge": "El archivo supera el tamaño máximo de 1 GB",
+      "storageQuota": "Este archivo supera la cuota de almacenamiento restante"
+    }
+  },
+  "storageQuota": {
+    "warning": "El almacenamiento está casi lleno: {{used}} de {{limit}} usados; quedan {{remaining}}.",
+    "full": "Se alcanzó el límite de almacenamiento. Las cargas y grabaciones están bloqueadas. Libere espacio de audio en su Biblioteca.",
+    "manageLibrary": "Administrar almacenamiento en la Biblioteca",
+    "admin": {
+      "enabled": "Aplicar cuota de almacenamiento",
+      "enabledDescription": "Al desactivarla, los usuarios tienen almacenamiento ilimitado.",
+      "limit": "Límite predeterminado (GiB)",
+      "limitDescription": "Introduzca cualquier valor positivo en GiB. Se admiten decimales. El valor predeterminado es 2 GiB.",
+      "limitError": "Introduzca un límite de almacenamiento positivo.",
+      "backend": "Backend de almacenamiento",
+      "warningThreshold": "Umbral de advertencia",
+      "inactive": "Inactiva: las cuotas no se aplican con almacenamiento {{backend}}.",
+      "save": "Guardar cuota de almacenamiento",
+      "saving": "Guardando...",
+      "saved": "Cuota de almacenamiento guardada.",
+      "saveError": "No se pudo guardar la cuota de almacenamiento.",
+      "loadError": "No se pudo cargar la configuración de cuota de almacenamiento."
+    }
+  },
+  "pagination": {
+    "showing": "Mostrando {{from}}–{{to}} de {{total}}",
+    "previous": "Pagina anterior",
+    "next": "Página siguiente"
+  },
+  "player": {
+    "pause": "Pausa",
+    "play": "Jugar",
+    "position": "Posición de reproducción",
+    "unmute": "Dejar de silenciar",
+    "mute": "Silenciar",
+    "speed": "Velocidad de reproducción",
+    "speedValue": "{{speed}}x",
+    "skipBack": "Retroceder {{seconds}} segundos",
+    "skipForward": "Avanzar {{seconds}} segundos",
+    "dock": "Reproductor de audio",
+    "backToTranscript": "Volver a la transcripción",
+    "speedPill": "Velocidad {{speed}}x"
+  },
+  "inlineEdit": {
+    "clickToEdit": "Haga clic para editar"
+  },
+  "analysis": {
+    "trust": {
+      "high": "Alta confianza",
+      "medium": "Confianza media",
+      "low": "Baja confianza",
+      "unknown": "Desconocido"
+    },
+    "title": "Integridad de audio",
+    "checksPassed": "Se aprobaron las comprobaciones {{passed}} de {{total}}",
+    "recorded": "Grabado",
+    "integrityDetails": "Detalles de integridad",
+    "technicalDetails": "Detalles técnicos",
+    "fileHash": "hash de archivo",
+    "tech": {
+      "format": "Formato",
+      "codec": "Códec",
+      "encoder": "Codificador",
+      "source": "Fuente"
+    }
+  },
+  "delete": {
+    "title": "¿Eliminar archivo multimedia?",
+    "descriptionBefore": "Esto eliminará permanentemente ",
+    "descriptionAfter": ". Su audio, transcripciones, resúmenes, título y nombre de archivo se eliminarán de este servidor. Los datos incluidos en copias de seguridad ya existentes se conservan hasta que esas copias se eliminen. Esta acción no se puede deshacer.",
+    "deleting": "Eliminando...",
+    "failed": "No se pudo eliminar el archivo multimedia",
+    "success": "Archivo multimedia eliminado"
+  },
+  "download": {
+    "downloading": "Descargando...",
+    "label": "Descargar audio",
+    "success": "audio descargado",
+    "error": "No se pudo descargar el audio. Por favor inténtalo de nuevo."
+  },
+  "detail": {
+    "audioFiles": "Archivos de audio",
+    "loading": "Cargando detalles multimedia...",
+    "notFound": "Medios no encontrados o no se pudieron cargar.",
+    "encrypted": "cifrado",
+    "scanPending": "El archivo se está analizando por seguridad. La reproducción estará disponible una vez que se complete el escaneo.",
+    "scanFailed": "El archivo falló en el análisis de seguridad y no se puede reproducir.",
+    "streamFailed": "Error en la transmisión de audio. Es posible que sea necesario volver a cargar el archivo.",
+    "viewTranscription": "Ver transcripción",
+    "updateTitleError": "No se pudo actualizar el título",
+    "updateDescriptionError": "No se pudo actualizar la descripción",
+    "audioDeleted": "Audio deleted by live recording retention policy. Transcript and summaries remain available."
+  }
+}

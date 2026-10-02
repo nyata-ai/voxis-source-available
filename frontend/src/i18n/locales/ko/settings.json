@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "설정",
+    "subtitle": "계정 설정 및 기본 설정 관리"
+  },
+  "nav": {
+    "notifications": "알림",
+    "profile": "윤곽",
+    "appearance": "모습",
+    "language": "언어",
+    "transcription": "전사",
+    "summary": "요약 및 내보내기",
+    "playback": "재생",
+    "apiKeys": "API 키",
+    "retention": "Recording Retention"
+  },
+  "profile": {
+    "title": "윤곽",
+    "description": "귀하의 계정 정보",
+    "name": "이름",
+    "email": "이메일",
+    "username": "사용자 이름",
+    "ssoNote": "귀하의 프로필은 SSO로 관리됩니다. 정보를 업데이트하려면 관리자에게 문의하세요.",
+    "updatePassword": "비밀번호 업데이트/변경",
+    "manageMfa": "MFA 관리",
+    "usage": {
+      "title": "용법",
+      "description": "조직의 리소스 소비",
+      "error": "사용 통계를 로드할 수 없습니다.",
+      "audioProcessed": "오디오 처리됨",
+      "aiTokens": "사용된 AI 토큰",
+      "remainingToday": "오늘 {{count}}회 남음",
+      "liveRecordingRetention": "라이브 녹음 보관 일수",
+      "retentionDays_one": "{{count}}일",
+      "retentionDays_other": "{{count}}일",
+      "notEnabled": "사용 안 함",
+      "storage": "저장 공간 사용량 / 한도",
+      "unlimited": "무제한",
+      "remaining": "남은 용량: {{value}}",
+      "duration": {
+        "zero": "0분",
+        "lessThanMinute": "< 1분",
+        "minutes": "{{count}}분",
+        "hours": "{{count}}시간",
+        "hoursMinutes": "{{hours}}시간 {{minutes}}분"
+      }
+    },
+    "securityAction": "비밀번호 및 다단계 인증 관리"
+  },
+  "appearance": {
+    "title": "모습",
+    "description": "모양과 느낌을 사용자 정의",
+    "light": "빛",
+    "lightDescription": "어두운 텍스트와 밝은 배경",
+    "dark": "어두운",
+    "darkDescription": "밝은 텍스트와 어두운 배경",
+    "system": "체계",
+    "systemDescription": "OS 기본 설정을 따릅니다."
+  },
+  "transcription": {
+    "title": "전사",
+    "description": "기본 전사 설정",
+    "defaultLanguage": "새 텍스트 변환의 ​​기본 언어",
+    "diarization": {
+      "label": "화자 분할",
+      "description": "다양한 화자를 식별하고 분리합니다."
+    }
+  },
+  "summary": {
+    "title": "요약 및 내보내기",
+    "description": "기본 요약 및 내보내기 설정",
+    "defaultType": "기본 요약 유형",
+    "types": {
+      "general": "일반적인",
+      "keyPoints": "핵심 사항",
+      "actionItems": "조치 항목",
+      "qAndA": "질문과 답변"
+    },
+    "typeDescription": "새 텍스트 변환에 대해 생성된 요약 유형",
+    "defaultFormat": "기본 내보내기 형식",
+    "formatDescription": "기록 및 요약을 내보낼 때의 기본 형식",
+    "autoBriefings": {
+      "label": "요약 자동 생성",
+      "description": "완료된 세션을 열면 네 가지 요약을 모두 생성합니다. 기본값은 꺼짐이며, 요약은 요청할 때 한 종류씩 생성됩니다."
+    },
+    "highStakes": {
+      "label": "고위험 요약",
+      "description": "법률, 공증 및 기타 정확성이 중요한 작업에 대한 2단계 요약입니다. 모델은 먼저 기록에서 모든 이름, 날짜, 수치 및 약속을 추출한 다음 해당 사실에 기반한 요약을 작성합니다. 표준 경로보다 속도가 느리고 더 많은 토큰을 사용하지만 누락되거나 다시 작성된 세부 정보가 줄어듭니다."
+    },
+    "profile": {
+      "label": "전문 프로필",
+      "description": "새 요약의 중점을 설정합니다. 조언을 제공하거나 주장을 검증하지 않습니다.",
+      "options": {
+        "general_professional": {
+          "label": "일반 전문가",
+          "description": "결정, 약속, 장애 요인 및 미해결 질문을 강조합니다."
+        },
+        "legal": {
+          "label": "법률",
+          "description": "주장, 의무, 다툼이 있는 사실 및 증거를 강조합니다."
+        },
+        "investment_analysis": {
+          "label": "투자 분석",
+          "description": "수치, 예측, 가정, 위험 및 실사 공백을 강조합니다."
+        },
+        "journalism": {
+          "label": "저널리즘",
+          "description": "출처 표시, 주장, 검증 공백 및 후속 질문을 강조합니다."
+        },
+        "negotiation": {
+          "label": "협상",
+          "description": "제안과 역제안, 조건, 양보, 합의 및 미결 사항을 강조합니다."
+        },
+        "decision_committee": {
+          "label": "의사결정위원회",
+          "description": "안건, 승인과 부결, 선결 조건, 반대 의견 및 후속 조치를 강조합니다."
+        },
+        "investigation": {
+          "label": "조사",
+          "description": "사건 경위, 시인과 부인, 증거 언급 및 진술 불일치를 강조합니다."
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "재생",
+    "description": "오디오 재생 환경설정",
+    "speed": "재생 속도"
+  },
+  "apiKeys": {
+    "title": "API 키",
+    "description": "Voxis API 및 MCP 서버에 프로그래밍 방식으로 액세스하기 위해 API 키를 관리합니다.",
+    "create": "API 키 생성",
+    "empty": "아직 API 키가 없습니다. 외부 도구와 서비스를 연결하려면 하나를 만드세요.",
+    "scopesCount": "{{count}} 스코프",
+    "lastUsed": "마지막 사용: {{value}}",
+    "never": "절대",
+    "expires": "만료: {{value}}",
+    "revoke": "취소",
+    "relativeTime": {
+      "justNow": "방금",
+      "minutes": "{{count}}분 전",
+      "hours": "{{count}}h 전",
+      "days": "{{count}}일 전"
+    },
+    "revokeDialog": {
+      "title": "확실합니까?",
+      "description": "이 작업은 취소할 수 없습니다. API 키는 영구적으로 취소되며 이를 사용하는 모든 통합의 작동이 중지됩니다."
+    },
+    "createDialog": {
+      "title": "새 API 키 생성",
+      "description": "Voxis API 및 MCP 서버에 프로그래밍 방식으로 액세스하기 위한 키를 만듭니다.",
+      "keyName": "키 이름",
+      "keyNamePlaceholder": "예를 들어 프로덕션, Claude 데스크탑",
+      "scopes": "범위",
+      "expiration": "만료",
+      "expirationOptions": {
+        "30": "30일",
+        "60": "60일",
+        "90": "90일",
+        "none": "만료 없음"
+      },
+      "error": "API 키를 생성할 수 없습니다. 세부정보를 확인하신 후 다시 시도해 주세요.",
+      "creating": "만드는 중...",
+      "submit": "만들다"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "미디어 읽기",
+        "description": "미디어 파일 읽기"
+      },
+      "mediaWrite": {
+        "label": "미디어 쓰기",
+        "description": "미디어 업로드 및 삭제"
+      },
+      "transcriptionRead": {
+        "label": "전사 읽기",
+        "description": "스크립트 읽기"
+      },
+      "transcriptionWrite": {
+        "label": "전사 쓰기",
+        "description": "스크립트 만들기"
+      },
+      "summaryRead": {
+        "label": "요약 읽기",
+        "description": "요약 읽기"
+      },
+      "summaryWrite": {
+        "label": "요약 쓰기",
+        "description": "요약을 작성하십시오. 또한 전사 읽기가 필요합니다."
+      },
+      "exportRead": {
+        "label": "내보내다",
+        "description": "문서 내보내기 소스 읽기 액세스도 필요합니다."
+      }
+    },
+    "created": {
+      "title": "API 키가 생성되었습니다.",
+      "description": "API 키가 성공적으로 생성되었습니다.",
+      "warning": "이 키는 한 번만 표시됩니다. 지금 복사하여 안전하게 보관하세요.",
+      "snippets": "연결 조각",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Claude 데스크탑 또는 Claude 코드 MCP 구성에 추가하세요.",
+        "codex": "OpenAI Codex MCP 구성에 추가:",
+        "adk": "Google ADK MCP 구성에 추가:",
+        "cursor": "Cursor 또는 VS Code MCP 구성에 추가:",
+        "rest": "컬이나 HTTP 클라이언트와 함께 API 키를 사용하세요.",
+        "openapi": "OpenAPI 사양 URL:",
+        "openapiNote": "참고: ChatGPT 맞춤 GPT에는 OAuth 인증(2단계)이 필요합니다. 직접 액세스하려면 API 키와 함께 REST API를 사용하세요."
+      },
+      "done": "완료",
+      "copy": "복사",
+      "copied": "복사되었습니다!",
+      "failed": "실패한",
+      "copySnippet": "스니펫 복사",
+      "copyApiKey": "API 키 복사"
+    }
+  },
+  "retention": {
+    "title": "Live Recording Audio Retention",
+    "description": "Automatically delete original audio files created by live recording. Transcripts and summaries remain available.",
+    "loadError": "Unable to load recording retention settings.",
+    "enabled": {
+      "label": "Auto-delete live recording audio",
+      "description": "선택한 보존 기간이 지나면 저장된 오디오를 이 서버에서 영구적으로 삭제합니다. 기존 백업에 있는 사본은 해당 백업이 삭제될 때까지 남아 있습니다."
+    },
+    "days": {
+      "label": "Delete after",
+      "description": "Choose between 1 and 30 days after live recording completion."
+    },
+    "applyExisting": {
+      "label": "Apply to existing live recordings",
+      "description": "Also delete audio from completed live recordings that are already older than the selected period."
+    },
+    "preview": {
+      "count": "{{count}} live recordings have audio eligible for immediate deletion.",
+      "oldest": "Oldest eligible recording completed {{date}}."
+    },
+    "confirm": {
+      "label": "Confirm immediate delete count",
+      "description": "Enter {{count}} to confirm immediate permanent audio deletion."
+    },
+    "confirmationRequired": "Enter the immediate delete count before saving.",
+    "save": "Save retention policy",
+    "saving": "Saving...",
+    "saved": "Recording retention policy saved.",
+    "saveError": "Unable to save recording retention policy."
+  }
+}

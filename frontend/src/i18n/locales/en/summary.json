@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "General Summary",
+    "keyPoints": "Key Points",
+    "actionItems": "Action Items",
+    "questionsAnswers": "Questions & Answers"
+  },
+  "typeMeta": {
+    "general": "General",
+    "keyPoints": "Key Points",
+    "actions": "Actions",
+    "qAndA": "Q&A",
+    "fallback": "Summary"
+  },
+  "profile": {
+    "label": "Profile",
+    "general_professional": "General Professional",
+    "legal": "Legal",
+    "investment_analysis": "Investment Analysis",
+    "journalism": "Journalism",
+    "negotiation": "Negotiation",
+    "decision_committee": "Decision Committee",
+    "investigation": "Investigation"
+  },
+  "viewer": {
+    "loading": "Loading summary...",
+    "noContent": "No summary content",
+    "evidence": "Evidence:",
+    "owner": "Owner:",
+    "due": "Due:",
+    "questionPrefix": "Question: ",
+    "answerPrefix": "Answer: ",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "Processing...",
+    "unknownError": "An unknown error occurred",
+    "copied": "Copied!",
+    "copy": "Copy",
+    "showSources": "Show sources",
+    "hideSources": "Hide sources",
+    "citations": "Citations",
+    "citation": "Citation {{id}}",
+    "citationWithSpeaker": "Citation {{id}}, {{speaker}}",
+    "citationWithTime": "Citation {{id}}, {{time}}",
+    "citationWithSpeakerTime": "Citation {{id}}, {{speaker}}, {{time}}",
+    "actionKinds": {
+      "action_item": "Action item",
+      "decision": "Decision",
+      "next_step": "Next step",
+      "open_issue": "Open issue"
+    },
+    "notSpecified": "Not stated in the transcript.",
+    "degradationNotice": "This summary was completed with fallback or normalized output. Review it against the transcript."
+  },
+  "briefing": {
+    "title": "Briefing",
+    "empty": "No briefings for this session yet.",
+    "autoStarted": "Started automatically when you opened this session.",
+    "notGenerated": "This briefing hasn't been generated yet.",
+    "generateAll": "Generate all",
+    "generatingAll": "Generating…",
+    "generateOne": "Generate {{type}}",
+    "generatingOne": "Generating…",
+    "error": "Couldn't generate briefings. Please try again.",
+    "generateTypeError": "Couldn't generate this briefing. Please try again.",
+    "aiUnavailable": "AI summarization is not available.",
+    "rateLimited": "Generation is rate-limited. Please wait a minute and try again.",
+    "regenerateError": "Couldn't regenerate this briefing. Please try again.",
+    "regenerateTypeError": "Couldn't regenerate the {{type}} briefing. Please try again.",
+    "regenerate": "Regenerate",
+    "regenerating": "Regenerating…",
+    "loadError": "Couldn't load this briefing. Please try again.",
+    "status": {
+      "notGenerated": "Not generated",
+      "processing": "Summarizing…",
+      "ready": "Ready",
+      "failed": "Failed"
+    },
+    "tabsLabel": "Briefing type",
+    "note": "Generated {{date}} · {{profile}} profile · Speaker names inferred by the model",
+    "noteWithoutProfile": "Generated {{date}} · Speaker names inferred by the model"
+  },
+  "summarize": {
+    "button": "Summarize",
+    "title": "Generate Summary",
+    "description": "Choose a summary type to generate from this transcription.",
+    "typeLabel": "Summary Type",
+    "alreadyExists": "This summary type already exists.",
+    "started": "Summarization started",
+    "failed": "Failed to start summarization. Please try again.",
+    "generating": "Generating...",
+    "start": "Start Summarization"
+  },
+  "detail": {
+    "loading": "Loading summary..."
+  }
+}

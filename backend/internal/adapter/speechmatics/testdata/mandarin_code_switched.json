@@ -1,0 +1,105 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-mandarin-code-switched",
+    "duration": 20.0
+  },
+  "results": [
+    {
+      "type": "word",
+      "start_time": 0.10,
+      "end_time": 0.30,
+      "alternatives": [{"content": "你", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.30,
+      "end_time": 0.50,
+      "alternatives": [{"content": "好", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.50,
+      "end_time": 0.70,
+      "alternatives": [{"content": "世", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.70,
+      "end_time": 0.90,
+      "alternatives": [{"content": "界", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 0.90,
+      "end_time": 0.92,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": "。", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.10,
+      "end_time": 1.30,
+      "alternatives": [{"content": "我", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.30,
+      "end_time": 1.50,
+      "alternatives": [{"content": "用", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 1.50,
+      "end_time": 2.10,
+      "alternatives": [{"content": "Python", "language": "en", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 2.10,
+      "end_time": 2.30,
+      "alternatives": [{"content": "写", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 2.30,
+      "end_time": 2.32,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": "。", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 2.60,
+      "end_time": 3.00,
+      "alternatives": [{"content": "Jadi", "language": "id", "speaker": "S2"}]
+    },
+    {
+      "type": "word",
+      "start_time": 3.00,
+      "end_time": 3.40,
+      "alternatives": [{"content": "kita", "language": "id", "speaker": "S2"}]
+    },
+    {
+      "type": "word",
+      "start_time": 3.40,
+      "end_time": 3.90,
+      "alternatives": [{"content": "pakai", "language": "id", "speaker": "S2"}]
+    },
+    {
+      "type": "word",
+      "start_time": 3.90,
+      "end_time": 4.40,
+      "alternatives": [{"content": "Zoom", "language": "en", "speaker": "S2"}]
+    },
+    {
+      "type": "punctuation",
+      "start_time": 4.40,
+      "end_time": 4.45,
+      "attaches_to": "previous",
+      "is_eos": true,
+      "alternatives": [{"content": ".", "language": "en", "speaker": "S2"}]
+    }
+  ]
+}

@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "设置",
+    "subtitle": "管理您的账户和个人设置。"
+  },
+  "nav": {
+    "notifications": "通知",
+    "profile": "个人资料",
+    "appearance": "外观",
+    "language": "语言",
+    "transcription": "转写",
+    "summary": "摘要与导出",
+    "playback": "回放",
+    "apiKeys": "API 密钥",
+    "retention": "录音保留"
+  },
+  "profile": {
+    "title": "个人资料",
+    "description": "您的账户信息",
+    "name": "姓名",
+    "email": "邮箱",
+    "username": "用户名",
+    "ssoNote": "您的个人资料由 SSO 管理。要更新您的信息，请联系您的管理员。",
+    "updatePassword": "更新/更改密码",
+    "manageMfa": "管理 MFA",
+    "usage": {
+      "title": "使用情况",
+      "description": "您所在组织的资源使用情况",
+      "error": "无法加载使用情况统计信息。",
+      "audioProcessed": "已处理音频",
+      "aiTokens": "AI Token 用量",
+      "remainingToday": "今日剩余 {{count}} 次",
+      "liveRecordingRetention": "实时录音保留天数",
+      "retentionDays_one": "{{count}} 天",
+      "retentionDays_other": "{{count}} 天",
+      "notEnabled": "未启用",
+      "storage": "存储用量 / 上限",
+      "unlimited": "无限制",
+      "remaining": "剩余：{{value}}",
+      "duration": {
+        "zero": "0 分钟",
+        "lessThanMinute": "< 1 分钟",
+        "minutes": "{{count}} 分钟",
+        "hours": "{{count}} 小时",
+        "hoursMinutes": "{{hours}} 小时 {{minutes}} 分钟"
+      }
+    },
+    "securityAction": "管理密码和多重身份验证"
+  },
+  "appearance": {
+    "title": "外观",
+    "description": "自定义 Voxis 的显示方式。",
+    "light": "浅色",
+    "lightDescription": "浅色背景搭配深色文字",
+    "dark": "深色",
+    "darkDescription": "深色背景搭配浅色文字",
+    "system": "系统",
+    "systemDescription": "跟随操作系统设置"
+  },
+  "transcription": {
+    "title": "转写",
+    "description": "新转写任务的默认设置",
+    "defaultLanguage": "默认语言",
+    "diarization": {
+      "label": "区分发言人",
+      "description": "在转写稿中区分不同发言人"
+    }
+  },
+  "summary": {
+    "title": "摘要与导出",
+    "description": "默认摘要和导出设置",
+    "defaultType": "默认摘要类型",
+    "types": {
+      "general": "总体摘要",
+      "keyPoints": "要点",
+      "actionItems": "待办事项",
+      "qAndA": "问答"
+    },
+    "typeDescription": "新转写任务默认生成的摘要类型",
+    "defaultFormat": "默认导出格式",
+    "formatDescription": "导出转写稿和摘要时使用的默认格式",
+    "autoBriefings": {
+      "label": "自动生成摘要",
+      "description": "打开已完成的会话时自动生成全部四种摘要。默认关闭：摘要在你请求时逐种生成。"
+    },
+    "highStakes": {
+      "label": "高准确度摘要",
+      "description": "适用于法律、公证等对准确性要求很高的工作。Voxis 会先提取转写稿中的姓名、日期、数字和承诺，再根据这些事实生成摘要。处理时间更长，也会使用更多 Token，但能降低遗漏或改写关键细节的风险。"
+    },
+    "profile": {
+      "label": "专业配置",
+      "description": "设置新摘要的侧重点。不提供建议，也不核实主张。",
+      "options": {
+        "general_professional": {
+          "label": "通用专业",
+          "description": "强调决策、承诺、障碍和未决问题。"
+        },
+        "legal": {
+          "label": "法律",
+          "description": "强调主张、义务、争议事实和证据。"
+        },
+        "investment_analysis": {
+          "label": "投资分析",
+          "description": "强调数字、预测、假设、风险和尽职调查缺口。"
+        },
+        "journalism": {
+          "label": "新闻",
+          "description": "强调归属、主张、核实缺口和后续问题。"
+        },
+        "negotiation": {
+          "label": "谈判",
+          "description": "强调报价与还价、条件、让步，以及已达成和待定事项。"
+        },
+        "decision_committee": {
+          "label": "决策委员会",
+          "description": "强调议案、批准与否决、先决条件、异议和后续要求。"
+        },
+        "investigation": {
+          "label": "调查",
+          "description": "强调事件时间线、承认与否认、证据引用及陈述矛盾之处。"
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "回放",
+    "description": "音频播放首选项",
+    "speed": "播放速度"
+  },
+  "apiKeys": {
+    "title": "API 密钥",
+    "description": "管理 API 密钥，以便以编程方式访问 Voxis API 和 MCP 服务器。",
+    "create": "创建 API 密钥",
+    "empty": "暂无 API 密钥。创建密钥后即可连接外部工具和服务。",
+    "scopesCount": "{{count}} 项权限",
+    "lastUsed": "上次使用：{{value}}",
+    "never": "从未使用",
+    "expires": "有效期至：{{value}}",
+    "revoke": "撤销",
+    "relativeTime": {
+      "justNow": "刚刚",
+      "minutes": "{{count}}m 前",
+      "hours": "{{count}}h 前",
+      "days": "{{count}}d 前"
+    },
+    "revokeDialog": {
+      "title": "确定要撤销吗？",
+      "description": "此操作无法撤消。 API 密钥将被永久撤销，任何使用它的集成都将停止工作。"
+    },
+    "createDialog": {
+      "title": "创建新的 API 密钥",
+      "description": "创建用于以编程方式访问 Voxis API 和 MCP 服务器的密钥。",
+      "keyName": "密钥名称",
+      "keyNamePlaceholder": "例如：生产环境、Claude Desktop",
+      "scopes": "权限",
+      "expiration": "有效期",
+      "expirationOptions": {
+        "30": "30 天",
+        "60": "60 天",
+        "90": "90 天",
+        "none": "永不过期"
+      },
+      "error": "无法创建 API 密钥。请检查详细信息并重试。",
+      "creating": "正在创建…",
+      "submit": "创建"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "查看媒体",
+        "description": "查看和下载媒体文件"
+      },
+      "mediaWrite": {
+        "label": "管理媒体",
+        "description": "上传和删除媒体"
+      },
+      "transcriptionRead": {
+        "label": "查看转写稿",
+        "description": "查看转写稿"
+      },
+      "transcriptionWrite": {
+        "label": "发起转写",
+        "description": "发起新的转写任务"
+      },
+      "summaryRead": {
+        "label": "查看摘要",
+        "description": "查看摘要"
+      },
+      "summaryWrite": {
+        "label": "生成摘要",
+        "description": "生成摘要；同时需要查看转写稿的权限"
+      },
+      "exportRead": {
+        "label": "导出",
+        "description": "导出文件；还需要源读取权限"
+      }
+    },
+    "created": {
+      "title": "API 密钥已创建",
+      "description": "您的 API 密钥已成功创建。",
+      "warning": "该密钥只会显示一次。立即复制并安全保存。",
+      "snippets": "连接配置",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "将以下内容添加到 Claude Desktop 或 Claude Code 的 MCP 配置中：",
+        "codex": "添加到您的 OpenAI Codex MCP 配置：",
+        "adk": "添加到您的 Google ADK MCP 配置：",
+        "cursor": "添加到您的 Cursor 或 VS Code MCP 配置：",
+        "rest": "将您的 API 密钥与 curl 或任何 HTTP 客户端一起使用：",
+        "openapi": "OpenAPI 规范 URL：",
+        "openapiNote": "注意：ChatGPT 中的自定义 GPT 需要 OAuth 身份验证（第二阶段）。如需直接访问，请使用 REST API 和 API 密钥。"
+      },
+      "done": "完成",
+      "copy": "复制",
+      "copied": "已复制",
+      "failed": "复制失败",
+      "copySnippet": "复制片段",
+      "copyApiKey": "复制 API 密钥"
+    }
+  },
+  "retention": {
+    "title": "实时录音音频保留",
+    "description": "自动删除实时录音的原始音频文件。转写稿和摘要仍可查看。",
+    "loadError": "无法加载录音保留设置。",
+    "enabled": {
+      "label": "自动删除实时录音音频",
+      "description": "在所选保留期限结束后，从此服务器永久删除已存储的音频。现有备份中的副本会保留，直到这些备份被删除。"
+    },
+    "days": {
+      "label": "多久后删除",
+      "description": "选择实时录音完成后 1 到 30 天之间的期限。"
+    },
+    "applyExisting": {
+      "label": "应用于现有实时录音",
+      "description": "同时删除已完成且早于所选期限的实时录音的音频。"
+    },
+    "preview": {
+      "count": "{{count}} 个实时录音的音频符合立即删除条件。",
+      "oldest": "最早符合条件的录音完成于 {{date}}。"
+    },
+    "confirm": {
+      "label": "确认立即删除的数量",
+      "description": "输入 {{count}} 以确认立即永久删除音频。"
+    },
+    "confirmationRequired": "保存前请输入立即删除的数量。",
+    "save": "保存保留策略",
+    "saving": "正在保存…",
+    "saved": "录音保留策略已保存。",
+    "saveError": "无法保存录音保留策略。"
+  }
+}

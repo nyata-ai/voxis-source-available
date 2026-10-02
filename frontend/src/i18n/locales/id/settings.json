@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "Pengaturan",
+    "subtitle": "Kelola pengaturan dan preferensi akun Anda"
+  },
+  "nav": {
+    "notifications": "Pemberitahuan",
+    "profile": "Profil",
+    "appearance": "Penampilan",
+    "language": "Bahasa",
+    "transcription": "Transkripsi",
+    "summary": "Ringkasan & ekspor",
+    "playback": "Pemutaran",
+    "apiKeys": "Kunci API",
+    "retention": "Masa simpan rekaman"
+  },
+  "profile": {
+    "title": "Profil",
+    "description": "Informasi akun Anda",
+    "name": "Nama",
+    "email": "Email",
+    "username": "Nama pengguna",
+    "ssoNote": "Profil Anda dikelola oleh SSO. Untuk memperbarui informasi Anda, hubungi administrator Anda.",
+    "updatePassword": "Ubah kata sandi",
+    "manageMfa": "Kelola MFA",
+    "usage": {
+      "title": "Penggunaan",
+      "description": "Pemakaian sumber daya organisasi Anda",
+      "error": "Tidak dapat memuat statistik penggunaan.",
+      "audioProcessed": "Audio yang diproses",
+      "aiTokens": "Token AI yang digunakan",
+      "remainingToday": "{{count}} tersisa hari ini",
+      "liveRecordingRetention": "Masa simpan rekaman langsung (hari)",
+      "retentionDays_one": "{{count}} hari",
+      "retentionDays_other": "{{count}} hari",
+      "notEnabled": "Tidak diaktifkan",
+      "storage": "Penggunaan / batas penyimpanan",
+      "unlimited": "Tanpa batas",
+      "remaining": "Tersisa: {{value}}",
+      "duration": {
+        "zero": "0 menit",
+        "lessThanMinute": "< 1 menit",
+        "minutes": "{{count}} menit",
+        "hours": "{{count}} jam",
+        "hoursMinutes": "{{hours}} jam {{minutes}} menit"
+      }
+    },
+    "securityAction": "Kelola kata sandi dan MFA"
+  },
+  "appearance": {
+    "title": "Penampilan",
+    "description": "Sesuaikan tampilan",
+    "light": "Terang",
+    "lightDescription": "Latar belakang terang dengan teks gelap",
+    "dark": "Gelap",
+    "darkDescription": "Latar belakang gelap dengan teks terang",
+    "system": "Sistem",
+    "systemDescription": "Mengikuti preferensi OS Anda"
+  },
+  "transcription": {
+    "title": "Transkripsi",
+    "description": "Pengaturan transkripsi default",
+    "defaultLanguage": "Bahasa default untuk transkripsi baru",
+    "diarization": {
+      "label": "Pisahkan pembicara",
+      "description": "Identifikasi dan pisahkan pembicara yang berbeda"
+    }
+  },
+  "summary": {
+    "title": "Ringkasan & ekspor",
+    "description": "Ringkasan default dan pengaturan ekspor",
+    "defaultType": "Jenis ringkasan default",
+    "types": {
+      "general": "Umum",
+      "keyPoints": "Poin penting",
+      "actionItems": "Tindak lanjut",
+      "qAndA": "Tanya jawab"
+    },
+    "typeDescription": "Jenis ringkasan yang dihasilkan untuk transkripsi baru",
+    "defaultFormat": "Format ekspor default",
+    "formatDescription": "Format default saat mengekspor transkrip dan ringkasan",
+    "autoBriefings": {
+      "label": "Buat ringkasan otomatis",
+      "description": "Membuat keempat jenis ringkasan begitu Anda membuka sesi yang sudah selesai. Nonaktif secara default: ringkasan dibuat saat Anda memintanya, satu jenis dalam satu waktu."
+    },
+    "highStakes": {
+      "label": "Ringkasan untuk pekerjaan berisiko tinggi",
+      "description": "Peringkasan dua tahap untuk pekerjaan hukum, notaris, dan pekerjaan lain yang sangat bergantung pada akurasi. Model mula-mula mengekstrak setiap nama, tanggal, angka, dan komitmen dari transkrip, lalu menulis ringkasan yang berlandaskan fakta tersebut. Proses ini lebih lambat dan memakai lebih banyak token daripada jalur standar, tetapi mengurangi detail yang terlewat atau ditulis ulang."
+    },
+    "profile": {
+      "label": "Profil profesional",
+      "description": "Menentukan penekanan untuk ringkasan baru. Profil ini tidak memberi saran atau memverifikasi klaim.",
+      "options": {
+        "general_professional": {
+          "label": "Profesional umum",
+          "description": "Menekankan keputusan, komitmen, hambatan, dan pertanyaan terbuka."
+        },
+        "legal": {
+          "label": "Hukum",
+          "description": "Menekankan klaim, kewajiban, fakta yang diperselisihkan, dan bukti."
+        },
+        "investment_analysis": {
+          "label": "Analisis investasi",
+          "description": "Menekankan angka, proyeksi, asumsi, risiko, dan kesenjangan uji tuntas."
+        },
+        "journalism": {
+          "label": "Jurnalisme",
+          "description": "Menekankan atribusi, klaim, kesenjangan verifikasi, dan pertanyaan tindak lanjut."
+        },
+        "negotiation": {
+          "label": "Negosiasi",
+          "description": "Menekankan penawaran, syarat, konsesi, serta poin yang disepakati dan yang masih terbuka."
+        },
+        "decision_committee": {
+          "label": "Komite Keputusan",
+          "description": "Menekankan usulan, persetujuan, syarat, perbedaan pendapat, dan tindak lanjut."
+        },
+        "investigation": {
+          "label": "Investigasi",
+          "description": "Menekankan kronologi, pengakuan, bantahan, rujukan bukti, dan ketidaksesuaian keterangan."
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "Pemutaran",
+    "description": "Preferensi pemutaran audio",
+    "speed": "Kecepatan pemutaran"
+  },
+  "apiKeys": {
+    "title": "Kunci API",
+    "description": "Kelola kunci API untuk akses terprogram ke server Voxis API dan MCP.",
+    "create": "Buat kunci API",
+    "empty": "Belum ada kunci API. Buat kunci untuk menghubungkan alat dan layanan eksternal.",
+    "scopesCount": "{{count}} izin",
+    "lastUsed": "Terakhir digunakan: {{value}}",
+    "never": "Tidak pernah",
+    "expires": "Berlaku hingga: {{value}}",
+    "revoke": "Cabut",
+    "relativeTime": {
+      "justNow": "Baru saja",
+      "minutes": "{{count}} menit lalu",
+      "hours": "{{count}} jam lalu",
+      "days": "{{count}} hari lalu"
+    },
+    "revokeDialog": {
+      "title": "Cabut kunci API?",
+      "description": "Tindakan ini tidak dapat dibatalkan. Kunci API akan dicabut secara permanen dan setiap integrasi yang menggunakannya akan berhenti berfungsi."
+    },
+    "createDialog": {
+      "title": "Buat kunci API baru",
+      "description": "Buat kunci untuk akses terprogram ke server Voxis API dan MCP.",
+      "keyName": "Nama kunci",
+      "keyNamePlaceholder": "misalnya Produksi, Claude Desktop",
+      "scopes": "Izin",
+      "expiration": "Masa berlaku",
+      "expirationOptions": {
+        "30": "30 hari",
+        "60": "60 hari",
+        "90": "90 hari",
+        "none": "Tidak kedaluwarsa"
+      },
+      "error": "Tidak dapat membuat kunci API. Silakan periksa detailnya dan coba lagi.",
+      "creating": "Sedang membuat...",
+      "submit": "Buat"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "Baca media",
+        "description": "Membaca file media"
+      },
+      "mediaWrite": {
+        "label": "Kelola media",
+        "description": "Mengunggah dan menghapus media"
+      },
+      "transcriptionRead": {
+        "label": "Baca transkrip",
+        "description": "Membaca transkrip"
+      },
+      "transcriptionWrite": {
+        "label": "Buat transkripsi",
+        "description": "Membuat transkripsi"
+      },
+      "summaryRead": {
+        "label": "Baca ringkasan",
+        "description": "Membaca ringkasan"
+      },
+      "summaryWrite": {
+        "label": "Buat ringkasan",
+        "description": "Membuat ringkasan; juga memerlukan izin membaca transkrip"
+      },
+      "exportRead": {
+        "label": "Ekspor",
+        "description": "Mengekspor dokumen; juga memerlukan izin membaca sumber"
+      }
+    },
+    "created": {
+      "title": "Kunci API berhasil dibuat",
+      "description": "Kunci API Anda telah berhasil dibuat.",
+      "warning": "Kunci ini hanya akan ditampilkan satu kali. Salin sekarang dan simpan dengan aman.",
+      "snippets": "Contoh konfigurasi",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Tambahkan ke konfigurasi MCP Claude Desktop atau Claude Code Anda:",
+        "codex": "Tambahkan ke konfigurasi OpenAI Codex MCP Anda:",
+        "adk": "Tambahkan ke konfigurasi Google ADK MCP Anda:",
+        "cursor": "Tambahkan ke konfigurasi Cursor atau VS Code MCP Anda:",
+        "rest": "Gunakan kunci API Anda dengan curl atau klien HTTP apa pun:",
+        "openapi": "URL spesifikasi OpenAPI:",
+        "openapiNote": "Catatan: GPT kustom di ChatGPT memerlukan autentikasi OAuth (Fase 2). Untuk akses langsung, gunakan REST API dengan kunci API Anda."
+      },
+      "done": "Selesai",
+      "copy": "Salin",
+      "copied": "Tersalin!",
+      "failed": "Gagal",
+      "copySnippet": "Salin konfigurasi",
+      "copyApiKey": "Salin kunci API"
+    }
+  },
+  "retention": {
+    "title": "Masa simpan audio rekaman langsung",
+    "description": "Hapus otomatis file audio asli dari rekaman langsung. Transkrip dan ringkasan tetap tersedia.",
+    "loadError": "Tidak dapat memuat pengaturan masa simpan rekaman.",
+    "enabled": {
+      "label": "Hapus otomatis audio rekaman langsung",
+      "description": "Hapus audio yang tersimpan dari server ini secara permanen setelah masa simpan yang dipilih berakhir. Salinan di cadangan yang sudah ada tetap tersimpan sampai cadangan tersebut dihapus."
+    },
+    "days": {
+      "label": "Hapus setelah",
+      "description": "Pilih antara 1 sampai 30 hari setelah rekaman langsung selesai."
+    },
+    "applyExisting": {
+      "label": "Terapkan pada rekaman langsung yang sudah ada",
+      "description": "Hapus juga audio dari rekaman langsung selesai yang sudah lebih lama dari periode yang dipilih."
+    },
+    "preview": {
+      "count": "{{count}} rekaman langsung memiliki audio yang memenuhi syarat untuk dihapus segera.",
+      "oldest": "Rekaman tertua yang memenuhi syarat selesai pada {{date}}."
+    },
+    "confirm": {
+      "label": "Konfirmasi jumlah yang dihapus segera",
+      "description": "Masukkan {{count}} untuk mengonfirmasi penghapusan audio permanen secara langsung."
+    },
+    "confirmationRequired": "Masukkan jumlah yang akan dihapus segera sebelum menyimpan.",
+    "save": "Simpan kebijakan masa simpan",
+    "saving": "Sedang menyimpan...",
+    "saved": "Kebijakan masa simpan rekaman disimpan.",
+    "saveError": "Tidak dapat menyimpan kebijakan masa simpan rekaman."
+  }
+}

@@ -1,0 +1,8 @@
+# Local build and test artifacts are never Docker build inputs.
+.gocache*/
+bin/
+server
+coverage.out
+*.test
+.env
+.env.*

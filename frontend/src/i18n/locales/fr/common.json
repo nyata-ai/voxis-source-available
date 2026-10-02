@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "Sauvegarder",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "close": "Fermer",
+    "retry": "Essayer à nouveau"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page introuvable"
+  },
+  "placeholder": {
+    "defaultDescription": "Cette fonctionnalité sera bientôt disponible. Revenez plus tard!",
+    "body": "Nous travaillons dur pour vous proposer cette fonctionnalité."
+  },
+  "export": {
+    "downloaded": "Exporter téléchargé",
+    "failed": "Échec de l'exportation. Veuillez réessayer.",
+    "bapError": "Générez d'abord le résumé Questions et réponses, ou régénérez-le si les noms des intervenants ont changé.",
+    "panelTitle": "Exporter",
+    "pillLabel": "{{row}} en {{format}}",
+    "briefingUnavailable": "Générez d'abord cette synthèse pour l'exporter.",
+    "rows": {
+      "transcript": "Transcription",
+      "briefing": "Synthèse · {{lens}}",
+      "bap": "Brouillon de procès-verbal d'audition",
+      "audio": "Audio d'origine"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "Langue",
+    "description": "Choisissez la langue de l'interface Voxis",
+    "saveFailed": "Impossible d'enregistrer votre choix de langue. Il pourrait être réinitialisé lors de votre prochaine visite."
+  },
+  "languageGroups": {
+    "english": "Anglais",
+    "asia": "Asie",
+    "europe": "Europe",
+    "middleEastAfrica": "Moyen-Orient et Afrique"
+  },
+  "languageNames": {
+    "auto": "Auto",
+    "autoDetect": "Détection automatique",
+    "en": "Anglais",
+    "id": "indonésien",
+    "jv": "javanais",
+    "su": "Soundanais",
+    "ms": "malais",
+    "tl": "Tagalog",
+    "th": "thaïlandais",
+    "vi": "vietnamien",
+    "zh": "Chinois",
+    "ja": "japonais",
+    "ko": "coréen",
+    "fr": "Français",
+    "de": "Allemand",
+    "it": "italien",
+    "pl": "polonais",
+    "pt": "portugais",
+    "ru": "russe",
+    "es": "Espagnol",
+    "sv": "suédois",
+    "da": "danois",
+    "no": "norvégien",
+    "fi": "finlandais",
+    "la": "latin",
+    "ar": "arabe",
+    "he": "hébreu",
+    "af": "afrikaans"
+  },
+  "errorBoundary": {
+    "title": "Quelque chose s'est mal passé",
+    "description": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+    "details": "Détails de l'erreur (développeur uniquement)"
+  },
+  "activity": {
+    "title": "Activity",
+    "count": "{{count}} processing",
+    "more": "+{{count}} more",
+    "ready": "Ready",
+    "view": "View",
+    "dismiss": "Dismiss",
+    "recordingTitle": "Live recording",
+    "inMotion": {
+      "title": "En cours"
+    },
+    "stage": {
+      "stitching": "Processing recording…",
+      "transcribing": "Transcribing…",
+      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "ready": "Ready"
+    },
+    "failed": {
+      "recording": "Recording couldn't be processed",
+      "transcription": "Transcription failed"
+    },
+    "toast": {
+      "recordingReady": "Recording ready",
+      "transcriptionReady": "Transcript ready"
+    }
+  },
+  "status": {
+    "pending": "En attente",
+    "encrypting": "Chiffrement",
+    "ready": "Prêt",
+    "failed": "Échoué",
+    "deleted": "Supprimé",
+    "submitted": "Soumis",
+    "processing": "Traitement",
+    "completed": "Terminé",
+    "scanPending": "Analyse en attente",
+    "scanInfected": "Infecté",
+    "scanError": "Erreur d'analyse",
+    "scanClean": "Propre"
+  },
+  "session": {
+    "source": {
+      "audio": "Audio"
+    },
+    "speaker_one": "{{count}} intervenant",
+    "speaker_other": "{{count}} intervenants",
+    "words": "{{n}} mots",
+    "lens_one": "{{count}} lentille",
+    "lens_other": "{{count}} lentilles",
+    "languages": "Langues : {{codes}}",
+    "untitled": "Session sans titre"
+  }
+}

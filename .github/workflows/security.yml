@@ -1,0 +1,250 @@
+name: OSS security
+
+on:
+  pull_request:
+  schedule:
+    - cron: '17 3 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dependencies:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-go@b7ad1dad31e06c5925ef5d2fc7ad053ef454303e # v7.0.0
+        with:
+          go-version: '1.25.14'
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Verify Go dependencies and scan shipped backend graph
+        working-directory: backend
+        run: |
+          go mod verify
+          GOTOOLCHAIN=go1.26.0+auto GOBIN="$RUNNER_TEMP/oss-tools" go install golang.org/x/vuln/cmd/govulncheck@v1.8.0
+          GOTOOLCHAIN=local "$RUNNER_TEMP/oss-tools/govulncheck" ./...
+      - name: Scan frontend dependency lock
+        working-directory: frontend
+        run: |
+          npm ci
+          npm audit --omit=dev --audit-level=high
+
+  keycloak-image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Verify locked infrastructure inputs
+        run: bash infra/oss/scripts/verify-image-lock.sh
+      - name: Verify the reviewed Keycloak attack surface
+        run: bash infra/oss/scripts/verify-keycloak-attack-surface.sh
+      - name: Verify the Keycloak attack-surface guard
+        run: bash infra/oss/scripts/test-keycloak-attack-surface.sh
+      - name: Build and scan the pinned Keycloak runtime for vulnerabilities
+        env:
+          TRIVY_VERSION: 0.74.0
+          TRIVY_SHA256: 2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a
+        run: |
+          archive="$RUNNER_TEMP/trivy.tar.gz"
+          tools="$RUNNER_TEMP/oss-tools"
+          keycloak_image=$(awk -F= '$1 == "KEYCLOAK_IMAGE" { print $2; exit }' infra/oss/.env.example)
+          temurin_image=$(awk -F= '$1 == "TEMURIN_IMAGE" { print $2; exit }' infra/oss/.env.example)
+          test -n "$keycloak_image" && test -n "$temurin_image"
+          image=voxis-oss-keycloak-security
+          docker build \
+            --build-arg "KEYCLOAK_IMAGE=$keycloak_image" \
+            --build-arg "TEMURIN_IMAGE=$temurin_image" \
+            --tag "$image" \
+            editions/oss/runtime/keycloak
+          image_id=$(docker image inspect --format '{{.Id}}' "$image")
+          image_architecture=$(docker image inspect --format '{{.Architecture}}' "$image")
+          [[ "$image_id" =~ ^sha256:[0-9a-f]{64}$ ]]
+          [[ "$image_architecture" == "amd64" ]]
+          mkdir -p "$tools"
+          curl --fail --location --retry 3 --output "$archive" "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          printf '%s  %s\n' "$TRIVY_SHA256" "$archive" | sha256sum --check --status
+          tar --extract --gzip --file "$archive" --directory "$tools" trivy
+          vex="$RUNNER_TEMP/keycloak.openvex.json"
+          python3 infra/oss/scripts/render-vex-for-image.py "$tools/trivy" "$image" infra/oss/security/keycloak-26.7.5.openvex.json "$vex" \
+            --package-products
+          "$tools/trivy" image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --no-progress \
+            --vex "$vex" "$image"
+
+  openbao-image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Verify locked infrastructure inputs
+        run: bash infra/oss/scripts/verify-image-lock.sh
+      - name: Verify the reviewed OpenBao attack surface
+        run: bash infra/oss/scripts/verify-openbao-attack-surface.sh
+      - name: Verify the OpenBao attack-surface guard
+        run: bash infra/oss/scripts/test-openbao-attack-surface.sh
+      - name: Scan the pinned OpenBao image for vulnerabilities
+        env:
+          TRIVY_VERSION: 0.74.0
+          TRIVY_SHA256: 2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a
+        run: |
+          archive="$RUNNER_TEMP/trivy.tar.gz"
+          tools="$RUNNER_TEMP/oss-tools"
+          openbao_image=$(awk -F= '$1 == "OPENBAO_IMAGE" { print $2; exit }' infra/oss/.env.example)
+          test -n "$openbao_image"
+          image=voxis-oss-openbao-security
+          docker build --build-arg "OPENBAO_IMAGE=$openbao_image" --tag "$image" editions/oss/runtime/openbao
+          image_id=$(docker image inspect --format '{{.Id}}' "$image")
+          image_architecture=$(docker image inspect --format '{{.Architecture}}' "$image")
+          [[ "$image_id" =~ ^sha256:[0-9a-f]{64}$ ]]
+          [[ "$image_architecture" == "amd64" ]]
+          mkdir -p "$tools"
+          curl --fail --location --retry 3 --output "$archive" "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          printf '%s  %s\n' "$TRIVY_SHA256" "$archive" | sha256sum --check --status
+          tar --extract --gzip --file "$archive" --directory "$tools" trivy
+          vex="$RUNNER_TEMP/openbao.openvex.json"
+          python3 infra/oss/scripts/render-vex-for-image.py "$tools/trivy" "$image" infra/oss/security/openbao-2.6.3.openvex.json "$vex" \
+            --package-products
+          "$tools/trivy" image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --no-progress \
+            --vex "$vex" "$image"
+
+  llama-image:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Verify the reviewed Llama attack surface
+        run: bash infra/oss/scripts/verify-llama-attack-surface.sh
+      - name: Verify the Llama attack-surface guard
+        run: bash infra/oss/scripts/test-llama-attack-surface.sh
+      - name: Scan the derived Llama runtime for vulnerabilities
+        env:
+          TRIVY_VERSION: 0.74.0
+          TRIVY_SHA256: 2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a
+        run: |
+          archive="$RUNNER_TEMP/trivy.tar.gz"
+          tools="$RUNNER_TEMP/oss-tools"
+          runtime_revision=$(awk -F= '$1 == "GEMMA_RUNTIME_REVISION" { print $2; exit }' infra/oss/.env.example)
+          test -n "$runtime_revision"
+          mkdir -p "$tools"
+          curl --fail --location --retry 3 --output "$archive" "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          printf '%s  %s\n' "$TRIVY_SHA256" "$archive" | sha256sum --check --status
+          tar --extract --gzip --file "$archive" --directory "$tools" trivy
+          llama_image="voxis-oss-llama:$runtime_revision"
+          docker build --build-arg "LLAMA_CPP_REVISION=$runtime_revision" --tag "$llama_image" editions/oss/runtime/llama
+          image_id=$(docker image inspect --format '{{.Id}}' "$llama_image")
+          image_architecture=$(docker image inspect --format '{{.Architecture}}' "$llama_image")
+          [[ "$image_id" =~ ^sha256:[0-9a-f]{64}$ ]]
+          [[ "$image_architecture" == "amd64" ]]
+          vex="$RUNNER_TEMP/llama.openvex.json"
+          python3 infra/oss/scripts/render-vex-for-image.py "$tools/trivy" "$llama_image" infra/oss/security/llama-5266f24.openvex.json "$vex" \
+            --package-products
+          raw_report="$RUNNER_TEMP/llama-raw.json"
+          "$tools/trivy" image --scanners vuln --severity HIGH,CRITICAL --format json --output "$raw_report" --exit-code 0 --no-progress "$llama_image"
+          if python3 - "$raw_report" <<'PY'
+          import json
+          import sys
+          report = json.load(open(sys.argv[1], encoding="utf-8"))
+          for result in report.get("Results", []):
+              for finding in result.get("Vulnerabilities") or []:
+                  if finding.get("VulnerabilityID") == "CVE-2025-69720" and finding.get("PkgName") == "libtinfo6":
+                      raise SystemExit(0)
+          raise SystemExit(1)
+          PY
+          then
+            mismatch="$RUNNER_TEMP/llama-mismatch.openvex.json"
+            python3 - "$vex" "$mismatch" <<'PY'
+          import json
+          import sys
+          document = json.load(open(sys.argv[1], encoding="utf-8"))
+          expected = "pkg:deb/debian/libtinfo6@6.5%2B20250216-2?arch=amd64&distro=debian-13.7"
+          for product in document["statements"][0]["products"]:
+              if product.get("@id") == expected:
+                  product["@id"] = "pkg:deb/debian/unmatched@0?arch=amd64&distro=debian-13.7"
+                  break
+          else:
+              raise SystemExit("the rendered Llama VEX has no libtinfo6 product")
+          json.dump(document, open(sys.argv[2], "w", encoding="utf-8"))
+          PY
+            mismatch_report="$RUNNER_TEMP/llama-mismatch.json"
+            "$tools/trivy" image --scanners vuln --severity HIGH,CRITICAL --format json --output "$mismatch_report" --exit-code 0 --no-progress \
+              --vex "$mismatch" "$llama_image"
+            python3 - "$mismatch_report" <<'PY'
+          import json
+          import sys
+          report = json.load(open(sys.argv[1], encoding="utf-8"))
+          for result in report.get("Results", []):
+              for finding in result.get("Vulnerabilities") or []:
+                  if finding.get("VulnerabilityID") == "CVE-2025-69720" and finding.get("PkgName") == "libtinfo6":
+                      raise SystemExit(0)
+          raise SystemExit("the local-model VEX mismatch did not leave the expected finding")
+          PY
+          fi
+          "$tools/trivy" image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --no-progress \
+            --vex "$vex" "$llama_image"
+
+  runtime-images:
+    name: runtime image (${{ matrix.image }})
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        image: [api, web, caddy, postgres, clamav]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Verify locked infrastructure inputs
+        run: bash infra/oss/scripts/verify-image-lock.sh
+      - name: Build and scan the runtime image for HIGH and CRITICAL vulnerabilities
+        env:
+          TRIVY_VERSION: 0.74.0
+          TRIVY_SHA256: 2ae6fe3ee734b7fdf11335663e18c75ea12dccc76062f09f164a3b0f8be4371a
+          IMAGE: ${{ matrix.image }}
+        run: |
+          archive="$RUNNER_TEMP/trivy.tar.gz"
+          tools="$RUNNER_TEMP/oss-tools"
+          lock() { awk -F= -v key="$1" '$1 == key { print $2; exit }' infra/oss/.env.example; }
+          image="voxis-oss-$IMAGE-security"
+          case "$IMAGE" in
+            api) docker build --file editions/oss/runtime/api/Dockerfile --tag "$image" backend ;;
+            caddy) docker build --tag "$image" editions/oss/runtime/caddy ;;
+            web)
+              docker build --tag voxis-oss-caddy-security editions/oss/runtime/caddy
+              docker build --file editions/oss/runtime/web/Dockerfile --build-arg CADDY_IMAGE=voxis-oss-caddy-security --tag "$image" frontend ;;
+            postgres) docker build --build-arg "POSTGRES_IMAGE=$(lock POSTGRES_IMAGE)" --tag "$image" editions/oss/runtime/postgres ;;
+            clamav) docker build --build-arg "CLAMAV_IMAGE=$(lock CLAMAV_IMAGE)" --tag "$image" editions/oss/runtime/clamav ;;
+          esac
+          image_id=$(docker image inspect --format '{{.Id}}' "$image")
+          image_architecture=$(docker image inspect --format '{{.Architecture}}' "$image")
+          [[ "$image_id" =~ ^sha256:[0-9a-f]{64}$ ]]
+          [[ "$image_architecture" == "amd64" ]]
+          mkdir -p "$tools"
+          curl --fail --location --retry 3 --output "$archive" "https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz"
+          printf '%s  %s\n' "$TRIVY_SHA256" "$archive" | sha256sum --check --status
+          tar --extract --gzip --file "$archive" --directory "$tools" trivy
+          "$tools/trivy" image --scanners vuln --severity HIGH,CRITICAL --exit-code 1 --no-progress "$image"
+
+  secrets:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - name: Fetch remote branches, tags, and pull-request heads
+        run: |
+          git fetch --force --tags origin '+refs/heads/*:refs/remotes/origin/*'
+          git fetch --force origin '+refs/pull/*/head:refs/remotes/origin/pull/*/head'
+      - name: Verify generated recovery material stays ignored
+        run: bash infra/oss/scripts/test-generated-secret-ignores.sh
+      - name: Scan full repository history for secrets
+        env:
+          GITLEAKS_VERSION: 8.30.1
+          GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+        run: |
+          archive="$RUNNER_TEMP/gitleaks.tar.gz"
+          tools="$RUNNER_TEMP/oss-tools"
+          mkdir -p "$tools"
+          curl --fail --location --retry 3 --output "$archive" "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          printf '%s  %s\n' "$GITLEAKS_SHA256" "$archive" | sha256sum --check --status
+          tar --extract --gzip --file "$archive" --directory "$tools" gitleaks
+          GITLEAKS_BIN="$tools/gitleaks" bash infra/oss/scripts/test-gitleaks-config.sh
+          "$tools/gitleaks" detect --source . --config .gitleaks.toml --log-opts="--all" --redact=100 --no-banner

@@ -1,0 +1,107 @@
+name: OSS installation smoke
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  clean-install:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Bootstrap the disposable installation
+        run: |
+          cp editions/oss/.env.ci infra/oss/.env
+          bash infra/oss/scripts/bootstrap.sh
+          sudo grep -Fxq 'voxis-oss-api-bwrap (enforce)' /sys/kernel/security/apparmor/profiles
+
+      - name: Build images before initializing state
+        run: docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml --profile app build postgres keycloak-db openbao clamav api web proxy
+
+      - name: Start fresh dependency services
+        run: |
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml up -d postgres keycloak-db keycloak openbao freshclam clamav
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml up -d --wait --wait-timeout 120 keycloak
+      - name: Initialize disposable OpenBao AppRole
+        run: VOXIS_OSS_SMOKE=1 bash infra/oss/scripts/init-openbao-smoke.sh
+      - name: Harden the Keycloak master realm and configure DCR and MCP audiences
+        # The scripts prompt for a master-realm administrator; the disposable
+        # installation answers with its bootstrap administrator.
+        run: |
+          admin() {
+            set -a; . infra/oss/.env; set +a
+            printf '%s\n%s\n\n' "$KEYCLOAK_BOOTSTRAP_ADMIN_USERNAME" "$KEYCLOAK_BOOTSTRAP_ADMIN_PASSWORD"
+          }
+          admin | bash infra/oss/scripts/configure-keycloak-master.sh
+          admin | bash infra/oss/scripts/configure-keycloak-dcr.sh
+          admin | bash infra/oss/scripts/configure-keycloak-mcp-audiences.sh
+      - name: Start API, web, proxy, and synthetic model stub
+        run: |
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml --profile app up -d --no-build api web proxy
+      - name: Verify same-origin API, identity, web, and storage wiring
+        run: |
+          for attempt in $(seq 1 60); do
+            if curl --fail --silent --show-error http://127.0.0.1:18080/ready >/dev/null; then
+              break
+            fi
+            sleep 2
+          done
+          curl --fail --silent --show-error http://127.0.0.1:18080/ready >/dev/null
+          public_discovery="$(curl --fail --silent --show-error --max-time 10 http://127.0.0.1:18080/auth/realms/voxis-oss/.well-known/openid-configuration)"
+          test "$(jq -r '.issuer' <<<"$public_discovery")" = 'https://oss-ci.invalid/auth/realms/voxis-oss'
+          public_jwks_uri="$(jq -r '.jwks_uri' <<<"$public_discovery")"
+          test "$public_jwks_uri" = 'http://127.0.0.1:18080/auth/realms/voxis-oss/protocol/openid-connect/certs'
+          curl --fail --silent --show-error --max-time 10 "$public_jwks_uri" >/dev/null
+          internal_discovery="$(docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml exec -T api sh -ec 'wget -q -T 10 -O - "${OSS_KEYCLOAK_FETCH_URL}/realms/${OSS_KEYCLOAK_REALM}/.well-known/openid-configuration"')"
+          test "$(jq -r '.issuer' <<<"$internal_discovery")" = 'https://oss-ci.invalid/auth/realms/voxis-oss'
+          internal_jwks_uri="$(jq -r '.jwks_uri' <<<"$internal_discovery")"
+          test "$internal_jwks_uri" = 'http://keycloak:8080/auth/realms/voxis-oss/protocol/openid-connect/certs'
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml exec -T api sh -ec 'wget -q -T 10 -O /dev/null "${OSS_KEYCLOAK_FETCH_URL}/realms/${OSS_KEYCLOAK_REALM}/protocol/openid-connect/certs"'
+          curl --fail --silent --show-error http://127.0.0.1:18080/ >/dev/null
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml exec -T api test -w /var/lib/voxis/media
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml exec -T api test -w /var/lib/voxis/scratch
+      - name: Verify the Keycloak admin plane is private and the web headers are set
+        run: |
+          for path in /auth/ /auth/admin/ /auth/admin/master/console/ /auth/realms/master/.well-known/openid-configuration /auth/realms/voxis-oss/../master/.well-known/openid-configuration \
+            '/auth/realms/voxis-oss/..;/master/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss;/../master/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss/%2e%2e/master/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss/%2E%2E%2Fmaster/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss%2f..%2fmaster/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss/%3b/master/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss/%5cmaster/.well-known/openid-configuration' \
+            '/auth/realms/voxis-oss/\master/.well-known/openid-configuration' \
+            '/auth/resources/..;/admin/master/console/'; do
+            test "$(curl --silent --path-as-is --output /dev/null --write-out '%{http_code}' "http://127.0.0.1:18080$path")" = 404
+          done
+          # Encoded characters in the query string are not path tricks.
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' 'http://127.0.0.1:18080/auth/realms/voxis-oss/.well-known/openid-configuration?probe=a%2Fb%3Bc')" = 200
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://localhost:8081/auth/admin/master/console/)" = 200
+          headers="$(curl --fail --silent --show-error --dump-header - --output /dev/null http://127.0.0.1:18080/)"
+          grep -qi "^content-security-policy: default-src 'self'; script-src 'self';" <<<"$headers"
+          grep -qi '^x-content-type-options: nosniff' <<<"$headers"
+          grep -qi '^referrer-policy: strict-origin-when-cross-origin' <<<"$headers"
+          grep -qi '^permissions-policy: .*microphone=(self)' <<<"$headers"
+          ! grep -qi '^server:' <<<"$headers"
+          test "$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:18080/api/v1/media)" = 401
+      - name: Verify anonymous Keycloak DCR through the same-origin proxy
+        run: |
+          KEYCLOAK_DCR_TEST_URL=http://localhost:18080/auth/realms/voxis-oss/clients-registrations/openid-connect \
+          KEYCLOAK_DCR_TEST_REDIRECT_URI=http://localhost:18080/mcp/callback \
+          bash infra/oss/scripts/test-keycloak-dcr.sh
+      - name: Show failure diagnostics
+        if: failure()
+        run: docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml --profile app logs --no-color
+      - name: Clean up test installation
+        if: always()
+        run: |
+          docker compose --env-file infra/oss/.env -f infra/oss/compose.yaml -f infra/oss/compose.smoke.yaml --profile app down -v
+          if [ -e /etc/apparmor.d/voxis-oss-api-bwrap ]; then
+            sudo apparmor_parser --remove /etc/apparmor.d/voxis-oss-api-bwrap
+            sudo rm /etc/apparmor.d/voxis-oss-api-bwrap
+          fi

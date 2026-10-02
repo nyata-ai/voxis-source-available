@@ -1,0 +1,32 @@
+title = "Voxis-OSS secret scanner"
+
+[extend]
+useDefault = true
+
+[[rules]]
+id = "generic-api-key"
+
+  [[rules.allowlists]]
+  description = "Spanish account-settings label that the generic API-key heuristic misclassifies"
+  condition = "AND"
+  paths = ['''^frontend/src/i18n/locales/es/settings\.json$''']
+  regexTarget = "line"
+  regexes = ['''^\s*"updatePassword":\s*"Actualizar/Cambiar contraseña",\s*$''']
+
+  [[rules.allowlists]]
+  description = "Exact current Keycloak derived-image tag line in the operator environment template (path and full line, so it also holds for a working-tree scan)"
+  condition = "AND"
+  paths = ['''^infra/oss/\.env\.example$''']
+  regexTarget = "line"
+  regexes = [
+    '''^\n?VOXIS_OSS_KEYCLOAK_IMAGE=voxis-oss-keycloak:26\.7\.5-temurin21-noble$''',
+  ]
+
+  [[rules.allowlists]]
+  description = "Exact current Keycloak derived-image tag line in the CI environment template (path and full line, so it also holds for a working-tree scan)"
+  condition = "AND"
+  paths = ['''^editions/oss/\.env\.ci$''']
+  regexTarget = "line"
+  regexes = [
+    '''^\n?VOXIS_OSS_KEYCLOAK_IMAGE=voxis-oss-keycloak:26\.7\.5-temurin21-noble-ci$''',
+  ]

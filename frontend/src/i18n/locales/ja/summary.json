@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "概要",
+    "keyPoints": "重要なポイント",
+    "actionItems": "アクションアイテム",
+    "questionsAnswers": "質問と回答"
+  },
+  "typeMeta": {
+    "general": "一般的な",
+    "keyPoints": "重要なポイント",
+    "actions": "アクション",
+    "qAndA": "Q&A",
+    "fallback": "まとめ"
+  },
+  "profile": {
+    "label": "プロファイル",
+    "general_professional": "一般プロフェッショナル",
+    "legal": "法務",
+    "investment_analysis": "投資分析",
+    "journalism": "ジャーナリズム",
+    "negotiation": "交渉",
+    "decision_committee": "意思決定委員会",
+    "investigation": "調査"
+  },
+  "viewer": {
+    "loading": "概要を読み込んでいます...",
+    "noContent": "要約コンテンツはありません",
+    "evidence": "証拠：",
+    "owner": "所有者：",
+    "due": "期限：",
+    "questionPrefix": "質問：",
+    "answerPrefix": "答え：",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "処理...",
+    "unknownError": "不明なエラーが発生しました",
+    "copied": "コピーしました！",
+    "copy": "コピー",
+    "showSources": "出典を表示",
+    "hideSources": "出典を非表示",
+    "citations": "引用",
+    "citation": "引用 {{id}}",
+    "citationWithSpeaker": "引用 {{id}}、{{speaker}}",
+    "citationWithTime": "引用 {{id}}、{{time}}",
+    "citationWithSpeakerTime": "引用 {{id}}、{{speaker}}、{{time}}",
+    "actionKinds": {
+      "action_item": "対応事項",
+      "decision": "決定",
+      "next_step": "次の手順",
+      "open_issue": "未解決事項"
+    },
+    "notSpecified": "文字起こしには記載されていません。",
+    "degradationNotice": "この要約はフォールバックまたは正規化された出力で完了しました。文字起こしと照合してください。"
+  },
+  "briefing": {
+    "title": "要約",
+    "empty": "このセッションにはまだ要約がありません。",
+    "autoStarted": "このセッションを開いたときに自動で開始しました。",
+    "notGenerated": "この要約はまだ生成されていません。",
+    "generateAll": "すべて生成",
+    "generatingAll": "生成中…",
+    "generateOne": "{{type}}を生成",
+    "generatingOne": "生成中…",
+    "error": "要約を生成できませんでした。もう一度お試しください。",
+    "generateTypeError": "この要約を生成できませんでした。もう一度お試しください。",
+    "aiUnavailable": "AI 要約は利用できません。",
+    "rateLimited": "生成にレート制限がかかっています。しばらく待ってからもう一度お試しください。",
+    "regenerateError": "この要約を再生成できませんでした。もう一度お試しください。",
+    "regenerateTypeError": "「{{type}}」の要約を再生成できませんでした。もう一度お試しください。",
+    "regenerate": "再生成",
+    "regenerating": "再生成しています…",
+    "loadError": "この要約を読み込めませんでした。もう一度お試しください。",
+    "status": {
+      "notGenerated": "未生成",
+      "processing": "生成中…",
+      "ready": "完了",
+      "failed": "失敗"
+    },
+    "tabsLabel": "要約の種類",
+    "note": "{{date}} に生成 · {{profile}} プロファイル · 話者名はモデルによる推定です",
+    "noteWithoutProfile": "{{date}} に生成 · 話者名はモデルによる推定です"
+  },
+  "summarize": {
+    "button": "要約する",
+    "title": "概要の生成",
+    "description": "この文字起こしから生成する概要のタイプを選択します。",
+    "typeLabel": "概要タイプ",
+    "alreadyExists": "この概要タイプはすでに存在します。",
+    "started": "要約を開始しました",
+    "failed": "集計の開始に失敗しました。もう一度試してください。",
+    "generating": "生成中...",
+    "start": "要約の開始"
+  },
+  "detail": {
+    "loading": "概要を読み込んでいます..."
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "Sprache",
+    "hint": "Die automatische Erkennung ist die empfohlene Standardeinstellung und für jede Aufnahme sicher. Sie können bis zu {{max}} Sprachen auswählen, um Voxis mitzuteilen, was zu erwarten ist – das endgültige Transkript richtet sich immer danach, was tatsächlich in der Aufnahme zu hören ist.",
+    "autoDetect": "Automatische Erkennung (empfohlen)",
+    "selectedCount": "{{selected}}/{{max}} ausgewählt"
+  },
+  "expectedSpeakers": {
+    "label": "Anzahl der Sprecher",
+    "auto": "Automatisch erkennen",
+    "hint": "Legen Sie das nur fest, wenn Sie wissen, wie viele Personen in der Aufnahme sprechen. Am meisten hilft es der Sprechertrennung bei Aufnahmen mit einer oder zwei Personen.",
+    "count_one": "{{count}} Sprecher",
+    "count_other": "{{count}} Sprecher"
+  },
+  "retranscribe": {
+    "deleteFailed": "Vorhandene Transkription konnte nicht gelöscht werden. Es wurden keine Änderungen vorgenommen.",
+    "started": "Die Neutranskription hat begonnen",
+    "newFailed": "Die alte Transkription wurde entfernt, aber die neue Transkription konnte nicht gestartet werden. Bitte transkribieren Sie erneut aus der Mediathek.",
+    "title": "Audio neu transkribieren",
+    "descriptionPrefix": "Dadurch wird die vorhandene Transkription gelöscht",
+    "descriptionSuffix": "und startet mit den folgenden Einstellungen eine neue.",
+    "diarization": "Sprechertrennung",
+    "starting": "Wird gestartet…",
+    "start": "Neu transkribieren"
+  },
+  "speakers": {
+    "title": "Sprecher",
+    "saving": "Speichern",
+    "findingNames": "Namen finden…",
+    "showLowConfidence": "Unsichere Vorschläge anzeigen",
+    "saveFailed": "Der Sprechername konnte nicht gespeichert werden. Bitte erneut versuchen.",
+    "dismissFailed": "Vorschlag konnte nicht abgelehnt werden.",
+    "speakerLabel": "Sprecher {{index}}",
+    "evidence": "KI-Vorschlag: {{name}}. Hinweis: {{evidence}}. Sicherheit: {{confidence}}.",
+    "acceptLabel": "Akzeptieren Sie den Vorschlag {{name}} für den Sprecher {{index}}",
+    "dismissLabel": "Vorschlag für Sprecher {{index}} ablehnen",
+    "showAll_one": "Alle {{count}} Sprecher anzeigen",
+    "showAll_other": "Alle {{count}} Sprecher anzeigen",
+    "showFewer": "Weniger anzeigen"
+  },
+  "transcribe": {
+    "started": "Die Transkription hat begonnen",
+    "failed": "Die Transkription konnte nicht gestartet werden. Bitte versuchen Sie es erneut.",
+    "button": "Transkribieren",
+    "title": "Audio transkribieren",
+    "description": "Konfigurieren Sie Transkriptionseinstellungen für diese Audiodatei.",
+    "diarization": "Sprechertrennung",
+    "enhanceAudio": "Audio verbessern",
+    "enhanceHint": "Wendet die KI-Rauschunterdrückung vor der Transkription an. Verwenden Sie es, wenn Sprache schwer zu verstehen ist – starker Wind, Verkehr, Maschinen. Führt zu mehr Bearbeitungszeit. Überspringen Sie daher den Vorgang für klare Aufnahmen, bei denen die Transkription bereits gut funktioniert.",
+    "starting": "Wird gestartet…",
+    "start": "Transkription starten"
+  },
+  "viewer": {
+    "lowConfidence": "Geringe Sicherheit",
+    "confidenceTitle": "Sicherheit: {{percent}} %",
+    "noUtterances": "Keine Äußerungen verfügbar.",
+    "ariaLabel": "Transkript",
+    "followLabel": "Wiedergabe folgen",
+    "follow": "Folgen"
+  },
+  "row": {
+    "actionsLabel": "Aktionen für {{title}}",
+    "retranscribe": "Neu transkribieren",
+    "delete": "Löschen"
+  },
+  "detail": {
+    "loading": "Transkript wird geladen...",
+    "notFound": "Die Transkription wurde nicht gefunden oder konnte nicht geladen werden.",
+    "tryAgain": "Erneut versuchen",
+    "titleLabel": "Audiotitel",
+    "descriptionPlaceholder": "Beschreibung hinzufügen...",
+    "descriptionLabel": "Audiodeskription",
+    "updateTitleFailed": "Der Audiotitel konnte nicht aktualisiert werden",
+    "updateDescriptionFailed": "Die Audiobeschreibung konnte nicht aktualisiert werden",
+    "delete": "Löschen",
+    "enhanced": "Erweitert",
+    "processing": "Transkription wird verarbeitet...",
+    "streamFailed": "Der Audiostream ist fehlgeschlagen. Bitte aktualisieren Sie und versuchen Sie es erneut."
+  },
+  "reader": {
+    "find": {
+      "label": "Im Transkript suchen",
+      "placeholder": "Im Transkript suchen",
+      "count": "{{current}} von {{total}}",
+      "none": "Keine Treffer",
+      "next": "Nächster Treffer",
+      "prev": "Vorheriger Treffer",
+      "clear": "Suche löschen"
+    },
+    "back": "Zurück zur Mediathek",
+    "backLabel": "Zurück zur Mediathek",
+    "retranscribe": "Neu transkribieren",
+    "sourceLabel": "Quelle",
+    "library": "Mediathek",
+    "more": "Weitere Aktionen",
+    "uploadedLine": "Hochgeladen am {{date}}",
+    "followPlayback": "Wiedergabe folgen"
+  }
+}

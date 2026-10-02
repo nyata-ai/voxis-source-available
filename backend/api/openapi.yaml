@@ -1,0 +1,210 @@
+openapi: "3.1.0"
+info:
+  title: Voxis Source-Available API
+  version: "1.0.0"
+  description: >-
+    Route-level contract for secure local transcription, recording, summaries, exports, API keys, and MCP.
+    Request and response schemas are expanded as each retained workflow is documented.
+    Every bearer-authenticated operation under /api/v1 and /mcp can also return
+    403 role_required when a JWT lacks the voxis-user realm role (API keys stop
+    working, with 401, within 60 seconds of their owner being disabled or losing
+    that role), and 429 rate_limited when one client IP exceeds 1200 requests per minute.
+servers:
+  - url: "{baseUrl}"
+    variables:
+      baseUrl:
+        default: "http://localhost:8080"
+        description: Public Voxis Source-Available API origin selected by the operator.
+security:
+  - BearerAuth: []
+paths:
+  /health: { get: { security: [], responses: { "200": { description: Alive } } } }
+  /ready: { get: { security: [], responses: { "200": { description: Ready } } } }
+  /.well-known/oauth-protected-resource: { get: { security: [], responses: { "200": { description: OAuth resource metadata } } } }
+  /mcp:
+    post:
+      summary: MCP JSON-RPC
+      responses:
+        "200": { description: MCP response }
+        "403": { description: "JSON-RPC error envelope (code -32002) when the JWT lacks the voxis-user realm role, or the origin or audience is not allowed." }
+        "429": { description: "JSON-RPC error envelope (code -32003) when a per-IP, per-key, or per-organization rate limit is exceeded." }
+  /api/v1/openapi.json: { get: { security: [], responses: { "200": { description: This contract } } } }
+  /api/v1/me:
+    get:
+      responses:
+        "200": { description: Current user }
+        "403": { $ref: '#/components/responses/Forbidden' }
+        "429": { $ref: '#/components/responses/TooManyRequests' }
+  /api/v1/dashboard/stats: { get: { responses: { "200": { description: Dashboard statistics } } } }
+  /api/v1/usage/stats: { get: { responses: { "200": { description: Usage statistics } } } }
+  /api/v1/search:
+    get:
+      summary: Search media metadata and bounded decrypted transcript segments
+      parameters:
+        - name: search
+          in: query
+          required: true
+          schema: { type: string, minLength: 1, maxLength: 200 }
+        - name: mode
+          in: query
+          schema: { type: string, enum: [lexical, semantic], default: lexical }
+        - name: limit
+          in: query
+          schema: { type: integer, minimum: 1, maximum: 100, default: 20 }
+        - name: offset
+          in: query
+          schema: { type: integer, minimum: 0, maximum: 10000, default: 0 }
+        - name: transcript_cursor
+          in: query
+          schema: { type: string, maxLength: 512 }
+      responses: { "200": { description: Metadata items and total use limit and offset. transcript_items are a separately keyset-paginated page over 25 decrypted organization-owned completed transcripts. Continue with next_transcript_cursor until transcript_complete is true; transcript items have no combined total. } }
+  /api/v1/media:
+    get: { responses: { "200": { description: Media list } } }
+  /api/v1/media/upload:
+    post:
+      responses:
+        "201": { description: Uploaded media }
+        "400": { $ref: '#/components/responses/BadRequest' }
+        "403": { $ref: '#/components/responses/Forbidden' }
+        "422": { description: "media_too_long: the audio is longer than MEDIA_MAX_DURATION (default 8h)" }
+        "429":
+          description: >-
+            rate_limited when the per-user upload rate is exceeded, or upload_limit
+            when the caller already has 2 uploads in progress. Retry-After gives the wait in seconds.
+          headers:
+            Retry-After: { schema: { type: integer, minimum: 1 } }
+          content:
+            application/json:
+              schema: { $ref: '#/components/schemas/Error' }
+        "503": { description: "Server-wide upload capacity is temporarily full; retry after Retry-After seconds." }
+  /api/v1/media/{id}:
+    parameters: [ { $ref: '#/components/parameters/ID' } ]
+    get: { responses: { "200": { description: Media } } }
+    patch: { responses: { "200": { description: Updated media } } }
+    delete:
+      description: >-
+        Purges the media's audio file, recording chunks, transcripts, and summaries; a content-free
+        record remains. API keys and scoped tokens need media:write, transcription:write, and summary:write.
+      responses:
+        "204": { description: Deleted media }
+        "403": { $ref: '#/components/responses/Forbidden' }
+  /api/v1/media/{id}/download: { parameters: [ { $ref: '#/components/parameters/ID' } ], get: { responses: { "200": { description: Decrypted media download } } } }
+  /api/v1/media/{id}/stream: { parameters: [ { $ref: '#/components/parameters/ID' } ], get: { security: [], responses: { "200": { description: Media stream } } } }
+  /api/v1/media/{id}/stream-url: { parameters: [ { $ref: '#/components/parameters/ID' } ], get: { responses: { "200": { description: Short-lived stream URL } } } }
+  /api/v1/transcriptions:
+    get: { responses: { "200": { description: Transcription list } } }
+    post:
+      description: Starting a transcription is limited to 30 per user per hour (burst 10), shared with the MCP create_transcription tool.
+      responses:
+        "201": { description: Created transcription }
+        "403": { $ref: '#/components/responses/Forbidden' }
+        "429": { $ref: '#/components/responses/TooManyRequests' }
+  /api/v1/transcriptions/{id}:
+    parameters: [ { $ref: '#/components/parameters/ID' } ]
+    get: { responses: { "200": { description: Transcription } } }
+    delete:
+      description: >-
+        Deletes the transcription and its summaries. API keys and scoped tokens need transcription:write
+        and summary:write.
+      responses:
+        "204": { description: Deleted transcription }
+        "403": { $ref: '#/components/responses/Forbidden' }
+  /api/v1/transcriptions/{id}/speakers: { parameters: [ { $ref: '#/components/parameters/ID' } ], patch: { responses: { "200": { description: Updated speakers } } } }
+  /api/v1/transcriptions/{id}/speakers/suggestions: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "200": { description: Speaker suggestions } } } }
+  /api/v1/transcriptions/{id}/speakers/suggestions/{index}: { parameters: [ { $ref: '#/components/parameters/ID' }, { $ref: '#/components/parameters/Index' } ], delete: { responses: { "204": { description: Dismissed suggestion } } } }
+  /api/v1/transcriptions/{id}/summaries:
+    parameters: [ { $ref: '#/components/parameters/ID' } ]
+    get: { responses: { "200": { description: Summary list } } }
+    post: { responses: { "201": { description: Created summaries } } }
+  /api/v1/transcriptions/{id}/export: { parameters: [ { $ref: '#/components/parameters/ID' } ], get: { responses: { "200": { description: Transcript export } } } }
+  /api/v1/summaries:
+    get: { responses: { "200": { description: Summary list } } }
+    post: { responses: { "201": { description: Created summary } } }
+  /api/v1/summaries/{id}:
+    parameters: [ { $ref: '#/components/parameters/ID' } ]
+    get: { responses: { "200": { description: Summary } } }
+    delete: { responses: { "204": { description: Deleted summary } } }
+  /api/v1/summaries/{id}/regenerate: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "200": { description: Regenerated summary } } } }
+  /api/v1/summaries/{id}/export: { parameters: [ { $ref: '#/components/parameters/ID' } ], get: { responses: { "200": { description: Summary export } } } }
+  /api/v1/settings/preferences:
+    get: { responses: { "200": { description: Preferences } } }
+    put: { responses: { "200": { description: Updated preferences } } }
+  /api/v1/features: { get: { responses: { "200": { description: Enabled OSS features } } } }
+  /api/v1/api-keys:
+    get: { responses: { "200": { description: API keys } } }
+    post: { responses: { "201": { description: Created API key } } }
+  /api/v1/api-keys/{id}: { parameters: [ { $ref: '#/components/parameters/ID' } ], delete: { responses: { "204": { description: Revoked API key } } } }
+  /api/v1/activity: { get: { responses: { "200": { description: Activity } } } }
+  /api/v1/recordings: { post: { responses: { "201": { description: Recording session } } } }
+  /api/v1/recordings/{id}:
+    parameters: [ { $ref: '#/components/parameters/ID' } ]
+    get: { responses: { "200": { description: Recording session } } }
+    delete: { responses: { "204": { description: Abandoned recording } } }
+  /api/v1/recordings/{id}/chunks: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "201": { description: Recorded chunk } } } }
+  /api/v1/recordings/{id}/complete: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "200": { description: Completing recording } } } }
+  /api/v1/recordings/{id}/pause: { parameters: [ { $ref: '#/components/parameters/ID' } ], patch: { responses: { "200": { description: Paused recording } } } }
+  /api/v1/recordings/{id}/resume: { parameters: [ { $ref: '#/components/parameters/ID' } ], patch: { responses: { "200": { description: Resumed recording } } } }
+  /api/v1/recordings/{id}/heartbeat: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "200": { description: Recording heartbeat } } } }
+  /api/v1/recordings/interrupted: { get: { responses: { "200": { description: Interrupted recordings } } } }
+  /api/v1/recordings/active: { get: { responses: { "200": { description: Active recording } } } }
+  /api/v1/recordings/{id}/recover: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "200": { description: Recovered recording } } } }
+  /api/v1/recordings/{id}/release: { parameters: [ { $ref: '#/components/parameters/ID' } ], post: { responses: { "200": { description: Released recording } } } }
+  /api/v1/admin/me: { get: { responses: { "200": { description: Admin identity } } } }
+  /api/v1/admin/ops/stats: { get: { responses: { "200": { description: Operations statistics } } } }
+  /api/v1/admin/system/stats: { get: { responses: { "200": { description: System statistics } } } }
+  /api/v1/admin/llm/prompts: { get: { responses: { "200": { description: Public Gemma prompts } } } }
+  /api/v1/admin/llm/prompts/{key}:
+    parameters: [ { $ref: '#/components/parameters/PromptKey' } ]
+    put: { responses: { "200": { description: Updated prompt } } }
+    delete: { responses: { "204": { description: Reset prompt } } }
+  /api/v1/admin/recording-retention:
+    get: { responses: { "200": { description: Recording retention policy } } }
+    put: { responses: { "200": { description: Updated recording retention policy } } }
+  /api/v1/admin/recording-retention/preview: { post: { responses: { "200": { description: Retention impact } } } }
+  /api/v1/admin/storage-quota:
+    get: { responses: { "200": { description: Storage quota policy } } }
+    put: { responses: { "200": { description: Updated storage quota policy } } }
+components:
+  schemas:
+    Error:
+      type: object
+      required: [error, message]
+      properties:
+        error: { type: string, description: Stable machine-readable code. }
+        message: { type: string, description: Human-readable explanation. }
+  responses:
+    BadRequest:
+      description: The request or uploaded file was rejected (bad_request).
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    Forbidden:
+      description: >-
+        role_required when the JWT lacks the voxis-user realm role, or forbidden
+        when a required scope is missing.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+    TooManyRequests:
+      description: rate_limited when a per-IP or per-user rate limit is exceeded.
+      content:
+        application/json:
+          schema: { $ref: '#/components/schemas/Error' }
+  parameters:
+    ID:
+      name: id
+      in: path
+      required: true
+      schema: { type: string, format: uuid }
+    Index:
+      name: index
+      in: path
+      required: true
+      schema: { type: integer, minimum: 0 }
+    PromptKey:
+      name: key
+      in: path
+      required: true
+      schema: { type: string, minLength: 1, maxLength: 100 }
+  securitySchemes:
+    BearerAuth: { type: http, scheme: bearer }

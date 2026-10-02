@@ -1,0 +1,28 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-mandarin-delimiter-override",
+    "duration": 2.0
+  },
+  "metadata": {
+    "language_pack_info": {
+      "per_language_word_delimiters": {
+        "cmn": " "
+      }
+    }
+  },
+  "results": [
+    {
+      "type": "word",
+      "start_time": 0.10,
+      "end_time": 0.60,
+      "alternatives": [{"content": "你好", "language": "cmn", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 0.61,
+      "end_time": 1.10,
+      "alternatives": [{"content": "世界", "language": "cmn", "speaker": "S1"}]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "format": "2.9",
+  "job": {
+    "id": "job-multi-speaker",
+    "duration": 30.0
+  },
+  "results": [
+    {
+      "type": "word",
+      "start_time": 5.0,
+      "end_time": 5.4,
+      "is_eos": true,
+      "alternatives": [{"content": "Setuju", "language": "id", "speaker": "S3"}]
+    },
+    {
+      "type": "word",
+      "start_time": 6.0,
+      "end_time": 6.5,
+      "is_eos": true,
+      "alternatives": [{"content": "Tidak", "language": "id", "speaker": "S1"}]
+    },
+    {
+      "type": "word",
+      "start_time": 7.0,
+      "end_time": 7.6,
+      "is_eos": true,
+      "alternatives": [{"content": "Mungkin", "language": "id", "speaker": "S2"}]
+    },
+    {
+      "type": "word",
+      "start_time": 8.0,
+      "end_time": 8.6,
+      "is_eos": true,
+      "alternatives": [{"content": "Hmm", "language": "id", "speaker": "UU"}]
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "close": "Close",
+    "retry": "Try again"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Page not found"
+  },
+  "placeholder": {
+    "defaultDescription": "This feature is coming soon. Check back later!",
+    "body": "We're working hard to bring you this feature."
+  },
+  "export": {
+    "downloaded": "Export downloaded",
+    "failed": "Failed to export. Please try again.",
+    "bapError": "Generate the Questions & Answers briefing first, or regenerate it if speaker names changed.",
+    "panelTitle": "Export",
+    "pillLabel": "{{row}} as {{format}}",
+    "briefingUnavailable": "Generate this briefing first to export it.",
+    "rows": {
+      "transcript": "Transcript",
+      "briefing": "Briefing · {{lens}}",
+      "bap": "Berita Acara draft",
+      "audio": "Original audio"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "Language",
+    "description": "Choose the language for the Voxis interface",
+    "saveFailed": "Couldn't save your language choice. It may revert on your next visit."
+  },
+  "languageGroups": {
+    "english": "English",
+    "asia": "Asia",
+    "europe": "Europe",
+    "middleEastAfrica": "Middle East & Africa"
+  },
+  "languageNames": {
+    "auto": "Auto",
+    "autoDetect": "Auto-detect",
+    "en": "English",
+    "id": "Indonesian",
+    "jv": "Javanese",
+    "su": "Sundanese",
+    "ms": "Malay",
+    "tl": "Tagalog",
+    "th": "Thai",
+    "vi": "Vietnamese",
+    "zh": "Chinese",
+    "ja": "Japanese",
+    "ko": "Korean",
+    "fr": "French",
+    "de": "German",
+    "it": "Italian",
+    "pl": "Polish",
+    "pt": "Portuguese",
+    "ru": "Russian",
+    "es": "Spanish",
+    "sv": "Swedish",
+    "da": "Danish",
+    "no": "Norwegian",
+    "fi": "Finnish",
+    "la": "Latin",
+    "ar": "Arabic",
+    "he": "Hebrew",
+    "af": "Afrikaans"
+  },
+  "errorBoundary": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Please try again.",
+    "details": "Error details (dev only)"
+  },
+  "activity": {
+    "title": "Activity",
+    "count": "{{count}} processing",
+    "more": "+{{count}} more",
+    "ready": "Ready",
+    "view": "View",
+    "dismiss": "Dismiss",
+    "recordingTitle": "Live recording",
+    "inMotion": {
+      "title": "In motion"
+    },
+    "stage": {
+      "stitching": "Processing recording…",
+      "transcribing": "Transcribing…",
+      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "ready": "Ready"
+    },
+    "failed": {
+      "recording": "Recording couldn't be processed",
+      "transcription": "Transcription failed"
+    },
+    "toast": {
+      "recordingReady": "Recording ready",
+      "transcriptionReady": "Transcript ready"
+    }
+  },
+  "status": {
+    "pending": "Pending",
+    "encrypting": "Encrypting",
+    "ready": "Ready",
+    "failed": "Failed",
+    "deleted": "Deleted",
+    "submitted": "Submitted",
+    "processing": "Processing",
+    "completed": "Completed",
+    "scanPending": "Scan pending",
+    "scanInfected": "Infected",
+    "scanError": "Scan error",
+    "scanClean": "Clean"
+  },
+  "session": {
+    "source": {
+      "audio": "Audio"
+    },
+    "speaker_one": "{{count}} speaker",
+    "speaker_other": "{{count}} speakers",
+    "words": "{{n}} words",
+    "lens_one": "{{count}} lens",
+    "lens_other": "{{count}} lenses",
+    "languages": "Languages: {{codes}}",
+    "untitled": "Untitled session"
+  }
+}

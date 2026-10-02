@@ -1,0 +1,25 @@
+{
+  "codes": {
+    "bad_request": "The request could not be processed. Please check the details and try again.",
+    "validation_error": "Some details need attention. Please check the form and try again.",
+    "invalid_input": "Some details need attention. Please check the form and try again.",
+    "not_found": "We could not find that item.",
+    "forbidden": "You do not have access to this item.",
+    "unauthorized": "Your session has expired. Please sign in again.",
+    "conflict": "A conflicting operation is already in progress. Please try again.",
+    "internal_error": "Something went wrong on our side. Please try again.",
+    "service_unavailable": "This service is temporarily unavailable. Please try again later.",
+    "storage_quota_exceeded": "Storage quota reached. Free audio storage in your Library before trying again.",
+    "rate_limited": "Too many requests. Please wait a moment and try again.",
+    "scan_pending": "This file is still being scanned for security. Please try again shortly.",
+    "scan_failed": "This file failed the security scan and cannot be used.",
+    "recent_auth_required": "Please confirm your identity again before continuing.",
+    "state_invalid": "This item is not ready for that action yet.",
+    "network": "Network error. Please check your connection and try again.",
+    "timeout": "The request took too long. Please try again.",
+    "role_required": "Your account does not have access yet. Ask your administrator to grant you access.",
+    "upload_limit": "Too many uploads are in progress. Please try again when one of them finishes.",
+    "media_too_long": "This recording is longer than this server allows. Split it into shorter parts and try again.",
+    "model_busy": "The AI model is busy. Please try again shortly."
+  }
+}

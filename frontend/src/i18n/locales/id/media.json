@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "Siap",
+    "processing": "Sedang diproses",
+    "failed": "Gagal",
+    "openFile": "Buka file",
+    "openAnyway": "Memproses — tetap buka",
+    "openFailed": "Buka file · gagal"
+  },
+  "upload": {
+    "dropzone": "Seret dan letakkan file audio di sini",
+    "browse": "Pilih file",
+    "browseFiles": "Pilih file",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "Maks 1 GB per file",
+    "queueLabel": "Antrian unggah",
+    "rejectedTitle": "File yang ditolak",
+    "rejectedLabel": "File yang ditolak",
+    "uploading": "Mengunggah {{name}}",
+    "processing": "Sedang diproses di server...",
+    "complete": "Unggahan selesai",
+    "viewFile": "Lihat file",
+    "viewFileNamed": "Lihat file: {{name}}",
+    "remove": "Hapus {{name}}",
+    "errors": {
+      "failed": "Gagal mengunggah"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "Jenis file tidak didukung",
+      "tooLarge": "File melebihi ukuran maksimum 1 GB",
+      "storageQuota": "File ini melebihi kuota penyimpanan yang tersisa"
+    }
+  },
+  "storageQuota": {
+    "warning": "Penyimpanan hampir penuh: {{used}} dari {{limit}} telah digunakan, tersisa {{remaining}}.",
+    "full": "Batas penyimpanan tercapai. Unggahan dan rekaman diblokir. Kosongkan ruang penyimpanan audio di Pustaka Anda.",
+    "manageLibrary": "Kelola penyimpanan di Pustaka",
+    "admin": {
+      "enabled": "Terapkan kuota penyimpanan",
+      "enabledDescription": "Saat dimatikan, pengguna memiliki penyimpanan tanpa batas.",
+      "limit": "Batas default (GiB)",
+      "limitDescription": "Masukkan nilai GiB positif apa pun. Nilai desimal didukung. Defaultnya adalah 2 GiB.",
+      "limitError": "Masukkan batas penyimpanan positif.",
+      "backend": "Backend penyimpanan",
+      "warningThreshold": "Ambang peringatan",
+      "inactive": "Tidak aktif: kuota tidak diterapkan dengan penyimpanan {{backend}}.",
+      "save": "Simpan kuota penyimpanan",
+      "saving": "Menyimpan...",
+      "saved": "Kuota penyimpanan disimpan.",
+      "saveError": "Tidak dapat menyimpan kuota penyimpanan.",
+      "loadError": "Tidak dapat memuat pengaturan kuota penyimpanan."
+    }
+  },
+  "pagination": {
+    "showing": "Menampilkan {{from}}–{{to}} dari {{total}}",
+    "previous": "Halaman sebelumnya",
+    "next": "Halaman berikutnya"
+  },
+  "player": {
+    "pause": "Jeda",
+    "play": "Putar",
+    "position": "Posisi pemutaran",
+    "unmute": "Nyalakan suara",
+    "mute": "Senyapkan",
+    "speed": "Kecepatan pemutaran",
+    "speedValue": "{{speed}}x",
+    "skipBack": "Mundur {{seconds}} detik",
+    "skipForward": "Maju {{seconds}} detik",
+    "dock": "Pemutar audio",
+    "backToTranscript": "Kembali ke transkrip",
+    "speedPill": "Kecepatan {{speed}}x"
+  },
+  "inlineEdit": {
+    "clickToEdit": "Klik untuk mengedit"
+  },
+  "analysis": {
+    "trust": {
+      "high": "Tingkat keyakinan tinggi",
+      "medium": "Tingkat keyakinan sedang",
+      "low": "Tingkat keyakinan rendah",
+      "unknown": "Tidak diketahui"
+    },
+    "title": "Integritas audio",
+    "checksPassed": "{{passed}} dari {{total}} pemeriksaan lolos",
+    "recorded": "Direkam",
+    "integrityDetails": "Detail integritas",
+    "technicalDetails": "Detail teknis",
+    "fileHash": "Hash file",
+    "tech": {
+      "format": "Format",
+      "codec": "Kodek",
+      "encoder": "Pembuat enkode",
+      "source": "Sumber"
+    }
+  },
+  "delete": {
+    "title": "Hapus file media?",
+    "descriptionBefore": "Ini akan menghapus secara permanen ",
+    "descriptionAfter": ". Audio, transkrip, ringkasan, judul, dan nama filenya akan dihapus dari server ini. Salinan di cadangan yang sudah ada tetap tersimpan sampai cadangan tersebut dihapus. Tindakan ini tidak dapat dibatalkan.",
+    "deleting": "Menghapus...",
+    "failed": "Gagal menghapus file media",
+    "success": "File media dihapus"
+  },
+  "download": {
+    "downloading": "Mengunduh...",
+    "label": "Unduh audio",
+    "success": "Audio diunduh",
+    "error": "Gagal mengunduh audio. Silakan coba lagi."
+  },
+  "detail": {
+    "audioFiles": "File audio",
+    "loading": "Memuat detail media...",
+    "notFound": "Media tidak ditemukan atau gagal dimuat.",
+    "encrypted": "Terenkripsi",
+    "scanPending": "File sedang dipindai untuk keamanan. Pemutaran akan tersedia setelah pemindaian selesai.",
+    "scanFailed": "Pemindaian keamanan file gagal dan tidak dapat diputar.",
+    "streamFailed": "Streaming audio gagal. File mungkin perlu diunggah ulang.",
+    "viewTranscription": "Lihat transkripsi",
+    "updateTitleError": "Gagal memperbarui judul",
+    "updateDescriptionError": "Gagal memperbarui deskripsi",
+    "audioDeleted": "Audio dihapus sesuai kebijakan masa simpan rekaman langsung. Transkrip dan ringkasan tetap tersedia."
+  }
+}

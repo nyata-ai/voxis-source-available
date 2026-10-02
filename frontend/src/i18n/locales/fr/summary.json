@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "Résumé général",
+    "keyPoints": "Points clés",
+    "actionItems": "Éléments d'action",
+    "questionsAnswers": "Questions et réponses"
+  },
+  "typeMeta": {
+    "general": "Général",
+    "keyPoints": "Points clés",
+    "actions": "Actes",
+    "qAndA": "Questions et réponses",
+    "fallback": "Résumé"
+  },
+  "profile": {
+    "label": "Profil",
+    "general_professional": "Professionnel général",
+    "legal": "Juridique",
+    "investment_analysis": "Analyse des investissements",
+    "journalism": "Journalisme",
+    "negotiation": "Négociation",
+    "decision_committee": "Comité de décision",
+    "investigation": "Enquête"
+  },
+  "viewer": {
+    "loading": "Chargement du résumé...",
+    "noContent": "Pas de contenu récapitulatif",
+    "evidence": "Preuve:",
+    "owner": "Propriétaire:",
+    "due": "Exigible:",
+    "questionPrefix": "Question:",
+    "answerPrefix": "Répondre:",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "Traitement...",
+    "unknownError": "Une erreur inconnue s'est produite",
+    "copied": "Copié!",
+    "copy": "Copie",
+    "showSources": "Afficher les sources",
+    "hideSources": "Masquer les sources",
+    "citations": "Citations",
+    "citation": "Citation {{id}}",
+    "citationWithSpeaker": "Citation {{id}}, {{speaker}}",
+    "citationWithTime": "Citation {{id}}, {{time}}",
+    "citationWithSpeakerTime": "Citation {{id}}, {{speaker}}, {{time}}",
+    "actionKinds": {
+      "action_item": "Action à réaliser",
+      "decision": "Décision",
+      "next_step": "Prochaine étape",
+      "open_issue": "Point ouvert"
+    },
+    "notSpecified": "Non indiqué dans la transcription.",
+    "degradationNotice": "Ce résumé a été finalisé avec une sortie de repli ou normalisée. Vérifiez-le par rapport à la transcription."
+  },
+  "briefing": {
+    "title": "Synthèse",
+    "empty": "Aucune synthèse pour cette session pour le moment.",
+    "autoStarted": "Lancée automatiquement à l'ouverture de cette session.",
+    "notGenerated": "Cette synthèse n'a pas encore été générée.",
+    "generateAll": "Tout générer",
+    "generatingAll": "Génération…",
+    "generateOne": "Générer {{type}}",
+    "generatingOne": "Génération…",
+    "error": "Impossible de générer les synthèses. Veuillez réessayer.",
+    "generateTypeError": "Impossible de générer cette synthèse. Veuillez réessayer.",
+    "aiUnavailable": "Le résumé par IA n'est pas disponible.",
+    "rateLimited": "La génération est limitée en fréquence. Patientez une minute puis réessayez.",
+    "regenerateError": "Impossible de régénérer cette synthèse. Veuillez réessayer.",
+    "regenerateTypeError": "Impossible de régénérer la synthèse « {{type}} ». Veuillez réessayer.",
+    "regenerate": "Régénérer",
+    "regenerating": "Régénération…",
+    "loadError": "Impossible de charger cette synthèse. Veuillez réessayer.",
+    "status": {
+      "notGenerated": "Non générée",
+      "processing": "Génération…",
+      "ready": "Prête",
+      "failed": "Échec"
+    },
+    "tabsLabel": "Type de synthèse",
+    "note": "Généré le {{date}} · profil {{profile}} · Noms des intervenants déduits par le modèle",
+    "noteWithoutProfile": "Généré le {{date}} · Noms des intervenants déduits par le modèle"
+  },
+  "summarize": {
+    "button": "Résumer",
+    "title": "Générer un résumé",
+    "description": "Choisissez un type de résumé à générer à partir de cette transcription.",
+    "typeLabel": "Type de résumé",
+    "alreadyExists": "Ce type de résumé existe déjà.",
+    "started": "La synthèse a commencé",
+    "failed": "Échec du démarrage du résumé. Veuillez réessayer.",
+    "generating": "Générateur...",
+    "start": "Démarrer le résumé"
+  },
+  "detail": {
+    "loading": "Chargement du résumé..."
+  }
+}

@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "Настройки",
+    "subtitle": "Управляйте настройками и предпочтениями своей учетной записи"
+  },
+  "nav": {
+    "notifications": "Уведомления",
+    "profile": "Профиль",
+    "appearance": "Появление",
+    "language": "Язык",
+    "transcription": "Транскрипция",
+    "summary": "Сводка и экспорт",
+    "playback": "Воспроизведение",
+    "apiKeys": "API Ключи",
+    "retention": "Recording Retention"
+  },
+  "profile": {
+    "title": "Профиль",
+    "description": "Информация о вашей учетной записи",
+    "name": "Имя",
+    "email": "Электронная почта",
+    "username": "Имя пользователя",
+    "ssoNote": "Вашим профилем управляет SSO. Чтобы обновить информацию, обратитесь к администратору.",
+    "updatePassword": "Обновить/изменить пароль",
+    "manageMfa": "Управление МИД",
+    "usage": {
+      "title": "Использование",
+      "description": "Потребление ресурсов вашей организации",
+      "error": "Не удалось загрузить статистику использования.",
+      "audioProcessed": "Аудио обработано",
+      "aiTokens": "Используемые токены AI",
+      "remainingToday": "Осталось сегодня: {{count}}",
+      "liveRecordingRetention": "Срок хранения живых записей (дни)",
+      "retentionDays_one": "{{count}} день",
+      "retentionDays_other": "{{count}} дней",
+      "notEnabled": "Не включено",
+      "storage": "Использование / лимит хранилища",
+      "unlimited": "Без ограничений",
+      "remaining": "Осталось: {{value}}",
+      "duration": {
+        "zero": "0 мин",
+        "lessThanMinute": "< 1 мин.",
+        "minutes": "{{count}} мин.",
+        "hours": "{{count}} час",
+        "hoursMinutes": "{{hours}} час {{minutes}} мин"
+      }
+    },
+    "securityAction": "Управление паролем и многофакторной аутентификацией"
+  },
+  "appearance": {
+    "title": "Появление",
+    "description": "Настройте внешний вид",
+    "light": "Свет",
+    "lightDescription": "Светлый фон с темным текстом",
+    "dark": "Темный",
+    "darkDescription": "Темный фон со светлым текстом",
+    "system": "Система",
+    "systemDescription": "Соответствует вашим предпочтениям ОС"
+  },
+  "transcription": {
+    "title": "Транскрипция",
+    "description": "Настройки транскрипции по умолчанию",
+    "defaultLanguage": "Язык по умолчанию для новых транскрипций",
+    "diarization": {
+      "label": "Диаризизация спикера",
+      "description": "Определите и разделите разных говорящих"
+    }
+  },
+  "summary": {
+    "title": "Сводка и экспорт",
+    "description": "Настройки сводки и экспорта по умолчанию",
+    "defaultType": "Тип сводки по умолчанию",
+    "types": {
+      "general": "Общий",
+      "keyPoints": "Ключевые моменты",
+      "actionItems": "Действия",
+      "qAndA": "Вопросы и ответы"
+    },
+    "typeDescription": "Тип сводки, создаваемой для новых транскрипций",
+    "defaultFormat": "Формат экспорта по умолчанию",
+    "formatDescription": "Формат по умолчанию при экспорте транскрипций и резюме",
+    "autoBriefings": {
+      "label": "Создавать резюме автоматически",
+      "description": "Создаёт все четыре вида резюме сразу при открытии завершённой сессии. По умолчанию выключено: резюме создаются по запросу, по одному виду за раз."
+    },
+    "highStakes": {
+      "label": "Резюме о высоких ставках",
+      "description": "Двухпроходное обобщение для юридической, нотариальной и другой работы, точность которой важна. Модель сначала извлекает из стенограммы каждое имя, дату, цифру и обязательство, а затем составляет резюме, привязанное к этим фактам. Медленнее и использует больше токенов, чем стандартный путь, но уменьшает количество пропущенных или переписанных деталей."
+    },
+    "profile": {
+      "label": "Профессиональный профиль",
+      "description": "Задает акцент для новых сводок. Не дает рекомендаций и не проверяет утверждения.",
+      "options": {
+        "general_professional": {
+          "label": "Общий профессиональный",
+          "description": "Выделяет решения, обязательства, препятствия и открытые вопросы."
+        },
+        "legal": {
+          "label": "Юридический",
+          "description": "Выделяет заявления, обязательства, спорные факты и доказательства."
+        },
+        "investment_analysis": {
+          "label": "Инвестиционный анализ",
+          "description": "Выделяет показатели, прогнозы, предположения, риски и пробелы в проверке."
+        },
+        "journalism": {
+          "label": "Журналистика",
+          "description": "Выделяет атрибуцию, утверждения, пробелы в проверке и последующие вопросы."
+        },
+        "negotiation": {
+          "label": "Переговоры",
+          "description": "Выделяет предложения, условия, уступки, согласованные и открытые вопросы."
+        },
+        "decision_committee": {
+          "label": "Комитет по решениям",
+          "description": "Выделяет вынесенные предложения, одобрения, условия, возражения и последующие шаги."
+        },
+        "investigation": {
+          "label": "Расследование",
+          "description": "Выделяет хронологию, признания, опровержения, ссылки на доказательства и противоречия."
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "Воспроизведение",
+    "description": "Настройки воспроизведения аудио",
+    "speed": "Скорость воспроизведения"
+  },
+  "apiKeys": {
+    "title": "API Ключи",
+    "description": "Управляйте ключами API для программного доступа к серверам Voxis, API и MCP.",
+    "create": "Создать ключ API",
+    "empty": "Ключей API пока нет. Создайте его для подключения внешних инструментов и сервисов.",
+    "scopesCount": "Прицелы {{count}}",
+    "lastUsed": "Последнее использование: {{value}}",
+    "never": "Никогда",
+    "expires": "Срок действия истекает: {{value}}",
+    "revoke": "Отозвать",
+    "relativeTime": {
+      "justNow": "Прямо сейчас",
+      "minutes": "{{count}}м назад",
+      "hours": "{{count}} ч назад",
+      "days": "{{count}}д назад"
+    },
+    "revokeDialog": {
+      "title": "Вы уверены?",
+      "description": "Это действие невозможно отменить. Ключ API будет окончательно отозван, и любые интеграции, использующие его, перестанут работать."
+    },
+    "createDialog": {
+      "title": "Создать новый ключ API",
+      "description": "Создайте ключ для программного доступа к серверам Voxis, API и MCP.",
+      "keyName": "Имя ключа",
+      "keyNamePlaceholder": "например Производство, Claude Рабочий стол",
+      "scopes": "Области применения",
+      "expiration": "Срок действия",
+      "expirationOptions": {
+        "30": "30 дней",
+        "60": "60 дней",
+        "90": "90 дней",
+        "none": "Нет срока годности"
+      },
+      "error": "Не удалось создать ключ API. Пожалуйста, проверьте детали и повторите попытку.",
+      "creating": "Создание...",
+      "submit": "Создавать"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "СМИ Читать",
+        "description": "Чтение медиафайлов"
+      },
+      "mediaWrite": {
+        "label": "СМИ пишут",
+        "description": "Загружать и удалять медиафайлы"
+      },
+      "transcriptionRead": {
+        "label": "Транскрипция Чтение",
+        "description": "Читать транскрипции"
+      },
+      "transcriptionWrite": {
+        "label": "Транскрипция Запись",
+        "description": "Создание транскрипций"
+      },
+      "summaryRead": {
+        "label": "Резюме Читать",
+        "description": "Читать обзоры"
+      },
+      "summaryWrite": {
+        "label": "Резюме Написать",
+        "description": "Создание резюме; также требуется чтение транскрипции"
+      },
+      "exportRead": {
+        "label": "Экспорт",
+        "description": "Экспортные документы; также требуется доступ для чтения исходного кода"
+      }
+    },
+    "created": {
+      "title": "Ключ API создан.",
+      "description": "Ваш ключ API успешно создан.",
+      "warning": "Этот ключ будет показан только один раз. Скопируйте его сейчас и сохраните в надежном месте.",
+      "snippets": "Фрагменты подключения",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Добавьте в свой рабочий стол Claude или конфигурацию Claude Code MCP:",
+        "codex": "Добавьте в конфиг OpenAI Codex MCP:",
+        "adk": "Добавьте в конфиг Google ADK MCP:",
+        "cursor": "Добавьте в конфигурацию Cursor или VS Code MCP:",
+        "rest": "Используйте ключ API с Curl или любым HTTP-клиентом:",
+        "openapi": "URL-адрес спецификации OpenAPI:",
+        "openapiNote": "Примечание. Для пользовательских GPT ChatGPT требуется проверка подлинности OAuth (этап 2). Используйте REST API с ключом API для прямого доступа."
+      },
+      "done": "Сделанный",
+      "copy": "Копировать",
+      "copied": "Скопировано!",
+      "failed": "Неуспешный",
+      "copySnippet": "Копировать фрагмент",
+      "copyApiKey": "Скопируйте ключ API"
+    }
+  },
+  "retention": {
+    "title": "Live Recording Audio Retention",
+    "description": "Automatically delete original audio files created by live recording. Transcripts and summaries remain available.",
+    "loadError": "Unable to load recording retention settings.",
+    "enabled": {
+      "label": "Auto-delete live recording audio",
+      "description": "Окончательно удаляет сохраненное аудио с этого сервера по истечении выбранного срока. Данные в уже созданных резервных копиях сохранятся, пока эти копии не будут удалены."
+    },
+    "days": {
+      "label": "Delete after",
+      "description": "Choose between 1 and 30 days after live recording completion."
+    },
+    "applyExisting": {
+      "label": "Apply to existing live recordings",
+      "description": "Also delete audio from completed live recordings that are already older than the selected period."
+    },
+    "preview": {
+      "count": "{{count}} live recordings have audio eligible for immediate deletion.",
+      "oldest": "Oldest eligible recording completed {{date}}."
+    },
+    "confirm": {
+      "label": "Confirm immediate delete count",
+      "description": "Enter {{count}} to confirm immediate permanent audio deletion."
+    },
+    "confirmationRequired": "Enter the immediate delete count before saving.",
+    "save": "Save retention policy",
+    "saving": "Saving...",
+    "saved": "Recording retention policy saved.",
+    "saveError": "Unable to save recording retention policy."
+  }
+}

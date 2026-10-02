@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "言語",
+    "hint": "自動検出は推奨される初期設定で、どのような録音にも安心して使えます。想定される言語を Voxis に伝えるために、最大 {{max}} 言語まで選択できます。最終的な文字起こしは、常に音声で実際に話されている内容に従います。",
+    "autoDetect": "自動検出 (推奨)",
+    "selectedCount": "{{selected}}/{{max}}が選択されました"
+  },
+  "expectedSpeakers": {
+    "label": "話者の人数",
+    "auto": "自動検出",
+    "hint": "録音で何人が話しているか分かっている場合のみ設定してください。話者が1人か2人の録音で、話者の区別に最も効果があります。",
+    "count_one": "話者{{count}}人",
+    "count_other": "話者{{count}}人"
+  },
+  "retranscribe": {
+    "deleteFailed": "既存の文字起こしを削除できませんでした。変更は行われませんでした。",
+    "started": "再転記が開始されました",
+    "newFailed": "古い転写は削除されましたが、新しい転写は開始できませんでした。メディアライブラリから再度転記してください。",
+    "title": "音声を再転写する",
+    "descriptionPrefix": "これにより、既存の文字起こしが削除されます。",
+    "descriptionSuffix": "以下の設定で新しいものを開始します。",
+    "diarization": "話者のダイアライゼーション",
+    "starting": "起動...",
+    "start": "再転記の開始"
+  },
+  "speakers": {
+    "title": "話者",
+    "saving": "保存",
+    "findingNames": "名前を検索中…",
+    "showLowConfidence": "信頼性の低い提案を表示する",
+    "saveFailed": "発言者名を保存できませんでした。もう一度やり直してください。",
+    "dismissFailed": "提案を却下できませんでした。",
+    "speakerLabel": "スピーカー {{index}}",
+    "evidence": "AI の提案: {{name}}。証拠: {{evidence}}。自信: {{confidence}}。",
+    "acceptLabel": "スピーカー {{index}} の提案 {{name}} を受け入れる",
+    "dismissLabel": "スピーカー {{index}} の提案を却下",
+    "showAll_one": "{{count}} 人の話者をすべて表示",
+    "showAll_other": "{{count}} 人の話者をすべて表示",
+    "showFewer": "折りたたむ"
+  },
+  "transcribe": {
+    "started": "文字起こしを開始しました",
+    "failed": "文字起こしの開始に失敗しました。もう一度試してください。",
+    "button": "転写する",
+    "title": "音声の文字起こし",
+    "description": "この音声ファイルの文字起こし設定を構成します。",
+    "diarization": "話者のダイアライゼーション",
+    "enhanceAudio": "オーディオを強化する",
+    "enhanceHint": "文字起こし前に AI ノイズ リダクションを適用します。強風、交通、機械など、音声が聞き取りにくい場合に使用します。処理時間が追加されるため、文字起こしがすでにうまく機能しているクリアな録音の場合はスキップしてください。",
+    "starting": "起動...",
+    "start": "文字起こしを開始する"
+  },
+  "viewer": {
+    "lowConfidence": "低い信頼性",
+    "confidenceTitle": "信頼度: {{percent}}%",
+    "noUtterances": "利用可能な発言はありません。",
+    "ariaLabel": "成績証明書",
+    "followLabel": "再生をフォローする",
+    "follow": "フォローする"
+  },
+  "row": {
+    "actionsLabel": "{{title}} のアクション",
+    "retranscribe": "再転写",
+    "delete": "消去"
+  },
+  "detail": {
+    "loading": "文字起こしを読み込んでいます...",
+    "notFound": "文字起こしが見つからないか、ロードできませんでした。",
+    "tryAgain": "もう一度やり直してください",
+    "titleLabel": "音声タイトル",
+    "descriptionPlaceholder": "説明を追加...",
+    "descriptionLabel": "音声解説",
+    "updateTitleFailed": "音声タイトルの更新に失敗しました",
+    "updateDescriptionFailed": "音声説明の更新に失敗しました",
+    "delete": "消去",
+    "enhanced": "強化された",
+    "processing": "文字起こしを処理しています...",
+    "streamFailed": "音声ストリームが失敗しました。更新してもう一度お試しください。"
+  },
+  "reader": {
+    "find": {
+      "label": "文字起こしを検索",
+      "placeholder": "文字起こしを検索",
+      "count": "{{total}} 件中 {{current}} 件目",
+      "none": "一致なし",
+      "next": "次の一致",
+      "prev": "前の一致",
+      "clear": "検索をクリア"
+    },
+    "back": "ライブラリに戻る",
+    "backLabel": "ライブラリに戻る",
+    "retranscribe": "再転写",
+    "sourceLabel": "ソース",
+    "library": "ライブラリ",
+    "more": "その他の操作",
+    "uploadedLine": "{{date}} にアップロード",
+    "followPlayback": "再生に追従"
+  }
+}

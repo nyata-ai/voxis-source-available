@@ -1,0 +1,23 @@
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Persistent service and model data
+data/
+models/
+backups/
+
+# Generated OpenBao recovery material and disposable CI state
+infra/oss/secrets/
+infra/oss/.oss-ci/
+infra/oss/keycloak/realm-voxis-oss.json
+
+# Generated files
+dist/
+coverage/
+/backend/coverage.out
+backend/bin/
+node_modules/

@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "Allgemeine Zusammenfassung",
+    "keyPoints": "Wichtige Punkte",
+    "actionItems": "Aufgaben",
+    "questionsAnswers": "Fragen und Antworten"
+  },
+  "typeMeta": {
+    "general": "Allgemein",
+    "keyPoints": "Wichtige Punkte",
+    "actions": "Aufgaben",
+    "qAndA": "Fragen und Antworten",
+    "fallback": "Zusammenfassung"
+  },
+  "profile": {
+    "label": "Profil",
+    "general_professional": "Allgemein professionell",
+    "legal": "Recht",
+    "investment_analysis": "Investmentanalyse",
+    "journalism": "Journalismus",
+    "negotiation": "Verhandlung",
+    "decision_committee": "Entscheidungsgremium",
+    "investigation": "Ermittlung"
+  },
+  "viewer": {
+    "loading": "Zusammenfassung wird geladen...",
+    "noContent": "Diese Zusammenfassung enthält noch keinen Inhalt.",
+    "evidence": "Beleg:",
+    "owner": "Verantwortlich:",
+    "due": "Fällig:",
+    "questionPrefix": "Frage:",
+    "answerPrefix": "Antwort:",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "In Bearbeitung…",
+    "unknownError": "Es ist ein unbekannter Fehler aufgetreten",
+    "copied": "Kopiert!",
+    "copy": "Kopieren",
+    "showSources": "Quellen anzeigen",
+    "hideSources": "Quellen ausblenden",
+    "citations": "Zitate",
+    "citation": "Zitat {{id}}",
+    "citationWithSpeaker": "Zitat {{id}}, {{speaker}}",
+    "citationWithTime": "Zitat {{id}}, {{time}}",
+    "citationWithSpeakerTime": "Zitat {{id}}, {{speaker}}, {{time}}",
+    "actionKinds": {
+      "action_item": "Aufgabe",
+      "decision": "Entscheidung",
+      "next_step": "Nächster Schritt",
+      "open_issue": "Offener Punkt"
+    },
+    "notSpecified": "Im Transkript nicht genannt.",
+    "degradationNotice": "Diese Zusammenfassung wurde mit Fallback- oder normalisierter Ausgabe abgeschlossen. Prüfen Sie sie anhand des Transkripts."
+  },
+  "briefing": {
+    "title": "Zusammenfassung",
+    "empty": "Für diese Sitzung gibt es noch keine Zusammenfassungen.",
+    "autoStarted": "Automatisch gestartet, als Sie diese Sitzung geöffnet haben.",
+    "notGenerated": "Diese Zusammenfassung wurde noch nicht erstellt.",
+    "generateAll": "Alle erstellen",
+    "generatingAll": "Wird erstellt…",
+    "generateOne": "{{type}} erstellen",
+    "generatingOne": "Wird erstellt…",
+    "error": "Zusammenfassungen konnten nicht erstellt werden. Bitte versuchen Sie es erneut.",
+    "generateTypeError": "Diese Zusammenfassung konnte nicht erstellt werden. Bitte versuchen Sie es erneut.",
+    "aiUnavailable": "Die KI-Zusammenfassung ist nicht verfügbar.",
+    "rateLimited": "Zu viele Anfragen. Warten Sie einen Moment und versuchen Sie es erneut.",
+    "regenerateError": "Diese Zusammenfassung konnte nicht neu erstellt werden. Bitte versuchen Sie es erneut.",
+    "regenerateTypeError": "Die Zusammenfassung „{{type}}“ konnte nicht neu erstellt werden. Bitte versuchen Sie es erneut.",
+    "regenerate": "Neu erstellen",
+    "regenerating": "Wird neu erstellt…",
+    "loadError": "Diese Zusammenfassung konnte nicht geladen werden. Bitte versuchen Sie es erneut.",
+    "status": {
+      "notGenerated": "Nicht erstellt",
+      "processing": "Wird erstellt…",
+      "ready": "Fertig",
+      "failed": "Fehlgeschlagen"
+    },
+    "tabsLabel": "Art der Zusammenfassung",
+    "note": "Erstellt am {{date}} · Profil {{profile}} · Sprechernamen vom Modell abgeleitet",
+    "noteWithoutProfile": "Erstellt am {{date}} · Sprechernamen vom Modell abgeleitet"
+  },
+  "summarize": {
+    "button": "Zusammenfassen",
+    "title": "Zusammenfassung erstellen",
+    "description": "Wählen Sie aus, welche Zusammenfassung aus diesem Transkript erstellt werden soll.",
+    "typeLabel": "Zusammenfassungstyp",
+    "alreadyExists": "Dieser Zusammenfassungstyp ist bereits vorhanden.",
+    "started": "Zusammenfassung gestartet",
+    "failed": "Die Zusammenfassung konnte nicht gestartet werden. Bitte versuchen Sie es erneut.",
+    "generating": "Generieren...",
+    "start": "Zusammenfassung starten"
+  },
+  "detail": {
+    "loading": "Zusammenfassung wird geladen..."
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "layout": {
+    "brand": "Voxis Source-Available",
+    "cancel": "取消"
+  },
+  "compat": {
+    "title": "不支持浏览器",
+    "message": "您的浏览器不支持录音。请使用最新版本的 Chrome、Firefox、Edge 或 Safari 18.4+。"
+  },
+  "mic": {
+    "none": "未检测到麦克风",
+    "select": "选择麦克风"
+  },
+  "micDevices": {
+    "fallbackLabel": "麦克风 {{id}}",
+    "denied": "麦克风访问被拒绝。请在您的浏览器设置中允许麦克风访问。",
+    "notFound": "找不到麦克风。请连接麦克风并重试。",
+    "error": "麦克风错误：{{message}}",
+    "failed": "无法访问麦克风设备。"
+  },
+  "recorder": {
+    "unsupported": "此浏览器不支持录制。",
+    "errorStopped": "录音错误。录音已停止。",
+    "micDenied": "麦克风访问被拒绝。",
+    "displayDenied": "屏幕或标签页共享已被取消或拒绝。请选择会议来源并启用音频共享。",
+    "startFailed": "无法开始录制。",
+    "noDisplayAudio": "未检测到共享音频。Chrome 或 Edge 的标签页音频可以稳定采集；全屏、本地应用和系统音频则取决于您的浏览器和操作系统。",
+    "audioContextSuspended": "音频采集无法启动。请再次点击“开始录音”，并保持浏览器标签页处于活动状态。",
+    "captureEndedBeforeStart": "共享的会议来源在录音开始前已停止。请重新选择并重试。"
+  },
+  "timer": {
+    "ariaLabel": "经过时间：{{display}}"
+  },
+  "waveform": {
+    "ariaLabel": "音频波形"
+  },
+  "recover": {
+    "titleSingle": "录音中断",
+    "titleMulti": "录音中断",
+    "descriptionSingle": "之前的录音被中断。您想恢复已保存的音频吗？",
+    "descriptionMulti": "您有 {{n}} 个中断的录音。请逐一恢复或丢弃每个会话。",
+    "date": "日期：",
+    "estimatedDuration": "预计持续时间：",
+    "microphone": "麦克风：",
+    "discard": "丢弃",
+    "discarding": "正在丢弃…",
+    "recover": "恢复录音",
+    "recovering": "正在恢复…"
+  },
+  "exit": {
+    "title": "录音正在进行中",
+    "description": "离开此页面会停止录音。请选择如何处理目前已录制的音频——若不选择就离开，录音会滞留在服务器上。",
+    "keep": "继续录音",
+    "stopAndSave": "停止并保存",
+    "discard": "丢弃录音"
+  },
+  "dataLoss": {
+    "savePartialTitle": "仅保存已上传的音频？",
+    "savePartialDescription": "尚未到达服务器的音频将永久丢失。录音将仅保存已上传的部分。",
+    "discardTitle": "丢弃此录音？",
+    "discardDescription": "该录音及所有已上传的片段将被永久删除。此操作无法撤销。",
+    "confirmSavePartial": "保存部分录音",
+    "confirmDiscard": "永久丢弃"
+  },
+  "meetingConsent": {
+    "title": "录制会议音频？",
+    "description": "请确保所有人已被告知，并且您有权进行录音。浏览器可能会采集您所选来源的全部音频，包括无关的人声或通知提示音。",
+    "cancel": "取消",
+    "continue": "我已获得同意——选择音频"
+  },
+  "activeTakeover": {
+    "title": "发现活动中的录音",
+    "description": "一个录音会话仍标记为活动状态。它可能仍在其他标签页或窗口中录音，也可能是已关闭或崩溃的标签页遗留下来的。",
+    "started": "开始时间：",
+    "chunksUploaded": "目前已上传 {{n}} 个片段",
+    "warning": "接管将中断该会话。如果它仍在其他地方录音，该录音会停止，并且只有已上传的音频可以恢复。",
+    "takeOver": "接管",
+    "takingOver": "正在接管…",
+    "leave": "前往媒体库"
+  },
+  "idle": {
+    "title": "准备录制",
+    "detecting": "正在检测麦克风…",
+    "start": "开始录音"
+  },
+  "status": {
+    "recording": "录音中",
+    "paused": "已暂停"
+  },
+  "controls": {
+    "pause": "暂停",
+    "resume": "继续",
+    "stop": "停止",
+    "minDurationHint": "请录制至少 {{seconds}} 秒后再停止"
+  },
+  "documentTitle": {
+    "paused": "已暂停",
+    "recording": "录音中",
+    "withApp": "{{prefix}} — Voxis"
+  },
+  "completing": {
+    "title": "正在完成录音…",
+    "uploadingRemaining": "正在上传剩余音频…（{{done}}/{{total}}）",
+    "processing": "正在处理音频…",
+    "uploadFailedTitle": "上传失败",
+    "uploadFailedBody": "剩余音频无法上传（错误 {{status}}），有 {{n}} 个片段被卡住。请重试上传，或仅使用已上传的音频继续。",
+    "retryUpload": "重试上传",
+    "saveUploaded": "保存已上传的部分",
+    "discardRecording": "丢弃录音",
+    "localWriteWarning": "部分音频无法存储在此设备上，因此这段录音的结尾可能缺失。"
+  },
+  "error": {
+    "title": "录音错误",
+    "fallback": "发生意外错误。",
+    "tryAgain": "重试"
+  },
+  "upload": {
+    "saving": "正在保存…（{{n}} 个片段尚未发送）",
+    "saved": "已保存"
+  },
+  "toast": {
+    "autoStop": "8小时后自动停止录音。",
+    "uploadInterrupted": "上传中断，录音已暂停。请检查网络连接。",
+    "micDenied": "麦克风访问被拒绝。",
+    "startSessionFailed": "无法开始录制会话。",
+    "startFailed": "无法开始录制。",
+    "completeFailed": "无法完成录制。您的音频已保存。",
+    "recovered": "录音已恢复，正在处理音频…",
+    "recoverFailed": "无法恢复录音。",
+    "discarded": "录音被丢弃。",
+    "discardFailed": "无法丢弃录音。",
+    "completeFailedStore": "无法完成录制。",
+    "captureEnded": "共享的音频来源已停止。Voxis 正在保存录音。",
+    "captureInterrupted": "{{error}} 您已保存的音频可以恢复。",
+    "captureRecoveryFailed": "录音已停止。请重新连接后再次尝试恢复已保存的音频。",
+    "chunkWriteFailed": "此设备无法存储最新的音频。为保护已录制的内容，录音已停止。",
+    "trailingAudioMissing": "部分音频无法存储在此设备上，因此这段录音的结尾可能缺失。",
+    "meetingWithoutMicrophone": "会议音频将在没有您麦克风的情况下继续录制。",
+    "meetingAudioMuted": "共享的会议音频已被静音。请检查浏览器的共享指示。",
+    "microphoneMuted": "麦克风音频已被静音。请检查您的设备。",
+    "recoveredAfterOffline": "您的连接中断了录音。已保存的音频正在处理中。",
+    "activeSessionExists": "另一个录音会话仍在进行中。请先恢复或丢弃该会话，再开始新的录音。",
+    "recoverPartialUpload": "{{n}} 个本地保存的片段无法附加。将使用服务器上已有的音频进行恢复。",
+    "releasedActiveSession": "有一个录音会话未关闭。您现在可以恢复或丢弃它。",
+    "takeOverFailed": "无法接管该录音会话。请重试。"
+  },
+  "captureSource": {
+    "label": "采集来源",
+    "microphone": "麦克风",
+    "mixed": "会议音频",
+    "mixedHelp": "Chrome 和 Edge 可以共享标签页音频。全屏、本地应用和系统音频则取决于您的浏览器和操作系统。",
+    "mixedUnsupported": "此浏览器无法打开共享选择器。请使用 Chrome 或 Edge 共享标签页音频。"
+  }
+}

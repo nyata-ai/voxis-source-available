@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "設定",
+    "subtitle": "アカウントの設定と基本設定を管理する"
+  },
+  "nav": {
+    "notifications": "通知",
+    "profile": "プロフィール",
+    "appearance": "外観",
+    "language": "言語",
+    "transcription": "転写",
+    "summary": "概要とエクスポート",
+    "playback": "再生",
+    "apiKeys": "API キー",
+    "retention": "Recording Retention"
+  },
+  "profile": {
+    "title": "プロフィール",
+    "description": "あなたのアカウント情報",
+    "name": "名前",
+    "email": "電子メール",
+    "username": "ユーザー名",
+    "ssoNote": "プロファイルは SSO によって管理されます。情報を更新するには、管理者に問い合わせてください。",
+    "updatePassword": "パスワードの更新/変更",
+    "manageMfa": "MFA の管理",
+    "usage": {
+      "title": "使用法",
+      "description": "組織のリソース消費量",
+      "error": "使用状況統計をロードできません。",
+      "audioProcessed": "音声処理済み",
+      "aiTokens": "使用されるAIトークン",
+      "remainingToday": "本日残り {{count}} 回",
+      "liveRecordingRetention": "ライブ録音の保存日数",
+      "retentionDays_one": "{{count}} 日",
+      "retentionDays_other": "{{count}} 日",
+      "notEnabled": "無効",
+      "storage": "ストレージ使用量 / 上限",
+      "unlimited": "無制限",
+      "remaining": "残り：{{value}}",
+      "duration": {
+        "zero": "0分",
+        "lessThanMinute": "1分未満",
+        "minutes": "{{count}}分",
+        "hours": "{{count}} 時間",
+        "hoursMinutes": "{{hours}}時間 {{minutes}}分"
+      }
+    },
+    "securityAction": "パスワードと多要素認証を管理"
+  },
+  "appearance": {
+    "title": "外観",
+    "description": "外観と操作感をカスタマイズする",
+    "light": "ライト",
+    "lightDescription": "明るい背景に暗い文字",
+    "dark": "暗い",
+    "darkDescription": "暗い背景に明るいテキスト",
+    "system": "システム",
+    "systemDescription": "OSの設定に従います"
+  },
+  "transcription": {
+    "title": "転写",
+    "description": "デフォルトの文字起こし設定",
+    "defaultLanguage": "新しい文字起こしのデフォルト言語",
+    "diarization": {
+      "label": "スピーカーのダイアライゼーション",
+      "description": "さまざまな話者を識別して区別する"
+    }
+  },
+  "summary": {
+    "title": "概要とエクスポート",
+    "description": "デフォルトのサマリーおよびエクスポート設定",
+    "defaultType": "デフォルトの要約タイプ",
+    "types": {
+      "general": "一般的な",
+      "keyPoints": "重要なポイント",
+      "actionItems": "アクションアイテム",
+      "qAndA": "質問と回答"
+    },
+    "typeDescription": "新しい文字起こしに対して生成される概要のタイプ",
+    "defaultFormat": "デフォルトのエクスポート形式",
+    "formatDescription": "文字起こしと要約をエクスポートするときのデフォルトの形式",
+    "autoBriefings": {
+      "label": "要約を自動生成",
+      "description": "完了したセッションを開いたときに 4 種類の要約をすべて生成します。既定ではオフで、要約は必要なときに 1 種類ずつ生成されます。"
+    },
+    "highStakes": {
+      "label": "一か八かの概要",
+      "description": "法律、公証、その他の正確性が重要な業務のための 2 パス要約。モデルはまずトランスクリプトからすべての名前、日付、数字、コミットメントを抽出し、次にそれらの事実に基づいた要約を書き込みます。標準パスよりも遅く、より多くのトークンを使用しますが、詳細の欠落や書き換えが減少します。"
+    },
+    "profile": {
+      "label": "専門プロファイル",
+      "description": "新しい要約の重点を設定します。助言や主張の検証は行いません。",
+      "options": {
+        "general_professional": {
+          "label": "一般プロフェッショナル",
+          "description": "意思決定、コミットメント、障害、未解決の質問を重視します。"
+        },
+        "legal": {
+          "label": "法務",
+          "description": "主張、義務、争われている事実、証拠を重視します。"
+        },
+        "investment_analysis": {
+          "label": "投資分析",
+          "description": "数値、予測、前提、リスク、デューデリジェンスの不足を重視します。"
+        },
+        "journalism": {
+          "label": "ジャーナリズム",
+          "description": "帰属、主張、検証の不足、追加取材の質問を重視します。"
+        },
+        "negotiation": {
+          "label": "交渉",
+          "description": "提案と対案、条件、譲歩、合意事項と未決事項を重視します。"
+        },
+        "decision_committee": {
+          "label": "意思決定委員会",
+          "description": "議案、承認・否決、前提条件、異議、フォローアップを重視します。"
+        },
+        "investigation": {
+          "label": "調査",
+          "description": "時系列、自認と否認、証拠への言及、供述の矛盾を重視します。"
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "再生",
+    "description": "オーディオ再生の設定",
+    "speed": "再生速度"
+  },
+  "apiKeys": {
+    "title": "API キー",
+    "description": "Voxis API および MCP サーバーにプログラムでアクセスするための API キーを管理します。",
+    "create": "APIキーの作成",
+    "empty": "API キーはまだありません。外部ツールやサービスを接続するために作成します。",
+    "scopesCount": "{{count}} スコープ",
+    "lastUsed": "最後に使用したもの: {{value}}",
+    "never": "一度もない",
+    "expires": "有効期限: {{value}}",
+    "revoke": "取り消す",
+    "relativeTime": {
+      "justNow": "ちょうど今",
+      "minutes": "{{count}}分前",
+      "hours": "{{count}}時間前",
+      "days": "{{count}}d前"
+    },
+    "revokeDialog": {
+      "title": "本気ですか？",
+      "description": "この操作は元に戻すことができません。 API キーは永久に取り消され、それを使用する統合は機能しなくなります。"
+    },
+    "createDialog": {
+      "title": "新しい API キーの作成",
+      "description": "Voxis API および MCP サーバーにプログラムでアクセスするためのキーを作成します。",
+      "keyName": "キー名",
+      "keyNamePlaceholder": "例えばプロダクション、Claude デスクトップ",
+      "scopes": "スコープ",
+      "expiration": "有効期限",
+      "expirationOptions": {
+        "30": "30日",
+        "60": "60日",
+        "90": "90日",
+        "none": "有効期限なし"
+      },
+      "error": "API キーを作成できませんでした。詳細を確認して、もう一度お試しください。",
+      "creating": "作成...",
+      "submit": "作成する"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "メディア読み取り",
+        "description": "メディアファイルの読み取り"
+      },
+      "mediaWrite": {
+        "label": "メディア書き込み",
+        "description": "メディアのアップロードと削除"
+      },
+      "transcriptionRead": {
+        "label": "文字起こしの読み取り",
+        "description": "文字起こしを読む"
+      },
+      "transcriptionWrite": {
+        "label": "文字起こし書き込み",
+        "description": "文字起こしを作成する"
+      },
+      "summaryRead": {
+        "label": "概要を読む",
+        "description": "概要を読む"
+      },
+      "summaryWrite": {
+        "label": "サマリーライト",
+        "description": "概要を作成します。転写読み取りも必要です"
+      },
+      "exportRead": {
+        "label": "輸出",
+        "description": "文書をエクスポートします。ソース読み取りアクセスも必要です"
+      }
+    },
+    "created": {
+      "title": "API キーが作成されました",
+      "description": "API キーが正常に作成されました。",
+      "warning": "このキーは 1 回だけ表示されます。今すぐコピーして安全に保管してください。",
+      "snippets": "接続スニペット",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Claude デスクトップまたは Claude コード MCP 構成に追加します。",
+        "codex": "OpenAI Codex MCP 構成に追加します。",
+        "adk": "Google ADK MCP 構成に追加します。",
+        "cursor": "Cursor または VS Code MCP 構成に追加します。",
+        "rest": "API キーをcurlまたは任意のHTTPクライアントで使用します。",
+        "openapi": "OpenAPI 仕様 URL:",
+        "openapiNote": "注: ChatGPT カスタム GPT には OAuth 認証 (フェーズ 2) が必要です。直接アクセスするには、REST API と API キーを使用します。"
+      },
+      "done": "終わり",
+      "copy": "コピー",
+      "copied": "コピーしました！",
+      "failed": "失敗した",
+      "copySnippet": "スニペットをコピー",
+      "copyApiKey": "APIキーをコピー"
+    }
+  },
+  "retention": {
+    "title": "Live Recording Audio Retention",
+    "description": "Automatically delete original audio files created by live recording. Transcripts and summaries remain available.",
+    "loadError": "Unable to load recording retention settings.",
+    "enabled": {
+      "label": "Auto-delete live recording audio",
+      "description": "選択した保存期間が過ぎると、保存された音声をこのサーバーから完全に削除します。既存のバックアップ内のコピーは、そのバックアップが削除されるまで残ります。"
+    },
+    "days": {
+      "label": "Delete after",
+      "description": "Choose between 1 and 30 days after live recording completion."
+    },
+    "applyExisting": {
+      "label": "Apply to existing live recordings",
+      "description": "Also delete audio from completed live recordings that are already older than the selected period."
+    },
+    "preview": {
+      "count": "{{count}} live recordings have audio eligible for immediate deletion.",
+      "oldest": "Oldest eligible recording completed {{date}}."
+    },
+    "confirm": {
+      "label": "Confirm immediate delete count",
+      "description": "Enter {{count}} to confirm immediate permanent audio deletion."
+    },
+    "confirmationRequired": "Enter the immediate delete count before saving.",
+    "save": "Save retention policy",
+    "saving": "Saving...",
+    "saved": "Recording retention policy saved.",
+    "saveError": "Unable to save recording retention policy."
+  }
+}

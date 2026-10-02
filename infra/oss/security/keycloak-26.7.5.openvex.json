@@ -1,0 +1,28 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/nyata-ai/voxis-source-available/blob/main/infra/oss/security/keycloak-26.7.5.openvex.json",
+  "author": "Voxis Source-Available maintainers",
+  "timestamp": "2026-10-02T00:00:00Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2025-59250"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/keycloak@sha256%3A6529db34610ce6328824218dce3bbe55c4ba4757bc5c8a09b5a4c746e28b6e9d?arch=amd64&repository_url=quay.io%2Fkeycloak%2Fkeycloak",
+          "subcomponents": [
+            {
+              "@id": "pkg:maven/com.microsoft.sqlserver/mssql-jdbc@13.2.1"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Review this statement when the locked Keycloak distribution or runtime inputs change.",
+      "impact_statement": "The reviewed Keycloak runtime contains mssql-jdbc-13.2.1.jre11.jar, the fixed build. Trivy normalizes its package version to 13.2.1."
+    }
+  ]
+}

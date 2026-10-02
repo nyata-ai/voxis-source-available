@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "close": "Schließen",
+    "retry": "Erneut versuchen"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Seite nicht gefunden"
+  },
+  "placeholder": {
+    "defaultDescription": "Diese Funktion ist bald verfügbar. Schauen Sie später noch einmal vorbei!",
+    "body": "Wir arbeiten hart daran, Ihnen diese Funktion bereitzustellen."
+  },
+  "export": {
+    "downloaded": "Export heruntergeladen",
+    "failed": "Exportieren fehlgeschlagen. Bitte versuchen Sie es erneut.",
+    "bapError": "Erstellen Sie zuerst das Briefing „Fragen und Antworten“, oder erzeugen Sie es neu, falls sich Sprechernamen geändert haben.",
+    "panelTitle": "Export",
+    "pillLabel": "{{row}} als {{format}}",
+    "briefingUnavailable": "Erstellen Sie diese Zusammenfassung zuerst, um sie zu exportieren.",
+    "rows": {
+      "transcript": "Transkript",
+      "briefing": "Zusammenfassung · {{lens}}",
+      "bap": "Vernehmungsprotokoll-Entwurf",
+      "audio": "Originalaudio"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "Sprache",
+    "description": "Wählen Sie die Sprache der Voxis-Oberfläche.",
+    "saveFailed": "Ihre Sprachauswahl konnte nicht gespeichert werden. Sie wird bei Ihrem nächsten Besuch möglicherweise zurückgesetzt."
+  },
+  "languageGroups": {
+    "english": "Englisch",
+    "asia": "Asien",
+    "europe": "Europa",
+    "middleEastAfrica": "Naher Osten und Afrika"
+  },
+  "languageNames": {
+    "auto": "Automatisch",
+    "autoDetect": "Automatische Erkennung",
+    "en": "Englisch",
+    "id": "Indonesisch",
+    "jv": "Javanisch",
+    "su": "Sundanesisch",
+    "ms": "Malaiisch",
+    "tl": "Tagalog",
+    "th": "Thailändisch",
+    "vi": "Vietnamesisch",
+    "zh": "Chinesisch",
+    "ja": "Japanisch",
+    "ko": "Koreanisch",
+    "fr": "Französisch",
+    "de": "Deutsch",
+    "it": "Italienisch",
+    "pl": "Polnisch",
+    "pt": "Portugiesisch",
+    "ru": "Russisch",
+    "es": "Spanisch",
+    "sv": "Schwedisch",
+    "da": "Dänisch",
+    "no": "Norwegisch",
+    "fi": "Finnisch",
+    "la": "Lateinisch",
+    "ar": "Arabisch",
+    "he": "Hebräisch",
+    "af": "Afrikaans"
+  },
+  "errorBoundary": {
+    "title": "Etwas ist schief gelaufen",
+    "description": "Es ist ein unerwarteter Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "details": "Fehlerdetails (nur Entwickler)"
+  },
+  "activity": {
+    "title": "Aktivität",
+    "count": "{{count}} in Bearbeitung",
+    "more": "+{{count}} weitere",
+    "ready": "Bereit",
+    "view": "Ansehen",
+    "dismiss": "Verwerfen",
+    "recordingTitle": "Live-Aufnahme",
+    "inMotion": {
+      "title": "In Bearbeitung"
+    },
+    "stage": {
+      "stitching": "Aufnahme wird verarbeitet…",
+      "transcribing": "Transkription läuft…",
+      "summarizing": "Zusammenfassungen werden erstellt… {{terminal}} von {{total}}",
+      "ready": "Bereit"
+    },
+    "failed": {
+      "recording": "Aufnahme konnte nicht verarbeitet werden",
+      "transcription": "Transkription fehlgeschlagen"
+    },
+    "toast": {
+      "recordingReady": "Aufnahme bereit",
+      "transcriptionReady": "Transkript bereit"
+    }
+  },
+  "status": {
+    "pending": "Ausstehend",
+    "encrypting": "Wird verschlüsselt",
+    "ready": "Bereit",
+    "failed": "Fehlgeschlagen",
+    "deleted": "Gelöscht",
+    "submitted": "Übermittelt",
+    "processing": "In Bearbeitung",
+    "completed": "Abgeschlossen",
+    "scanPending": "Sicherheitsprüfung läuft",
+    "scanInfected": "Bedrohung erkannt",
+    "scanError": "Sicherheitsprüfung fehlgeschlagen",
+    "scanClean": "Prüfung bestanden"
+  },
+  "session": {
+    "source": {
+      "audio": "Audio"
+    },
+    "speaker_one": "{{count}} Sprecher",
+    "speaker_other": "{{count}} Sprecher",
+    "words": "{{n}} Wörter",
+    "lens_one": "{{count}} Zusammenfassung",
+    "lens_other": "{{count}} Zusammenfassungen",
+    "languages": "Sprachen: {{codes}}",
+    "untitled": "Unbenannte Sitzung"
+  }
+}

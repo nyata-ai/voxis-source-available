@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "Prêt",
+    "processing": "Traitement",
+    "failed": "Échoué",
+    "openFile": "Ouvrir le fichier",
+    "openAnyway": "Traitement - ouvert quand même",
+    "openFailed": "Ouvrir le fichier · échoué"
+  },
+  "upload": {
+    "dropzone": "Glissez et déposez les fichiers audio ici",
+    "browse": "ou parcourir",
+    "browseFiles": "Parcourir les fichiers",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "Max 1 Go par fichier",
+    "queueLabel": "File d'attente de téléchargement",
+    "rejectedTitle": "Fichiers rejetés",
+    "rejectedLabel": "Fichiers rejetés",
+    "uploading": "Téléchargement de {{name}}",
+    "processing": "Traitement sur le serveur...",
+    "complete": "Téléchargement terminé",
+    "viewFile": "Voir le fichier",
+    "viewFileNamed": "Voir le fichier : {{name}}",
+    "remove": "Supprimer {{name}}",
+    "errors": {
+      "failed": "Échec du téléchargement"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "Type de fichier non pris en charge",
+      "tooLarge": "Le fichier dépasse la taille maximale de 1 Go",
+      "storageQuota": "Ce fichier dépasse le quota de stockage restant"
+    }
+  },
+  "storageQuota": {
+    "warning": "Le stockage est presque plein : {{used}} sur {{limit}} utilisés, {{remaining}} restants.",
+    "full": "La limite de stockage est atteinte. Les envois et enregistrements sont bloqués. Libérez de l'espace audio dans votre bibliothèque.",
+    "manageLibrary": "Gérer le stockage dans la bibliothèque",
+    "admin": {
+      "enabled": "Appliquer le quota de stockage",
+      "enabledDescription": "Lorsqu'il est désactivé, les utilisateurs ont un stockage illimité.",
+      "limit": "Limite par défaut (GiB)",
+      "limitDescription": "Saisissez une valeur positive en GiB. Les décimales sont acceptées. La valeur par défaut est 2 GiB.",
+      "limitError": "Saisissez une limite de stockage positive.",
+      "backend": "Backend de stockage",
+      "warningThreshold": "Seuil d'avertissement",
+      "inactive": "Inactif : les quotas ne sont pas appliqués avec le stockage {{backend}}.",
+      "save": "Enregistrer le quota de stockage",
+      "saving": "Enregistrement...",
+      "saved": "Quota de stockage enregistré.",
+      "saveError": "Impossible d'enregistrer le quota de stockage.",
+      "loadError": "Impossible de charger les paramètres de quota de stockage."
+    }
+  },
+  "pagination": {
+    "showing": "Affichage de {{from}} – {{to}} de {{total}}",
+    "previous": "Page précédente",
+    "next": "Page suivante"
+  },
+  "player": {
+    "pause": "Pause",
+    "play": "Jouer",
+    "position": "Position de lecture",
+    "unmute": "Activer le son",
+    "mute": "Muet",
+    "speed": "Vitesse de lecture",
+    "speedValue": "{{speed}}x",
+    "skipBack": "Reculer de {{seconds}} secondes",
+    "skipForward": "Avancer de {{seconds}} secondes",
+    "dock": "Lecteur audio",
+    "backToTranscript": "Retour à la transcription",
+    "speedPill": "Vitesse {{speed}}x"
+  },
+  "inlineEdit": {
+    "clickToEdit": "Cliquez pour modifier"
+  },
+  "analysis": {
+    "trust": {
+      "high": "Confiance élevée",
+      "medium": "Confiance moyenne",
+      "low": "Faible confiance",
+      "unknown": "Inconnu"
+    },
+    "title": "Intégrité audio",
+    "checksPassed": "Contrôles {{passed}} sur {{total}} réussis",
+    "recorded": "Enregistré",
+    "integrityDetails": "Détails d'intégrité",
+    "technicalDetails": "Détails techniques",
+    "fileHash": "Hachage de fichier",
+    "tech": {
+      "format": "Format",
+      "codec": "Codec",
+      "encoder": "Encodeur",
+      "source": "Source"
+    }
+  },
+  "delete": {
+    "title": "Supprimer le fichier multimédia?",
+    "descriptionBefore": "Cela supprimera définitivement ",
+    "descriptionAfter": ". Son audio, ses transcriptions, ses résumés, son titre et son nom de fichier seront supprimés de ce serveur. Les copies présentes dans les sauvegardes existantes sont conservées jusqu'à la suppression de ces sauvegardes. Cette action ne peut pas être annulée.",
+    "deleting": "Suppression...",
+    "failed": "Échec de la suppression du fichier multimédia",
+    "success": "Fichier multimédia supprimé"
+  },
+  "download": {
+    "downloading": "Téléchargement...",
+    "label": "Télécharger l'audio",
+    "success": "Audio téléchargé",
+    "error": "Échec du téléchargement de l'audio. Veuillez réessayer."
+  },
+  "detail": {
+    "audioFiles": "Fichiers audio",
+    "loading": "Chargement des détails du média...",
+    "notFound": "Média introuvable ou échec de chargement.",
+    "encrypted": "Crypté",
+    "scanPending": "Le fichier est en cours d'analyse pour des raisons de sécurité. La lecture sera disponible une fois l’analyse terminée.",
+    "scanFailed": "L'analyse de sécurité du fichier a échoué et ne peut pas être lu.",
+    "streamFailed": "Le flux audio a échoué. Le fichier devra peut-être être re-téléchargé.",
+    "viewTranscription": "Voir la transcription",
+    "updateTitleError": "Échec de la mise à jour du titre",
+    "updateDescriptionError": "Échec de la mise à jour de la description",
+    "audioDeleted": "Audio deleted by live recording retention policy. Transcript and summaries remain available."
+  }
+}

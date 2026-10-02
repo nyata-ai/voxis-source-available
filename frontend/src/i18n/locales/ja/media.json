@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "準備ができて",
+    "processing": "処理",
+    "failed": "失敗した",
+    "openFile": "ファイルを開く",
+    "openAnyway": "処理中 — とにかく開く",
+    "openFailed": "ファイルを開く · 失敗しました"
+  },
+  "upload": {
+    "dropzone": "ここに音声ファイルをドラッグ＆ドロップします",
+    "browse": "または閲覧する",
+    "browseFiles": "ファイルを参照する",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "1ファイルあたり最大1GB",
+    "queueLabel": "アップロードキュー",
+    "rejectedTitle": "拒否されたファイル",
+    "rejectedLabel": "拒否されたファイル",
+    "uploading": "{{name}}をアップロード中",
+    "processing": "サーバー上で処理中...",
+    "complete": "アップロード完了",
+    "viewFile": "ファイルを表示",
+    "viewFileNamed": "ファイルを表示: {{name}}",
+    "remove": "{{name}}を削除",
+    "errors": {
+      "failed": "アップロードに失敗しました"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "サポートされていないファイル形式です",
+      "tooLarge": "ファイルが最大サイズの 1 GB を超えています",
+      "storageQuota": "このファイルは残りのストレージ容量を超えています"
+    }
+  },
+  "storageQuota": {
+    "warning": "ストレージの空きが少なくなっています：{{used}} / {{limit}} を使用済み、残り {{remaining}}。",
+    "full": "ストレージの上限に達しました。アップロードと録音はブロックされています。ライブラリで音声ストレージを空けてください。",
+    "manageLibrary": "ライブラリでストレージを管理",
+    "admin": {
+      "enabled": "ストレージ割り当てを適用",
+      "enabledDescription": "オフにすると、ユーザーのストレージは無制限になります。",
+      "limit": "既定の上限 (GiB)",
+      "limitDescription": "正の GiB 値を入力してください。小数も使用できます。既定値は 2 GiB です。",
+      "limitError": "正のストレージ上限を入力してください。",
+      "backend": "ストレージバックエンド",
+      "warningThreshold": "警告しきい値",
+      "inactive": "無効：{{backend}} ストレージでは割り当ては適用されません。",
+      "save": "ストレージ割り当てを保存",
+      "saving": "保存中...",
+      "saved": "ストレージ割り当てを保存しました。",
+      "saveError": "ストレージ割り当てを保存できませんでした。",
+      "loadError": "ストレージ割り当て設定を読み込めませんでした。"
+    }
+  },
+  "pagination": {
+    "showing": "{{total}} の {{from}} ～ {{to}} を表示",
+    "previous": "前のページへ",
+    "next": "次のページ"
+  },
+  "player": {
+    "pause": "一時停止",
+    "play": "遊ぶ",
+    "position": "再生位置",
+    "unmute": "ミュートを解除する",
+    "mute": "ミュート",
+    "speed": "再生速度",
+    "speedValue": "{{speed}}倍",
+    "skipBack": "{{seconds}} 秒戻る",
+    "skipForward": "{{seconds}} 秒進む",
+    "dock": "オーディオプレーヤー",
+    "backToTranscript": "文字起こしに戻る",
+    "speedPill": "{{speed}}倍速"
+  },
+  "inlineEdit": {
+    "clickToEdit": "クリックして編集"
+  },
+  "analysis": {
+    "trust": {
+      "high": "高い信頼性",
+      "medium": "中程度の信頼",
+      "low": "低い信頼性",
+      "unknown": "未知"
+    },
+    "title": "オーディオの完全性",
+    "checksPassed": "{{total}} チェックのうち {{passed}} チェックに合格しました",
+    "recorded": "録音済み",
+    "integrityDetails": "整合性の詳細",
+    "technicalDetails": "技術的な詳細",
+    "fileHash": "ファイルハッシュ",
+    "tech": {
+      "format": "形式",
+      "codec": "コーデック",
+      "encoder": "エンコーダ",
+      "source": "ソース"
+    }
+  },
+  "delete": {
+    "title": "メディアファイルを削除しますか?",
+    "descriptionBefore": "次のファイルを完全に削除します：",
+    "descriptionAfter": "。音声、文字起こし、要約、タイトル、ファイル名がこのサーバーから削除されます。既存のバックアップ内のコピーは、そのバックアップが削除されるまで残ります。この操作は元に戻せません。",
+    "deleting": "削除中...",
+    "failed": "メディアファイルを削除できませんでした",
+    "success": "メディアファイルを削除しました"
+  },
+  "download": {
+    "downloading": "ダウンロード中...",
+    "label": "音声をダウンロードする",
+    "success": "ダウンロードされた音声",
+    "error": "音声のダウンロードに失敗しました。もう一度試してください。"
+  },
+  "detail": {
+    "audioFiles": "音声ファイル",
+    "loading": "メディアの詳細を読み込んでいます...",
+    "notFound": "メディアが見つからないか、ロードに失敗しました。",
+    "encrypted": "暗号化された",
+    "scanPending": "ファイルはセキュリティのためにスキャン中です。スキャンが完了すると、再生が可能になります。",
+    "scanFailed": "ファイルはセキュリティ スキャンに失敗したため、再生できません。",
+    "streamFailed": "音声ストリームが失敗しました。ファイルを再アップロードする必要がある場合があります。",
+    "viewTranscription": "文字起こしを見る",
+    "updateTitleError": "タイトルの更新に失敗しました",
+    "updateDescriptionError": "説明の更新に失敗しました",
+    "audioDeleted": "Audio deleted by live recording retention policy. Transcript and summaries remain available."
+  }
+}

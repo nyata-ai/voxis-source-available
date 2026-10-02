@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "就绪",
+    "processing": "处理中",
+    "failed": "失败",
+    "openFile": "打开文件",
+    "openAnyway": "仍要打开",
+    "openFailed": "无法打开文件"
+  },
+  "upload": {
+    "dropzone": "将音频文件拖放到此处",
+    "browse": "或选择文件",
+    "browseFiles": "选择文件",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "每个文件最大 1 GB",
+    "queueLabel": "上传队列",
+    "rejectedTitle": "无法上传的文件",
+    "rejectedLabel": "无法上传的文件",
+    "uploading": "正在上传 {{name}}",
+    "processing": "服务器处理中…",
+    "complete": "上传完成",
+    "viewFile": "查看文件",
+    "viewFileNamed": "查看文件：{{name}}",
+    "remove": "删除{{name}}",
+    "errors": {
+      "failed": "上传失败"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "不支持的文件类型",
+      "tooLarge": "文件超过 1 GB 大小上限",
+      "storageQuota": "此文件超出剩余存储配额"
+    }
+  },
+  "storageQuota": {
+    "warning": "存储空间即将用满：已使用 {{used}} / {{limit}}，剩余 {{remaining}}。",
+    "full": "存储空间已用尽，暂时无法上传或录音。请在媒体库中删除不再需要的音频。",
+    "manageLibrary": "前往媒体库管理存储空间",
+    "admin": {
+      "enabled": "强制执行存储配额",
+      "enabledDescription": "关闭后，用户可使用无限存储空间。",
+      "limit": "默认上限 (GiB)",
+      "limitDescription": "请输入任意正 GiB 值，支持小数。默认值为 2 GiB。",
+      "limitError": "请输入正数存储上限。",
+      "backend": "存储后端",
+      "warningThreshold": "警告阈值",
+      "inactive": "未启用：使用 {{backend}} 存储时不执行配额。",
+      "save": "保存存储配额",
+      "saving": "正在保存…",
+      "saved": "存储配额已保存。",
+      "saveError": "无法保存存储配额。",
+      "loadError": "无法加载存储配额设置。"
+    }
+  },
+  "pagination": {
+    "showing": "显示第 {{from}}–{{to}} 项，共 {{total}} 项",
+    "previous": "上一页",
+    "next": "下一页"
+  },
+  "player": {
+    "pause": "暂停",
+    "play": "播放",
+    "position": "播放位置",
+    "unmute": "取消静音",
+    "mute": "静音",
+    "speed": "播放速度",
+    "speedValue": "{{speed}}倍",
+    "skipBack": "后退 {{seconds}} 秒",
+    "skipForward": "前进 {{seconds}} 秒",
+    "dock": "音频播放器",
+    "backToTranscript": "返回转写稿",
+    "speedPill": "{{speed}} 倍速"
+  },
+  "inlineEdit": {
+    "clickToEdit": "点击编辑"
+  },
+  "analysis": {
+    "trust": {
+      "high": "高置信度",
+      "medium": "中等置信度",
+      "low": "低置信度",
+      "unknown": "未知"
+    },
+    "title": "音频完整性",
+    "checksPassed": "已通过 {{passed}}/{{total}} 项检查",
+    "recorded": "已录制",
+    "integrityDetails": "完整性详情",
+    "technicalDetails": "技术细节",
+    "fileHash": "文件哈希值",
+    "tech": {
+      "format": "格式",
+      "codec": "编解码器",
+      "encoder": "编码器",
+      "source": "来源"
+    }
+  },
+  "delete": {
+    "title": "删除媒体文件？",
+    "descriptionBefore": "这将永久删除",
+    "descriptionAfter": "。其音频、转写文本、摘要、标题和文件名将从此服务器中删除。现有备份中的副本会保留，直到这些备份被删除。此操作无法撤消。",
+    "deleting": "正在删除…",
+    "failed": "删除媒体文件失败",
+    "success": "媒体文件已删除"
+  },
+  "download": {
+    "downloading": "正在下载…",
+    "label": "下载音频",
+    "success": "音频已下载",
+    "error": "无法下载音频，请重试。"
+  },
+  "detail": {
+    "audioFiles": "音频文件",
+    "loading": "正在加载媒体详情…",
+    "notFound": "未找到媒体或加载失败。",
+    "encrypted": "加密",
+    "scanPending": "正在扫描文件以确保安全。扫描完成后即可播放。",
+    "scanFailed": "文件安全扫描失败，无法播放。",
+    "streamFailed": "音频流失败。该文件可能需要重新上传。",
+    "viewTranscription": "查看转写稿",
+    "updateTitleError": "更新标题失败",
+    "updateDescriptionError": "无法更新描述",
+    "audioDeleted": "音频已按实时录音保留策略删除。转写稿和摘要仍可查看。"
+  }
+}

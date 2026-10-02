@@ -1,0 +1,354 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/nyata-ai/voxis-source-available/blob/main/infra/oss/security/llama-5266f24.openvex.json",
+  "author": "Voxis Source-Available maintainers",
+  "timestamp": "2026-09-20T00:00:00Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2025-69720"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libtinfo6@6.5%2B20250216-2?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/ncurses-base@6.5%2B20250216-2?arch=all&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/ncurses-bin@6.5%2B20250216-2?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The affected path is the infocmp terminal-inspection command. The derived image starts only llama-server, and its private text-model HTTP service has no command-execution route."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-12064"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/curl@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libcurl4t64@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires the curl command with a schemeless URL and --proto-default set to sftp or scp. The only retained curl command has a fixed HTTPS model URL and no such option; the running server has no model-download argument."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-16742"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libsystemd0@257.13-1~deb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libudev1@257.13-1~deb13u1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The affected systemd-homed daemon is absent from the derived image."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-54369"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/libacl1@2.3.2-2%2Bb1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory affects pathname-based libacl functions. llama-server does not link libacl, and the private text-model service has no command-execution route."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-76642"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/bsdutils@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/login@4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires a mount(8) helper and post-mount hooks. The model service starts llama-server as an unprivileged user and does not expose command execution."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-78408"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/bsdutils@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/login@4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires local nsenter or unshare use. The private text-model service does not expose command execution."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-78409"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/bsdutils@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/login@4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires an unprivileged fstab X-mount.subdir flow. The private text-model service does not expose command execution."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-78410"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/bsdutils@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/login@4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&epoch=1"
+            },
+            {
+              "@id": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires restricted SUID mount(8) source-path processing. The private text-model service does not expose command execution."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-8286"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/curl@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libcurl4t64@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires cleartext IMAP, POP3, SMTP, FTP, or LDAP transfers that upgrade with STARTTLS. The retained model bootstrap uses one fixed HTTPS transfer, and the running server has no model-download argument."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-8458"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/curl@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libcurl4t64@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires Negotiate service settings and a reused libcurl connection. The retained model bootstrap has no Negotiate configuration, and the running server has no model-download argument."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-8927"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/curl@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            },
+            {
+              "@id": "pkg:deb/debian/libcurl4t64@8.14.1-2%2Bdeb13u5?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires sequential libcurl transfers through environment-selected proxies with Digest proxy authentication. The reviewed container has no proxy environment, and the retained model bootstrap has no proxy or Digest option."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-9538"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-llama@sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743?arch=amd64&repository_url=index.docker.io%2Flibrary%2Fvoxis-oss-llama",
+          "subcomponents": [
+            {
+              "@id": "pkg:deb/debian/perl-base@5.40.1-6%2Bdeb13u1?arch=amd64&distro=debian-13.7"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
+      "impact_statement": "The advisory requires Archive::Tar to parse an attacker-controlled tar header. The derived image starts llama-server and neither its model bootstrap nor text-model HTTP contract accepts tar input or invokes Perl."
+    }
+  ]
+}

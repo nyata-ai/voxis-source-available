@@ -1,0 +1,25 @@
+{
+  "codes": {
+    "bad_request": "La demande n'a pas pu être traitée. Veuillez vérifier les détails et réessayer.",
+    "validation_error": "Certains détails nécessitent une attention particulière. Veuillez vérifier le formulaire et réessayer.",
+    "invalid_input": "Certains détails nécessitent une attention particulière. Veuillez vérifier le formulaire et réessayer.",
+    "not_found": "Nous n'avons pas pu trouver cet article.",
+    "forbidden": "Vous n'avez pas accès à cet élément.",
+    "unauthorized": "Votre session a expiré. Veuillez vous reconnecter.",
+    "conflict": "Une opération conflictuelle est déjà en cours. Veuillez réessayer.",
+    "internal_error": "Quelque chose s'est mal passé de notre côté. Veuillez réessayer.",
+    "service_unavailable": "Ce service est temporairement indisponible. Veuillez réessayer plus tard.",
+    "storage_quota_exceeded": "Le quota de stockage est atteint. Libérez de l'espace audio dans la bibliothèque avant de réessayer.",
+    "rate_limited": "Trop de demandes. Veuillez patienter un moment et réessayer.",
+    "scan_pending": "Ce fichier est toujours en cours d'analyse pour des raisons de sécurité. Veuillez réessayer sous peu.",
+    "scan_failed": "Ce fichier a échoué à l'analyse de sécurité et ne peut pas être utilisé.",
+    "recent_auth_required": "Veuillez confirmer à nouveau votre identité avant de continuer.",
+    "state_invalid": "Cet élément n'est pas encore prêt pour cette action.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion et réessayer.",
+    "timeout": "La demande a pris trop de temps. Veuillez réessayer.",
+    "role_required": "Votre compte n'a pas encore accès. Demandez à votre administrateur de vous l'accorder.",
+    "upload_limit": "Trop d'envois sont en cours. Veuillez réessayer lorsque l'un d'eux sera terminé.",
+    "media_too_long": "Cet enregistrement dépasse la durée autorisée par ce serveur. Divisez-le en parties plus courtes et réessayez.",
+    "model_busy": "Le modèle d'IA est occupé. Veuillez réessayer dans un instant."
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "Language",
+    "hint": "Auto-detect is the recommended default and safe for any recording. You can select up to {{max}} languages to tell Voxis what to expect — the final transcript always follows what is actually heard in the audio.",
+    "autoDetect": "Auto-detect (recommended)",
+    "selectedCount": "{{selected}}/{{max}} selected"
+  },
+  "expectedSpeakers": {
+    "label": "Number of speakers",
+    "auto": "Auto detect",
+    "hint": "Only set this if you know how many people speak in the recording. It helps speaker separation most for recordings with one or two speakers.",
+    "count_one": "{{count}} speaker",
+    "count_other": "{{count}} speakers"
+  },
+  "retranscribe": {
+    "deleteFailed": "Failed to delete existing transcription. No changes were made.",
+    "started": "Retranscription started",
+    "newFailed": "Old transcription was removed but new one failed to start. Please transcribe again from the media library.",
+    "title": "Retranscribe Audio",
+    "descriptionPrefix": "This will delete the existing transcription for",
+    "descriptionSuffix": "and start a new one with the settings below.",
+    "diarization": "Speaker diarization",
+    "starting": "Starting...",
+    "start": "Start Retranscription"
+  },
+  "speakers": {
+    "title": "Speakers",
+    "saving": "Saving",
+    "findingNames": "Finding names…",
+    "showLowConfidence": "Show low-confidence suggestions",
+    "saveFailed": "Couldn't save speaker name. Try again.",
+    "dismissFailed": "Couldn't dismiss suggestion.",
+    "speakerLabel": "Speaker {{index}}",
+    "evidence": "AI suggestion: {{name}}. Evidence: {{evidence}}. Confidence: {{confidence}}.",
+    "acceptLabel": "Accept suggestion {{name}} for speaker {{index}}",
+    "dismissLabel": "Dismiss suggestion for speaker {{index}}",
+    "showAll_one": "Show all {{count}} speaker",
+    "showAll_other": "Show all {{count}} speakers",
+    "showFewer": "Show fewer"
+  },
+  "transcribe": {
+    "started": "Transcription started",
+    "failed": "Failed to start transcription. Please try again.",
+    "button": "Transcribe",
+    "title": "Transcribe Audio",
+    "description": "Configure transcription settings for this audio file.",
+    "diarization": "Speaker diarization",
+    "enhanceAudio": "Enhance audio",
+    "enhanceHint": "Applies AI noise reduction before transcription. Use when speech is hard to hear — heavy wind, traffic, machinery. Adds processing time, so skip for clear recordings where transcription already works well.",
+    "starting": "Starting...",
+    "start": "Start Transcription"
+  },
+  "viewer": {
+    "lowConfidence": "Low confidence",
+    "confidenceTitle": "Confidence: {{percent}}%",
+    "noUtterances": "No utterances available.",
+    "ariaLabel": "Transcript",
+    "followLabel": "Follow playback",
+    "follow": "Follow"
+  },
+  "row": {
+    "actionsLabel": "Actions for {{title}}",
+    "retranscribe": "Retranscribe",
+    "delete": "Delete"
+  },
+  "detail": {
+    "loading": "Loading transcription...",
+    "notFound": "Transcription not found or failed to load.",
+    "tryAgain": "Try again",
+    "titleLabel": "Audio title",
+    "descriptionPlaceholder": "Add a description...",
+    "descriptionLabel": "Audio description",
+    "updateTitleFailed": "Failed to update audio title",
+    "updateDescriptionFailed": "Failed to update audio description",
+    "delete": "Delete",
+    "enhanced": "Enhanced",
+    "processing": "Processing transcription...",
+    "streamFailed": "Audio stream failed. Please refresh and try again."
+  },
+  "reader": {
+    "find": {
+      "label": "Find in transcript",
+      "placeholder": "Find in transcript",
+      "count": "{{current}} of {{total}}",
+      "none": "No matches",
+      "next": "Next match",
+      "prev": "Previous match",
+      "clear": "Clear search"
+    },
+    "back": "Back to library",
+    "backLabel": "Back to library",
+    "retranscribe": "Retranscribe",
+    "sourceLabel": "Source",
+    "library": "Library",
+    "more": "More actions",
+    "uploadedLine": "Uploaded {{date}}",
+    "followPlayback": "Follow playback"
+  }
+}

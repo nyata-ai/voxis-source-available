@@ -1,0 +1,83 @@
+# CI-only HTTP variant of Caddyfile: the same routes and headers without TLS.
+{
+	admin off
+}
+
+http://:8081 {
+	@not_host not remote_ip 172.30.0.1
+	respond @not_host 403
+	reverse_proxy keycloak:8080
+	header {
+		defer
+		-Server
+		-Via
+	}
+}
+
+http://:8099 {
+	bind 127.0.0.1
+	respond 200
+}
+
+:80 {
+	header {
+		defer
+		-Server
+		-Via
+		?X-Content-Type-Options nosniff
+	}
+
+	# Only the application realm's endpoints and the login theme's static
+	# resources are public. The admin console, the admin API, and the master
+	# realm are not.
+	#
+	# Path tricks are refused before the allowlist: a semicolon, "..", or an
+	# encoded dot, slash, semicolon, or backslash. Caddy matches the allowlist
+	# on a decoded, cleaned path, but Keycloak receives the raw one and may read
+	# these differently (for example /auth/realms/<realm>/..;/master/). The
+	# regexp sees the escaped request URI, where a raw backslash appears as
+	# %5C; `^[^?]*` limits it to the path, so encoded query values still pass.
+	handle /auth* {
+		@keycloak_path_tricks vars_regexp {http.request.uri} `(?i)^[^?]*(;|[.][.]|%2e|%2f|%3b|%5c)`
+		handle @keycloak_path_tricks {
+			respond 404
+		}
+		@keycloak_public path /auth/realms/{$OSS_KEYCLOAK_REALM}/* /auth/resources/*
+		handle @keycloak_public {
+			reverse_proxy keycloak:8080
+		}
+		handle {
+			respond 404
+		}
+	}
+
+	handle /api/* {
+		reverse_proxy api:8080
+	}
+
+	handle /health {
+		reverse_proxy api:8080
+	}
+
+	handle /ready {
+		reverse_proxy api:8080
+	}
+
+	handle /mcp* {
+		reverse_proxy api:8080
+	}
+
+	handle /.well-known/* {
+		reverse_proxy api:8080
+	}
+
+	handle {
+		header {
+			Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self' blob:; connect-src 'self'; font-src 'self'; frame-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+			Permissions-Policy "camera=(), geolocation=(), microphone=(self), payment=(), usb=()"
+			Referrer-Policy strict-origin-when-cross-origin
+			X-Frame-Options DENY
+		}
+		reverse_proxy web:8080
+	}
+}

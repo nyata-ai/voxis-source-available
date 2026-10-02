@@ -1,0 +1,104 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/nyata-ai/voxis-source-available/blob/main/infra/oss/security/openbao-2.6.3.openvex.json",
+  "author": "Voxis Source-Available maintainers",
+  "timestamp": "2026-09-24T00:00:00Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2024-8185"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/openbao@sha256%3Aa60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889?arch=amd64&repository_url=quay.io%2Fopenbao%2Fopenbao",
+          "subcomponents": [
+            {
+              "@id": "pkg:golang/github.com/openbao/openbao@v0.0.0-20260923163753-63a65e6b9075"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Trivy represents the 2.6.3 release commit 63a65e6b9075 as a pseudo-version. Review when the locked image or runtime Dockerfile changes.",
+      "impact_statement": "OpenBao 2.6.3 is newer than the vendor-fixed 2.0.3 release for this advisory."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2024-9180"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/openbao@sha256%3Aa60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889?arch=amd64&repository_url=quay.io%2Fopenbao%2Fopenbao",
+          "subcomponents": [
+            {
+              "@id": "pkg:golang/github.com/openbao/openbao@v0.0.0-20260923163753-63a65e6b9075"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Trivy represents the 2.6.3 release commit 63a65e6b9075 as a pseudo-version. Review when the locked image or runtime Dockerfile changes.",
+      "impact_statement": "OpenBao 2.6.3 is newer than the vendor-fixed 2.0.3 release for this advisory."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-59043"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/openbao@sha256%3Aa60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889?arch=amd64&repository_url=quay.io%2Fopenbao%2Fopenbao",
+          "subcomponents": [
+            {
+              "@id": "pkg:golang/github.com/openbao/openbao@v0.0.0-20260923163753-63a65e6b9075"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Trivy represents the 2.6.3 release commit 63a65e6b9075 as a pseudo-version. Review when the locked image or runtime Dockerfile changes.",
+      "impact_statement": "OpenBao 2.6.3 is newer than the vendor-fixed 2.4.1 release for this advisory."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2025-64761"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/openbao@sha256%3Aa60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889?arch=amd64&repository_url=quay.io%2Fopenbao%2Fopenbao",
+          "subcomponents": [
+            {
+              "@id": "pkg:golang/github.com/openbao/openbao@v0.0.0-20260923163753-63a65e6b9075"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Trivy represents the 2.6.3 release commit 63a65e6b9075 as a pseudo-version. Review when the locked image or runtime Dockerfile changes.",
+      "impact_statement": "OpenBao 2.6.3 is newer than the vendor-fixed 2.4.4 release for this advisory."
+    },
+    {
+      "vulnerability": {
+        "name": "CVE-2026-45808"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/openbao@sha256%3Aa60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889?arch=amd64&repository_url=quay.io%2Fopenbao%2Fopenbao",
+          "subcomponents": [
+            {
+              "@id": "pkg:golang/github.com/openbao/openbao@v0.0.0-20260923163753-63a65e6b9075"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_present",
+      "status_notes": "Trivy represents the 2.6.3 release commit 63a65e6b9075 as a pseudo-version. Review when the locked image or runtime Dockerfile changes.",
+      "impact_statement": "OpenBao 2.6.3 is newer than the vendor-fixed 2.5.4 release for this advisory."
+    }
+  ]
+}

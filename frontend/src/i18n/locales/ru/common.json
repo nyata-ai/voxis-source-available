@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "Сохранять",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "close": "Закрывать",
+    "retry": "Попробуйте еще раз"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "Страница не найдена"
+  },
+  "placeholder": {
+    "defaultDescription": "Эта функция скоро появится. Зайдите позже!",
+    "body": "Мы прилагаем все усилия, чтобы предоставить вам эту функцию."
+  },
+  "export": {
+    "downloaded": "Экспортировать скачанное",
+    "failed": "Не удалось экспортировать. Пожалуйста, попробуйте еще раз.",
+    "bapError": "Сначала создайте сводку «Вопросы и ответы», либо создайте её заново, если имена говорящих изменились.",
+    "panelTitle": "Экспорт",
+    "pillLabel": "{{row}} в формате {{format}}",
+    "briefingUnavailable": "Сначала создайте это резюме, чтобы экспортировать его.",
+    "rows": {
+      "transcript": "Расшифровка",
+      "briefing": "Резюме · {{lens}}",
+      "bap": "Черновик протокола допроса",
+      "audio": "Исходное аудио"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "Язык",
+    "description": "Выберите язык интерфейса Voxis.",
+    "saveFailed": "Не удалось сохранить выбранный язык. При следующем входе он может вернуться к прежнему."
+  },
+  "languageGroups": {
+    "english": "Английский",
+    "asia": "Азия",
+    "europe": "Европа",
+    "middleEastAfrica": "Ближний Восток и Африка"
+  },
+  "languageNames": {
+    "auto": "Авто",
+    "autoDetect": "Автообнаружение",
+    "en": "Английский",
+    "id": "индонезийский",
+    "jv": "яванский",
+    "su": "суданский",
+    "ms": "малайский",
+    "tl": "Тагальский",
+    "th": "тайский",
+    "vi": "вьетнамский",
+    "zh": "китайский",
+    "ja": "японский",
+    "ko": "корейский",
+    "fr": "Французский",
+    "de": "немецкий",
+    "it": "итальянский",
+    "pl": "Польский",
+    "pt": "португальский",
+    "ru": "Русский",
+    "es": "испанский",
+    "sv": "Шведский",
+    "da": "датский",
+    "no": "норвежский",
+    "fi": "финский",
+    "la": "латинский",
+    "ar": "арабский",
+    "he": "иврит",
+    "af": "африкаанс"
+  },
+  "errorBoundary": {
+    "title": "Что-то пошло не так",
+    "description": "Произошла непредвиденная ошибка. Пожалуйста, попробуйте еще раз.",
+    "details": "Подробности об ошибке (только для разработчиков)"
+  },
+  "activity": {
+    "title": "Activity",
+    "count": "{{count}} processing",
+    "more": "+{{count}} more",
+    "ready": "Ready",
+    "view": "View",
+    "dismiss": "Dismiss",
+    "recordingTitle": "Live recording",
+    "inMotion": {
+      "title": "В обработке"
+    },
+    "stage": {
+      "stitching": "Processing recording…",
+      "transcribing": "Transcribing…",
+      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "ready": "Ready"
+    },
+    "failed": {
+      "recording": "Recording couldn't be processed",
+      "transcription": "Transcription failed"
+    },
+    "toast": {
+      "recordingReady": "Recording ready",
+      "transcriptionReady": "Transcript ready"
+    }
+  },
+  "status": {
+    "pending": "Ожидание",
+    "encrypting": "Шифрование",
+    "ready": "Готово",
+    "failed": "Ошибка",
+    "deleted": "Удалено",
+    "submitted": "Отправлено",
+    "processing": "Обработка",
+    "completed": "Завершено",
+    "scanPending": "Сканирование ожидает",
+    "scanInfected": "Заражено",
+    "scanError": "Ошибка сканирования",
+    "scanClean": "Чисто"
+  },
+  "session": {
+    "source": {
+      "audio": "Аудио"
+    },
+    "speaker_one": "{{count}} говорящий",
+    "speaker_other": "{{count}} говорящих",
+    "words": "{{n}} слов",
+    "lens_one": "{{count}} линза",
+    "lens_other": "{{count}} линз",
+    "languages": "Языки: {{codes}}",
+    "untitled": "Сессия без названия"
+  }
+}

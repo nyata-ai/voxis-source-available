@@ -1,0 +1,123 @@
+{
+  "status": {
+    "ready": "준비가 된",
+    "processing": "처리",
+    "failed": "실패한",
+    "openFile": "파일 열기",
+    "openAnyway": "처리 중 - 어쨌든 열려 있음",
+    "openFailed": "파일 열기 · 실패"
+  },
+  "upload": {
+    "dropzone": "여기에 오디오 파일을 드래그 앤 드롭하세요.",
+    "browse": "또는 찾아보기",
+    "browseFiles": "파일 찾아보기",
+    "formats": "MP3, WAV, OGG, FLAC, M4A, WebM, AAC, Opus",
+    "maxSize": "파일당 최대 1GB",
+    "queueLabel": "업로드 대기열",
+    "rejectedTitle": "거부된 파일",
+    "rejectedLabel": "거부된 파일",
+    "uploading": "{{name}} 업로드 중",
+    "processing": "서버에서 처리 중...",
+    "complete": "업로드 완료",
+    "viewFile": "파일 보기",
+    "viewFileNamed": "파일 보기: {{name}}",
+    "remove": "{{name}} 제거",
+    "errors": {
+      "failed": "업로드 실패"
+    },
+    "rejectionReasons": {
+      "unsupportedType": "지원되지 않는 파일 형식",
+      "tooLarge": "파일이 최대 크기인 1GB를 초과합니다.",
+      "storageQuota": "이 파일은 남은 저장소 할당량을 초과합니다"
+    }
+  },
+  "storageQuota": {
+    "warning": "저장 공간이 거의 찼습니다: {{used}} / {{limit}} 사용, {{remaining}} 남음.",
+    "full": "저장소 한도에 도달했습니다. 업로드와 녹음이 차단되었습니다. 라이브러리에서 오디오 저장 공간을 비우세요.",
+    "manageLibrary": "라이브러리에서 저장소 관리",
+    "admin": {
+      "enabled": "저장소 할당량 적용",
+      "enabledDescription": "끄면 사용자는 무제한 저장소를 사용할 수 있습니다.",
+      "limit": "기본 한도 (GiB)",
+      "limitDescription": "양수 GiB 값을 입력하세요. 소수도 지원됩니다. 기본값은 2 GiB입니다.",
+      "limitError": "양수 저장소 한도를 입력하세요.",
+      "backend": "저장소 백엔드",
+      "warningThreshold": "경고 임계값",
+      "inactive": "비활성: {{backend}} 저장소에서는 할당량이 적용되지 않습니다.",
+      "save": "저장소 할당량 저장",
+      "saving": "저장 중...",
+      "saved": "저장소 할당량이 저장되었습니다.",
+      "saveError": "저장소 할당량을 저장할 수 없습니다.",
+      "loadError": "저장소 할당량 설정을 불러올 수 없습니다."
+    }
+  },
+  "pagination": {
+    "showing": "{{total}}의 {{from}}–{{to}} 표시",
+    "previous": "이전 페이지",
+    "next": "다음 페이지"
+  },
+  "player": {
+    "pause": "정지시키다",
+    "play": "놀다",
+    "position": "재생 위치",
+    "unmute": "음소거 해제",
+    "mute": "무음",
+    "speed": "재생 속도",
+    "speedValue": "{{speed}}배",
+    "skipBack": "{{seconds}}초 뒤로",
+    "skipForward": "{{seconds}}초 앞으로",
+    "dock": "오디오 플레이어",
+    "backToTranscript": "전사로 돌아가기",
+    "speedPill": "{{speed}}배속"
+  },
+  "inlineEdit": {
+    "clickToEdit": "편집하려면 클릭하세요"
+  },
+  "analysis": {
+    "trust": {
+      "high": "높은 신뢰도",
+      "medium": "중간 신뢰",
+      "low": "낮은 신뢰도",
+      "unknown": "알려지지 않은"
+    },
+    "title": "오디오 무결성",
+    "checksPassed": "{{total}} 중 {{passed}} 검사가 통과되었습니다.",
+    "recorded": "녹음됨",
+    "integrityDetails": "무결성 세부정보",
+    "technicalDetails": "기술적인 세부사항",
+    "fileHash": "파일 해시",
+    "tech": {
+      "format": "체재",
+      "codec": "코덱",
+      "encoder": "인코더",
+      "source": "원천"
+    }
+  },
+  "delete": {
+    "title": "미디어 파일을 삭제하시겠습니까?",
+    "descriptionBefore": "다음 파일을 영구적으로 삭제합니다: ",
+    "descriptionAfter": ". 오디오, 전사본, 요약, 제목, 파일 이름이 이 서버에서 삭제됩니다. 기존 백업에 있는 사본은 해당 백업이 삭제될 때까지 남아 있습니다. 이 작업은 취소할 수 없습니다.",
+    "deleting": "삭제 중...",
+    "failed": "미디어 파일을 삭제하지 못했습니다",
+    "success": "미디어 파일이 삭제되었습니다"
+  },
+  "download": {
+    "downloading": "다운로드 중...",
+    "label": "오디오 다운로드",
+    "success": "오디오 다운로드됨",
+    "error": "오디오를 다운로드하지 못했습니다. 다시 시도해 주세요."
+  },
+  "detail": {
+    "audioFiles": "오디오 파일",
+    "loading": "미디어 세부정보 로드 중...",
+    "notFound": "미디어를 찾을 수 없거나 로드하지 못했습니다.",
+    "encrypted": "암호화됨",
+    "scanPending": "보안을 위해 파일을 검사하는 중입니다. 스캔이 완료되면 재생할 수 있습니다.",
+    "scanFailed": "파일이 보안 검사에 실패하여 재생할 수 없습니다.",
+    "streamFailed": "오디오 스트림에 실패했습니다. 파일을 다시 업로드해야 할 수도 있습니다.",
+    "viewTranscription": "전사 보기",
+    "updateTitleError": "제목을 업데이트하지 못했습니다.",
+    "updateDescriptionError": "설명을 업데이트하지 못했습니다.",
+    "audioDeleted": "Audio deleted by live recording retention policy. Transcript and summaries remain available."
+  }
+}

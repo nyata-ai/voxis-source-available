@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "保存",
+    "cancel": "取消",
+    "delete": "删除",
+    "close": "关闭",
+    "retry": "重试"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "找不到页面"
+  },
+  "placeholder": {
+    "defaultDescription": "此功能即将推出。请稍后再回来查看！",
+    "body": "我们正在努力为您提供此功能。"
+  },
+  "export": {
+    "downloaded": "导出已下载",
+    "failed": "导出失败，请重试。",
+    "bapError": "请先生成“问答”简报；如果发言人姓名已更改，请重新生成。",
+    "panelTitle": "导出",
+    "pillLabel": "将{{row}}导出为 {{format}}",
+    "briefingUnavailable": "请先生成该摘要，然后才能导出。",
+    "rows": {
+      "transcript": "转写稿",
+      "briefing": "摘要 · {{lens}}",
+      "bap": "讯问笔录草稿",
+      "audio": "原始音频"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "语言",
+    "description": "选择 Voxis 界面的语言",
+    "saveFailed": "语言选择未能保存，下次访问时可能会恢复原样。"
+  },
+  "languageGroups": {
+    "english": "英语",
+    "asia": "亚洲",
+    "europe": "欧洲",
+    "middleEastAfrica": "中东和非洲"
+  },
+  "languageNames": {
+    "auto": "自动",
+    "autoDetect": "自动检测",
+    "en": "英语",
+    "id": "印度尼西亚语",
+    "jv": "爪哇语",
+    "su": "巽他语",
+    "ms": "马来语",
+    "tl": "他加禄语",
+    "th": "泰语",
+    "vi": "越南语",
+    "zh": "中文",
+    "ja": "日语",
+    "ko": "韩语",
+    "fr": "法语",
+    "de": "德语",
+    "it": "意大利语",
+    "pl": "波兰语",
+    "pt": "葡萄牙语",
+    "ru": "俄语",
+    "es": "西班牙语",
+    "sv": "瑞典语",
+    "da": "丹麦语",
+    "no": "挪威语",
+    "fi": "芬兰语",
+    "la": "拉丁语",
+    "ar": "阿拉伯语",
+    "he": "希伯来语",
+    "af": "南非荷兰语"
+  },
+  "errorBoundary": {
+    "title": "出了点问题",
+    "description": "发生意外错误，请重试。",
+    "details": "错误详细信息（仅限开发）"
+  },
+  "activity": {
+    "title": "活动",
+    "count": "{{count}} 个处理中",
+    "more": "还有 {{count}} 项",
+    "ready": "就绪",
+    "view": "查看",
+    "dismiss": "忽略",
+    "recordingTitle": "实时录音",
+    "inMotion": {
+      "title": "处理中"
+    },
+    "stage": {
+      "stitching": "正在处理录音…",
+      "transcribing": "正在转写…",
+      "summarizing": "正在总结…{{terminal}}/{{total}}",
+      "ready": "就绪"
+    },
+    "failed": {
+      "recording": "录音处理失败",
+      "transcription": "转写失败"
+    },
+    "toast": {
+      "recordingReady": "录音已就绪",
+      "transcriptionReady": "转写稿已就绪"
+    }
+  },
+  "status": {
+    "pending": "待处理",
+    "encrypting": "加密中",
+    "ready": "就绪",
+    "failed": "失败",
+    "deleted": "已删除",
+    "submitted": "已提交",
+    "processing": "处理中",
+    "completed": "已完成",
+    "scanPending": "安全检查中",
+    "scanInfected": "检测到威胁",
+    "scanError": "安全检查失败",
+    "scanClean": "检查通过"
+  },
+  "session": {
+    "source": {
+      "audio": "音频"
+    },
+    "speaker_one": "{{count}} 位发言人",
+    "speaker_other": "{{count}} 位发言人",
+    "words": "{{n}} 字",
+    "lens_one": "{{count}} 份摘要",
+    "lens_other": "{{count}} 份摘要",
+    "languages": "语言：{{codes}}",
+    "untitled": "未命名会话"
+  }
+}

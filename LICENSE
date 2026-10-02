@@ -1,0 +1,119 @@
+# Voxis Source-Available License 1.0
+
+Copyright (c) 2026 PT. Karya Nyata Teknologi (Nyata.AI)
+
+Voxis Source-Available is source-available software. This license is not an open-source license approved by the Open Source Initiative. It lets you read, run, and change the Software for the purposes listed in Section 3. Other uses need a separate commercial license.
+
+## 1. Definitions
+
+In this license:
+
+- **"Licensor"** means PT. Karya Nyata Teknologi (Nyata.AI).
+- **"Software"** means the original Voxis code, documentation, and other material that Licensor distributes under this license as Voxis Source-Available, whether unmodified or modified by anyone.
+- **"You"** means the individual or organization exercising a permission under this license.
+- **"Personal Noncommercial Use"** means use by an individual for their own personal purposes, such as study, personal notes, hobby projects, or family matters. It does not include use for a business, for an employer, for a client, or for financial gain.
+- **"Educational Institution"** means a school, college, university, academy, training institute, or other organization whose primary activity is education or instruction. It includes public and private institutions, nonprofit and for-profit institutions, and institutions established or run by a Government Body.
+- **"Nonprofit Organization"** means an organization that is not a Government Body, that pursues a charitable, community, social, cultural, humanitarian, or similar purpose, and that does not distribute profits to its members, founders, directors, or owners. It includes foundations, associations, and charities, and unincorporated community, charitable, or social groups that operate on the same basis.
+- **"Religious Institution"** means a church, mosque, temple, synagogue, or other religious congregation, order, or body that is not a Government Body.
+- **"Exempt Institution"** means an Educational Institution, a Nonprofit Organization, or a Religious Institution.
+- **"Government Body"** means a national, regional, or local government; a ministry, department, agency, court, legislature, or other public authority; and any entity that one of them controls and that carries out a public function.
+- **"Own Ordinary Operations"** means the activities an institution carries out for itself to pursue its mission and run its own affairs, such as teaching, research, worship, community service, administration, and fundraising, whether funded by tuition, fees, grants, or donations. It does not include providing the Software, or a transcription or hosting service built on it, to third parties as a commercial offering. An institution's own staff, students, members, and volunteers are not third parties when they use the Software for the institution's Own Ordinary Operations.
+- **"Commercial Use"** means any use of the Software:
+  1. in the operations of a business, other than an Educational Institution;
+  2. to perform work for clients or customers for a fee or other commercial benefit;
+  3. to sell, resell, or distribute the Software, or a service built on it, for a fee or as part of a paid offering; or
+  4. to offer the Software as a hosted service to third parties as a commercial offering or for a fee.
+
+## 2. Scope
+
+This license covers only the Software. It does not grant rights in third-party software, model weights, container images, fonts, services, trademarks, or other material that carries its own terms. Section 7 explains this further.
+
+If a notice in a file of the Software conflicts with this license, this license governs the permissions that Licensor grants in that file. This does not change any third-party notice or third-party terms.
+
+## 3. Permissions
+
+Subject to the conditions of this license, Licensor grants the following worldwide, non-exclusive, royalty-free permissions. Each permission applies only for the purpose it states.
+
+### 3.1 Personal noncommercial use
+
+An individual may use, copy, and modify the Software for Personal Noncommercial Use.
+
+### 3.2 Exempt Institutions
+
+An Exempt Institution may use, copy, and modify the Software for its Own Ordinary Operations.
+
+### 3.3 Service providers acting for an exempt user
+
+A contractor, service provider, or volunteer may install, configure, operate, maintain, and modify the Software on behalf of an Exempt Institution, or of an individual who qualifies under Section 3.1. It may do so only for that institution's Own Ordinary Operations or that individual's Personal Noncommercial Use.
+
+The provider may charge for its own labour and services. The provider may not:
+
+1. use an installation for its own operations, or for anyone other than the Exempt Institution or individual that installation serves;
+2. charge a fee for the Software itself, or resell it; or
+3. run the Software on infrastructure the provider controls as a hosting offering to more than one customer.
+
+A provider may operate separate installations for several Exempt Institutions or individuals only if each installation is dedicated to one of them and runs on infrastructure that the institution or individual controls or has contracted for in its own name.
+
+### 3.4 Evaluation
+
+Any individual or organization may inspect, build, install in a non-production environment, test, and modify the Software to:
+
+1. evaluate its security;
+2. evaluate whether to obtain or use it, including under a commercial license; or
+3. prepare a contribution offered to Licensor.
+
+This includes individuals, freelancers, businesses, Government Bodies, and auditors acting for any of them. This permission does not cover production use, meaning use of the Software to carry out an organization's actual work. It also does not cover client work, resale, or a hosted service.
+
+### 3.5 No activation
+
+This license does not require activation, usage reporting, or usage metering.
+
+## 4. Redistribution
+
+This section applies to every permission in Section 3. If you hold a permission under Section 3, you may give copies of the Software, modified or unmodified, to others, but only if:
+
+1. you distribute it under this license only, and include a complete copy of this license;
+2. you keep all copyright, license, and third-party notices;
+3. you mark each file that you changed materially, and state in general terms what you changed;
+4. you do not sell the Software or include it in a paid offering, unless a commercial license from Licensor allows it; and
+5. you do not add terms that limit the permissions this license gives a recipient.
+
+Charging for installation, support, or other services under Section 3.3 is not a sale of the Software under item 4.
+
+Each recipient receives permissions directly from Licensor under this license. A recipient's permissions depend on that recipient's own situation under Section 3. Redistribution does not give a recipient more permissions than it qualifies for, and must not give it fewer.
+
+## 5. Commercial license required
+
+Any use of the Software that Section 3 does not permit needs a separate written commercial license from Licensor. This includes:
+
+1. Commercial Use;
+2. operational use by a Government Body, except by a Government Body that is an Educational Institution; and
+3. use by a contractor, service provider, or volunteer beyond what Section 3.3 permits.
+
+This section does not restrict a use that Section 3 permits. For a commercial license, contact [oss@nyata.ai](mailto:oss@nyata.ai).
+
+## 6. Notices, trademarks, and endorsement
+
+You must keep copyright, license, and attribution notices in every copy of the Software.
+
+You may not state or imply that Licensor, Nyata.AI, Speechmatics, Google, or another third party endorses a modified version without its written permission. This license grants no right to use the names Voxis, Nyata, or Nyata.AI, or any related logo, except to identify truthfully that the Software comes from Licensor. You may not present a modified version as an official Voxis Source-Available release.
+
+## 7. Third-party material
+
+Model weights, container images, dependencies, fonts, and external services remain subject to their own terms. This license does not include Speechmatics service access, rights to redistribute model weights, hardware, storage, hosting, electricity, or any third-party subscription.
+
+## 8. Disclaimer and limitation of liability
+
+The Software is provided "as is" and without warranty of any kind, whether express, implied, statutory, or otherwise, including warranties of merchantability, fitness for a particular purpose, title, and non-infringement. To the fullest extent permitted by law, Licensor and the contributors to the Software are not liable for any claim, loss, or damage arising from the Software or its use.
+
+## 9. Termination
+
+The permissions in this license end automatically if you materially breach its conditions and do not cure that breach within 30 days after receiving written notice from Licensor. Sections 1, 7, 8, and 10 survive termination.
+
+## 10. Governing law
+
+If You are an individual resident in the Republic of Indonesia, or an organization established or domiciled in the Republic of Indonesia, this license and any dispute arising from it are governed by the laws of the Republic of Indonesia.
+
+In every other case, this license and any dispute arising from it are governed by the laws of England and Wales.
+
+In either case, conflict-of-laws rules that would apply the law of another jurisdiction do not apply.

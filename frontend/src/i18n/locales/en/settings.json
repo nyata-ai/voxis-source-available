@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "Settings",
+    "subtitle": "Manage your account settings and preferences"
+  },
+  "nav": {
+    "notifications": "Notifications",
+    "profile": "Profile",
+    "appearance": "Appearance",
+    "language": "Language",
+    "transcription": "Transcription",
+    "summary": "Summary & Export",
+    "playback": "Playback",
+    "apiKeys": "API Keys",
+    "retention": "Recording Retention"
+  },
+  "profile": {
+    "title": "Profile",
+    "description": "Your account information",
+    "name": "Name",
+    "email": "Email",
+    "username": "Username",
+    "ssoNote": "Your profile is managed by SSO. To update your information, contact your administrator.",
+    "updatePassword": "Update/Change Password",
+    "manageMfa": "Manage MFA",
+    "usage": {
+      "title": "Usage",
+      "description": "Your organization's resource consumption",
+      "error": "Unable to load usage statistics.",
+      "audioProcessed": "Audio Processed",
+      "aiTokens": "AI Tokens Used",
+      "remainingToday": "{{count}} remaining today",
+      "liveRecordingRetention": "Live Recording Retention Days",
+      "retentionDays_one": "{{count}} day",
+      "retentionDays_other": "{{count}} days",
+      "notEnabled": "Not enabled",
+      "storage": "Storage Usage / Limit",
+      "unlimited": "Unlimited",
+      "remaining": "Remaining: {{value}}",
+      "duration": {
+        "zero": "0 min",
+        "lessThanMinute": "< 1 min",
+        "minutes": "{{count}} min",
+        "hours": "{{count}} hr",
+        "hoursMinutes": "{{hours}} hr {{minutes}} min"
+      }
+    },
+    "securityAction": "Manage password and MFA"
+  },
+  "appearance": {
+    "title": "Appearance",
+    "description": "Customize the look and feel",
+    "light": "Light",
+    "lightDescription": "Light background with dark text",
+    "dark": "Dark",
+    "darkDescription": "Dark background with light text",
+    "system": "System",
+    "systemDescription": "Follows your OS preference"
+  },
+  "transcription": {
+    "title": "Transcription",
+    "description": "Default transcription settings",
+    "defaultLanguage": "Default language for new transcriptions",
+    "diarization": {
+      "label": "Speaker Diarization",
+      "description": "Identify and separate different speakers"
+    }
+  },
+  "summary": {
+    "title": "Summary & Export",
+    "description": "Default summary and export settings",
+    "defaultType": "Default Summary Type",
+    "types": {
+      "general": "General",
+      "keyPoints": "Key Points",
+      "actionItems": "Action Items",
+      "qAndA": "Questions & Answers"
+    },
+    "typeDescription": "Type of summary generated for new transcriptions",
+    "defaultFormat": "Default Export Format",
+    "formatDescription": "Default format when exporting transcriptions and summaries",
+    "autoBriefings": {
+      "label": "Auto-generate briefings",
+      "description": "Generate all four briefing types as soon as you open a finished session. Off by default: briefings are generated when you ask for them, one type at a time."
+    },
+    "highStakes": {
+      "label": "High-stakes summaries",
+      "description": "Two-pass summarization for legal, notarial, and other accuracy-critical work. The model first extracts every name, date, figure, and commitment from the transcript, then writes the summary anchored to those facts. Slower and uses more tokens than the standard path, but reduces missed or rewritten details."
+    },
+    "profile": {
+      "label": "Professional Profile",
+      "description": "Sets the emphasis for new summaries. It does not give advice or verify claims.",
+      "options": {
+        "general_professional": {
+          "label": "General Professional",
+          "description": "Emphasizes decisions, commitments, blockers, and open questions."
+        },
+        "legal": {
+          "label": "Legal",
+          "description": "Emphasizes claims, obligations, disputed facts, and evidence."
+        },
+        "investment_analysis": {
+          "label": "Investment Analysis",
+          "description": "Emphasizes figures, forecasts, assumptions, risks, and diligence gaps."
+        },
+        "journalism": {
+          "label": "Journalism",
+          "description": "Emphasizes attribution, claims, verification gaps, and follow-up questions."
+        },
+        "negotiation": {
+          "label": "Negotiation",
+          "description": "Emphasizes offers, conditions, concessions, and agreed versus open points."
+        },
+        "decision_committee": {
+          "label": "Decision Committee",
+          "description": "Emphasizes proposals, approvals, conditions, dissents, and follow-ups."
+        },
+        "investigation": {
+          "label": "Investigation",
+          "description": "Emphasizes chronology, admissions, denials, evidence references, and inconsistencies."
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "Playback",
+    "description": "Audio playback preferences",
+    "speed": "Playback Speed"
+  },
+  "apiKeys": {
+    "title": "API Keys",
+    "description": "Manage API keys for programmatic access to the Voxis API and MCP server.",
+    "create": "Create API Key",
+    "empty": "No API keys yet. Create one to connect external tools and services.",
+    "scopesCount": "{{count}} scopes",
+    "lastUsed": "Last used: {{value}}",
+    "never": "Never",
+    "expires": "Expires: {{value}}",
+    "revoke": "Revoke",
+    "relativeTime": {
+      "justNow": "Just now",
+      "minutes": "{{count}}m ago",
+      "hours": "{{count}}h ago",
+      "days": "{{count}}d ago"
+    },
+    "revokeDialog": {
+      "title": "Are you sure?",
+      "description": "This action cannot be undone. The API key will be permanently revoked and any integrations using it will stop working."
+    },
+    "createDialog": {
+      "title": "Create New API Key",
+      "description": "Create a key for programmatic access to the Voxis API and MCP server.",
+      "keyName": "Key Name",
+      "keyNamePlaceholder": "e.g. Production, Claude Desktop",
+      "scopes": "Scopes",
+      "expiration": "Expiration",
+      "expirationOptions": {
+        "30": "30 days",
+        "60": "60 days",
+        "90": "90 days",
+        "none": "No expiration"
+      },
+      "error": "Could not create the API key. Please check the details and try again.",
+      "creating": "Creating...",
+      "submit": "Create"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "Media Read",
+        "description": "Read media files"
+      },
+      "mediaWrite": {
+        "label": "Media Write",
+        "description": "Upload and delete media"
+      },
+      "transcriptionRead": {
+        "label": "Transcription Read",
+        "description": "Read transcriptions"
+      },
+      "transcriptionWrite": {
+        "label": "Transcription Write",
+        "description": "Create transcriptions"
+      },
+      "summaryRead": {
+        "label": "Summary Read",
+        "description": "Read summaries"
+      },
+      "summaryWrite": {
+        "label": "Summary Write",
+        "description": "Create summaries; also requires transcription read"
+      },
+      "exportRead": {
+        "label": "Export",
+        "description": "Export documents; also requires source read access"
+      }
+    },
+    "created": {
+      "title": "API Key Created",
+      "description": "Your API key has been created successfully.",
+      "warning": "This key will only be shown once. Copy it now and store it securely.",
+      "snippets": "Connection Snippets",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Add to your Claude Desktop or Claude Code MCP config:",
+        "codex": "Add to your OpenAI Codex MCP config:",
+        "adk": "Add to your Google ADK MCP config:",
+        "cursor": "Add to your Cursor or VS Code MCP config:",
+        "rest": "Use your API key with curl or any HTTP client:",
+        "openapi": "OpenAPI specification URL:",
+        "openapiNote": "Note: ChatGPT custom GPTs require OAuth authentication (Phase 2). Use the REST API with your API key for direct access."
+      },
+      "done": "Done",
+      "copy": "Copy",
+      "copied": "Copied!",
+      "failed": "Failed",
+      "copySnippet": "Copy snippet",
+      "copyApiKey": "Copy API key"
+    }
+  },
+  "retention": {
+    "title": "Live Recording Audio Retention",
+    "description": "Automatically delete original audio files created by live recording. Transcripts and summaries remain available.",
+    "loadError": "Unable to load recording retention settings.",
+    "enabled": {
+      "label": "Auto-delete live recording audio",
+      "description": "Permanently delete the stored audio from this server after the selected period. Copies in existing backups remain until those backups are deleted."
+    },
+    "days": {
+      "label": "Delete after",
+      "description": "Choose between 1 and 30 days after live recording completion."
+    },
+    "applyExisting": {
+      "label": "Apply to existing live recordings",
+      "description": "Also delete audio from completed live recordings that are already older than the selected period."
+    },
+    "preview": {
+      "count": "{{count}} live recordings have audio eligible for immediate deletion.",
+      "oldest": "Oldest eligible recording completed {{date}}."
+    },
+    "confirm": {
+      "label": "Confirm immediate delete count",
+      "description": "Enter {{count}} to confirm immediate permanent audio deletion."
+    },
+    "confirmationRequired": "Enter the immediate delete count before saving.",
+    "save": "Save retention policy",
+    "saving": "Saving...",
+    "saved": "Recording retention policy saved.",
+    "saveError": "Unable to save recording retention policy."
+  }
+}

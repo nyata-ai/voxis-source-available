@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "언어",
+    "hint": "자동 감지는 권장되는 기본 설정이며 어떤 녹음에도 안전하게 사용할 수 있습니다. 예상되는 언어를 Voxis에 알려주기 위해 최대 {{max}}개 언어를 선택할 수 있습니다. 최종 기록은 항상 오디오에서 실제로 들리는 내용을 따릅니다.",
+    "autoDetect": "자동 감지(권장)",
+    "selectedCount": "{{selected}}/{{max}} 선택됨"
+  },
+  "expectedSpeakers": {
+    "label": "화자 수",
+    "auto": "자동 감지",
+    "hint": "녹음에서 몇 명이 말하는지 아는 경우에만 설정하세요. 화자가 한두 명인 녹음에서 화자 구분에 가장 도움이 됩니다.",
+    "count_one": "화자 {{count}}명",
+    "count_other": "화자 {{count}}명"
+  },
+  "retranscribe": {
+    "deleteFailed": "기존 스크립트를 삭제하지 못했습니다. 변경사항이 없습니다.",
+    "started": "재기록이 시작되었습니다.",
+    "newFailed": "이전 스크립트가 삭제되었지만 새 스크립트를 시작하지 못했습니다. 미디어 라이브러리에서 다시 스크립트를 작성해 주세요.",
+    "title": "오디오 재기록",
+    "descriptionPrefix": "다음의 기존 스크립트가 삭제됩니다.",
+    "descriptionSuffix": "아래 설정으로 새 것을 시작하십시오.",
+    "diarization": "화자 분할",
+    "starting": "시작 중...",
+    "start": "재전사 시작"
+  },
+  "speakers": {
+    "title": "발표자",
+    "saving": "절약",
+    "findingNames": "이름을 찾는 중…",
+    "showLowConfidence": "신뢰도가 낮은 제안 표시",
+    "saveFailed": "스피커 이름을 저장할 수 없습니다. 다시 시도해 보세요.",
+    "dismissFailed": "제안을 닫을 수 없습니다.",
+    "speakerLabel": "스피커 {{index}}",
+    "evidence": "AI 제안: {{name}}. 증거: {{evidence}}. 자신감: {{confidence}}.",
+    "acceptLabel": "스피커 {{index}}에 대한 제안 {{name}} 수락",
+    "dismissLabel": "스피커 {{index}}에 대한 제안 닫기",
+    "showAll_one": "발표자 {{count}}명 모두 보기",
+    "showAll_other": "발표자 {{count}}명 모두 보기",
+    "showFewer": "간략히 보기"
+  },
+  "transcribe": {
+    "started": "스크립트 작성이 시작되었습니다.",
+    "failed": "스크립트 작성을 시작하지 못했습니다. 다시 시도해 주세요.",
+    "button": "고쳐 쓰다",
+    "title": "오디오 녹음",
+    "description": "이 오디오 파일에 대한 녹음 설정을 구성합니다.",
+    "diarization": "화자 분할",
+    "enhanceAudio": "오디오 향상",
+    "enhanceHint": "전사하기 전에 AI 노이즈 감소를 적용합니다. 강한 바람, 교통 상황, 기계류 등 말소리가 잘 들리지 않을 때 사용하세요. 처리 시간이 추가되므로 이미 전사가 잘 진행되고 있는 선명한 녹음은 건너뛰세요.",
+    "starting": "시작 중...",
+    "start": "전사 시작"
+  },
+  "viewer": {
+    "lowConfidence": "낮은 신뢰도",
+    "confidenceTitle": "신뢰도: {{percent}}%",
+    "noUtterances": "사용 가능한 발언이 없습니다.",
+    "ariaLabel": "성적 증명서",
+    "followLabel": "재생 팔로우",
+    "follow": "따르다"
+  },
+  "row": {
+    "actionsLabel": "{{title}}에 대한 작업",
+    "retranscribe": "재기록",
+    "delete": "삭제"
+  },
+  "detail": {
+    "loading": "스크립트 로드 중...",
+    "notFound": "스크립트를 찾을 수 없거나 로드하지 못했습니다.",
+    "tryAgain": "다시 시도하세요",
+    "titleLabel": "오디오 제목",
+    "descriptionPlaceholder": "설명 추가...",
+    "descriptionLabel": "오디오 설명",
+    "updateTitleFailed": "오디오 제목을 업데이트하지 못했습니다.",
+    "updateDescriptionFailed": "오디오 설명을 업데이트하지 못했습니다.",
+    "delete": "삭제",
+    "enhanced": "향상된",
+    "processing": "텍스트 변환 처리 중...",
+    "streamFailed": "오디오 스트림에 실패했습니다. 새로고침한 후 다시 시도해 주세요."
+  },
+  "reader": {
+    "find": {
+      "label": "전사 내용 검색",
+      "placeholder": "전사 내용 검색",
+      "count": "{{total}}개 중 {{current}}번째",
+      "none": "일치 항목 없음",
+      "next": "다음 일치",
+      "prev": "이전 일치",
+      "clear": "검색 지우기"
+    },
+    "back": "라이브러리로 돌아가기",
+    "backLabel": "라이브러리로 돌아가기",
+    "retranscribe": "재기록",
+    "sourceLabel": "출처",
+    "library": "라이브러리",
+    "more": "추가 작업",
+    "uploadedLine": "{{date}} 업로드",
+    "followPlayback": "재생 따라가기"
+  }
+}

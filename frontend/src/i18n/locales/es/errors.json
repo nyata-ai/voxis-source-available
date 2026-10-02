@@ -1,0 +1,25 @@
+{
+  "codes": {
+    "bad_request": "La solicitud no se pudo procesar. Por favor verifique los detalles e inténtelo nuevamente.",
+    "validation_error": "Algunos detalles necesitan atención. Por favor revisa el formulario y vuelve a intentarlo.",
+    "invalid_input": "Algunos detalles necesitan atención. Por favor revisa el formulario y vuelve a intentarlo.",
+    "not_found": "No pudimos encontrar ese artículo.",
+    "forbidden": "No tienes acceso a este elemento.",
+    "unauthorized": "Tu sesión ha caducado. Por favor inicia sesión nuevamente.",
+    "conflict": "Una operación conflictiva ya está en marcha. Por favor inténtalo de nuevo.",
+    "internal_error": "Algo salió mal de nuestro lado. Por favor inténtalo de nuevo.",
+    "service_unavailable": "Este servicio no está disponible temporalmente. Inténtelo de nuevo más tarde.",
+    "storage_quota_exceeded": "Se alcanzó la cuota de almacenamiento. Libere espacio de audio en la Biblioteca antes de volver a intentarlo.",
+    "rate_limited": "Demasiadas solicitudes. Espere un momento e inténtelo de nuevo.",
+    "scan_pending": "Este archivo todavía se está analizando por seguridad. Inténtelo de nuevo en breve.",
+    "scan_failed": "Este archivo no pasó el análisis de seguridad y no se puede utilizar.",
+    "recent_auth_required": "Confirme su identidad nuevamente antes de continuar.",
+    "state_invalid": "Este elemento aún no está listo para esa acción.",
+    "network": "Error de red. Por favor verifique su conexión e inténtelo nuevamente.",
+    "timeout": "La solicitud tardó demasiado. Por favor inténtalo de nuevo.",
+    "role_required": "Su cuenta aún no tiene acceso. Pida a su administrador que le conceda acceso.",
+    "upload_limit": "Hay demasiadas subidas en curso. Inténtelo de nuevo cuando termine alguna.",
+    "media_too_long": "Esta grabación supera la duración que permite este servidor. Divídala en partes más cortas e inténtelo de nuevo.",
+    "model_busy": "El modelo de IA está ocupado. Inténtelo de nuevo en unos momentos."
+  }
+}

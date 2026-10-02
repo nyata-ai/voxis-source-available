@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "Resumen general",
+    "keyPoints": "Puntos clave",
+    "actionItems": "Elementos de acción",
+    "questionsAnswers": "Preguntas y respuestas"
+  },
+  "typeMeta": {
+    "general": "General",
+    "keyPoints": "Puntos clave",
+    "actions": "Comportamiento",
+    "qAndA": "Preguntas y respuestas",
+    "fallback": "Resumen"
+  },
+  "profile": {
+    "label": "Perfil",
+    "general_professional": "Profesional general",
+    "legal": "Legal",
+    "investment_analysis": "Análisis de inversiones",
+    "journalism": "Periodismo",
+    "negotiation": "Negociación",
+    "decision_committee": "Comité de decisión",
+    "investigation": "Investigación"
+  },
+  "viewer": {
+    "loading": "Cargando resumen...",
+    "noContent": "Sin contenido resumido",
+    "evidence": "Evidencia:",
+    "owner": "Dueño:",
+    "due": "Pendiente:",
+    "questionPrefix": "Pregunta:",
+    "answerPrefix": "Respuesta:",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "Tratamiento...",
+    "unknownError": "Se produjo un error desconocido",
+    "copied": "¡Copiado!",
+    "copy": "Copiar",
+    "showSources": "Mostrar fuentes",
+    "hideSources": "Ocultar fuentes",
+    "citations": "Citas",
+    "citation": "Cita {{id}}",
+    "citationWithSpeaker": "Cita {{id}}, {{speaker}}",
+    "citationWithTime": "Cita {{id}}, {{time}}",
+    "citationWithSpeakerTime": "Cita {{id}}, {{speaker}}, {{time}}",
+    "actionKinds": {
+      "action_item": "Elemento de acción",
+      "decision": "Decisión",
+      "next_step": "Siguiente paso",
+      "open_issue": "Tema abierto"
+    },
+    "notSpecified": "No se indica en la transcripción.",
+    "degradationNotice": "Este resumen se completó con una salida de respaldo o normalizada. Revíselo con la transcripción."
+  },
+  "briefing": {
+    "title": "Resumen",
+    "empty": "Todavía no hay resúmenes para esta sesión.",
+    "autoStarted": "Se inició automáticamente al abrir esta sesión.",
+    "notGenerated": "Este resumen aún no se ha generado.",
+    "generateAll": "Generar todo",
+    "generatingAll": "Generando…",
+    "generateOne": "Generar {{type}}",
+    "generatingOne": "Generando…",
+    "error": "No se pudieron generar los resúmenes. Inténtalo de nuevo.",
+    "generateTypeError": "No se pudo generar este resumen. Inténtalo de nuevo.",
+    "aiUnavailable": "El resumen con IA no está disponible.",
+    "rateLimited": "La generación está limitada por frecuencia. Espera un minuto e inténtalo de nuevo.",
+    "regenerateError": "No se pudo regenerar este resumen. Inténtalo de nuevo.",
+    "regenerateTypeError": "No se pudo regenerar el resumen «{{type}}». Inténtalo de nuevo.",
+    "regenerate": "Regenerar",
+    "regenerating": "Regenerando…",
+    "loadError": "No se pudo cargar este resumen. Inténtalo de nuevo.",
+    "status": {
+      "notGenerated": "Sin generar",
+      "processing": "Generando…",
+      "ready": "Listo",
+      "failed": "Error"
+    },
+    "tabsLabel": "Tipo de resumen",
+    "note": "Generado el {{date}} · perfil {{profile}} · Nombres de oradores inferidos por el modelo",
+    "noteWithoutProfile": "Generado el {{date}} · Nombres de oradores inferidos por el modelo"
+  },
+  "summarize": {
+    "button": "Resumir",
+    "title": "Generar resumen",
+    "description": "Elija un tipo de resumen para generar a partir de esta transcripción.",
+    "typeLabel": "Tipo de resumen",
+    "alreadyExists": "Este tipo de resumen ya existe.",
+    "started": "Resumen iniciado",
+    "failed": "No se pudo iniciar el resumen. Por favor inténtalo de nuevo.",
+    "generating": "Generando...",
+    "start": "Iniciar resumen"
+  },
+  "detail": {
+    "loading": "Cargando resumen..."
+  }
+}

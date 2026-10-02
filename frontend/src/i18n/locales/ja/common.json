@@ -1,0 +1,134 @@
+{
+  "actions": {
+    "save": "保存",
+    "cancel": "キャンセル",
+    "delete": "消去",
+    "close": "近い",
+    "retry": "もう一度やり直してください"
+  },
+  "notFound": {
+    "title": "404",
+    "message": "ページが見つかりません"
+  },
+  "placeholder": {
+    "defaultDescription": "この機能は近日中に公開される予定です。後でもう一度確認してください。",
+    "body": "私たちはこの機能を皆様にお届けできるよう鋭意取り組んでいます。"
+  },
+  "export": {
+    "downloaded": "ダウンロードしたエクスポート",
+    "failed": "エクスポートに失敗しました。もう一度試してください。",
+    "bapError": "先に「質問と回答」ブリーフィングを生成するか、話者名が変更された場合は再生成してください。",
+    "panelTitle": "エクスポート",
+    "pillLabel": "{{row}}を{{format}}で書き出す",
+    "briefingUnavailable": "この要約を書き出すには、先に生成してください。",
+    "rows": {
+      "transcript": "文字起こし",
+      "briefing": "要約 · {{lens}}",
+      "bap": "取調べ調書ドラフト",
+      "audio": "元の音声"
+    },
+    "short": {
+      "pdf": "PDF",
+      "docx": "DOCX",
+      "json": "JSON"
+    }
+  },
+  "language": {
+    "title": "言語",
+    "description": "Voxis インターフェースの言語を選択してください",
+    "saveFailed": "言語の選択を保存できませんでした。次回アクセス時に元に戻る場合があります。"
+  },
+  "languageGroups": {
+    "english": "英語",
+    "asia": "アジア",
+    "europe": "ヨーロッパ",
+    "middleEastAfrica": "中東とアフリカ"
+  },
+  "languageNames": {
+    "auto": "自動",
+    "autoDetect": "自動検出",
+    "en": "英語",
+    "id": "インドネシア語",
+    "jv": "ジャワ語",
+    "su": "スンダ人",
+    "ms": "マレー語",
+    "tl": "タガログ語",
+    "th": "タイ語",
+    "vi": "ベトナム語",
+    "zh": "中国語",
+    "ja": "日本語",
+    "ko": "韓国人",
+    "fr": "フランス語",
+    "de": "ドイツ語",
+    "it": "イタリア語",
+    "pl": "研磨",
+    "pt": "ポルトガル語",
+    "ru": "ロシア",
+    "es": "スペイン語",
+    "sv": "スウェーデン語",
+    "da": "デンマーク語",
+    "no": "ノルウェー語",
+    "fi": "フィンランド語",
+    "la": "ラテン",
+    "ar": "アラビア語",
+    "he": "ヘブライ語",
+    "af": "アフリカーンス語"
+  },
+  "errorBoundary": {
+    "title": "何か問題が発生しました",
+    "description": "予期しないエラーが発生しました。もう一度試してください。",
+    "details": "エラーの詳細 (開発のみ)"
+  },
+  "activity": {
+    "title": "Activity",
+    "count": "{{count}} processing",
+    "more": "+{{count}} more",
+    "ready": "Ready",
+    "view": "View",
+    "dismiss": "Dismiss",
+    "recordingTitle": "Live recording",
+    "inMotion": {
+      "title": "処理中"
+    },
+    "stage": {
+      "stitching": "Processing recording…",
+      "transcribing": "Transcribing…",
+      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "ready": "Ready"
+    },
+    "failed": {
+      "recording": "Recording couldn't be processed",
+      "transcription": "Transcription failed"
+    },
+    "toast": {
+      "recordingReady": "Recording ready",
+      "transcriptionReady": "Transcript ready"
+    }
+  },
+  "status": {
+    "pending": "保留中",
+    "encrypting": "暗号化中",
+    "ready": "準備完了",
+    "failed": "失敗",
+    "deleted": "削除済み",
+    "submitted": "送信済み",
+    "processing": "処理中",
+    "completed": "完了",
+    "scanPending": "スキャン保留中",
+    "scanInfected": "感染",
+    "scanError": "スキャンエラー",
+    "scanClean": "問題なし"
+  },
+  "session": {
+    "source": {
+      "audio": "音声"
+    },
+    "speaker_one": "話者{{count}}人",
+    "speaker_other": "話者{{count}}人",
+    "words": "{{n}}語",
+    "lens_one": "レンズ{{count}}件",
+    "lens_other": "レンズ{{count}}件",
+    "languages": "言語：{{codes}}",
+    "untitled": "無題のセッション"
+  }
+}

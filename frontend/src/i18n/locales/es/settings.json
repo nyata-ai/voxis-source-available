@@ -1,0 +1,257 @@
+{
+  "page": {
+    "title": "Ajustes",
+    "subtitle": "Administre la configuración y preferencias de su cuenta"
+  },
+  "nav": {
+    "notifications": "Notificaciones",
+    "profile": "Perfil",
+    "appearance": "Apariencia",
+    "language": "Idioma",
+    "transcription": "Transcripción",
+    "summary": "Resumen y exportación",
+    "playback": "Reproducción",
+    "apiKeys": "Teclas API",
+    "retention": "Recording Retention"
+  },
+  "profile": {
+    "title": "Perfil",
+    "description": "La información de tu cuenta",
+    "name": "Nombre",
+    "email": "Correo electrónico",
+    "username": "Nombre de usuario",
+    "ssoNote": "Su perfil es administrado por SSO. Para actualizar su información, comuníquese con su administrador.",
+    "updatePassword": "Actualizar/Cambiar contraseña",
+    "manageMfa": "Administrar MFA",
+    "usage": {
+      "title": "Uso",
+      "description": "El consumo de recursos de su organización",
+      "error": "No se pueden cargar estadísticas de uso.",
+      "audioProcessed": "Audio procesado",
+      "aiTokens": "Fichas de IA utilizadas",
+      "remainingToday": "{{count}} restantes hoy",
+      "liveRecordingRetention": "Días de retención de grabaciones en vivo",
+      "retentionDays_one": "{{count}} día",
+      "retentionDays_other": "{{count}} días",
+      "notEnabled": "No habilitado",
+      "storage": "Uso / límite de almacenamiento",
+      "unlimited": "Ilimitado",
+      "remaining": "Restante: {{value}}",
+      "duration": {
+        "zero": "0 minutos",
+        "lessThanMinute": "< 1 minuto",
+        "minutes": "{{count}} mín.",
+        "hours": "{{count}} horas",
+        "hoursMinutes": "{{hours}} h {{minutes}} min"
+      }
+    },
+    "securityAction": "Gestionar contraseña y autenticación multifactor"
+  },
+  "appearance": {
+    "title": "Apariencia",
+    "description": "Personaliza la apariencia",
+    "light": "Luz",
+    "lightDescription": "Fondo claro con texto oscuro.",
+    "dark": "Oscuro",
+    "darkDescription": "Fondo oscuro con texto claro.",
+    "system": "Sistema",
+    "systemDescription": "Sigue su preferencia de sistema operativo"
+  },
+  "transcription": {
+    "title": "Transcripción",
+    "description": "Configuración de transcripción predeterminada",
+    "defaultLanguage": "Idioma predeterminado para nuevas transcripciones",
+    "diarization": {
+      "label": "Diarización del orador",
+      "description": "Identificar y separar diferentes hablantes."
+    }
+  },
+  "summary": {
+    "title": "Resumen y exportación",
+    "description": "Configuración predeterminada de resumen y exportación",
+    "defaultType": "Tipo de resumen predeterminado",
+    "types": {
+      "general": "General",
+      "keyPoints": "Puntos clave",
+      "actionItems": "Elementos de acción",
+      "qAndA": "Preguntas y respuestas"
+    },
+    "typeDescription": "Tipo de resumen generado para nuevas transcripciones",
+    "defaultFormat": "Formato de exportación predeterminado",
+    "formatDescription": "Formato predeterminado al exportar transcripciones y resúmenes",
+    "autoBriefings": {
+      "label": "Generar resúmenes automáticamente",
+      "description": "Genera los cuatro tipos de resumen en cuanto abres una sesión finalizada. Desactivado por defecto: los resúmenes se generan cuando los pides, de uno en uno."
+    },
+    "highStakes": {
+      "label": "Resúmenes de alto riesgo",
+      "description": "Resumen de dos pasos para trabajos legales, notariales y otros trabajos críticos para la precisión. El modelo primero extrae cada nombre, fecha, figura y compromiso de la transcripción y luego escribe el resumen vinculado a esos hechos. Es más lento y utiliza más tokens que la ruta estándar, pero reduce los detalles omitidos o reescritos."
+    },
+    "profile": {
+      "label": "Perfil profesional",
+      "description": "Define el énfasis de los nuevos resúmenes. No ofrece asesoramiento ni verifica afirmaciones.",
+      "options": {
+        "general_professional": {
+          "label": "Profesional general",
+          "description": "Destaca decisiones, compromisos, bloqueos y preguntas abiertas."
+        },
+        "legal": {
+          "label": "Legal",
+          "description": "Destaca reclamaciones, obligaciones, hechos controvertidos y pruebas."
+        },
+        "investment_analysis": {
+          "label": "Análisis de inversiones",
+          "description": "Destaca cifras, previsiones, supuestos, riesgos y vacíos de diligencia debida."
+        },
+        "journalism": {
+          "label": "Periodismo",
+          "description": "Destaca atribución, afirmaciones, vacíos de verificación y preguntas de seguimiento."
+        },
+        "negotiation": {
+          "label": "Negociación",
+          "description": "Destaca ofertas, condiciones, concesiones y puntos acordados o abiertos."
+        },
+        "decision_committee": {
+          "label": "Comité de decisión",
+          "description": "Destaca propuestas, aprobaciones, condiciones, discrepancias y seguimientos."
+        },
+        "investigation": {
+          "label": "Investigación",
+          "description": "Destaca cronología, admisiones, negaciones, referencias a pruebas e inconsistencias."
+        }
+      }
+    }
+  },
+  "playback": {
+    "title": "Reproducción",
+    "description": "Preferencias de reproducción de audio",
+    "speed": "Velocidad de reproducción"
+  },
+  "apiKeys": {
+    "title": "Teclas API",
+    "description": "Administre las claves API para el acceso programático al servidor Voxis API y MCP.",
+    "create": "Crear clave API",
+    "empty": "Aún no hay claves API. Cree uno para conectar herramientas y servicios externos.",
+    "scopesCount": "Visores {{count}}",
+    "lastUsed": "Último uso: {{value}}",
+    "never": "Nunca",
+    "expires": "Vence: {{value}}",
+    "revoke": "Revocar",
+    "relativeTime": {
+      "justNow": "En este momento",
+      "minutes": "Hace {{count}}m",
+      "hours": "Hace {{count}}h",
+      "days": "Hace {{count}}d"
+    },
+    "revokeDialog": {
+      "title": "¿Está seguro?",
+      "description": "Esta acción no se puede deshacer. La clave API se revocará permanentemente y cualquier integración que la utilice dejará de funcionar."
+    },
+    "createDialog": {
+      "title": "Crear nueva clave API",
+      "description": "Cree una clave para el acceso programático al servidor Voxis API y MCP.",
+      "keyName": "Nombre clave",
+      "keyNamePlaceholder": "p.ej. Producción, escritorio Claude",
+      "scopes": "Alcances",
+      "expiration": "Vencimiento",
+      "expirationOptions": {
+        "30": "30 dias",
+        "60": "60 días",
+        "90": "90 dias",
+        "none": "Sin vencimiento"
+      },
+      "error": "No se pudo crear la clave API. Por favor verifique los detalles e inténtelo nuevamente.",
+      "creating": "Creando...",
+      "submit": "Crear"
+    },
+    "scopeOptions": {
+      "mediaRead": {
+        "label": "Lectura de medios",
+        "description": "Leer archivos multimedia"
+      },
+      "mediaWrite": {
+        "label": "Escritura de medios",
+        "description": "Cargar y eliminar medios"
+      },
+      "transcriptionRead": {
+        "label": "Lectura de transcripción",
+        "description": "Leer transcripciones"
+      },
+      "transcriptionWrite": {
+        "label": "Escritura de transcripción",
+        "description": "Crear transcripciones"
+      },
+      "summaryRead": {
+        "label": "Lectura resumida",
+        "description": "Leer resúmenes"
+      },
+      "summaryWrite": {
+        "label": "Resumen escrito",
+        "description": "Crear resúmenes; también requiere lectura de transcripción"
+      },
+      "exportRead": {
+        "label": "Exportar",
+        "description": "Documentos de exportación; también requiere acceso de lectura de fuente"
+      }
+    },
+    "created": {
+      "title": "Clave API creada",
+      "description": "Su clave API se ha creado correctamente.",
+      "warning": "Esta clave sólo se mostrará una vez. Cópialo ahora y guárdalo de forma segura.",
+      "snippets": "Fragmentos de conexión",
+      "tabs": {
+        "claude": "Claude",
+        "codex": "OpenAI Codex",
+        "adk": "Google ADK",
+        "cursor": "Cursor / VS Code",
+        "rest": "REST API",
+        "openapi": "OpenAPI"
+      },
+      "instructions": {
+        "claude": "Agregue a su configuración de escritorio Claude o código Claude MCP:",
+        "codex": "Agregue a su configuración OpenAI Codex MCP:",
+        "adk": "Agregue a su configuración Google ADK MCP:",
+        "cursor": "Agregue a su configuración Cursor o VS Code MCP:",
+        "rest": "Utilice su clave API con curl o cualquier cliente HTTP:",
+        "openapi": "URL de especificación OpenAPI:",
+        "openapiNote": "Nota: Los GPT personalizados de ChatGPT requieren autenticación OAuth (Fase 2). Utilice el REST API con su clave API para acceso directo."
+      },
+      "done": "Hecho",
+      "copy": "Copiar",
+      "copied": "¡Copiado!",
+      "failed": "Fallido",
+      "copySnippet": "Copiar fragmento",
+      "copyApiKey": "Copiar clave API"
+    }
+  },
+  "retention": {
+    "title": "Live Recording Audio Retention",
+    "description": "Automatically delete original audio files created by live recording. Transcripts and summaries remain available.",
+    "loadError": "Unable to load recording retention settings.",
+    "enabled": {
+      "label": "Auto-delete live recording audio",
+      "description": "Elimina permanentemente el audio almacenado de este servidor tras el período seleccionado. Los datos incluidos en copias de seguridad ya existentes se conservan hasta que esas copias se eliminen."
+    },
+    "days": {
+      "label": "Delete after",
+      "description": "Choose between 1 and 30 days after live recording completion."
+    },
+    "applyExisting": {
+      "label": "Apply to existing live recordings",
+      "description": "Also delete audio from completed live recordings that are already older than the selected period."
+    },
+    "preview": {
+      "count": "{{count}} live recordings have audio eligible for immediate deletion.",
+      "oldest": "Oldest eligible recording completed {{date}}."
+    },
+    "confirm": {
+      "label": "Confirm immediate delete count",
+      "description": "Enter {{count}} to confirm immediate permanent audio deletion."
+    },
+    "confirmationRequired": "Enter the immediate delete count before saving.",
+    "save": "Save retention policy",
+    "saving": "Saving...",
+    "saved": "Recording retention policy saved.",
+    "saveError": "Unable to save recording retention policy."
+  }
+}

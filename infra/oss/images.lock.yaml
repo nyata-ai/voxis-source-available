@@ -1,0 +1,114 @@
+# Tested immutable inputs for the initial OSS infrastructure scaffold.
+# Re-lock and review every digest before a release. This lock is not proof that
+# a tag with the same name remains safe.
+images:
+  alpine:
+    reference: alpine@sha256:79ff19e9084a00eece421b2523fb93e22d730e2c0e525905de047e848e56d95f
+    source_tag: alpine:3.24.1
+    observed_on: 2026-09-13
+  debian:
+    reference: debian@sha256:6ebd97fa83deb272194a2cf015b3d26a4d538e9ad3a7a79d544c8af5b0a01443
+    source_tag: debian:bookworm
+    observed_on: 2026-09-13
+  debian_runtime:
+    reference: debian@sha256:d7e12182ce18b85b93007c1dedf31f2d29e01ccf3182cc4017c709b6259bc132
+    source_tag: debian:trixie-slim
+    amd64_manifest: sha256:abc9cb88a5587630d7f915f47b23b0668fe250fbfc6457aa4d52b534c1bbf73f
+    observed_on: 2026-09-14
+  golang:
+    reference: golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+    source_tag: golang:1.25-bookworm
+    observed_on: 2026-09-13
+  node:
+    reference: node@sha256:6dac556d980b7f0e5498d08f08cee0ca67798b4ad6c23964a9214920e67758d0
+    source_tag: node:24-bookworm
+    observed_on: 2026-09-13
+  static_ffmpeg:
+    reference: mwader/static-ffmpeg:9.0.1@sha256:54e55b0cb8f672870fc38ceb2e6c411855cb3b39c505f5f3b2505ee01ed5f2b7
+    source_tag: mwader/static-ffmpeg:9.0.1
+    observed_on: 2026-09-14
+  postgres:
+    reference: postgres@sha256:cf78e76683b9ca8c5733cbbdce6c9262b45b6767934dd0a95e671f9a0fc20685
+    source_tag: postgres:16.15-alpine3.24
+    source_revision: 9d15534160ade17f2b6c455a39ee967c49b1937d
+    amd64_manifest: sha256:075f7ba66bc9b3ce7d6b8b635208ff61cd7cf1a67d71ec530eec5d7ae0cbe571
+    observed_on: 2026-09-13
+  keycloak:
+    reference: quay.io/keycloak/keycloak@sha256:6529db34610ce6328824218dce3bbe55c4ba4757bc5c8a09b5a4c746e28b6e9d
+    source_tag: quay.io/keycloak/keycloak:26.7.5
+    source_revision: 44299f39868f252ea02236134618c8c5c70a6e9d
+    amd64_manifest: sha256:6529db34610ce6328824218dce3bbe55c4ba4757bc5c8a09b5a4c746e28b6e9d
+    observed_on: 2026-10-02
+  temurin_21_jre:
+    reference: eclipse-temurin@sha256:7fd597bf48c8bb13a7a3fb227f8366dec0423f78775d4b4f7e30409204af8627
+    source_tag: eclipse-temurin:21-jre-noble
+    amd64_manifest: sha256:7fd597bf48c8bb13a7a3fb227f8366dec0423f78775d4b4f7e30409204af8627
+    observed_on: 2026-10-02
+  openbao:
+    reference: quay.io/openbao/openbao@sha256:a60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889
+    source_tag: quay.io/openbao/openbao:2.6.3
+    source_revision: 63a65e6b907589dbb952c371a70260a065bf8bd7
+    amd64_manifest: sha256:99c8dd178200d9a5f1a0420d6b1923514280e31e9271bdd92c69f765738c42aa
+    runtime_security_floors:
+      libcrypto3: 3.5.8-r0
+      libssl3: 3.5.8-r0
+    observed_on: 2026-09-24
+  clamav:
+    reference: clamav/clamav@sha256:71fbb76b397cd84a90043caf1178a7f81bd0c131a031e7b0619afd721fbfad41
+    source_tag: clamav/clamav:1.4.6
+    runtime_security_floors:
+      libcrypto3: 3.5.8-r0
+      libssl3: 3.5.8-r0
+    observed_on: 2026-09-14
+  caddy:
+    source_tag: v2.11.4
+    source_revision: e2eee6a7fce366321294c9c2a79f3146891dcbdf
+    source_archive: https://github.com/caddyserver/caddy/archive/e2eee6a7fce366321294c9c2a79f3146891dcbdf.tar.gz
+    source_sha256: a593bd7077c76102ca76d19287a5e247d4e359dd67eddbc933f865afd3c131eb
+    build_image: golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+    runtime_image: alpine@sha256:79ff19e9084a00eece421b2523fb93e22d730e2c0e525905de047e848e56d95f
+    module_floors:
+      golang.org/x/crypto: v0.55.0
+      golang.org/x/net: v0.58.0
+      golang.org/x/text: v0.41.0
+      google.golang.org/grpc: v1.83.2
+    runtime_security_floors:
+      libcrypto3: 3.5.8-r0
+      libssl3: 3.5.8-r0
+    observed_on: 2026-09-13
+runtime:
+  postgres:
+    gosu:
+      revision: 6456aaa0f3c854d199d0f037f068eb97515b7513
+      source_archive: https://github.com/tianon/gosu/archive/6456aaa0f3c854d199d0f037f068eb97515b7513.tar.gz
+      sha256: 33d7537d588ea49458b9509bcf4554bdf5ceacc66da71e5caa1058ea3b689c3b
+      license: Apache-2.0
+      build_image: golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+    runtime_security_floors:
+      libcrypto3: 3.5.8-r0
+      libssl3: 3.5.8-r0
+      libuuid: 2.42.3-r1
+  bubblewrap:
+    source: https://github.com/containers/bubblewrap
+    release: v0.12.0
+    revision: 2a76602a8c71f36c1527cf9fc3417d9149822e0c
+    source_archive: https://github.com/containers/bubblewrap/archive/refs/tags/v0.12.0.tar.gz
+    sha256: 3f66d9e3f85396f6d7d7fbd2859f277e4fd3a9303341bfe2ff325251bda65fd4
+    license: LGPL-2.1-or-later
+    build_options:
+      cflags: -include linux/limits.h
+      meson: -Dman=disabled -Dselinux=disabled -Dtests=false -Dbash_completion=disabled -Dzsh_completion=disabled
+    runtime_security_floors:
+      libcrypto3: 3.5.8-r0
+      libssl3: 3.5.8-r0
+  llama_cpp:
+    source: https://github.com/ggml-org/llama.cpp
+    release: v0.4.0
+    revision: 5266f24da75dc449bd56cbed7addb9c8e4a6a73e
+  gemma:
+    repository: google/gemma-4-12B-it-qat-q4_0-gguf
+    revision: 29d097773436b69ff9feafd636ab4cf873786537
+    file: gemma-4-12b-it-qat-q4_0.gguf
+    sha256: 93567e57a8fe10b23569b9d9ec38cd005deedf71e29477c421a4b83f418a538b
+    quantization: Q4_0
+    license: Apache-2.0

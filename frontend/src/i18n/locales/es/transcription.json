@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "Idioma",
+    "hint": "La detección automática es la opción recomendada y sirve para cualquier grabación. Puede seleccionar hasta {{max}} idiomas para indicarle a Voxis qué esperar; la transcripción final siempre sigue lo que realmente se escucha en el audio.",
+    "autoDetect": "Detección automática (recomendado)",
+    "selectedCount": "{{selected}}/{{max}} seleccionado"
+  },
+  "expectedSpeakers": {
+    "label": "Número de interlocutores",
+    "auto": "Detección automática",
+    "hint": "Indíquelo solo si sabe cuántas personas hablan en la grabación. Ayuda sobre todo a la separación de interlocutores en grabaciones con uno o dos interlocutores.",
+    "count_one": "{{count}} interlocutor",
+    "count_other": "{{count}} interlocutores"
+  },
+  "retranscribe": {
+    "deleteFailed": "No se pudo eliminar la transcripción existente. No se realizaron cambios.",
+    "started": "Retranscripción iniciada",
+    "newFailed": "Se eliminó la transcripción anterior pero no se pudo iniciar la nueva. Transcriba nuevamente desde la biblioteca multimedia.",
+    "title": "Retranscribir audio",
+    "descriptionPrefix": "Esto eliminará la transcripción existente para",
+    "descriptionSuffix": "y comience uno nuevo con la configuración a continuación.",
+    "diarization": "Diarización del orador",
+    "starting": "A partir de...",
+    "start": "Iniciar retranscripción"
+  },
+  "speakers": {
+    "title": "Oradores",
+    "saving": "Ahorro",
+    "findingNames": "Buscando nombres...",
+    "showLowConfidence": "Mostrar sugerencias de baja confianza",
+    "saveFailed": "No se pudo guardar el nombre del orador. Intentar otra vez.",
+    "dismissFailed": "No se pudo descartar la sugerencia.",
+    "speakerLabel": "Altavoz {{index}}",
+    "evidence": "Sugerencia de IA: {{name}}. Evidencia: {{evidence}}. Confianza: {{confidence}}.",
+    "acceptLabel": "Aceptar sugerencia {{name}} para altavoz {{index}}",
+    "dismissLabel": "Descartar sugerencia para el orador {{index}}",
+    "showAll_one": "Mostrar el {{count}} orador",
+    "showAll_other": "Mostrar los {{count}} oradores",
+    "showFewer": "Mostrar menos"
+  },
+  "transcribe": {
+    "started": "Transcripción iniciada",
+    "failed": "No se pudo iniciar la transcripción. Por favor inténtalo de nuevo.",
+    "button": "Transcribir",
+    "title": "Transcribir audio",
+    "description": "Configure los ajustes de transcripción para este archivo de audio.",
+    "diarization": "Diarización del orador",
+    "enhanceAudio": "Mejorar audio",
+    "enhanceHint": "Aplica reducción de ruido de IA antes de la transcripción. Úselo cuando sea difícil escuchar el habla: viento fuerte, tráfico, maquinaria. Agrega tiempo de procesamiento, así que omita las grabaciones claras donde la transcripción ya funciona bien.",
+    "starting": "A partir de...",
+    "start": "Iniciar transcripción"
+  },
+  "viewer": {
+    "lowConfidence": "Baja confianza",
+    "confidenceTitle": "Confianza: {{percent}}%",
+    "noUtterances": "No hay declaraciones disponibles.",
+    "ariaLabel": "Transcripción",
+    "followLabel": "Seguir la reproducción",
+    "follow": "Seguir"
+  },
+  "row": {
+    "actionsLabel": "Acciones para {{title}}",
+    "retranscribe": "Retranscribir",
+    "delete": "Borrar"
+  },
+  "detail": {
+    "loading": "Cargando transcripción...",
+    "notFound": "Transcripción no encontrada o no se pudo cargar.",
+    "tryAgain": "Intentar otra vez",
+    "titleLabel": "Título de audio",
+    "descriptionPlaceholder": "Añade una descripción...",
+    "descriptionLabel": "Audiodescripción",
+    "updateTitleFailed": "No se pudo actualizar el título de audio",
+    "updateDescriptionFailed": "No se pudo actualizar la descripción de audio",
+    "delete": "Borrar",
+    "enhanced": "Mejorado",
+    "processing": "Procesando transcripción...",
+    "streamFailed": "Error en la transmisión de audio. Actualice e inténtelo de nuevo."
+  },
+  "reader": {
+    "find": {
+      "label": "Buscar en la transcripción",
+      "placeholder": "Buscar en la transcripción",
+      "count": "{{current}} de {{total}}",
+      "none": "Sin coincidencias",
+      "next": "Coincidencia siguiente",
+      "prev": "Coincidencia anterior",
+      "clear": "Borrar búsqueda"
+    },
+    "back": "Volver a la biblioteca",
+    "backLabel": "Volver a la biblioteca",
+    "retranscribe": "Retranscribir",
+    "sourceLabel": "Fuente",
+    "library": "Biblioteca",
+    "more": "Más acciones",
+    "uploadedLine": "Subido el {{date}}",
+    "followPlayback": "Seguir la reproducción"
+  }
+}

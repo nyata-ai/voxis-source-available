@@ -1,0 +1,97 @@
+{
+  "types": {
+    "general": "总体总结",
+    "keyPoints": "要点",
+    "actionItems": "待办事项",
+    "questionsAnswers": "问答"
+  },
+  "typeMeta": {
+    "general": "总体摘要",
+    "keyPoints": "要点",
+    "actions": "待办事项",
+    "qAndA": "问答",
+    "fallback": "摘要"
+  },
+  "profile": {
+    "label": "配置",
+    "general_professional": "通用专业",
+    "legal": "法律",
+    "investment_analysis": "投资分析",
+    "journalism": "新闻",
+    "negotiation": "谈判",
+    "decision_committee": "决策委员会",
+    "investigation": "调查"
+  },
+  "viewer": {
+    "loading": "正在加载摘要…",
+    "noContent": "无摘要内容",
+    "evidence": "证据：",
+    "owner": "负责人：",
+    "due": "截止时间：",
+    "questionPrefix": "问题：",
+    "answerPrefix": "回答：",
+    "questionMarker": "Q",
+    "answerMarker": "A",
+    "processing": "处理中…",
+    "unknownError": "发生未知错误",
+    "copied": "已复制",
+    "copy": "复制",
+    "showSources": "显示来源",
+    "hideSources": "隐藏来源",
+    "citations": "引文",
+    "citation": "引文 {{id}}",
+    "citationWithSpeaker": "引文 {{id}}，{{speaker}}",
+    "citationWithTime": "引文 {{id}}，{{time}}",
+    "citationWithSpeakerTime": "引文 {{id}}，{{speaker}}，{{time}}",
+    "actionKinds": {
+      "action_item": "行动项",
+      "decision": "决定",
+      "next_step": "下一步",
+      "open_issue": "待解决问题"
+    },
+    "notSpecified": "转写稿中未说明。",
+    "degradationNotice": "此摘要使用了备用或规范化输出。请对照转写稿核实。"
+  },
+  "briefing": {
+    "title": "摘要",
+    "empty": "此会话尚无摘要。",
+    "autoStarted": "打开此会话时已自动开始生成。",
+    "notGenerated": "尚未生成此摘要。",
+    "generateAll": "全部生成",
+    "generatingAll": "正在生成…",
+    "generateOne": "生成{{type}}",
+    "generatingOne": "正在生成…",
+    "error": "无法生成摘要，请重试。",
+    "generateTypeError": "无法生成此摘要，请重试。",
+    "aiUnavailable": "AI 摘要功能不可用。",
+    "rateLimited": "请求过于频繁，请稍等片刻后重试。",
+    "regenerateError": "无法重新生成此摘要，请重试。",
+    "regenerateTypeError": "无法重新生成“{{type}}”摘要，请重试。",
+    "regenerate": "重新生成",
+    "regenerating": "正在重新生成…",
+    "loadError": "无法加载此摘要，请重试。",
+    "status": {
+      "notGenerated": "未生成",
+      "processing": "正在生成…",
+      "ready": "已就绪",
+      "failed": "失败"
+    },
+    "tabsLabel": "摘要类型",
+    "note": "生成于 {{date}} · {{profile}} 模式 · 发言人姓名由模型推断",
+    "noteWithoutProfile": "生成于 {{date}} · 发言人姓名由模型推断"
+  },
+  "summarize": {
+    "button": "总结",
+    "title": "生成摘要",
+    "description": "选择要从这份转写稿生成的摘要类型。",
+    "typeLabel": "摘要类型",
+    "alreadyExists": "此摘要类型已经存在。",
+    "started": "已开始生成摘要",
+    "failed": "无法开始生成摘要，请重试。",
+    "generating": "正在生成…",
+    "start": "生成摘要"
+  },
+  "detail": {
+    "loading": "正在加载摘要…"
+  }
+}

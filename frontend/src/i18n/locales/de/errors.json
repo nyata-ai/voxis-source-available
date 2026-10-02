@@ -1,0 +1,25 @@
+{
+  "codes": {
+    "bad_request": "Die Anfrage konnte nicht bearbeitet werden. Bitte überprüfen Sie die Details und versuchen Sie es erneut.",
+    "validation_error": "Einige Details erfordern Aufmerksamkeit. Bitte überprüfen Sie das Formular und versuchen Sie es erneut.",
+    "invalid_input": "Einige Details erfordern Aufmerksamkeit. Bitte überprüfen Sie das Formular und versuchen Sie es erneut.",
+    "not_found": "Wir konnten diesen Eintrag nicht finden.",
+    "forbidden": "Sie haben keinen Zugriff auf dieses Element.",
+    "unauthorized": "Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.",
+    "conflict": "Ein anderer Vorgang läuft bereits. Bitte versuchen Sie es erneut.",
+    "internal_error": "Auf unserer Seite ist etwas schief gelaufen. Bitte versuchen Sie es erneut.",
+    "service_unavailable": "Dieser Dienst ist vorübergehend nicht verfügbar. Bitte versuchen Sie es später noch einmal.",
+    "storage_quota_exceeded": "Das Speicherlimit ist erreicht. Löschen Sie nicht mehr benötigtes Audio aus der Mediathek und versuchen Sie es erneut.",
+    "rate_limited": "Zu viele Anfragen. Bitte warten Sie einen Moment und versuchen Sie es erneut.",
+    "scan_pending": "Diese Datei wird noch aus Sicherheitsgründen überprüft. Bitte versuchen Sie es in Kürze noch einmal.",
+    "scan_failed": "Diese Datei hat den Sicherheitsscan nicht bestanden und kann nicht verwendet werden.",
+    "recent_auth_required": "Bitte bestätigen Sie Ihre Identität noch einmal, bevor Sie fortfahren.",
+    "state_invalid": "Dieser Eintrag ist noch nicht für diese Aktion bereit.",
+    "network": "Netzwerkfehler. Bitte überprüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
+    "timeout": "Die Anfrage hat zu lange gedauert. Bitte versuchen Sie es erneut.",
+    "role_required": "Ihr Konto hat noch keinen Zugriff. Bitten Sie Ihre Administration, Ihnen Zugriff zu gewähren.",
+    "upload_limit": "Es laufen zu viele Uploads. Bitte versuchen Sie es erneut, sobald einer abgeschlossen ist.",
+    "media_too_long": "Diese Aufnahme ist länger, als dieser Server zulässt. Teilen Sie sie in kürzere Teile auf und versuchen Sie es erneut.",
+    "model_busy": "Das KI-Modell ist ausgelastet. Bitte versuchen Sie es gleich noch einmal."
+  }
+}

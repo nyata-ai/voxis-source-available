@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "Langue",
+    "hint": "La détection automatique est l'option recommandée par défaut et convient à tous les enregistrements. Vous pouvez sélectionner jusqu'à {{max}} langues pour indiquer à Voxis ce qu'il doit attendre — la transcription finale suit toujours ce qui est réellement entendu dans l'audio.",
+    "autoDetect": "Détection automatique (recommandé)",
+    "selectedCount": "{{selected}}/{{max}} sélectionné"
+  },
+  "expectedSpeakers": {
+    "label": "Nombre d'intervenants",
+    "auto": "Détection automatique",
+    "hint": "Ne renseignez ce champ que si vous savez combien de personnes parlent dans l'enregistrement. Cela aide surtout la séparation des intervenants dans les enregistrements comptant un ou deux intervenants.",
+    "count_one": "{{count}} intervenant",
+    "count_other": "{{count}} intervenants"
+  },
+  "retranscribe": {
+    "deleteFailed": "Échec de la suppression de la transcription existante. Aucune modification n'a été apportée.",
+    "started": "Retranscription commencée",
+    "newFailed": "L'ancienne transcription a été supprimée mais la nouvelle n'a pas pu démarrer. Merci de retranscrire à nouveau depuis la médiathèque.",
+    "title": "Retranscrire l'audio",
+    "descriptionPrefix": "Cela supprimera la transcription existante pour",
+    "descriptionSuffix": "et démarrez-en un nouveau avec les paramètres ci-dessous.",
+    "diarization": "Diarisation des locuteurs",
+    "starting": "Départ...",
+    "start": "Démarrer la retranscription"
+  },
+  "speakers": {
+    "title": "Intervenants",
+    "saving": "Économie",
+    "findingNames": "Trouver des noms…",
+    "showLowConfidence": "Afficher des suggestions peu fiables",
+    "saveFailed": "Impossible d'enregistrer le nom de l'intervenant. Essayer à nouveau.",
+    "dismissFailed": "Impossible d'ignorer la suggestion.",
+    "speakerLabel": "Haut-parleur {{index}}",
+    "evidence": "Suggestion IA: {{name}}. Preuve: {{evidence}}. Confiance: {{confidence}}.",
+    "acceptLabel": "Accepter la suggestion {{name}} pour le haut-parleur {{index}}",
+    "dismissLabel": "Ignorer la suggestion pour le haut-parleur {{index}}",
+    "showAll_one": "Afficher le {{count}} intervenant",
+    "showAll_other": "Afficher les {{count}} intervenants",
+    "showFewer": "Afficher moins"
+  },
+  "transcribe": {
+    "started": "Transcription commencée",
+    "failed": "Échec du démarrage de la transcription. Veuillez réessayer.",
+    "button": "Transcrire",
+    "title": "Transcrire l'audio",
+    "description": "Configurez les paramètres de transcription pour ce fichier audio.",
+    "diarization": "Diarisation des locuteurs",
+    "enhanceAudio": "Améliorer l'audio",
+    "enhanceHint": "Applique la réduction du bruit AI avant la transcription. À utiliser lorsque la parole est difficile à entendre: vent fort, circulation, machinerie. Ajoute du temps de traitement, alors évitez les enregistrements clairs où la transcription fonctionne déjà bien.",
+    "starting": "Départ...",
+    "start": "Démarrer la transcription"
+  },
+  "viewer": {
+    "lowConfidence": "Faible confiance",
+    "confidenceTitle": "Confiance: {{percent}}%",
+    "noUtterances": "Aucun énoncé disponible.",
+    "ariaLabel": "Transcription",
+    "followLabel": "Suivre la lecture",
+    "follow": "Suivre"
+  },
+  "row": {
+    "actionsLabel": "Actions pour {{title}}",
+    "retranscribe": "Retranscrire",
+    "delete": "Supprimer"
+  },
+  "detail": {
+    "loading": "Chargement de la transcription...",
+    "notFound": "Transcription introuvable ou échec de chargement.",
+    "tryAgain": "Essayer à nouveau",
+    "titleLabel": "Titre audio",
+    "descriptionPlaceholder": "Ajouter une description...",
+    "descriptionLabel": "Audiodescription",
+    "updateTitleFailed": "Échec de la mise à jour du titre audio",
+    "updateDescriptionFailed": "Échec de la mise à jour de l'audiodescription",
+    "delete": "Supprimer",
+    "enhanced": "Amélioré",
+    "processing": "Traitement de la transcription...",
+    "streamFailed": "Le flux audio a échoué. Veuillez actualiser et réessayer."
+  },
+  "reader": {
+    "find": {
+      "label": "Rechercher dans la transcription",
+      "placeholder": "Rechercher dans la transcription",
+      "count": "{{current}} sur {{total}}",
+      "none": "Aucun résultat",
+      "next": "Résultat suivant",
+      "prev": "Résultat précédent",
+      "clear": "Effacer la recherche"
+    },
+    "back": "Retour à la bibliothèque",
+    "backLabel": "Retour à la bibliothèque",
+    "retranscribe": "Retranscrire",
+    "sourceLabel": "Source",
+    "library": "Bibliothèque",
+    "more": "Autres actions",
+    "uploadedLine": "Importé le {{date}}",
+    "followPlayback": "Suivre la lecture"
+  }
+}

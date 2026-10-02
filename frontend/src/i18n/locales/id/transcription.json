@@ -1,0 +1,99 @@
+{
+  "languageSelector": {
+    "label": "Bahasa",
+    "hint": "Deteksi otomatis adalah pilihan bawaan yang disarankan dan aman untuk semua rekaman. Anda dapat memilih hingga {{max}} bahasa untuk memberi tahu Voxis bahasa apa yang diperkirakan muncul — transkrip akhir selalu mengikuti apa yang benar-benar terdengar dalam audio.",
+    "autoDetect": "Deteksi otomatis (disarankan)",
+    "selectedCount": "{{selected}}/{{max}} dipilih"
+  },
+  "expectedSpeakers": {
+    "label": "Jumlah pembicara",
+    "auto": "Deteksi otomatis",
+    "hint": "Isi ini hanya jika Anda tahu berapa orang yang berbicara dalam rekaman. Ini paling membantu pemisahan pembicara pada rekaman dengan satu atau dua pembicara.",
+    "count_one": "{{count}} pembicara",
+    "count_other": "{{count}} pembicara"
+  },
+  "retranscribe": {
+    "deleteFailed": "Gagal menghapus transkripsi yang ada. Tidak ada perubahan yang dilakukan.",
+    "started": "Transkripsi ulang dimulai",
+    "newFailed": "Transkripsi lama telah dihapus, tetapi transkripsi baru gagal dimulai. Silakan transkripsikan lagi dari Pustaka.",
+    "title": "Transkripsi ulang audio",
+    "descriptionPrefix": "Ini akan menghapus transkripsi yang ada",
+    "descriptionSuffix": "dan mulai yang baru dengan pengaturan di bawah ini.",
+    "diarization": "Pisahkan pembicara",
+    "starting": "Memulai...",
+    "start": "Mulai transkripsi ulang"
+  },
+  "speakers": {
+    "title": "Pembicara",
+    "saving": "Menyimpan...",
+    "findingNames": "Menemukan nama…",
+    "showLowConfidence": "Tampilkan saran dengan tingkat keyakinan rendah",
+    "saveFailed": "Tidak dapat menyimpan nama pembicara. Coba lagi.",
+    "dismissFailed": "Tidak dapat menolak saran.",
+    "speakerLabel": "Pembicara {{index}}",
+    "evidence": "Saran AI: {{name}}. Bukti: {{evidence}}. Tingkat keyakinan: {{confidence}}.",
+    "acceptLabel": "Terima saran {{name}} untuk pembicara {{index}}",
+    "dismissLabel": "Tolak saran untuk pembicara {{index}}",
+    "showAll_one": "Tampilkan semua {{count}} pembicara",
+    "showAll_other": "Tampilkan semua {{count}} pembicara",
+    "showFewer": "Tampilkan lebih sedikit"
+  },
+  "transcribe": {
+    "started": "Transkripsi dimulai",
+    "failed": "Gagal memulai transkripsi. Silakan coba lagi.",
+    "button": "Transkripsikan",
+    "title": "Transkripsikan audio",
+    "description": "Konfigurasikan pengaturan transkripsi untuk file audio ini.",
+    "diarization": "Pisahkan pembicara",
+    "enhanceAudio": "Tingkatkan audio",
+    "enhanceHint": "Menerapkan pengurangan noise AI sebelum transkripsi. Gunakan saat ucapan sulit didengar — angin kencang, lalu lintas, mesin. Menambah waktu pemrosesan, jadi lewati rekaman yang jelas dengan transkripsi yang sudah berfungsi dengan baik.",
+    "starting": "Memulai...",
+    "start": "Mulai transkripsi"
+  },
+  "viewer": {
+    "lowConfidence": "Tingkat keyakinan rendah",
+    "confidenceTitle": "Tingkat keyakinan: {{percent}}%",
+    "noUtterances": "Tidak ada ucapan yang tersedia.",
+    "ariaLabel": "Transkrip",
+    "followLabel": "Ikuti pemutaran",
+    "follow": "Mengikuti"
+  },
+  "row": {
+    "actionsLabel": "Tindakan untuk {{title}}",
+    "retranscribe": "Transkripsikan ulang",
+    "delete": "Hapus"
+  },
+  "detail": {
+    "loading": "Memuat transkripsi...",
+    "notFound": "Transkripsi tidak ditemukan atau gagal dimuat.",
+    "tryAgain": "Coba lagi",
+    "titleLabel": "Judul audio",
+    "descriptionPlaceholder": "Tambahkan deskripsi...",
+    "descriptionLabel": "Deskripsi audio",
+    "updateTitleFailed": "Gagal memperbarui judul audio",
+    "updateDescriptionFailed": "Gagal memperbarui deskripsi audio",
+    "delete": "Hapus",
+    "enhanced": "Ditingkatkan",
+    "processing": "Memproses transkripsi...",
+    "streamFailed": "Streaming audio gagal. Silakan segarkan dan coba lagi."
+  },
+  "reader": {
+    "find": {
+      "label": "Cari dalam transkrip",
+      "placeholder": "Cari dalam transkrip",
+      "count": "{{current}} dari {{total}}",
+      "none": "Tidak ada hasil",
+      "next": "Hasil berikutnya",
+      "prev": "Hasil sebelumnya",
+      "clear": "Hapus pencarian"
+    },
+    "back": "Kembali ke Pustaka",
+    "backLabel": "Kembali ke Pustaka",
+    "retranscribe": "Transkripsikan ulang",
+    "sourceLabel": "Sumber",
+    "library": "Pustaka",
+    "more": "Tindakan lain",
+    "uploadedLine": "Diunggah {{date}}",
+    "followPlayback": "Ikuti pemutaran"
+  }
+}
