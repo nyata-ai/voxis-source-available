@@ -1,7 +1,22 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import { SettingsPage } from './SettingsPage'
+
+function LocationProbe() {
+  const location = useLocation()
+  return <output data-testid="location">{location.search}</output>
+}
+
+function renderSettings(initialEntry = '/settings') {
+  return render(
+    <MemoryRouter initialEntries={[initialEntry]}>
+      <SettingsPage />
+      <LocationProbe />
+    </MemoryRouter>
+  )
+}
 
 // Mock child sections to isolate layout testing
 vi.mock('@/components/settings/ProfileSection', () => ({
@@ -27,7 +42,7 @@ vi.mock('@/components/settings/ApiKeysSection', () => ({
 }))
 describe('SettingsPage', () => {
   it('renders with sidebar navigation showing internal-profile section names', () => {
-    render(<SettingsPage />)
+    renderSettings()
     expect(screen.getByText('Profile')).toBeInTheDocument()
     expect(screen.getByText('Appearance')).toBeInTheDocument()
     expect(screen.getByText('Language')).toBeInTheDocument()
@@ -40,25 +55,25 @@ describe('SettingsPage', () => {
   })
 
   it('does not expose email notification controls', () => {
-    render(<SettingsPage />)
+    renderSettings()
     expect(screen.queryByText('Notifications')).not.toBeInTheDocument()
   })
 
   it('default active section is Profile', () => {
-    render(<SettingsPage />)
+    renderSettings()
     expect(screen.getByTestId('profile-section')).toBeInTheDocument()
   })
 
   it('clicking Appearance shows AppearanceSection', async () => {
     const user = userEvent.setup()
-    render(<SettingsPage />)
+    renderSettings()
     await user.click(screen.getByText('Appearance'))
     expect(screen.getByTestId('appearance-section')).toBeInTheDocument()
   })
 
   it('clicking each nav item switches content area', async () => {
     const user = userEvent.setup()
-    render(<SettingsPage />)
+    renderSettings()
 
     await user.click(screen.getByText('Language'))
     expect(screen.getByTestId('language-section')).toBeInTheDocument()
@@ -77,7 +92,64 @@ describe('SettingsPage', () => {
   })
 
   it('renders page title', () => {
-    render(<SettingsPage />)
+    renderSettings()
     expect(screen.getByRole('heading', { name: /settings/i })).toBeInTheDocument()
+  })
+
+  describe('section in the URL', () => {
+    it('opens the section named by ?section=', () => {
+      renderSettings('/settings?section=api-keys')
+      expect(screen.getByTestId('apikeys-section')).toBeInTheDocument()
+      expect(screen.getByRole('button', { name: 'API Keys' })).toHaveAttribute(
+        'aria-current',
+        'page'
+      )
+    })
+
+    it('falls back to Profile for an unknown section', () => {
+      renderSettings('/settings?section=nope')
+      expect(screen.getByTestId('profile-section')).toBeInTheDocument()
+    })
+
+    it('writes the chosen section to the URL, and drops it for Profile', async () => {
+      const user = userEvent.setup()
+      renderSettings()
+
+      await user.click(screen.getByRole('button', { name: 'Language' }))
+      expect(screen.getByTestId('location')).toHaveTextContent('?section=language')
+
+      await user.click(screen.getByRole('button', { name: 'Profile' }))
+      expect(screen.getByTestId('location')).toBeEmptyDOMElement()
+    })
+  })
+
+  it('leaves Settings on Back, however many sections were opened', async () => {
+    const user = userEvent.setup()
+    function BackButton() {
+      const navigate = useNavigate()
+      return <button onClick={() => navigate(-1)}>Back</button>
+    }
+    render(
+      <MemoryRouter initialEntries={['/desk', '/settings']} initialIndex={1}>
+        <Routes>
+          <Route path="/settings" element={<SettingsPage />} />
+          <Route path="/desk" element={<p>The Desk</p>} />
+        </Routes>
+        <BackButton />
+      </MemoryRouter>
+    )
+
+    await user.click(screen.getByRole('button', { name: 'Language' }))
+    await user.click(screen.getByRole('button', { name: 'Playback' }))
+    await user.click(screen.getByRole('button', { name: 'Back' }))
+
+    expect(screen.getByText('The Desk')).toBeInTheDocument()
+  })
+
+  it('marks the active item with the coral edge, like the sidebar', () => {
+    renderSettings('/settings?section=playback')
+    const active = screen.getByRole('button', { name: 'Playback' })
+    expect(active).toHaveClass('border-coral-mark')
+    expect(screen.getByRole('button', { name: 'Profile' })).not.toHaveAttribute('aria-current')
   })
 })

@@ -23,7 +23,7 @@ export function RecordingTimer({ elapsed, isPaused }: RecordingTimerProps) {
   return (
     <div className="flex items-center gap-3" role="timer" aria-label={t('timer.ariaLabel', { display })}>
       <span
-        className={`font-mono text-5xl font-bold tracking-wider tabular-nums ${
+        className={`text-5xl font-normal tabular-nums ${
           isPaused ? 'text-muted-foreground' : 'text-foreground'
         }`}
       >

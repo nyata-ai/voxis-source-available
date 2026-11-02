@@ -4,9 +4,12 @@ import { useTranslation } from 'react-i18next'
 import { ChevronLeft, ChevronRight, FileAudio, FileText, Search } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { Button } from '@/components/ui/button'
+import { Page, PageHeader } from '@/components/layout/Page'
 import { useSearchMedia } from '@/hooks/useMedia'
 import { useUnifiedSearch } from '@/hooks/useSearch'
 import { useTranscriptionList } from '@/hooks/useTranscription'
+import { INTAKE_DISC_CLASS } from '@/lib/intake-tone'
+import { cn } from '@/lib/utils'
 import type { SearchItem } from '@/types/search'
 
 const PAGE_SIZE = 50
@@ -156,11 +159,7 @@ export function LibraryPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-6">
-      <header>
-        <h1 className="text-3xl font-semibold">{t('library.title')}</h1>
-        <p className="mt-2 text-muted-foreground">{t('library.description')}</p>
-      </header>
+    <Page header={<PageHeader title={t('library.title')} description={t('library.description')} />}>
       <label className="relative block max-w-xl">
         <span className="sr-only">{t('library.search')}</span>
         <Search className="pointer-events-none absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
@@ -220,7 +219,7 @@ export function LibraryPage() {
         <ResultList rows={rows} label={t('library.title')} />
       )}
       <Pagination offset={offset} total={total} onPageChange={setOffset} />
-    </div>
+    </Page>
   )
 }
 
@@ -242,11 +241,13 @@ function ResultList({ rows, label }: { rows: LibraryRow[]; label: string }) {
           <Link
             key={row.key}
             to={row.to}
-            className="flex items-center gap-4 border-b p-4 last:border-b-0 hover:bg-accent"
+            className="flex items-center gap-3 border-b border-border/60 p-4 last:border-b-0 transition-colors hover:bg-accent/30"
           >
-            <Icon className="h-5 w-5 text-muted-foreground" aria-hidden="true" />
+            <span className={cn('flex h-6 w-6 shrink-0 items-center justify-center rounded-full', INTAKE_DISC_CLASS.upload)} aria-hidden="true">
+              <Icon className="h-3.5 w-3.5" />
+            </span>
             <span className="min-w-0 flex-1">
-              <span className="block truncate font-medium">{row.title}</span>
+              <span className="block truncate text-sm font-semibold">{row.title}</span>
               {row.detail && (
                 <span className="block truncate text-sm text-muted-foreground">{row.detail}</span>
               )}
@@ -316,12 +317,12 @@ function EmptyState({ search }: { search: boolean }) {
   if (search)
     return (
       <div className="rounded-lg border border-dashed p-8 text-center">
-        <p className="font-medium">{t('library.noMatches')}</p>
+        <p className="font-semibold">{t('library.noMatches')}</p>
       </div>
     )
   return (
     <div className="rounded-lg border border-dashed p-8 text-center">
-      <p className="font-medium">{t('library.emptyTitle')}</p>
+      <p className="font-semibold">{t('library.emptyTitle')}</p>
       <p className="mt-2 text-sm text-muted-foreground">{t('library.emptyBody')}</p>
       <Button asChild className="mt-4">
         <Link to="/dashboard?capture=upload">{t('library.upload')}</Link>

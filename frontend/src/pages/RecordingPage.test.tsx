@@ -147,6 +147,7 @@ const mockChunkUpload = {
 }
 
 vi.mock('@/hooks/useChunkUpload', () => ({
+  BACKLOG_LIMIT: 10,
   useChunkUpload: () => mockChunkUpload,
 }))
 
@@ -320,6 +321,17 @@ describe('RecordingPage', () => {
   })
 
   // State 2: Recording active
+  // The Toaster keeps above this bar on phones, keyed on the attribute.
+  it('marks the Start and Stop bars so toasts can keep clear of them', () => {
+    const idle = renderPage()
+    expect(screen.getByRole('button', { name: 'Start Recording' }).closest('[data-pinned-controls]')).not.toBeNull()
+    idle.unmount()
+
+    mockStore.status = 'recording'
+    renderPage()
+    expect(screen.getByRole('button', { name: /stop/i }).closest('[data-pinned-controls]')).not.toBeNull()
+  })
+
   it('renders "Recording" label and controls when recording', () => {
     mockStore.status = 'recording'
     renderPage()
@@ -428,20 +440,45 @@ describe('RecordingPage', () => {
     expect(screen.getByRole('button', { name: /try again/i })).toBeInTheDocument()
   })
 
-  // Upload status indicator
-  it('shows "Saving..." when outbox has unsent chunks', () => {
+  // Segment ticks under the tape
+  it('says how segments are kept before the first one is captured', () => {
     mockStore.status = 'recording'
-    mockStore.outboxSize = 3
     renderPage()
-    expect(screen.getByText(/saving/i)).toBeInTheDocument()
+    expect(screen.getByText('Sent every 30 seconds and stored encrypted')).toBeInTheDocument()
   })
 
-  it('shows "Saved" when outbox is empty and lastSavedAt is set', () => {
+  it('counts captured segments against the ones still waiting to upload', async () => {
     mockStore.status = 'recording'
-    mockStore.outboxSize = 0
-    mockStore.lastSavedAt = Date.now()
+    mockStore.outboxSize = 1
     renderPage()
-    expect(screen.getByText('Saved')).toBeInTheDocument()
+
+    await act(async () => {
+      await capturedMediaRecorderOptions?.onDataAvailable?.(new Blob(['a']), 0)
+      await capturedMediaRecorderOptions?.onDataAvailable?.(new Blob(['b']), 1)
+    })
+
+    expect(
+      screen.getByText('Sent every 30 seconds and stored encrypted · 1 of 2 saved'),
+    ).toBeInTheDocument()
+    const ticks = screen.getByTestId('segment-ticks').children
+    expect(ticks).toHaveLength(2)
+    expect(ticks[0]).toHaveAttribute('data-saved', 'true')
+    expect(ticks[1]).toHaveAttribute('data-saved', 'false')
+  })
+
+  it('warns only once the upload backlog passes the pause limit', () => {
+    mockStore.status = 'recording'
+    mockStore.outboxSize = 11
+    renderPage()
+    expect(screen.getByText('Saving... (11 unsent)')).toHaveClass('text-warning')
+  })
+
+  it('makes Stop the primary button and keeps Pause outlined', () => {
+    mockStore.status = 'recording'
+    mockStore.elapsed = 5
+    renderPage()
+    expect(screen.getByRole('button', { name: /stop/i })).not.toHaveClass('bg-destructive')
+    expect(screen.getByRole('button', { name: /pause/i })).toHaveClass('border')
   })
 
   it('awaits the chunk enqueue from onDataAvailable', async () => {
@@ -512,6 +549,72 @@ describe('RecordingPage', () => {
     const startCallOrder = mockMediaRecorder.start.mock.invocationCallOrder[0]
     expect(prepareCallOrder).toBeLessThan(createCallOrder)
     expect(createCallOrder).toBeLessThan(startCallOrder)
+  })
+
+  describe('while Start is working', () => {
+    function deferred() {
+      let resolve: () => void = () => {}
+      let reject: (error: Error) => void = () => {}
+      const promise = new Promise<void>((done, fail) => {
+        resolve = done
+        reject = fail
+      })
+      return { promise, resolve, reject }
+    }
+
+    const startButton = () => screen.getByRole('button', { name: 'Start Recording' })
+    const testButton = () => screen.getByRole('button', { name: 'Test microphone' })
+
+    /** Presses Start and waits for prepare, which is where the page first opens
+     *  a capture of its own. */
+    async function pressStart() {
+      const prepare = deferred()
+      mockMediaRecorder.prepare.mockReturnValue(prepare.promise)
+      renderPage()
+      fireEvent.click(startButton())
+      await waitFor(() => expect(mockMediaRecorder.prepare).toHaveBeenCalledTimes(1))
+      return prepare
+    }
+
+    it('keeps the microphone test out and cannot start twice', async () => {
+      mockCreateSession.mutateAsync.mockResolvedValue({ id: 'sess-1' })
+      mockMediaRecorder.start.mockResolvedValue(undefined)
+      const prepare = await pressStart()
+
+      expect(testButton()).toBeDisabled()
+      expect(startButton()).toBeDisabled()
+      fireEvent.click(startButton())
+
+      await act(async () => {
+        prepare.resolve()
+      })
+      await waitFor(() => expect(mockMediaRecorder.start).toHaveBeenCalledTimes(1))
+      expect(mockMediaRecorder.prepare).toHaveBeenCalledTimes(1)
+      expect(mockCreateSession.mutateAsync).toHaveBeenCalledTimes(1)
+    })
+
+    it('gives the test and Start back when capture cannot be prepared', async () => {
+      const prepare = await pressStart()
+
+      await act(async () => {
+        prepare.reject(new Error('permission denied'))
+      })
+
+      await waitFor(() => expect(startButton()).toBeEnabled())
+      expect(testButton()).toBeEnabled()
+    })
+
+    it('gives the test and Start back when the meeting-capture consent dialog asks first', async () => {
+      mockStore.captureSource = 'mixed_audio'
+      renderPage()
+
+      fireEvent.click(startButton())
+
+      // The dialog hides the page from the accessibility tree while it asks.
+      const hiddenStart = () => screen.getByRole('button', { name: 'Start Recording', hidden: true })
+      await waitFor(() => expect(hiddenStart()).toBeEnabled())
+      expect(mockMediaRecorder.prepare).not.toHaveBeenCalled()
+    })
   })
 
   it('does not create a server session when mixed capture prepare fails', async () => {

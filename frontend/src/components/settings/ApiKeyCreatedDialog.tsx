@@ -110,7 +110,7 @@ export function ApiKeyCreatedDialog({
 
         <div className="space-y-4">
           <div className="rounded-md border border-warning/40 bg-warning/10 p-3">
-            <p className="text-sm font-medium text-warning">
+            <p className="text-sm font-semibold text-warning">
               {t('apiKeys.created.warning')}
             </p>
           </div>
@@ -121,7 +121,7 @@ export function ApiKeyCreatedDialog({
           </div>
 
           <div className="space-y-2">
-            <p className="text-sm font-medium">{t('apiKeys.created.snippets')}</p>
+            <p className="text-sm font-semibold">{t('apiKeys.created.snippets')}</p>
             <Tabs defaultValue="claude">
               <TabsList className="flex-wrap h-auto">
                 <TabsTrigger value="claude">{t('apiKeys.created.tabs.claude')}</TabsTrigger>

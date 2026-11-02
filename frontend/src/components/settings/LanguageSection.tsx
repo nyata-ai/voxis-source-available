@@ -32,11 +32,11 @@ export function LanguageSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{t('language.title')}</h3>
+        <h3 className="text-section font-normal">{t('language.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('language.description')}</p>
       </div>
 
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {pickerLocales(active).map(({ code, label, nativeLabel }) => {
           const isAvailable = TRANSLATED_LANGUAGE_CODE_SET.has(code)
           const isActive = active === code && isAvailable
@@ -53,7 +53,7 @@ export function LanguageSection() {
                 isActive && 'ring-2 ring-primary border-primary'
               )}
             >
-              <span className="text-sm font-medium">{nativeLabel}</span>
+              <span className="text-sm font-semibold">{nativeLabel}</span>
               <span className="text-xs text-muted-foreground text-center">{label}</span>
             </button>
           )

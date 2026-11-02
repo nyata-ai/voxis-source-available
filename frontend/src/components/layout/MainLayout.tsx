@@ -34,9 +34,12 @@ export function MainLayout({ children }: { children: ReactNode }) {
     return () => document.removeEventListener('keydown', close)
   }, [sidebarOpen, closeSidebar])
   return (
-    <div className="relative min-h-screen">
+    // A column at least one dynamic viewport tall whose middle row grows, so
+    // the footer sits at the bottom of short pages instead of mid-screen.
+    <div className="relative flex min-h-dvh flex-col">
       <Header onMenuClick={() => setSidebarOpen(!sidebarOpen)} />
-      <div className="flex">
+      <div className="flex flex-1">
+        {/* Mobile sidebar overlay */}
         {sidebarOpen && (
           <div
             className="fixed inset-0 z-40 bg-background/80 backdrop-blur-sm md:hidden"
@@ -46,7 +49,9 @@ export function MainLayout({ children }: { children: ReactNode }) {
         )}
         <Sidebar
           className={cn(
-            'fixed left-0 top-14 z-40 h-[calc(100vh-3.5rem)] w-56 border-r bg-background transition-transform md:translate-x-0',
+            // dvh, not vh: on phones 100vh runs under the browser's bottom
+            // bar and hides the foot of the drawer.
+            'fixed left-0 top-14 z-40 h-[calc(100dvh-3.5rem)] w-56 border-r bg-background transition-transform md:translate-x-0',
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           )}
           onNavigate={closeSidebar}

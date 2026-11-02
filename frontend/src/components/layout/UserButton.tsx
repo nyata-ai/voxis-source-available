@@ -70,15 +70,15 @@ export function UserButton() {
         <DropdownMenuTrigger asChild>
           <button
             type="button"
-            className="flex items-center gap-2 border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-accent/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+            className="flex items-center gap-2 rounded-md border border-transparent px-1.5 py-1 transition-colors hover:border-border hover:bg-accent/45 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             aria-label={t('layout.accountMenu', { name: displayName })}
           >
-            <span className="flex h-7 w-7 items-center justify-center bg-primary text-[0.7rem] font-semibold text-primary-foreground">
+            <span className="flex h-7 w-7 items-center justify-center rounded-sm bg-primary text-caption font-semibold text-primary-foreground">
               {initial}
             </span>
             <span className="hidden text-left leading-tight md:block">
               <span className="block text-xs font-semibold">{displayName}</span>
-              <span className="block text-[0.68rem] text-muted-foreground">{user.email}</span>
+              <span className="block text-caption text-muted-foreground">{user.email}</span>
             </span>
           </button>
         </DropdownMenuTrigger>
@@ -86,7 +86,7 @@ export function UserButton() {
         <DropdownMenuContent align="end" sideOffset={8} className="w-56">
           <DropdownMenuLabel className="font-normal">
             <div className="space-y-0.5">
-              <p className="truncate text-sm font-medium leading-none">{displayName}</p>
+              <p className="truncate text-sm font-semibold leading-none">{displayName}</p>
               <p className="truncate text-xs text-muted-foreground">{user.email}</p>
             </div>
           </DropdownMenuLabel>

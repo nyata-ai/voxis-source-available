@@ -27,7 +27,7 @@ export function BrowserCompatCheck({ children }: BrowserCompatCheckProps) {
       <div className="flex flex-col items-center justify-center gap-4 py-16 text-center" role="alert">
         <AlertCircle className="h-12 w-12 text-muted-foreground" />
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold">{t('compat.title')}</h2>
+          <h2 className="text-section font-normal">{t('compat.title')}</h2>
           <p className="text-muted-foreground max-w-md">
             {t('compat.message')}
           </p>

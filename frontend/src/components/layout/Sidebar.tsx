@@ -38,8 +38,8 @@ export function Sidebar({
         aria-label={t('layout.sidebarNavigation')}
       >
         {groups.map((group) => (
-          <div key={group.id} className="space-y-1">
-            <p className="px-3 text-[0.65rem] font-medium uppercase tracking-wide text-muted-foreground">
+          <div key={group.id} className="space-y-px">
+            <p className="kicker px-3 pb-1">
               {t(group.labelKey)}
             </p>
             {group.routes.map((route) => (
@@ -75,11 +75,20 @@ function NavLink({
       rel={route.openInNewTab ? 'noreferrer' : undefined}
       onClick={onNavigate}
       className={cn(
-        'flex items-center gap-3 rounded-md px-3 py-2 text-sm hover:bg-accent',
-        active && 'bg-accent font-medium'
+        // 44px rows in the phone drawer (touch-target rule); about 36px from md.
+        'group flex min-h-11 items-center gap-2.5 border-l-2 px-3 py-2 text-body transition-colors md:min-h-0',
+        active
+          ? 'border-l-coral-mark bg-accent/40 text-foreground'
+          : 'border-l-transparent text-muted-foreground hover:bg-accent/25 hover:text-foreground'
       )}
     >
-      <Icon className="h-4 w-4" aria-hidden="true" />
+      <Icon
+        className={cn(
+          'h-3.5 w-3.5 transition-opacity',
+          active ? 'opacity-100' : 'opacity-70 group-hover:opacity-100'
+        )}
+        aria-hidden="true"
+      />
       {route.labelKey ? t(route.labelKey) : route.label}
     </Link>
   )

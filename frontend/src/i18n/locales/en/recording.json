@@ -115,8 +115,7 @@
     "tryAgain": "Try Again"
   },
   "upload": {
-    "saving": "Saving... ({{n}} unsent)",
-    "saved": "Saved"
+    "saving": "Saving... ({{n}} unsent)"
   },
   "toast": {
     "autoStop": "Recording automatically stopped after 8 hours.",
@@ -150,5 +149,15 @@
     "mixed": "Meeting audio",
     "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
     "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  },
+  "tape": {
+    "caption": "Sent every 30 seconds and stored encrypted",
+    "count": "{{saved}} of {{total}} saved"
+  },
+  "micCheck": {
+    "test": "Test microphone",
+    "listening": "Listening…",
+    "heard": "We can hear you",
+    "silent": "No sound yet. Check the microphone."
   }
 }

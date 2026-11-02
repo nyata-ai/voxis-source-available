@@ -14,6 +14,7 @@ export interface ActivityItem {
   title?: string
   stage: ActivityStage
   status: ActivityStatus
+  /** Stored failure reason. Only present on `failed` items. */
   error_message?: string
   detail?: ActivityDetail
   started_at: string

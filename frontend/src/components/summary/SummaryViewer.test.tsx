@@ -573,7 +573,7 @@ describe('SummaryViewer', () => {
     expect(screen.getByText('General Summary')).toBeInTheDocument()
   })
 
-  // The reader's briefing panel already caps the band at 78ch; a 65ch prose cap
+  // The reader's briefing panel already caps the band at 70ch; a 65ch prose cap
   // inside it would render the body narrower than the artboard asks for.
   it('lets the general body fill its host when headless, and caps it in the card', () => {
     const { container, unmount } = render(<SummaryViewer summary={baseSummary} headless />)
@@ -584,10 +584,10 @@ describe('SummaryViewer', () => {
     expect(card.container.querySelector('.max-w-prose')).not.toBeNull()
   })
 
-  it('paints a failed lens coral inside the reader and destructive in the card', () => {
+  it('paints a failed lens destructive inside the reader and in the card', () => {
     const failed = { ...baseSummary, status: 'failed' as const, error_message: 'Boom' }
     const { unmount } = render(<SummaryViewer summary={failed} headless />)
-    expect(screen.getByText('Boom')).toHaveClass('text-coral')
+    expect(screen.getByText('Boom')).toHaveClass('text-destructive')
     unmount()
 
     render(<SummaryViewer summary={failed} />)

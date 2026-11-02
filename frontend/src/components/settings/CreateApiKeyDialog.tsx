@@ -106,7 +106,7 @@ export function CreateApiKeyDialog({
                     htmlFor={`scope-${scope.value}`}
                     className="flex-1 cursor-pointer font-normal"
                   >
-                    <span className="font-medium">{t(scope.labelKey)}</span>
+                    <span className="font-semibold">{t(scope.labelKey)}</span>
                     <span className="ml-1 text-muted-foreground">
                       - {t(scope.descriptionKey)}
                     </span>

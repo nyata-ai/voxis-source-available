@@ -20,7 +20,9 @@
     "libraryTitle": "ライブラリ",
     "libraryBody": "この組織には {{files}} 個の音声ファイルが保存されています。",
     "statsUnavailable": "ダッシュボードの集計が使えない間もライブラリは利用できます。",
-    "openLibrary": "ライブラリを開く"
+    "openLibrary": "ライブラリを開く",
+    "recordCatalog": "ライブ",
+    "uploadCatalog": "ファイル"
   },
   "library": {
     "title": "ライブラリ",

@@ -12,9 +12,13 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Switch } from '@/components/ui/switch'
+import { cn } from '@/lib/utils'
 import { AudioAnalysisCard } from '@/components/media/AudioAnalysisCard'
 import { SpeakerEditor } from '@/components/transcription/SpeakerEditor'
-import { TranscriptViewer } from '@/components/transcription/TranscriptViewer'
+import {
+  TranscriptViewer,
+  type CitationLanding,
+} from '@/components/transcription/TranscriptViewer'
 import type { SummaryType } from '@/types/summary'
 import { ExportPanel } from './ExportPanel'
 import type { SessionView } from './session-view'
@@ -23,12 +27,36 @@ import type { SessionView } from './session-view'
 const FOLLOW_SWITCH =
   'h-5 w-9 [&>span]:h-4 [&>span]:w-4 [&>span]:data-[state=checked]:translate-x-4'
 
-/** The transcript column pins under the app header from `lg` and scrolls
- *  inside its own box, so the words stay put while the left rail — audio card,
- *  export, speakers, integrity — flows with the page. The 16 px of air under the
- *  header is opaque padding on the sticky element itself, so scrolled content
- *  never shows through the gap. `--app-header-h` is set in globals.css. */
-const COLUMN_STICKY = 'lg:sticky lg:top-[var(--app-header-h)] lg:bg-background lg:pt-4'
+/** The transcript column pins under the app header (and the reader's section
+ *  links, when the page shows them) from `lg` and scrolls inside its own box,
+ *  so the words stay put while the left rail — audio card, speakers, export,
+ *  integrity — flows with the page. The 16 px of air under the header is opaque
+ *  padding on the sticky element itself, so scrolled content never shows
+ *  through the gap. `--app-header-h` is set in globals.css; `--reader-nav-h` by
+ *  the reader page. */
+const COLUMN_STICKY =
+  'lg:sticky lg:top-[calc(var(--app-header-h)_+_var(--reader-nav-h,0rem))] lg:bg-background lg:pt-4'
+
+/** From `lg` the find row rides with the sticky column. Below it the page is the
+ *  one scroll, so the row pins itself under the same bars, opaque, or stepping
+ *  through matches would carry the Next button off the screen. The auto-scroll
+ *  hook finds it by `data-reader-find` to land turns below it. */
+const FIND_ROW_STICKY =
+  'max-lg:sticky max-lg:top-[calc(var(--app-header-h)_+_var(--reader-nav-h,0rem))] max-lg:z-10 max-lg:bg-background max-lg:pt-2'
+
+/** 44 px below `sm`, the toolbar's quieter 28 px above it. */
+const FIND_BUTTON = 'h-11 w-11 rounded-lg sm:h-7 sm:w-7'
+
+/** Where an in-page section link lands: under the app header and the sticky
+ *  section links, with a little air. */
+export const READER_SECTION_SCROLL_MARGIN =
+  'scroll-mt-[calc(var(--app-header-h)_+_var(--reader-nav-h,0rem)_+_0.5rem)]'
+
+/** DOM ids of the reader's sections, for the section links. */
+export const READER_SECTION_ID = {
+  transcript: 'transcript',
+  export: 'export',
+} as const
 
 interface FindState {
   query: string
@@ -39,10 +67,10 @@ interface FindState {
 }
 
 /**
- * Find-in-transcript. Enter steps to the next match and wraps, Shift+Enter
- * steps back, Escape clears the query and blurs — none of which touches
- * follow-playback; stepping goes through the viewer's own jump, which releases
- * follow on its own.
+ * Find-in-transcript. Enter goes to the first match, then steps and wraps,
+ * Shift+Enter steps back, Escape clears the query and blurs — none of which
+ * touches follow-playback; stepping goes through the viewer's own jump, which
+ * releases follow on its own.
  */
 function FindField({ query, matchCount, activeMatch, onQueryChange, onStep }: FindState) {
   const { t } = useTranslation(['transcription'])
@@ -69,7 +97,7 @@ function FindField({ query, matchCount, activeMatch, onQueryChange, onStep }: Fi
 
   return (
     <>
-      <div className="relative flex-1 basis-full sm:basis-60">
+      <div className="relative min-w-24 flex-1 basis-0 sm:basis-60">
         <Search
           className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground"
           aria-hidden="true"
@@ -92,17 +120,14 @@ function FindField({ query, matchCount, activeMatch, onQueryChange, onStep }: Fi
             className="shrink-0 tabular-nums text-xs text-ink-muted dark:text-muted-foreground"
           >
             {matchCount > 0
-              ? t('transcription:reader.find.count', {
-                  current: activeMatch + 1,
-                  total: matchCount,
-                })
+              ? t('transcription:reader.find.count', { current: Math.max(activeMatch, 0) + 1, total: matchCount })
               : t('transcription:reader.find.none')}
           </span>
-          <span className="flex min-h-11 items-center gap-1">
+          <span className="flex min-h-11 items-center sm:gap-1">
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 rounded-lg"
+              className={FIND_BUTTON}
               disabled={matchCount === 0}
               onClick={() => onStep(-1)}
               aria-label={t('transcription:reader.find.prev')}
@@ -112,7 +137,7 @@ function FindField({ query, matchCount, activeMatch, onQueryChange, onStep }: Fi
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 rounded-lg"
+              className={FIND_BUTTON}
               disabled={matchCount === 0}
               onClick={() => onStep(1)}
               aria-label={t('transcription:reader.find.next')}
@@ -122,7 +147,7 @@ function FindField({ query, matchCount, activeMatch, onQueryChange, onStep }: Fi
             <Button
               variant="ghost"
               size="icon"
-              className="h-7 w-7 rounded-lg"
+              className={FIND_BUTTON}
               onClick={() => onQueryChange('')}
               aria-label={t('transcription:reader.find.clear')}
             >
@@ -149,6 +174,8 @@ function TranscriptBody({
   onSeek,
   onMatchesChange,
   onFollowingChange,
+  landing,
+  isPlaying,
 }: {
   session: SessionView
   currentTime: number
@@ -158,12 +185,14 @@ function TranscriptBody({
   onSeek: (time: number) => void
   onMatchesChange: (matches: number[]) => void
   onFollowingChange: (following: boolean) => void
+  landing?: CitationLanding | null
+  isPlaying?: boolean
 }) {
   if (session.transcriptCta) return <>{session.transcriptCta}</>
 
   if (session.utterances.length === 0 && session.fullTranscript) {
     return (
-      <pre className="whitespace-pre-wrap text-[15px] leading-[1.65]">{session.fullTranscript}</pre>
+      <pre className="max-w-[68ch] whitespace-pre-wrap font-sans text-reading">{session.fullTranscript}</pre>
     )
   }
 
@@ -180,6 +209,8 @@ function TranscriptBody({
       // so the toolbar switch and the floating pill cannot disagree.
       following={following}
       onFollowingChange={onFollowingChange}
+      landing={landing}
+      isPlaying={isPlaying}
     />
   )
 }
@@ -209,22 +240,32 @@ export function ReaderFilePanels({ session }: { session: SessionView }) {
   if (!hasFilePanels(session)) return null
   return (
     <>
-      {showsSpeakers(session) && session.transcriptionId && (
-        <SpeakerEditor
-          transcriptionId={session.transcriptionId}
-          speakerMap={session.speakerMap ?? {}}
-          speakerCount={session.speakerCount}
-          suggestedSpeakerMap={session.suggestedSpeakerMap}
-          suggestionsGenerated={session.suggestionsGenerated}
-        />
-      )}
-      {session.forensics && (
-        <AudioAnalysisCard
-          analysis={session.forensics.analysis}
-          fileHash={session.forensics.fileHash}
-        />
-      )}
+      <SpeakersPanel session={session} />
+      <AnalysisPanel session={session} />
     </>
+  )
+}
+
+function SpeakersPanel({ session }: { session: SessionView }) {
+  if (!showsSpeakers(session) || !session.transcriptionId) return null
+  return (
+    <SpeakerEditor
+      transcriptionId={session.transcriptionId}
+      speakerMap={session.speakerMap ?? {}}
+      speakerCount={session.speakerCount}
+      suggestedSpeakerMap={session.suggestedSpeakerMap}
+      suggestionsGenerated={session.suggestionsGenerated}
+    />
+  )
+}
+
+function AnalysisPanel({ session }: { session: SessionView }) {
+  if (!session.forensics) return null
+  return (
+    <AudioAnalysisCard
+      analysis={session.forensics.analysis}
+      fileHash={session.forensics.fileHash}
+    />
   )
 }
 
@@ -242,13 +283,18 @@ export interface ReaderWorkspaceProps {
   /** Whether the mini dock is covering the bottom of the viewport, so the rail
    *  can stop its scroll above it instead of underneath it. */
   dockVisible?: boolean
+  /** A briefing citation landing on its transcript turn. */
+  landing?: CitationLanding | null
+  /** Whether the audio is playing: below `lg`, follow only lets go of a page
+   *  scrolled by hand while it is. */
+  isPlaying?: boolean
 }
 
 /**
- * The reading surface: a narrow left rail of things you act on — player,
- * export, speakers, provenance — beside the transcript, which gets the wider
- * column and its own scroll. Both rails stick under the top bar from `lg` up,
- * so the transport never scrolls away from the words.
+ * The reading surface: a fixed rail (300-360 px) of things you act on, in the
+ * order you use them — player, speakers, export, provenance — beside the
+ * transcript, which takes every pixel left over and its own scroll. The
+ * transcript sticks under the top bar from `lg` up, so the words stay put.
  */
 export function ReaderWorkspace({
   session,
@@ -259,23 +305,27 @@ export function ReaderWorkspace({
   audioCard,
   columnRef,
   dockVisible = false,
+  landing,
+  isPlaying,
 }: ReaderWorkspaceProps) {
   const { t } = useTranslation(['transcription'])
   const [query, setQuery] = useState('')
   const [matches, setMatches] = useState<number[]>([])
-  const [activeMatch, setActiveMatch] = useState(0)
+  // -1 until the reader steps, so the first Enter goes to match 1 rather than 2.
+  const [activeMatch, setActiveMatch] = useState(-1)
   const [following, setFollowing] = useState(true)
 
   const handleMatchesChange = useCallback((next: number[]) => {
     setMatches(next)
-    setActiveMatch(0)
+    setActiveMatch(-1)
   }, [])
 
   const stepMatch = useCallback(
     (delta: number) => {
       setActiveMatch((current) => {
         const total = matches.length
-        if (total === 0) return 0
+        if (total === 0) return -1
+        if (current < 0) return delta > 0 ? 0 : total - 1
         return (current + delta + total) % total
       })
     },
@@ -291,7 +341,7 @@ export function ReaderWorkspace({
 
   return (
     <div
-      className="grid items-start gap-8 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]"
+      className="grid items-start gap-8 lg:grid-cols-[minmax(300px,360px)_minmax(0,1fr)]"
       style={dockVisible ? DOCK_UP : undefined}
     >
       {/* The rail is one column from `lg` and flows with the page — no inner
@@ -305,18 +355,28 @@ export function ReaderWorkspace({
           {showAudioBlock && <div className="order-1 space-y-6">{audioCard}</div>}
           {showPanels && (
             <div className="order-3 space-y-6">
+              <SpeakersPanel session={session} />
               {showExport && (
-                <ExportPanel session={session} activeLens={activeLens} bapEligible={bapEligible} />
+                <div id={READER_SECTION_ID.export} className={READER_SECTION_SCROLL_MARGIN}>
+                  <ExportPanel session={session} activeLens={activeLens} bapEligible={bapEligible} />
+                </div>
               )}
-              <ReaderFilePanels session={session} />
+              <AnalysisPanel session={session} />
             </div>
           )}
         </div>
       </div>
 
-      <div ref={columnRef} className={`order-2 min-w-0 ${COLUMN_STICKY}`}>
+      <div
+        ref={columnRef}
+        id={READER_SECTION_ID.transcript}
+        className={`order-2 min-w-0 ${COLUMN_STICKY} ${READER_SECTION_SCROLL_MARGIN}`}
+      >
         {hasTranscriptText && (
-          <div className="flex flex-wrap items-center gap-3 pb-3">
+          <div
+            data-reader-find=""
+            className={cn('flex flex-wrap items-center gap-2 pb-2 sm:gap-3 sm:pb-3', FIND_ROW_STICKY)}
+          >
             <FindField
               query={query}
               matchCount={matches.length}
@@ -324,14 +384,17 @@ export function ReaderWorkspace({
               onQueryChange={setQuery}
               onStep={stepMatch}
             />
-            <span className="inline-flex min-h-11 items-center gap-2">
+            {/* A phone has one row for find. While it is searching, the switch
+                steps aside: stepping releases follow, and the Follow pill is
+                the way back. */}
+            <span className={cn('inline-flex min-h-11 items-center gap-2', query.trim() !== '' && 'max-sm:hidden')}>
               <Switch
                 id="reader-follow"
                 checked={following}
                 onCheckedChange={setFollowing}
                 className={FOLLOW_SWITCH}
               />
-              <Label htmlFor="reader-follow" className="cursor-pointer text-[13px] font-normal">
+              <Label htmlFor="reader-follow" className="cursor-pointer text-body font-normal">
                 {t('transcription:reader.followPlayback')}
               </Label>
             </span>
@@ -346,6 +409,8 @@ export function ReaderWorkspace({
           onSeek={onSeek}
           onMatchesChange={handleMatchesChange}
           onFollowingChange={setFollowing}
+          landing={landing}
+          isPlaying={isPlaying}
         />
       </div>
     </div>

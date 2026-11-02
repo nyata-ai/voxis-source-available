@@ -17,7 +17,7 @@ export const CHIP_CLASS =
  *  the height (44 px on phones, 32 px from `sm`). */
 export const PILL_CLASS =
   'inline-flex items-center rounded-full border border-secondary bg-paper-soft ' +
-  'font-semibold text-ink-muted transition-colors hover:border-coral hover:text-coral ' +
+  'font-semibold text-ink-muted transition-colors hover:border-coral-mark hover:text-coral-mark ' +
   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ' +
   'dark:border-border dark:bg-muted dark:text-muted-foreground'
 

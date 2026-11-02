@@ -17,8 +17,6 @@
     "rejectedTitle": "Отклоненные файлы",
     "rejectedLabel": "Отклоненные файлы",
     "uploading": "Загрузка {{name}}",
-    "processing": "Обработка на сервере...",
-    "complete": "Загрузка завершена",
     "viewFile": "Открыть файл",
     "viewFileNamed": "Открыть файл: {{name}}",
     "remove": "Удалить {{name}}",
@@ -29,6 +27,14 @@
       "unsupportedType": "Неподдерживаемый тип файла",
       "tooLarge": "Размер файла превышает максимальный размер 1 ГБ.",
       "storageQuota": "Этот файл превышает оставшуюся квоту хранилища"
+    },
+    "step": {
+      "waiting": "Ожидание",
+      "uploading": "Загрузка",
+      "encrypting": "Шифрование",
+      "encryptFailed": "Ошибка шифрования",
+      "scanning": "Проверка на вирусы",
+      "ready": "Готово"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "Вперёд на {{seconds}} секунд",
     "dock": "Аудиоплеер",
     "backToTranscript": "Назад к расшифровке",
-    "speedPill": "Скорость {{speed}}x"
+    "speedPill": "Скорость {{speed}}x",
+    "speakingTime": "Время речи: {{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "Нажмите, чтобы изменить"

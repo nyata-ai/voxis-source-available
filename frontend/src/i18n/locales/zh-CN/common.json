@@ -91,9 +91,9 @@
       "title": "处理中"
     },
     "stage": {
-      "stitching": "正在处理录音…",
-      "transcribing": "正在转写…",
-      "summarizing": "正在总结…{{terminal}}/{{total}}",
+      "stitching": "正在保存",
+      "transcribing": "正在转写",
+      "summarizing": "摘要 {{terminal}}/{{total}}",
       "ready": "就绪"
     },
     "failed": {

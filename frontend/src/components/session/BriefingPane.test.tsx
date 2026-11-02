@@ -120,11 +120,11 @@ describe('BriefingPane', () => {
   })
 
   describe('tab accessibility', () => {
-    // twMerge has to let the forest pill beat the shadcn default, or the
+    // twMerge has to let the ink pill beat the shadcn default, or the
     // selected tab is indistinguishable from the other three.
-    it('paints the selected tab forest', () => {
+    it('paints the selected tab ink', () => {
       renderPane({ lenses: allGenerated, activeLens: 'key_points' })
-      expect(tab('Key Points').className).toContain('data-[state=active]:bg-forest')
+      expect(tab('Key Points').className).toContain('data-[state=active]:bg-primary')
       expect(tab('Key Points').className).not.toContain('data-[state=active]:bg-background')
     })
 
@@ -418,8 +418,10 @@ describe('BriefingPane', () => {
       })
       renderPane({ lenses: allGenerated, activeLens: 'key_points' })
 
-      expect(useSummaryDetailMock).toHaveBeenCalledTimes(1)
-      expect(useSummaryDetailMock).toHaveBeenCalledWith('s-key')
+      // Counted by id, not by call: the pane renders twice (the tab row's tools
+      // slot arrives after the first pass), and a re-render is not a request.
+      const ids = new Set(useSummaryDetailMock.mock.calls.map((call) => call[0]))
+      expect(ids).toEqual(new Set(['s-key']))
       expect(screen.getByText('Fetched body text.')).toBeInTheDocument()
     })
 

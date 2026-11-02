@@ -14,6 +14,9 @@ interface InlineEditableTextProps {
   inputClassName?: string
   as?: 'h1' | 'h2' | 'p' | 'span'
   stopPropagation?: boolean
+  /** Opens straight into the editor, focused — for a field the reader asked
+   *  to add from a menu, where a second click to start typing would be noise. */
+  defaultEditing?: boolean
 }
 
 export function InlineEditableText({
@@ -27,9 +30,10 @@ export function InlineEditableText({
   inputClassName,
   as: Tag = 'p',
   stopPropagation = false,
+  defaultEditing = false,
 }: InlineEditableTextProps) {
   const { t } = useTranslation('media')
-  const [editing, setEditing] = useState(false)
+  const [editing, setEditing] = useState(defaultEditing)
   const [draft, setDraft] = useState(value)
   const inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
   const savedByKeyRef = useRef(false)
@@ -91,6 +95,7 @@ export function InlineEditableText({
       ref: inputRef as React.RefObject<HTMLInputElement & HTMLTextAreaElement>,
       value: draft,
       'aria-label': ariaLabel,
+      autoFocus: defaultEditing,
       onChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => setDraft(e.target.value),
       onBlur: handleBlur,
       onClick: stopPropagation
@@ -147,7 +152,7 @@ export function InlineEditableText({
       title={t('inlineEdit.clickToEdit')}
     >
       <Tag className={cn('inline', isEmpty && 'text-muted-foreground')}>{displayValue}</Tag>
-      <Pencil className="h-3.5 w-3.5 shrink-0 text-muted-foreground/40 group-hover:text-muted-foreground transition-colors" />
+      <Pencil className="h-3.5 w-3.5 shrink-0 text-muted-foreground group-hover:text-foreground transition-colors" />
     </button>
   )
 }

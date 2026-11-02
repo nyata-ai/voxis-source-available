@@ -81,9 +81,9 @@
   },
   "activity": {
     "title": "Activity",
-    "count": "{{count}} processing",
-    "more": "+{{count}} more",
-    "ready": "Ready",
+    "count": "В работе: {{count}}",
+    "more": "ещё {{count}}",
+    "ready": "Готово",
     "view": "View",
     "dismiss": "Dismiss",
     "recordingTitle": "Live recording",
@@ -91,14 +91,14 @@
       "title": "В обработке"
     },
     "stage": {
-      "stitching": "Processing recording…",
-      "transcribing": "Transcribing…",
-      "summarizing": "Summarizing… {{terminal}} of {{total}}",
-      "ready": "Ready"
+      "stitching": "Сохранение",
+      "transcribing": "Расшифровка",
+      "summarizing": "Сводка {{terminal}} из {{total}}",
+      "ready": "Готово"
     },
     "failed": {
-      "recording": "Recording couldn't be processed",
-      "transcription": "Transcription failed"
+      "recording": "Не удалось обработать запись",
+      "transcription": "Ошибка расшифровки"
     },
     "toast": {
       "recordingReady": "Recording ready",
@@ -124,10 +124,14 @@
       "audio": "Аудио"
     },
     "speaker_one": "{{count}} говорящий",
+    "speaker_few": "{{count}} говорящих",
+    "speaker_many": "{{count}} говорящих",
     "speaker_other": "{{count}} говорящих",
     "words": "{{n}} слов",
-    "lens_one": "{{count}} линза",
-    "lens_other": "{{count}} линз",
+    "lens_one": "{{count}} резюме",
+    "lens_few": "{{count}} резюме",
+    "lens_many": "{{count}} резюме",
+    "lens_other": "{{count}} резюме",
     "languages": "Языки: {{codes}}",
     "untitled": "Сессия без названия"
   }

@@ -20,7 +20,9 @@
     "libraryTitle": "Tu biblioteca",
     "libraryBody": "Hay {{files}} archivos de audio almacenados en esta organización.",
     "statsUnavailable": "La biblioteca sigue disponible aunque falten las estadísticas del panel.",
-    "openLibrary": "Abrir biblioteca"
+    "openLibrary": "Abrir biblioteca",
+    "recordCatalog": "En vivo",
+    "uploadCatalog": "Archivo"
   },
   "library": {
     "title": "Biblioteca",

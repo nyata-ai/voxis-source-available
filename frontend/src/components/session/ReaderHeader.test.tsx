@@ -205,4 +205,95 @@ describe('ReaderHeader', () => {
       '/library'
     )
   })
+
+  describe('description', () => {
+    it('shows an existing description and keeps the menu free of an add item', async () => {
+      renderHeader(makeSession())
+      expect(screen.getByText('Quarterly review')).toBeInTheDocument()
+      const user = userEvent.setup()
+      await user.click(screen.getByRole('button', { name: 'More actions' }))
+      expect(screen.queryByRole('menuitem', { name: /Add a description/ })).not.toBeInTheDocument()
+    })
+
+    // An empty "Add a description" line cost a row of height on every visit;
+    // the empty case now lives in the More menu and opens the editor directly.
+    it('moves adding a description into the More menu and opens the editor from there', async () => {
+      const session = makeSession({ description: '' })
+      renderHeader(session)
+      expect(screen.queryByText(/Add a description/)).not.toBeInTheDocument()
+
+      const user = userEvent.setup()
+      await user.click(screen.getByRole('button', { name: 'More actions' }))
+      await user.click(screen.getByRole('menuitem', { name: /Add a description/ }))
+
+      const editor = await screen.findByRole('textbox', { name: 'Audio description' })
+      await user.type(editor, 'Site visit notes{Control>}{Enter}{/Control}')
+      expect(session.actions.saveDescription).toHaveBeenCalledWith('Site visit notes')
+    })
+
+    it('offers the menu for adding a description even when no rare action is permitted', async () => {
+      const base = makeSession({ description: '' })
+      renderHeader({ ...base, can: { ...base.can, delete: false, retranscribe: false } })
+      const user = userEvent.setup()
+      await user.click(screen.getByRole('button', { name: 'More actions' }))
+      expect(screen.getAllByRole('menuitem')).toHaveLength(1)
+    })
+  })
+
+  describe('section links', () => {
+    const sections = [
+      { id: 'transcript', labelKey: 'transcription:reader.sections.transcript' },
+      { id: 'briefing', labelKey: 'transcription:reader.sections.briefings' },
+      { id: 'export', labelKey: 'transcription:reader.sections.export' },
+    ]
+
+    it('draws the links in the sticky bar and scrolls to a section without a hash', async () => {
+      const target = document.createElement('section')
+      target.id = 'briefing'
+      target.scrollIntoView = vi.fn()
+      document.body.appendChild(target)
+      render(
+        <MemoryRouter>
+          <ReaderHeader session={makeSession()} onDelete={vi.fn()} onRetranscribe={vi.fn()} sections={sections} />
+        </MemoryRouter>,
+      )
+      const nav = screen.getByRole('navigation', { name: 'Sections' })
+      expect(screen.getByTestId('reader-bar')).toContainElement(nav)
+      expect(within(nav).getAllByRole('link').map((link) => link.textContent)).toEqual([
+        'Transcript',
+        'Briefings',
+        'Export',
+      ])
+
+      const user = userEvent.setup()
+      await user.click(within(nav).getByRole('link', { name: 'Briefings' }))
+      expect(target.scrollIntoView).toHaveBeenCalledWith({ block: 'start', behavior: 'smooth' })
+      expect(window.location.hash).toBe('')
+      target.remove()
+    })
+
+    it('draws no links when there is only one place to go', () => {
+      render(
+        <MemoryRouter>
+          <ReaderHeader
+            session={makeSession()}
+            onDelete={vi.fn()}
+            onRetranscribe={vi.fn()}
+            sections={sections.slice(0, 1)}
+          />
+        </MemoryRouter>,
+      )
+      expect(screen.queryByRole('navigation', { name: 'Sections' })).not.toBeInTheDocument()
+      // The bar itself stays: it carries the way back.
+      expect(screen.getByRole('link', { name: 'Back to library' })).toBeInTheDocument()
+    })
+  })
+
+  describe('speaker chip', () => {
+    it('leads the speaker count with one disc per speaker, up to five', () => {
+      renderHeader(makeSession({ speakerCount: 7 }))
+      const chip = within(meta()).getByText('7 speakers')
+      expect(chip.querySelectorAll('[data-testid="speaker-disc"]')).toHaveLength(5)
+    })
+  })
 })

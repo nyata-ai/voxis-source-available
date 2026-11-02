@@ -21,6 +21,10 @@ Your installation uses the bundled Keycloak realm `voxis-oss` and the `voxis-oss
 
 Choose Upload from the dashboard or sidebar. Select an audio file, wait for its scan and encrypted storage to finish, then start transcription from the file reader.
 
+Once you have a finished transcript, the dashboard opens with **Latest session**: the most recent finished session in your organization, with its title, length, number of speakers, and the summaries that are ready (on screen they are called briefings). Press **Open** to go to it.
+
+While a file uploads, its row shows a small track of steps and names the current one: **Uploading**, **Encrypting**, **Scanning for malware**, then **Ready**.
+
 In the library you can edit file details, open the reader, search audio and transcripts, and delete media you own. When searching transcript content, Voxis checks completed transcripts in bounded pages. Use **Load more transcript matches** when it appears to continue through older completed transcripts.
 
 Deleting a file is permanent. It removes the audio, its transcripts and summaries, and its name, title, and description from the server. It cannot be undone. Copies in your organization's existing backups remain until those backups are deleted.
@@ -34,6 +38,8 @@ Custom dictionaries and vocabulary packs are not available with Speechmatics Mel
 ## {#record} Record and recover
 
 Choose Record to capture microphone or supported device audio in the browser. If the page closes or the network fails, the recorder offers to recover the interrupted session when you return.
+
+Before you start, you can press **Test microphone** and speak to check that Voxis can hear you. Nothing is recorded during the test.
 
 Until they are uploaded, pieces of your recording are kept in this browser. They are encrypted, but the key is kept in the same browser, so this only stops casual snooping. When you sign out, Voxis clears them. If some pieces have not been uploaded yet, it warns you first. They are also cleared when someone else signs in on this browser. On a shared computer, let the upload finish and then sign out.
 

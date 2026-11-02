@@ -16,6 +16,7 @@ import {
 } from '@/hooks/useTranscription'
 import { toast } from '@/lib/toast'
 import type { SpeakerSuggestion } from '@/types/transcription'
+import { SpeakerDisc } from './SpeakerDisc'
 
 /** Rows shown before the panel folds the rest behind "Show all". Four is what
  *  the left column can carry without pushing the forensics panel off-screen;
@@ -206,6 +207,7 @@ export function SpeakerEditor({
           <SpeakerRow
             key={key}
             index={i}
+            name={confirmed}
             value={inputs[key] ?? ''}
             suggestion={suggestion}
             onChange={(v) => handleChange(key, v)}
@@ -226,7 +228,7 @@ export function SpeakerEditor({
           className={cn(
             PANEL_ROW_CLASS,
             'flex w-full items-center justify-between gap-3 text-left text-sm text-foreground',
-            'transition-colors hover:text-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
+            'transition-colors hover:text-coral-mark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring'
           )}
         >
           {showAllRows
@@ -251,7 +253,7 @@ export function SpeakerEditor({
           />
           <Label
             htmlFor="show-low-confidence"
-            className="text-[13px] font-normal text-ink-muted dark:text-muted-foreground"
+            className="text-body font-normal text-ink-muted dark:text-muted-foreground"
           >
             {t('speakers.showLowConfidence')}
           </Label>
@@ -263,6 +265,8 @@ export function SpeakerEditor({
 
 interface SpeakerRowProps {
   index: number
+  /** The saved name: the disc shows its initial, as the transcript does. */
+  name: string
   value: string
   suggestion?: SpeakerSuggestion
   onChange: (value: string) => void
@@ -275,6 +279,7 @@ interface SpeakerRowProps {
 
 function SpeakerRow({
   index,
+  name,
   value,
   suggestion,
   onChange,
@@ -299,13 +304,18 @@ function SpeakerRow({
   }
 
   return (
-    <div className={cn(PANEL_ROW_CLASS, 'grid grid-cols-[96px_minmax(0,1fr)] items-center gap-3')}>
-      <Label
-        htmlFor={`speaker-${key}`}
-        className="text-[13px] font-normal text-ink-muted dark:text-muted-foreground"
-      >
-        {t('speakers.speakerLabel', { index: speakerNumber })}
-      </Label>
+    <div className={cn(PANEL_ROW_CLASS, 'grid grid-cols-[112px_minmax(0,1fr)] items-center gap-3')}>
+      {/* The disc sits beside the label, not inside it: the label's text is
+          the input's accessible name and must stay exactly "Speaker N". */}
+      <div className="flex min-w-0 items-center gap-2">
+        <SpeakerDisc speakerIndex={index} name={name} size="md" />
+        <Label
+          htmlFor={`speaker-${key}`}
+          className="text-body font-normal text-ink-muted dark:text-muted-foreground"
+        >
+          {t('speakers.speakerLabel', { index: speakerNumber })}
+        </Label>
+      </div>
       <div className="min-w-0 space-y-2">
         <Input
           id={`speaker-${key}`}
@@ -325,7 +335,7 @@ function SpeakerRow({
                 13 px in body ink rather than the 12 px muted label a chip
                 normally carries. */}
             <Chip
-              className="min-h-8 text-[13px] font-normal text-foreground dark:text-foreground"
+              className="min-h-8 text-body font-normal text-foreground dark:text-foreground"
               title={suggestion.evidence}
             >
               <Sparkles

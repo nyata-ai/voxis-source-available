@@ -34,6 +34,16 @@ describe('AudioPlayer', () => {
     expect(screen.getByRole('button', { name: 'Mute' })).toBeInTheDocument()
   })
 
+  it('draws the reader strip under the scrubber, inside the ink card', () => {
+    render(
+      <AudioPlayer src="https://example.com/audio.mp3" belowScrubber={<div data-testid="strip" />} />,
+    )
+    const strip = screen.getByTestId('strip')
+    const slider = screen.getByRole('slider')
+    expect(strip.closest('.on-ink')).not.toBeNull()
+    expect(slider.compareDocumentPosition(strip) & Node.DOCUMENT_POSITION_FOLLOWING).toBeTruthy()
+  })
+
   it('renders nothing when no src', () => {
     render(<AudioPlayer src={null} />)
     expect(screen.queryByRole('button', { name: 'Play' })).not.toBeInTheDocument()

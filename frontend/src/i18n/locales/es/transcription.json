@@ -3,6 +3,7 @@
     "label": "Idioma",
     "hint": "La detección automática es la opción recomendada y sirve para cualquier grabación. Puede seleccionar hasta {{max}} idiomas para indicarle a Voxis qué esperar; la transcripción final siempre sigue lo que realmente se escucha en el audio.",
     "autoDetect": "Detección automática (recomendado)",
+    "chooseLanguages": "Elegir idiomas (hasta {{max}})",
     "selectedCount": "{{selected}}/{{max}} seleccionado"
   },
   "expectedSpeakers": {
@@ -56,12 +57,20 @@
     "noUtterances": "No hay declaraciones disponibles.",
     "ariaLabel": "Transcripción",
     "followLabel": "Seguir la reproducción",
-    "follow": "Seguir"
+    "follow": "Seguir",
+    "languageSwitch": "El idioma detectado cambia de {{from}} a {{to}}"
   },
   "row": {
     "actionsLabel": "Acciones para {{title}}",
     "retranscribe": "Retranscribir",
     "delete": "Borrar"
+  },
+  "list": {
+    "group": {
+      "today": "Hoy",
+      "thisWeek": "Esta semana",
+      "earlier": "Anteriores"
+    }
   },
   "detail": {
     "loading": "Cargando transcripción...",
@@ -94,6 +103,12 @@
     "library": "Biblioteca",
     "more": "Más acciones",
     "uploadedLine": "Subido el {{date}}",
-    "followPlayback": "Seguir la reproducción"
+    "followPlayback": "Seguir la reproducción",
+    "sections": {
+      "label": "Secciones",
+      "transcript": "Transcripción",
+      "briefings": "Resúmenes",
+      "export": "Exportar"
+    }
   }
 }

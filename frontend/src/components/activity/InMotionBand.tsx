@@ -2,27 +2,18 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import type { TFunction } from 'i18next'
-import { AlertCircle, Loader2 } from 'lucide-react'
 import { useActivity } from '@/hooks/useActivity'
 import { cn } from '@/lib/utils'
 import type { ActivityItem } from '@/types/activity'
-import { activityStageKey, elapsedLabel } from './activity-labels'
+import { activityIntake, activityLabel, activitySteps, elapsedLabel } from './activity-labels'
+import { IntakeDisc } from './IntakeDisc'
+import { StepTrack } from './StepTrack'
 import { useRefreshListsOnSettle } from './useRefreshListsOnSettle'
 
 /** Same fallback the row itself displays — kept as one function so the live
  * announcement below never drifts from what's on screen. */
 function titleForItem(item: ActivityItem, t: TFunction): string {
   return item.title?.trim() || (item.kind === 'recording' ? t('activity.recordingTitle') : t('activity.title'))
-}
-
-/** Same stage/failure vocabulary the row itself displays — see titleForItem. */
-function labelForItem(item: ActivityItem, t: TFunction): string {
-  return item.status === 'failed'
-    ? t(`activity.failed.${item.kind}`)
-    : t(activityStageKey(item.stage), {
-        terminal: item.detail?.terminal ?? 0,
-        total: item.detail?.total ?? 0,
-      })
 }
 
 /**
@@ -45,6 +36,8 @@ export function InMotionBand() {
   const { t } = useTranslation('common')
   const { data } = useActivity()
   const items = useMemo(() => (data?.items ?? []).filter(isInFlight), [data?.items])
+  // The Recent list beside this band caches its own query; refresh it (and the
+  // Library's) the moment something here finishes or fails.
   useRefreshListsOnSettle(items)
   const [now, setNow] = useState(() => Date.now())
   const [announcement, setAnnouncement] = useState('')
@@ -80,7 +73,7 @@ export function InMotionBand() {
     for (const item of items) {
       const prev = prevItems.get(item.ref_id)
       if (!prev || prev.status !== item.status) {
-        message = `${titleForItem(item, t)}: ${labelForItem(item, t)}`
+        message = `${titleForItem(item, t)}: ${activityLabel(item, t)}`
       }
     }
     for (const [refID, prevItem] of prevItems) {
@@ -106,7 +99,7 @@ export function InMotionBand() {
         <section aria-labelledby="in-motion-heading">
           <h2
             id="in-motion-heading"
-            className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-muted-foreground/70"
+            className="kicker mb-3"
           >
             {t('activity.inMotion.title')}
           </h2>
@@ -130,37 +123,25 @@ function InMotionRow({ item, now }: InMotionRowProps) {
   const { t } = useTranslation('common')
   const failed = item.status === 'failed'
   const title = titleForItem(item, t)
-  const label = labelForItem(item, t)
+  const label = activityLabel(item, t)
   // A failed item stopped moving, so its elapsed clock would be meaningless.
   const elapsed = failed ? '' : elapsedLabel(item.started_at, now)
 
   const body = (
     <>
-      <span
-        className={cn('flex h-4 w-4 shrink-0 items-center justify-center', {
-          'text-destructive': failed,
-          'text-primary': !failed,
-        })}
-      >
-        {failed ? (
-          <AlertCircle aria-hidden="true" className="h-3.5 w-3.5" />
-        ) : (
-          <Loader2
-            aria-hidden="true"
-            className="h-3.5 w-3.5 motion-safe:animate-spin motion-reduce:animate-none"
-          />
-        )}
-      </span>
+      <IntakeDisc intake={activityIntake(item)} />
 
       <span className="min-w-0 truncate text-sm text-foreground">{title}</span>
 
-      <span className="flex shrink-0 items-center gap-2 text-[0.7rem]">
-        <span className={failed ? 'font-medium text-destructive' : 'text-muted-foreground'}>
-          {label}
-        </span>
+      <span className="flex shrink-0 items-center gap-2 text-caption">
+        <StepTrack
+          steps={activitySteps(item)}
+          label={label}
+          labelClassName={failed ? 'font-semibold text-destructive' : 'text-muted-foreground'}
+        />
         {elapsed && (
           <>
-            <span aria-hidden="true" className="text-muted-foreground/40">
+            <span aria-hidden="true" className="text-muted-foreground">
               ·
             </span>
             <span className="tabular-nums text-muted-foreground">{elapsed}</span>

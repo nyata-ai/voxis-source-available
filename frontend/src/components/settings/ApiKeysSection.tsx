@@ -68,7 +68,7 @@ export function ApiKeysSection() {
     <div className="space-y-6">
       <div className="flex items-start justify-between">
         <div>
-          <h3 className="text-lg font-medium">{t('apiKeys.title')}</h3>
+          <h3 className="text-section font-normal">{t('apiKeys.title')}</h3>
           <p className="text-sm text-muted-foreground">
             {t('apiKeys.description')}
           </p>
@@ -94,14 +94,14 @@ export function ApiKeysSection() {
           {keys.map((key) => (
             <div
               key={key.id}
-              className="flex items-center justify-between rounded-lg border p-4"
+              className="flex flex-wrap items-center justify-between gap-3 rounded-lg border p-4"
             >
-              <div className="space-y-1">
-                <div className="flex items-center gap-2">
-                  <span className="font-medium">{key.name}</span>
+              <div className="min-w-0 space-y-1">
+                <div className="flex flex-wrap items-center gap-2">
+                  <span className="min-w-0 break-words font-semibold">{key.name}</span>
                   <Badge variant="secondary">{t('apiKeys.scopesCount', { count: key.scopes.length })}</Badge>
                 </div>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground">
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
                   <span className="font-mono">{key.key_prefix}...</span>
                   <span>
                     {t('apiKeys.lastUsed', { value: key.last_used_at ? formatRelativeTime(key.last_used_at, t, formatters) : t('apiKeys.never') })}

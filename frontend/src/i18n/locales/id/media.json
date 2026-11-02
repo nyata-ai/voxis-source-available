@@ -17,8 +17,6 @@
     "rejectedTitle": "File yang ditolak",
     "rejectedLabel": "File yang ditolak",
     "uploading": "Mengunggah {{name}}",
-    "processing": "Sedang diproses di server...",
-    "complete": "Unggahan selesai",
     "viewFile": "Lihat file",
     "viewFileNamed": "Lihat file: {{name}}",
     "remove": "Hapus {{name}}",
@@ -29,6 +27,14 @@
       "unsupportedType": "Jenis file tidak didukung",
       "tooLarge": "File melebihi ukuran maksimum 1 GB",
       "storageQuota": "File ini melebihi kuota penyimpanan yang tersisa"
+    },
+    "step": {
+      "waiting": "Menunggu",
+      "uploading": "Mengunggah",
+      "encrypting": "Mengenkripsi",
+      "encryptFailed": "Enkripsi gagal",
+      "scanning": "Memindai malware",
+      "ready": "Siap"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "Maju {{seconds}} detik",
     "dock": "Pemutar audio",
     "backToTranscript": "Kembali ke transkrip",
-    "speedPill": "Kecepatan {{speed}}x"
+    "speedPill": "Kecepatan {{speed}}x",
+    "speakingTime": "Waktu bicara: {{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "Klik untuk mengedit"

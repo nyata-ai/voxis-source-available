@@ -45,7 +45,7 @@ export function AudioAnalysisCard({ analysis, fileHash }: AudioAnalysisCardProps
         onClick={() => setIsOpen((previous) => !previous)}
         aria-expanded={isOpen}
         // 18 px vertical, 20 px horizontal per the artboard's collapsed row.
-        className="flex min-h-11 w-full items-center justify-between gap-3 px-5 py-[18px] text-left transition-colors hover:text-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="flex min-h-11 w-full items-center justify-between gap-3 px-5 py-[18px] text-left transition-colors hover:text-coral-mark focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <span className="inline-flex items-center gap-2.5 text-sm">
           <TrustIcon className={cn('h-4 w-4 shrink-0', trust.iconClass)} aria-hidden="true" />
@@ -93,7 +93,7 @@ function AnalysisDetails({ analysis, fileHash }: AudioAnalysisCardProps) {
       {analysis.recording_date && (
         <div className="flex justify-between gap-4 text-sm">
           <span className="text-muted-foreground">{t('analysis.recorded')}</span>
-          <span className="font-medium">{analysis.recording_date}</span>
+          <span className="font-normal">{analysis.recording_date}</span>
         </div>
       )}
 
@@ -179,7 +179,7 @@ function TechRow({ label, value }: { label: string; value: string }) {
   return (
     <div className="flex min-w-0 justify-between gap-4 text-sm">
       <span className="shrink-0 text-muted-foreground">{label}</span>
-      <span className="truncate font-medium">{value}</span>
+      <span className="truncate font-normal">{value}</span>
     </div>
   )
 }

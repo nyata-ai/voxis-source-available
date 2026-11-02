@@ -63,6 +63,16 @@ function renderViewer(props: ViewerProps = {}) {
 }
 
 describe('TranscriptViewer', () => {
+  // The tray's pill and this one share a band on phones; side by side they
+  // overlapped by 23 to 69 px at 375 px, depending on the language.
+  it('keeps the Follow pill clear of the activity tray at phone and tablet widths', () => {
+    renderViewer({ following: false })
+    expect(screen.getByRole('button', { name: /follow/i })).toHaveClass(
+      'md:max-lg:left-[calc(var(--app-sidebar-w)_+_1.5rem)]',
+      'max-md:[body:has([data-activity-tray])_&]:bottom-[calc(var(--reader-dock-h,0rem)_+_5rem)]',
+    )
+  })
+
   beforeEach(() => {
     // jsdom has no layout engine; scrollTo is a stub that logs "not implemented".
     Element.prototype.scrollTo = vi.fn()
@@ -172,7 +182,8 @@ describe('TranscriptViewer', () => {
     expect(buttons[0]).not.toHaveClass('bg-paper-soft')
     expect(buttons[0].className).not.toMatch(/border-[lb]/)
     expect(buttons[1]).toHaveClass('bg-paper-soft')
-    expect(buttons[1]).toHaveClass('shadow-[inset_3px_0_0_var(--color-coral)]')
+    expect(buttons[1]).toHaveClass('before:bg-coral-mark')
+    expect(buttons[0]).not.toHaveClass('before:bg-coral-mark')
     // Nothing shifts when a turn lights up: the same padding on both.
     expect(buttons[0]).toHaveClass('px-3')
     expect(buttons[1]).toHaveClass('px-3')
@@ -181,7 +192,25 @@ describe('TranscriptViewer', () => {
   it('renders the turns on a rail beside the words', () => {
     const { container } = renderViewer()
     const row = container.querySelectorAll('[role="listitem"]')[0]
-    expect(row?.querySelector('button')).toHaveClass('sm:grid-cols-[96px_minmax(0,1fr)]')
+    expect(row?.querySelector('button')).toHaveClass('sm:grid-cols-[112px_minmax(0,1fr)]')
+  })
+
+  // The browser picks CJK glyph shapes and line breaking from `lang`, and a
+  // screen reader switches voice; a turn without a provider language follows
+  // the page instead.
+  it('marks a turn with its provider language, and leaves it off when absent', () => {
+    const utterances: Utterance[] = [
+      mockUtterances[0],
+      { ...mockUtterances[1], language: undefined },
+    ]
+    renderViewer({ utterances })
+    expect(screen.getByText('Hello, welcome to the meeting.')).toHaveAttribute('lang', 'id')
+    expect(screen.getByText('Thank you for having me.')).not.toHaveAttribute('lang')
+  })
+
+  it('marks a Mandarin turn as zh, which the CJK type rules match', () => {
+    renderViewer({ utterances: [{ ...mockUtterances[0], language: 'cmn' }] })
+    expect(screen.getByText('Hello, welcome to the meeting.')).toHaveAttribute('lang', 'zh')
   })
 
   // A `role="listitem"` on the button would replace the button role, and with it
@@ -197,15 +226,21 @@ describe('TranscriptViewer', () => {
     expect(screen.getAllByRole('button')).toHaveLength(3)
   })
 
-  it('renders transcript in a scroll box that owns its own overscroll', () => {
+  // From lg the transcript scrolls in its own box; below lg there is no box
+  // (no height cap, no overflow), so the page is the only scroll on a phone.
+  it('renders transcript in a scroll box from lg only', () => {
     const { container } = renderViewer()
     const scrollContainer = container.querySelector('[data-testid="transcript-scroll-container"]')
     expect(scrollContainer).toBeInTheDocument()
-    expect(scrollContainer).toHaveClass('overscroll-contain')
-    expect(scrollContainer).toHaveClass('max-h-[60vh]')
-    expect(scrollContainer).toHaveClass('lg:max-h-[calc(100vh_-_10rem_-_var(--reader-dock-h,0rem))]')
+    expect(scrollContainer).toHaveClass('lg:overflow-y-auto')
+    expect(scrollContainer).toHaveClass('lg:overscroll-contain')
+    expect(scrollContainer).toHaveClass(
+      'lg:max-h-[calc(100vh_-_10rem_-_var(--reader-nav-h,0rem)_-_var(--reader-dock-h,0rem))]'
+    )
+    expect(scrollContainer).not.toHaveClass('max-h-[60vh]')
+    expect(scrollContainer).not.toHaveClass('overflow-y-auto')
     // The gutter is reserved so the words never sit under a hover scrollbar.
-    expect(scrollContainer).toHaveClass('[scrollbar-gutter:stable]')
+    expect(scrollContainer).toHaveClass('lg:[scrollbar-gutter:stable]')
   })
 
   describe('controlled follow', () => {
@@ -293,7 +328,7 @@ describe('TranscriptViewer', () => {
       expect(onMatchesChange).toHaveBeenLastCalledWith([])
     })
 
-    // The reader shell resets `activeMatch` to 0 on every match-list change, so
+    // The reader shell resets `activeMatch` to -1 on every match-list change, so
     // typing would otherwise look exactly like stepping to the first match — and
     // silently switch "Follow playback" off, with nothing to switch it back on.
     it('does not jump or release follow while the query is being typed', () => {
@@ -303,14 +338,14 @@ describe('TranscriptViewer', () => {
 
       const { rerenderViewer, container } = renderViewer({
         searchQuery: 't',
-        activeMatch: 0,
+        activeMatch: -1,
         onFollowingChange,
       })
       expect(scrollTo).not.toHaveBeenCalled()
       expect(onFollowingChange).not.toHaveBeenCalledWith(false)
 
-      // Next character: still typing, `activeMatch` still reset to 0.
-      rerenderViewer({ searchQuery: 'th', activeMatch: 0, onFollowingChange })
+      // Next character: still typing, `activeMatch` still reset.
+      rerenderViewer({ searchQuery: 'th', activeMatch: -1, onFollowingChange })
       expect(scrollTo).not.toHaveBeenCalled()
       expect(onFollowingChange).not.toHaveBeenCalledWith(false)
 
@@ -319,6 +354,28 @@ describe('TranscriptViewer', () => {
         'data-active-match',
         'true'
       )
+    })
+
+    it('jumps to the first match on the first step', () => {
+      const scrollTo = vi.fn()
+      Element.prototype.scrollTo = scrollTo
+      const onFollowingChange = vi.fn()
+
+      const { rerenderViewer } = renderViewer({ searchQuery: 'the', activeMatch: -1, onFollowingChange })
+      expect(scrollTo).not.toHaveBeenCalled()
+
+      rerenderViewer({ searchQuery: 'the', activeMatch: 0, onFollowingChange })
+      expect(scrollTo).toHaveBeenCalledTimes(1)
+      expect(onFollowingChange).toHaveBeenCalledWith(false)
+    })
+
+    it('does not jump when a stepped match is reset by the query changing', () => {
+      const scrollTo = vi.fn()
+      Element.prototype.scrollTo = scrollTo
+      const { rerenderViewer } = renderViewer({ searchQuery: 'the', activeMatch: 1 })
+      rerenderViewer({ searchQuery: 'th', activeMatch: 1 })
+      rerenderViewer({ searchQuery: 'th', activeMatch: -1 })
+      expect(scrollTo).not.toHaveBeenCalled()
     })
 
     it('scrolls to the segment named by activeMatch and releases follow when stepping', () => {
@@ -395,6 +452,68 @@ describe('TranscriptViewer', () => {
       // Row 2 is the playing segment AND a non-match: dimmed, still highlighted.
       expect(rows[1]?.querySelector('button')).toHaveClass('bg-paper-soft')
       expect(rows[1]?.querySelector('button')).toHaveClass('opacity-40')
+    })
+  })
+
+  describe('script layout', () => {
+    const run: Utterance[] = [
+      { ...mockUtterances[0], speaker: 0, language: 'id' },
+      { ...mockUtterances[1], speaker: 0, language: 'id' },
+      { ...mockUtterances[2], speaker: 1, language: 'en' },
+    ]
+
+    it('shows the name and disc only when the speaker changes, with air above the change', () => {
+      const { container } = renderViewer({ utterances: run, speakerMap: { '0': 'Ana Vidal' } })
+      const rows = container.querySelectorAll('[role="listitem"]')
+      // The follow-on turn keeps its name for a screen reader only.
+      expect(rows[1]?.querySelector('.sr-only')).toHaveTextContent('Ana Vidal')
+      expect(rows[1]?.querySelector('[data-testid="speaker-disc"]')).toBeNull()
+      expect(rows[0]?.querySelector('[data-testid="speaker-disc"]')).toHaveTextContent('A')
+      // Unnamed: the disc carries the speaker number.
+      expect(rows[2]?.querySelector('[data-testid="speaker-disc"]')).toHaveTextContent('2')
+      expect(rows[2]).toHaveClass('pt-3')
+      expect(rows[1]).not.toHaveClass('pt-3')
+      expect(rows[0]).not.toHaveClass('pt-3')
+    })
+
+    it('colours the disc by speaker number and never the text', () => {
+      const { container } = renderViewer({ utterances: run })
+      const discs = container.querySelectorAll('[data-testid="speaker-disc"]')
+      expect(discs[0]).toHaveClass('bg-peach')
+      expect(discs[1]).toHaveClass('bg-mint')
+      expect(discs[0]).toHaveAttribute('aria-hidden', 'true')
+      expect(screen.getAllByText('Speaker 1')[0]).toHaveClass('text-foreground')
+    })
+
+    it('labels a language switch in codes, with the switch spelled out for a screen reader', () => {
+      renderViewer({ utterances: run })
+      const label = screen.getByText('ID → EN')
+      expect(label).toHaveAttribute('aria-hidden', 'true')
+      expect(label.parentElement).toHaveClass('text-info')
+      expect(
+        screen.getByText('Detected language changes from Indonesian to English'),
+      ).toHaveClass('sr-only')
+      expect(screen.getAllByText(/→/)).toHaveLength(1)
+    })
+  })
+
+  describe('citation landing', () => {
+    it('rings the turn the citation lands on and brings it on screen once per landing', () => {
+      const scrollTo = vi.fn()
+      Element.prototype.scrollTo = scrollTo
+      const { container, rerenderViewer } = renderViewer({ landing: { time: 4, nonce: 1 } })
+      const rows = container.querySelectorAll('[role="listitem"]')
+      expect(rows[1]?.querySelector('.citation-landing')).not.toBeNull()
+      expect(container.querySelectorAll('.citation-landing')).toHaveLength(1)
+      expect(scrollTo).toHaveBeenCalledTimes(1)
+
+      // Same landing re-rendered: no second scroll.
+      rerenderViewer({ landing: { time: 4, nonce: 1 } })
+      expect(scrollTo).toHaveBeenCalledTimes(1)
+
+      // Cleared by the owner after 1.2 s: the ring goes.
+      rerenderViewer({ landing: null })
+      expect(container.querySelector('.citation-landing')).toBeNull()
     })
   })
 })

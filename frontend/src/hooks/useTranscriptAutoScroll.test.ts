@@ -396,4 +396,285 @@ describe('useTranscriptAutoScroll', () => {
     expect(first).not.toHaveBeenCalled()
     expect(second).toHaveBeenCalledWith(false)
   })
+
+  it('does not scroll when a transcript arrives after mount and settles on its first turn', () => {
+    const container = createMockContainer()
+    const containerRef = { current: container }
+    const { result, rerender } = renderHook(
+      ({ activeId, count }) =>
+        useTranscriptAutoScroll({
+          containerRef,
+          activeSegmentId: activeId,
+          segmentCount: count,
+          isFollowing: true,
+          onFollowingChange: vi.fn(),
+        }),
+      { initialProps: { activeId: null as number | null, count: 0 } },
+    )
+    act(() => result.current.registerSegmentRef(0, createMockElement(0)))
+    rerender({ activeId: 0, count: 3 })
+    expect(container.scrollTo).not.toHaveBeenCalled()
+    // A real change afterwards still follows.
+    act(() => result.current.registerSegmentRef(1, createMockElement(400)))
+    rerender({ activeId: 1, count: 3 })
+    expect(container.scrollTo).toHaveBeenCalledTimes(1)
+  })
+
+  it('does not scroll again when only a callback identity changes', () => {
+    const container = createMockContainer()
+    const containerRef = { current: container }
+    const { result, rerender } = renderHook(
+      ({ onChange }) =>
+        useTranscriptAutoScroll({
+          containerRef,
+          activeSegmentId: 1,
+          isFollowing: true,
+          onFollowingChange: onChange,
+        }),
+      { initialProps: { onChange: vi.fn() } },
+    )
+    act(() => result.current.registerSegmentRef(1, createMockElement()))
+    rerender({ onChange: vi.fn() })
+    expect(container.scrollTo).not.toHaveBeenCalled()
+  })
+
+  it('scrolls back to the playing turn when follow is switched back on', () => {
+    const container = createMockContainer()
+    const containerRef = { current: container }
+    const { result, rerender } = renderHook(
+      ({ following }) =>
+        useTranscriptAutoScroll({
+          containerRef,
+          activeSegmentId: 1,
+          isFollowing: following,
+          onFollowingChange: vi.fn(),
+        }),
+      { initialProps: { following: false } },
+    )
+    act(() => result.current.registerSegmentRef(1, createMockElement()))
+    rerender({ following: true })
+    expect(container.scrollTo).toHaveBeenCalledTimes(1)
+  })
+
+  describe('window mode (below lg)', () => {
+    it('scrolls the window, not the box, to follow playback', () => {
+      const container = createMockContainer()
+      const containerRef = { current: container }
+      const windowScroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
+      const el = createMockElement()
+      el.getBoundingClientRect = () => ({ top: 900, height: 40 }) as DOMRect
+      const { result, rerender } = renderHook(
+        ({ activeId }) =>
+          useTranscriptAutoScroll({
+            containerRef,
+            activeSegmentId: activeId,
+            isFollowing: true,
+            onFollowingChange: vi.fn(),
+            scrollMode: 'window',
+          }),
+        { initialProps: { activeId: null as number | null } },
+      )
+      act(() => result.current.registerSegmentRef(1, el))
+      rerender({ activeId: 1 })
+      expect(container.scrollTo).not.toHaveBeenCalled()
+      expect(windowScroll).toHaveBeenCalledWith({
+        top: expect.any(Number),
+        behavior: 'smooth',
+      })
+    })
+
+    function landingTop(el: HTMLElement) {
+      const container = createMockContainer()
+      const containerRef = { current: container }
+      const windowScroll = vi.spyOn(window, 'scrollTo').mockImplementation(() => {})
+      windowScroll.mockClear()
+      const { result, rerender } = renderHook(
+        ({ activeId }) =>
+          useTranscriptAutoScroll({
+            containerRef,
+            activeSegmentId: activeId,
+            isFollowing: true,
+            onFollowingChange: vi.fn(),
+            scrollMode: 'window',
+          }),
+        { initialProps: { activeId: null as number | null } },
+      )
+      act(() => result.current.registerSegmentRef(1, el))
+      rerender({ activeId: 1 })
+      return (windowScroll.mock.calls[0]![0] as ScrollToOptions).top!
+    }
+
+    it('starts a turn taller than the viewport right under the sticky bars', () => {
+      const el = createMockElement()
+      el.getBoundingClientRect = () => ({ top: 2000, height: window.innerHeight * 3 }) as DOMRect
+      // With no bars set in jsdom the offset is its 16 px of air: 2000 - 16.
+      expect(landingTop(el)).toBe(2000 - 16)
+    })
+
+    it('still centres a short turn in the space the bars leave free', () => {
+      const el = createMockElement()
+      el.getBoundingClientRect = () => ({ top: 2000, height: 40 }) as DOMRect
+      const free = window.innerHeight - 16
+      expect(landingTop(el)).toBe(2000 - (16 + (free - 40) / 2))
+    })
+
+    it('lands the turn below the sticky find row', () => {
+      const row = document.createElement('div')
+      row.setAttribute('data-reader-find', '')
+      Object.defineProperty(row, 'offsetHeight', { value: 60 })
+      document.body.appendChild(row)
+      try {
+        const el = createMockElement()
+        el.getBoundingClientRect = () => ({ top: 2000, height: window.innerHeight * 3 }) as DOMRect
+        expect(landingTop(el)).toBe(2000 - 16 - 60)
+      } finally {
+        row.remove()
+      }
+    })
+
+    it('keeps follow on when the page is scrolled while nothing plays', () => {
+      const container = createMockContainer()
+      const containerRef = { current: container }
+      const onFollowingChange = vi.fn()
+      renderHook(() =>
+        useTranscriptAutoScroll({
+          containerRef,
+          activeSegmentId: null,
+          isFollowing: true,
+          onFollowingChange,
+          scrollMode: 'window',
+          isPlaying: false,
+        }),
+      )
+      act(() => {
+        Object.defineProperty(window, 'scrollY', { value: 400, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+      expect(onFollowingChange).not.toHaveBeenCalled()
+      Object.defineProperty(window, 'scrollY', { value: 0, configurable: true })
+    })
+
+    it('releases follow when the page is scrolled by hand', () => {
+      const container = createMockContainer()
+      const containerRef = { current: container }
+      const onFollowingChange = vi.fn()
+      renderHook(() =>
+        useTranscriptAutoScroll({
+          containerRef,
+          activeSegmentId: null,
+          isFollowing: true,
+          onFollowingChange,
+          scrollMode: 'window',
+        }),
+      )
+      act(() => {
+        Object.defineProperty(window, 'scrollY', { value: 400, configurable: true })
+        window.dispatchEvent(new Event('scroll'))
+      })
+      expect(onFollowingChange).toHaveBeenCalledWith(false)
+      Object.defineProperty(window, 'scrollY', { value: 0, configurable: true })
+    })
+
+    describe('pressing play', () => {
+      let dock: HTMLElement | null = null
+
+      afterEach(() => {
+        dock?.remove()
+        dock = null
+      })
+
+      /** Renders a paused, following window-mode reader whose active turn sits
+       *  at `top` in the viewport. jsdom's window is 768 tall. */
+      function pausedReader({
+        top = 2000,
+        activeSegmentId = 1 as number | null,
+        isFollowing = true,
+        scrollMode = 'window' as 'window' | 'container',
+        docked = true,
+      } = {}) {
+        if (docked && !dock) {
+          dock = document.createElement('div')
+          dock.dataset.testid = 'reader-mini-dock'
+          document.body.append(dock)
+        }
+        const container = createMockContainer()
+        const turn = createMockElement()
+        const rect = { top, bottom: top + 40, height: 40 } as DOMRect
+        turn.getBoundingClientRect = () => rect
+        container.getBoundingClientRect = () => rect
+        const containerRef = { current: container }
+        const onFollowingChange = vi.fn()
+        const hook = renderHook(
+          ({ isPlaying }) =>
+            useTranscriptAutoScroll({
+              containerRef,
+              activeSegmentId,
+              isFollowing,
+              onFollowingChange,
+              scrollMode,
+              isPlaying,
+            }),
+          { initialProps: { isPlaying: false } },
+        )
+        act(() => hook.result.current.registerSegmentRef(1, turn))
+        return { ...hook, onFollowingChange }
+      }
+
+      it('releases follow when the active turn is below the screen', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: 2000 })
+        expect(onFollowingChange).not.toHaveBeenCalled()
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).toHaveBeenCalledWith(false)
+      })
+
+      it('releases follow when the active turn has scrolled above the screen', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: -500 })
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).toHaveBeenCalledWith(false)
+      })
+
+      it('judges the transcript as a whole between turns', () => {
+        const away = pausedReader({ top: 2000, activeSegmentId: null })
+        away.rerender({ isPlaying: true })
+        expect(away.onFollowingChange).toHaveBeenCalledWith(false)
+
+        const here = pausedReader({ top: 200, activeSegmentId: null })
+        here.rerender({ isPlaying: true })
+        expect(here.onFollowingChange).not.toHaveBeenCalled()
+      })
+
+      it('keeps follow when the active turn is on screen', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: 300 })
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).not.toHaveBeenCalled()
+      })
+
+      it('keeps follow when play is pressed on the audio card, with the transcript below the fold', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: 2000, docked: false })
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).not.toHaveBeenCalled()
+      })
+
+      it('does not release again on a pause or on later renders', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: 2000 })
+        rerender({ isPlaying: false })
+        expect(onFollowingChange).not.toHaveBeenCalled()
+        rerender({ isPlaying: true })
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).toHaveBeenCalledTimes(1)
+      })
+
+      it('leaves an already released reader alone', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: 2000, isFollowing: false })
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).not.toHaveBeenCalled()
+      })
+
+      it('changes nothing in container mode', () => {
+        const { rerender, onFollowingChange } = pausedReader({ top: 2000, scrollMode: 'container' })
+        rerender({ isPlaying: true })
+        expect(onFollowingChange).not.toHaveBeenCalled()
+      })
+    })
+  })
 })

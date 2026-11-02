@@ -17,8 +17,6 @@
     "rejectedTitle": "拒否されたファイル",
     "rejectedLabel": "拒否されたファイル",
     "uploading": "{{name}}をアップロード中",
-    "processing": "サーバー上で処理中...",
-    "complete": "アップロード完了",
     "viewFile": "ファイルを表示",
     "viewFileNamed": "ファイルを表示: {{name}}",
     "remove": "{{name}}を削除",
@@ -29,6 +27,14 @@
       "unsupportedType": "サポートされていないファイル形式です",
       "tooLarge": "ファイルが最大サイズの 1 GB を超えています",
       "storageQuota": "このファイルは残りのストレージ容量を超えています"
+    },
+    "step": {
+      "waiting": "待機中",
+      "uploading": "アップロード中",
+      "encrypting": "暗号化中",
+      "encryptFailed": "暗号化に失敗しました",
+      "scanning": "マルウェア検査中",
+      "ready": "準備完了"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "{{seconds}} 秒進む",
     "dock": "オーディオプレーヤー",
     "backToTranscript": "文字起こしに戻る",
-    "speedPill": "{{speed}}倍速"
+    "speedPill": "{{speed}}倍速",
+    "speakingTime": "発言時間：{{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "クリックして編集"

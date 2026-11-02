@@ -49,14 +49,23 @@ describe('ActivityCard', () => {
     vi.clearAllMocks()
   })
 
-  it('shows spinner, stage text, and elapsed time for an in-progress recording', () => {
+  it('shows the step track, the current step and elapsed time for an in-progress recording', () => {
     vi.useFakeTimers()
     const { container } = renderCard(baseItem)
 
     expect(screen.getByText('Morning standup')).toBeInTheDocument()
-    expect(screen.getByText('Processing recording…')).toBeInTheDocument()
+    expect(screen.getByText('Saving')).toBeInTheDocument()
     expect(screen.getByText(/2m/)).toBeInTheDocument()
-    expect(container.querySelector('[class*="animate-spin"]')).toBeInTheDocument()
+    // Saving → Ready, decorative, with the current step pulsing in place of a spinner.
+    const track = screen.getByTestId('step-track')
+    expect(track).toHaveAttribute('aria-hidden', 'true')
+    expect([...track.querySelectorAll('[data-step]')].map((dot) => dot.getAttribute('data-step'))).toEqual([
+      'current',
+      'pending',
+    ])
+    expect(container.querySelector('[class*="animate-spin"]')).not.toBeInTheDocument()
+    // Peach intake disc for a recording.
+    expect(container.querySelector('[data-intake="record"]')).toBeInTheDocument()
   })
 
   it('uses inverse surface tokens and readable in-progress controls', () => {
@@ -67,7 +76,7 @@ describe('ActivityCard', () => {
       'bg-foreground',
       'text-background',
     )
-    expect(screen.getByText('Processing recording…').parentElement).toHaveClass('text-background/70')
+    expect(screen.getByText('Saving').closest('div')).toHaveClass('text-background/70')
     expect(screen.getByRole('button', { name: 'Dismiss' })).toHaveClass(
       'text-background',
       'hover:bg-background/15',
@@ -99,23 +108,53 @@ describe('ActivityCard', () => {
     expect(onDismiss).toHaveBeenCalledWith('activity-1')
   })
 
-  it('shows a failed reason and the detail link without an inert retry action', () => {
+  it('shows failed copy without an inert retry action', () => {
     renderCard({
       ...baseItem,
       kind: 'transcription',
       status: 'failed',
       stage: 'transcribing',
-      link: '/transcriptions/transcription-1',
-      error_message: 'Provider temporarily unavailable',
     })
 
-    expect(screen.getByText('Transcription failed')).toHaveClass(
-      'text-red-300',
-      '[.dark_&]:text-red-800',
-    )
-    expect(screen.getByTestId('activity-error-message')).toHaveTextContent('Provider temporarily unavailable')
-    expect(screen.getByRole('link', { name: 'View' })).toHaveAttribute('href', '/transcriptions/transcription-1')
+    expect(screen.getByText('Transcription failed')).toHaveClass('text-destructive-inverse')
     expect(screen.queryByRole('button', { name: 'Try again' })).not.toBeInTheDocument()
+  })
+
+  it('shows the stored failure reason with the full text on hover', () => {
+    renderCard({
+      ...baseItem,
+      kind: 'transcription',
+      status: 'failed',
+      stage: 'transcribing',
+      error_message: 'unsupported audio codec: aac',
+    })
+
+    const reason = screen.getByTestId('activity-error-message')
+    expect(reason).toHaveTextContent('unsupported audio codec: aac')
+    expect(reason).toHaveClass('line-clamp-2')
+    expect(reason).toHaveAttribute('title', 'unsupported audio codec: aac')
+  })
+
+  it('does not show a failure reason while an item is still in progress', () => {
+    renderCard({ ...baseItem, error_message: 'transient upload error' })
+
+    expect(screen.queryByTestId('activity-error-message')).not.toBeInTheDocument()
+  })
+
+  it('offers View on a failed item so the session page can be opened', () => {
+    renderCard({
+      ...baseItem,
+      kind: 'transcription',
+      status: 'failed',
+      stage: 'transcribing',
+      link: '/transcriptions/trans-1',
+      error_message: 'unsupported audio codec: aac',
+    })
+
+    expect(screen.getByRole('link', { name: 'View' })).toHaveAttribute(
+      'href',
+      '/transcriptions/trans-1',
+    )
   })
 
   it('interpolates summary progress detail', () => {
@@ -126,7 +165,12 @@ describe('ActivityCard', () => {
       detail: { terminal: 2, total: 4 },
     })
 
-    expect(screen.getByText('Summarizing… 2 of 4')).toBeInTheDocument()
+    expect(screen.getByText('Briefing 2 of 4')).toBeInTheDocument()
+    expect(
+      [...screen.getByTestId('step-track').querySelectorAll('[data-step]')].map((dot) =>
+        dot.getAttribute('data-step'),
+      ),
+    ).toEqual(['done', 'current', 'pending'])
   })
 
   it('fires a ready toast once when an item becomes completed', () => {
@@ -172,7 +216,25 @@ describe('ActivityCard', () => {
     expect(onDismiss).toHaveBeenCalledWith('activity-1')
   })
 
-  it('auto-dismisses each terminal card with its own timer', () => {
+  it('does not dismiss a failed card by itself', () => {
+    vi.useFakeTimers()
+    const onDismiss = vi.fn()
+    renderCard({ ...baseItem, status: 'failed' }, onDismiss)
+
+    act(() => {
+      vi.advanceTimersByTime(60_000)
+    })
+    expect(onDismiss).not.toHaveBeenCalled()
+  })
+
+  it('gives View and Dismiss a 44 px target on phones', () => {
+    renderCard({ ...baseItem, status: 'completed', stage: 'ready', link: '/media/1' })
+
+    expect(screen.getByRole('link', { name: 'View' })).toHaveClass('h-11', 'md:h-8')
+    expect(screen.getByRole('button', { name: 'Dismiss' })).toHaveClass('h-11', 'md:h-8')
+  })
+
+  it('auto-dismisses a completed card with its own timer', () => {
     vi.useFakeTimers()
     const onDismiss = vi.fn()
     renderCard({ ...baseItem, status: 'completed', stage: 'ready' }, onDismiss)

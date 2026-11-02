@@ -65,9 +65,10 @@ describe('MiniDock', () => {
     // Clear of the sidebar on desktop and of the floating activity tray. The
     // sidebar's width is a token, so this offset cannot drift from MainLayout.
     // Both start at `md`: the tray (z-50, w-80, right-4) covers the dock from
-    // the moment the dock stops being full width, not from `lg`.
+    // the moment the dock stops being full width, not from `lg`, and only
+    // while the tray is on screen (it marks itself `data-activity-tray`).
     expect(dock).toHaveClass('md:left-[var(--app-sidebar-w)]')
-    expect(dock).toHaveClass('md:pr-[21rem]')
+    expect(dock).toHaveClass('md:[body:has([data-activity-tray])_&]:pr-[21rem]')
   })
 
   it('reads elapsed over total', () => {

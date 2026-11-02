@@ -100,8 +100,13 @@ describe('InMotionBand', () => {
     expect(screen.getAllByRole('listitem')).toHaveLength(2)
     expect(screen.getByText('Board Meeting')).toBeInTheDocument()
     // Stage vocabulary comes from activity-labels.ts — same strings the tray uses.
-    expect(screen.getByText('Transcribing…')).toBeInTheDocument()
-    expect(screen.getByText('Processing recording…')).toBeInTheDocument()
+    expect(screen.getByText('Transcribing')).toBeInTheDocument()
+    expect(screen.getByText('Saving')).toBeInTheDocument()
+    // A step track per row instead of a spinner, and the intake disc per channel.
+    expect(screen.getAllByTestId('step-track')).toHaveLength(2)
+    expect(document.querySelector('[data-intake="upload"]')).toBeInTheDocument()
+    expect(document.querySelector('[data-intake="record"]')).toBeInTheDocument()
+    expect(document.querySelector('[class*="animate-spin"]')).not.toBeInTheDocument()
     // Untitled recordings fall back to the shared activity title.
     expect(screen.getByText('Live recording')).toBeInTheDocument()
     expect(screen.getAllByText('1m').length).toBeGreaterThanOrEqual(1)
@@ -120,7 +125,7 @@ describe('InMotionBand', () => {
       },
     ])
     renderBand()
-    expect(screen.getByText('Summarizing… 1 of 3')).toBeInTheDocument()
+    expect(screen.getByText('Briefing 1 of 3')).toBeInTheDocument()
   })
 
   it('links a row to the item link when the feed provides one', () => {
@@ -273,7 +278,9 @@ describe('InMotionBand live announcements', () => {
     expect(announcementText()).toBe('Board Meeting: Ready')
   })
 
-  it('refreshes cached media and transcription lists when an item settles', () => {
+  // The finished work becomes a row in the Recent list beside the band, which
+  // caches its own query — without this the desk keeps showing the old list.
+  it('refreshes the media list when an item leaves the in-flight set', () => {
     mockItems([runningItem])
     const { rerender } = renderBand()
     const invalidate = vi.spyOn(queryClient, 'invalidateQueries')
@@ -285,7 +292,10 @@ describe('InMotionBand live announcements', () => {
     expect(invalidate).toHaveBeenCalledWith({ queryKey: transcriptionKeys.all })
   })
 
-  it('refreshes cached lists when an item changes to failed', () => {
+  // A failure is terminal but stays in the in-flight set, so it never trips
+  // the drop-out detector above — without its own branch the Library keeps
+  // the row at "pending" while the tray already says it failed.
+  it('refreshes the lists when an item flips to failed', () => {
     mockItems([runningItem])
     const { rerender } = renderBand()
     const invalidate = vi.spyOn(queryClient, 'invalidateQueries')
@@ -295,6 +305,17 @@ describe('InMotionBand live announcements', () => {
 
     expect(invalidate).toHaveBeenCalledWith({ queryKey: mediaKeys.all })
     expect(invalidate).toHaveBeenCalledWith({ queryKey: transcriptionKeys.all })
+  })
+
+  it('does not refresh the lists when nothing changed', () => {
+    mockItems([runningItem])
+    const { rerender } = renderBand()
+    const invalidate = vi.spyOn(queryClient, 'invalidateQueries')
+
+    mockItems([runningItem])
+    rerender(wrap())
+
+    expect(invalidate).not.toHaveBeenCalled()
   })
 })
 

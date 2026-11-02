@@ -1,15 +1,18 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, type ReactNode } from 'react'
 import { Link, useBlocker, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 import { Mic, Pause, Play, Square, Loader2, AlertTriangle } from 'lucide-react'
+import { Label } from '@/components/ui/label'
 import { Button } from '@/components/ui/button'
 import { StorageQuotaNotice } from '@/components/media/StorageQuotaNotice'
 import { BrowserCompatCheck } from '@/components/recording/BrowserCompatCheck'
 import { CaptureSourceSelector } from '@/components/recording/CaptureSourceSelector'
+import { MicrophoneCheck } from '@/components/recording/MicrophoneCheck'
 import { MicrophoneSelector } from '@/components/recording/MicrophoneSelector'
 import { RecordingTimer } from '@/components/recording/RecordingTimer'
 import { RecordingWaveform } from '@/components/recording/RecordingWaveform'
 import { RecoverRecordingDialog } from '@/components/recording/RecoverRecordingDialog'
+import { SegmentTicks } from '@/components/recording/SegmentTicks'
 import { RecordingExitDialog } from '@/components/recording/RecordingExitDialog'
 import { ActiveSessionTakeoverDialog } from '@/components/recording/ActiveSessionTakeoverDialog'
 import { MeetingCaptureConsentDialog } from '@/components/recording/MeetingCaptureConsentDialog'
@@ -19,7 +22,7 @@ import {
 } from '@/components/recording/RecordingDataLossDialog'
 import { useMicrophoneDevices } from '@/hooks/useMicrophoneDevices'
 import { useMediaRecorder } from '@/hooks/useMediaRecorder'
-import { useChunkUpload } from '@/hooks/useChunkUpload'
+import { BACKLOG_LIMIT, useChunkUpload } from '@/hooks/useChunkUpload'
 import { useInterruptedRecording } from '@/hooks/useInterruptedRecording'
 import { useUsageStats } from '@/hooks/useUsageStats'
 import {
@@ -86,6 +89,9 @@ export function RecordingPage() {
   const [dataLossAction, setDataLossAction] = useState<RecordingDataLossAction | null>(null)
   const [showMeetingConsent, setShowMeetingConsent] = useState(false)
   const [meetingConsentAcknowledged, setMeetingConsentAcknowledged] = useState(false)
+  // True from the press of Start until it has recorded or given up. The status
+  // stays `idle` through prepare and the session POST, so it says nothing here.
+  const [starting, setStarting] = useState(false)
 
   useEffect(() => {
     if (interruptedSessions.length > 0 && store.status === 'idle') {
@@ -111,6 +117,10 @@ export function RecordingPage() {
     isLoading: micLoading,
   } = useMicrophoneDevices()
 
+  // Segments this page has handed to the outbox; the ticks under the tape
+  // compare it with the outbox size to show how many the server already has.
+  const [segmentsCaptured, setSegmentsCaptured] = useState(0)
+
   // MediaRecorder
   const recorder = useMediaRecorder({
     deviceId: selectedDeviceId,
@@ -118,6 +128,7 @@ export function RecordingPage() {
     onDataAvailable: async (blob, seq) => {
       try {
         await chunkUpload.enqueue(seq, blob)
+        setSegmentsCaptured((count) => count + 1)
       } catch {
         handleChunkWriteFailure()
       }
@@ -347,6 +358,15 @@ export function RecordingPage() {
   }
 
   async function handleStart(consentAlreadyAcknowledged = false) {
+    setStarting(true)
+    try {
+      await beginRecording(consentAlreadyAcknowledged)
+    } finally {
+      setStarting(false)
+    }
+  }
+
+  async function beginRecording(consentAlreadyAcknowledged: boolean) {
     if (!recorder.mimeType) return
     if (
       store.captureSource === 'mixed_audio' &&
@@ -382,6 +402,7 @@ export function RecordingPage() {
       store.setSessionId(session.id)
       store.setMimeType(recorder.mimeType)
       store.setElapsed(0)
+      setSegmentsCaptured(0)
     } catch (err) {
       await recorder.discardPrepared()
       // 409 means another session is still active — a generic "failed to
@@ -569,7 +590,8 @@ export function RecordingPage() {
   /**
    * Stop & save from the exit guard. The blocked navigation is reset rather
    * than proceeded: handleStop navigates to the library itself once the
-   * session is complete, and both guarded links point there anyway.
+   * session is complete, whichever link was blocked (the logo goes to the Desk,
+   * Cancel goes back), because that is where the saved recording shows up.
    */
   function handleExitStopAndSave() {
     blocker.reset?.()
@@ -640,7 +662,8 @@ export function RecordingPage() {
 
   return (
     <BrowserCompatCheck>
-      <div className="flex flex-col items-center justify-center min-h-[calc(100vh-4rem)] px-4">
+      {/* Phones reserve room at the bottom for the pinned Start/Stop bar. */}
+      <div className="flex flex-1 flex-col items-center justify-center px-4 py-10 max-sm:pb-32">
         {/* Someone (maybe another tab) still owns an active session */}
         <ActiveSessionTakeoverDialog
           session={activeSession}
@@ -695,117 +718,154 @@ export function RecordingPage() {
           }}
         />
 
-        {/* State 1: Pre-recording / Idle */}
+        {/* State 1: Pre-recording / Idle — one 360px column, source first. */}
         {store.status === 'idle' && (
-          <div className="flex flex-col items-center gap-6 text-center">
-            <div className="flex h-24 w-24 items-center justify-center rounded-full bg-primary/10">
-              <Mic className="h-12 w-12 text-primary" />
-            </div>
-            <div className="space-y-2">
-              <h1 className="text-2xl font-normal">{t('idle.title')}</h1>
-              {micLoading ? (
-                <p className="text-muted-foreground">{t('idle.detecting')}</p>
-              ) : (
-                <div className="flex flex-col items-center gap-4">
-                  {micError && <p className="text-destructive text-sm">{micError}</p>}
-                  {!micError && (
-                    <MicrophoneSelector
-                      devices={devices}
-                      selectedDeviceId={selectedDeviceId}
-                      onDeviceChange={setSelectedDeviceId}
-                    />
+          <div className="flex w-full max-w-[360px] flex-col gap-6">
+            <h1 className="text-page font-normal">
+              {t('idle.title')}
+            </h1>
+            {micLoading ? (
+              <p className="text-muted-foreground">{t('idle.detecting')}</p>
+            ) : (
+              <>
+                <CaptureSourceSelector
+                  value={store.captureSource}
+                  onChange={store.setCaptureSource}
+                />
+                {/* Both sources record the microphone (meeting audio mixes it
+                    in), so the picker and the check stay for either one. */}
+                <div className="flex flex-col gap-2">
+                  <Label>{t('captureSource.microphone')}</Label>
+                  {micError ? (
+                    <p className="text-sm text-destructive">{micError}</p>
+                  ) : (
+                    <>
+                      <MicrophoneSelector
+                        devices={devices}
+                        selectedDeviceId={selectedDeviceId}
+                        onDeviceChange={setSelectedDeviceId}
+                      />
+                      {devices.length > 0 && (
+                        <MicrophoneCheck deviceId={selectedDeviceId} disabled={starting} />
+                      )}
+                    </>
                   )}
-                  <CaptureSourceSelector
-                    value={store.captureSource}
-                    onChange={store.setCaptureSource}
-                  />
                 </div>
-              )}
-            </div>
-            <StorageQuotaNotice storage={usageStats?.user_storage} className="max-w-xl text-left" />
-            <Button
-              size="lg"
-              onClick={() => void handleStart()}
-              disabled={
-                micLoading ||
-                (store.captureSource === 'microphone' && (!!micError || devices.length === 0)) ||
-                createSession.isPending ||
-                // A pending take-over decision must not race a new session.
-                activeSession !== null ||
-                isTakingOver
-              }
-              className="gap-2 px-8"
-            >
-              {createSession.isPending ? (
-                <Loader2 className="h-5 w-5 animate-spin" />
-              ) : (
-                <Mic className="h-5 w-5" />
-              )}
-              {t('idle.start')}
-            </Button>
+              </>
+            )}
+            <StorageQuotaNotice storage={usageStats?.user_storage} />
+            <PinnedControls>
+              <Button
+                size="lg"
+                onClick={() => void handleStart()}
+                disabled={
+                  micLoading ||
+                  (store.captureSource === 'microphone' && (!!micError || devices.length === 0)) ||
+                  starting ||
+                  createSession.isPending ||
+                  // A pending take-over decision must not race a new session.
+                  activeSession !== null ||
+                  isTakingOver
+                }
+                className="w-full gap-2"
+              >
+                {createSession.isPending ? (
+                  <Loader2 className="h-5 w-5 animate-spin" />
+                ) : (
+                  <Mic className="h-5 w-5" />
+                )}
+                {t('idle.start')}
+              </Button>
+            </PinnedControls>
           </div>
         )}
 
-        {/* State 2: Recording active (or paused) */}
+        {/* State 2: Recording active (or paused) — the running tape */}
         {(store.status === 'recording' || store.status === 'paused') && (
-          <div className="flex flex-col items-center gap-8">
-            {/* Status indicator */}
+          <div className="flex w-full max-w-[640px] flex-col items-center gap-6">
+            {/* Status indicator: live red with the status pulse (Live Red
+                Rule); paused is quiet grey, not a warning. */}
             <div className="flex items-center gap-2">
               {store.status === 'recording' ? (
                 <>
-                  <span className="h-3 w-3 rounded-full bg-live animate-pulse" />
-                  <span className="text-sm font-medium text-live">{t('status.recording')}</span>
+                  <span
+                    aria-hidden="true"
+                    className="h-3 w-3 rounded-full bg-live motion-safe:animate-[status-pulse_1.8s_ease-in-out_infinite]"
+                  />
+                  <span className="text-sm font-semibold text-live">
+                    {t('status.recording')}
+                  </span>
                 </>
               ) : (
                 <>
-                  <span className="h-3 w-3 rounded-full bg-warning" />
-                  <span className="text-sm font-medium text-warning">{t('status.paused')}</span>
+                  <span aria-hidden="true" className="h-3 w-3 rounded-full bg-muted-foreground" />
+                  <span className="text-sm font-semibold text-muted-foreground">
+                    {t('status.paused')}
+                  </span>
                 </>
               )}
             </div>
 
-            {/* Timer */}
-            <RecordingTimer elapsed={store.elapsed} isPaused={store.status === 'paused'} />
-
-            {/* Waveform */}
-            <RecordingWaveform
-              analyserNode={recorder.analyserNode}
+            <RecordingTimer
+              elapsed={store.elapsed}
               isPaused={store.status === 'paused'}
             />
 
-            {/* Controls */}
-            <div className="flex items-center gap-4">
-              {store.status === 'recording' ? (
-                <Button variant="outline" size="lg" onClick={handlePause} className="gap-2">
-                  <Pause className="h-5 w-5" />
-                  {t('controls.pause')}
-                </Button>
-              ) : (
-                <Button variant="outline" size="lg" onClick={handleResume} className="gap-2">
-                  <Play className="h-5 w-5" />
-                  {t('controls.resume')}
-                </Button>
-              )}
-              <Button
-                variant="destructive"
-                size="lg"
-                onClick={handleStop}
-                disabled={store.elapsed < MIN_RECORDING_SECONDS}
-                className="gap-2"
-              >
-                <Square className="h-5 w-5" />
-                {t('controls.stop')}
-              </Button>
+            <div className="flex w-full flex-col items-center gap-3">
+              <RecordingWaveform
+                analyserNode={recorder.analyserNode}
+                isPaused={store.status === 'paused'}
+              />
+              <SegmentTicks
+                total={segmentsCaptured}
+                saved={Math.max(0, segmentsCaptured - store.outboxSize)}
+                unsent={store.outboxSize}
+                backlogLimit={BACKLOG_LIMIT}
+              />
             </div>
+
+            {/* Controls: Stop is how a recording finishes, so it is the
+                primary ink button; Pause stays outline. */}
+            <PinnedControls>
+              <div className="flex w-full items-center gap-4 sm:w-auto sm:justify-center">
+                {store.status === 'recording' ? (
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={handlePause}
+                    className="flex-1 gap-2 sm:flex-none"
+                  >
+                    <Pause className="h-5 w-5" />
+                    {t('controls.pause')}
+                  </Button>
+                ) : (
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={handleResume}
+                    className="flex-1 gap-2 sm:flex-none"
+                  >
+                    <Play className="h-5 w-5" />
+                    {t('controls.resume')}
+                  </Button>
+                )}
+                <Button
+                  size="lg"
+                  onClick={handleStop}
+                  disabled={store.elapsed < MIN_RECORDING_SECONDS}
+                  className="flex-1 gap-2 sm:flex-none"
+                >
+                  <Square className="h-5 w-5" />
+                  {t('controls.stop')}
+                </Button>
+              </div>
+            </PinnedControls>
 
             {store.elapsed < MIN_RECORDING_SECONDS && (
               <p className="text-xs text-muted-foreground">
                 {t('controls.minDurationHint', { seconds: MIN_RECORDING_SECONDS })}
               </p>
             )}
-
-            {/* Upload status */}
-            <UploadStatusIndicator outboxSize={store.outboxSize} lastSavedAt={store.lastSavedAt} />
           </div>
         )}
 
@@ -826,7 +886,7 @@ export function RecordingPage() {
               <>
                 <Loader2 className="h-12 w-12 animate-spin text-primary" />
                 <div className="space-y-2">
-                  <h2 className="text-xl font-semibold">{t('completing.title')}</h2>
+                  <h2 className="text-section font-normal">{t('completing.title')}</h2>
                   {drainTotal !== null && store.outboxSize > 0 ? (
                     <p className="text-muted-foreground">
                       {t('completing.uploadingRemaining', {
@@ -850,8 +910,10 @@ export function RecordingPage() {
         {store.status === 'error' && (
           <div className="flex flex-col items-center gap-6 text-center">
             <div className="space-y-2">
-              <h2 className="text-xl font-semibold text-destructive">{t('error.title')}</h2>
-              <p className="text-muted-foreground">{store.errorMessage || t('error.fallback')}</p>
+              <h2 className="text-section font-normal text-destructive">{t('error.title')}</h2>
+              <p className="text-muted-foreground">
+                {store.errorMessage || t('error.fallback')}
+              </p>
             </div>
             <Button
               variant="outline"
@@ -898,7 +960,7 @@ function FlushFailurePanel({
     <>
       <AlertTriangle className="h-12 w-12 text-destructive" />
       <div className="space-y-2">
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-section font-normal">
           {storageQuotaExceeded ? t('media:storageQuota.full') : t('completing.uploadFailedTitle')}
         </h2>
         {!storageQuotaExceeded && (
@@ -918,7 +980,7 @@ function FlushFailurePanel({
             to="/library"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium underline underline-offset-2"
+            className="text-sm font-normal underline underline-offset-2"
           >
             {t('media:storageQuota.manageLibrary')}
           </Link>
@@ -934,21 +996,14 @@ function FlushFailurePanel({
   )
 }
 
-function UploadStatusIndicator({
-  outboxSize,
-  lastSavedAt,
-}: {
-  outboxSize: number
-  lastSavedAt: number | null
-}) {
-  const { t } = useTranslation('recording')
-  if (outboxSize > 0) {
-    return <p className="text-sm text-warning">{t('upload.saving', { n: outboxSize })}</p>
-  }
-
-  if (lastSavedAt) {
-    return <p className="text-sm text-muted-foreground">{t('upload.saved')}</p>
-  }
-
-  return null
+/**
+ * Start and Stop within thumb reach: on phones the bar is pinned to the
+ * bottom edge, clear of the home indicator; from `sm` it sits in the column.
+ */
+function PinnedControls({ children }: { children: ReactNode }) {
+  return (
+    <div data-pinned-controls="" className="max-sm:fixed max-sm:inset-x-0 max-sm:bottom-0 max-sm:z-40 max-sm:border-t max-sm:bg-background max-sm:px-4 max-sm:pt-3 max-sm:pb-[calc(0.75rem+env(safe-area-inset-bottom))] sm:flex sm:justify-center">
+      {children}
+    </div>
+  )
 }

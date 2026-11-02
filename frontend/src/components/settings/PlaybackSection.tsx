@@ -15,7 +15,7 @@ export function PlaybackSection() {
     return (
       <div className="space-y-6">
         <div>
-          <h3 className="text-lg font-medium">{t('playback.title')}</h3>
+          <h3 className="text-section font-normal">{t('playback.title')}</h3>
           <p className="text-sm text-muted-foreground">{t('playback.description')}</p>
         </div>
         <div className="space-y-4 rounded-lg border p-4">
@@ -31,14 +31,14 @@ export function PlaybackSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{t('playback.title')}</h3>
+        <h3 className="text-section font-normal">{t('playback.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('playback.description')}</p>
       </div>
 
       <div className="space-y-4 rounded-lg border p-4">
         <div className="flex items-center justify-between">
           <Label>{t('playback.speed')}</Label>
-          <span className="text-sm font-medium">{Number.isInteger(displaySpeed) ? displaySpeed.toFixed(1) : String(displaySpeed)}x</span>
+          <span className="text-sm font-normal">{Number.isInteger(displaySpeed) ? displaySpeed.toFixed(1) : String(displaySpeed)}x</span>
         </div>
         <Slider
           min={0.5}

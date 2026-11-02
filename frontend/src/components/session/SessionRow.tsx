@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { StatusChip } from '@/components/ui/status-chip'
 import { LanguageBadge } from './LanguageBadge'
+import { INTAKE_DISC_CLASS } from '@/lib/intake-tone'
 import { statusTone } from '@/lib/status-tone'
 import { formatDuration, cn } from '@/lib/utils'
 import { formatLanguageCodes } from '@/lib/languages'
@@ -44,6 +45,8 @@ export interface SessionRowProps {
   onRetranscribe?: (item: SessionRowItem) => void
   /** Caller must gate applicability per item before exposing rename. */
   onRename?: (item: SessionRowItem) => void
+  /** Extra classes on the row. */
+  className?: string
 }
 
 /**
@@ -51,7 +54,7 @@ export interface SessionRowProps {
  * (44px) single-line grid: source glyph, title + meta, then language/lens/
  * status indicators and an optional overflow menu.
  */
-export function SessionRow({ item, onDelete, onRetranscribe, onRename }: SessionRowProps) {
+export function SessionRow({ item, onDelete, onRetranscribe, onRename, className }: SessionRowProps) {
   const { t } = useTranslation(['common', 'transcription'])
   const formatters = useFormatters()
 
@@ -81,7 +84,7 @@ export function SessionRow({ item, onDelete, onRetranscribe, onRename }: Session
   const showDropdown = !!onDelete || !!onRename || (!!onRetranscribe && item.retranscribable)
 
   return (
-    <div className="group/row relative h-11 border-b border-border/60 last:border-b-0">
+    <div className={cn('group/row relative h-11 border-b border-border/60 last:border-b-0', className)}>
       <Link
         to={item.to}
         className={cn(
@@ -90,14 +93,16 @@ export function SessionRow({ item, onDelete, onRetranscribe, onRename }: Session
         )}
       >
         <span className="flex shrink-0 items-center gap-1" aria-hidden="true">
-          <SourceIcon className="h-4 w-4 text-muted-foreground" />
+          <span className={cn('flex h-6 w-6 items-center justify-center rounded-full', INTAKE_DISC_CLASS.upload)}>
+            <SourceIcon className="h-3.5 w-3.5" />
+          </span>
         </span>
 
         <span className="min-w-0">
           <span className="sr-only">{sourceLabel}.</span>
-          <span className="block truncate text-sm font-medium text-foreground">{title}</span>
+          <span className="block truncate text-sm font-semibold text-foreground">{title}</span>
           {meta && (
-            <span className="block truncate text-[0.7rem] text-muted-foreground">{meta}</span>
+            <span className="block truncate text-caption text-muted-foreground">{meta}</span>
           )}
         </span>
 
@@ -112,13 +117,13 @@ export function SessionRow({ item, onDelete, onRetranscribe, onRename }: Session
             </span>
           )}
           {showLensChip && (
-            <span className="text-[0.68rem] text-muted-foreground">
+            <span className="text-caption text-muted-foreground">
               {t('common:session.lens', { count: lensCount })}
             </span>
           )}
           {showStatusChip && <StatusChip status={item.status} />}
           {showDuration && (
-            <span className="text-[0.7rem] text-muted-foreground">
+            <span className="text-caption tabular-nums text-muted-foreground">
               {formatDuration(item.durationSeconds ?? 0)}
             </span>
           )}

@@ -28,13 +28,13 @@ export function StorageQuotaNotice({ storage, className }: StorageQuotaNoticePro
       )}
       role={full ? 'alert' : 'status'}
     >
-      <p className="font-medium">
+      <p className="font-semibold">
         {full
           ? t('storageQuota.full', values)
           : t('storageQuota.warning', values)}
       </p>
       {full && (
-        <Link to="/library" className="mt-1 inline-block text-xs font-medium underline underline-offset-2">
+        <Link to="/library" className="mt-1 inline-block text-xs font-normal underline underline-offset-2">
           {t('storageQuota.manageLibrary')}
         </Link>
       )}

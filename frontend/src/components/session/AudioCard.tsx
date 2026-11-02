@@ -1,4 +1,4 @@
-import { forwardRef, type Ref } from 'react'
+import { forwardRef, type ReactNode, type Ref } from 'react'
 import { AudioPlayer, type AudioPlayerHandle } from '@/components/media/AudioPlayer'
 import type { SessionAudio } from './session-view'
 
@@ -11,6 +11,8 @@ export interface AudioCardProps {
   /** Observed by the page: once this element leaves the viewport the mini dock
    *  takes over, so the reader always has a transport within reach. */
   cardRef?: Ref<HTMLDivElement>
+  /** Under the scrubber: who spoke when. */
+  speakerStrip?: ReactNode
 }
 
 /**
@@ -22,7 +24,7 @@ export interface AudioCardProps {
  * turn calls `seek` on it, and `SessionReaderPage` owns that wiring.
  */
 export const AudioCard = forwardRef<AudioPlayerHandle, AudioCardProps>(function AudioCard(
-  { audio, onTimeUpdate, onPlayStateChange, onDurationChange, onSpeedChange, cardRef },
+  { audio, onTimeUpdate, onPlayStateChange, onDurationChange, onSpeedChange, cardRef, speakerStrip },
   ref,
 ) {
   return (
@@ -37,6 +39,7 @@ export const AudioCard = forwardRef<AudioPlayerHandle, AudioCardProps>(function 
         onPlayStateChange={onPlayStateChange}
         onDurationChange={onDurationChange}
         onSpeedChange={onSpeedChange}
+        belowScrubber={speakerStrip}
       />
     </div>
   )

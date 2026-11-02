@@ -115,8 +115,7 @@
     "tryAgain": "Попробуйте еще раз"
   },
   "upload": {
-    "saving": "Сохранение... ({{n}} не отправлено)",
-    "saved": "Сохранено"
+    "saving": "Сохранение... ({{n}} не отправлено)"
   },
   "toast": {
     "autoStop": "Запись автоматически прекращается через 8 часов.",
@@ -150,5 +149,15 @@
     "mixed": "Meeting audio",
     "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
     "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  },
+  "tape": {
+    "caption": "Отправляется каждые 30 секунд и хранится в зашифрованном виде",
+    "count": "Сохранено {{saved}} из {{total}}"
+  },
+  "micCheck": {
+    "test": "Проверить микрофон",
+    "listening": "Слушаем…",
+    "heard": "Мы вас слышим",
+    "silent": "Звука пока нет. Проверьте микрофон."
   }
 }

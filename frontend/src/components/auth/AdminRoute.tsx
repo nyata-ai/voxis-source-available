@@ -1,4 +1,5 @@
 import { Outlet } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { AlertTriangle, ShieldAlert } from 'lucide-react'
 import { ApiError } from '@/lib/api-client'
 import { useAdmin } from '@/hooks/useAdmin'
@@ -10,12 +11,13 @@ export interface AdminOutletContext {
 }
 
 export function AdminRoute() {
+  const { t } = useTranslation('auth')
   const { data, error, isError, isLoading } = useAdmin()
 
   if (isLoading) {
     return (
       <div className="space-y-2">
-        <h1 className="text-2xl font-normal">Admin</h1>
+        <h1 className="text-page font-normal">{t('layout.nav.admin')}</h1>
         <p className="text-muted-foreground">Checking admin access...</p>
       </div>
     )

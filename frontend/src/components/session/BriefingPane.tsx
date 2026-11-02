@@ -105,7 +105,7 @@ function LensStatusDot({ state, t }: { state: LensState; t: TranslateFn }) {
           className={cn(
             'h-1.5 w-1.5 shrink-0 rounded-full border',
             state === 'failed'
-              ? 'border-coral bg-coral group-data-[state=active]:border-current group-data-[state=active]:bg-current'
+              ? 'border-destructive bg-destructive group-data-[state=active]:border-current group-data-[state=active]:bg-current'
               : 'border-current'
           )}
         />
@@ -278,6 +278,7 @@ function LensBody({
   summaryProfile,
   summaryProfilesEnabled,
   onCitationSeek,
+  toolbarContainer,
 }: {
   lens: SessionLens
   summary?: SummaryDetail
@@ -287,6 +288,7 @@ function LensBody({
   summaryProfile: SummaryProfile
   summaryProfilesEnabled: boolean
   onCitationSeek?: (startSeconds: number) => void
+  toolbarContainer?: HTMLElement | null
 }) {
   const { t } = useTranslation('summary')
   const summaryId = lens.summaryId
@@ -312,6 +314,7 @@ function LensBody({
         summary={summary}
         isLoading={isLoading}
         onCitationSeek={onCitationSeek}
+        toolbarContainer={toolbarContainer}
         actions={
           summaryId ? (
             <RegenerateButton
@@ -341,6 +344,7 @@ function FetchedLens({
   summaryProfile,
   summaryProfilesEnabled,
   onCitationSeek,
+  toolbarContainer,
 }: {
   lens: SessionLens
   summaryId: string
@@ -348,6 +352,7 @@ function FetchedLens({
   summaryProfile: SummaryProfile
   summaryProfilesEnabled: boolean
   onCitationSeek?: (startSeconds: number) => void
+  toolbarContainer?: HTMLElement | null
 }) {
   const { data, isLoading, isError } = useSummaryDetail(summaryId)
   return (
@@ -360,6 +365,7 @@ function FetchedLens({
       summaryProfile={summaryProfile}
       summaryProfilesEnabled={summaryProfilesEnabled}
       onCitationSeek={onCitationSeek}
+      toolbarContainer={toolbarContainer}
     />
   )
 }
@@ -370,6 +376,9 @@ interface LensPanelProps {
   summaryProfile: SummaryProfile
   summaryProfilesEnabled: boolean
   onCitationSeek?: (startSeconds: number) => void
+  /** The slot at the right end of the tab row where the open briefing's tools
+   *  (Regenerate, Show sources, Copy) are drawn. */
+  toolbarContainer?: HTMLElement | null
 }
 
 /** A lens with no summary row yet: say why there is nothing to read, and offer
@@ -403,6 +412,7 @@ function LensPanel({
   summaryProfile,
   summaryProfilesEnabled,
   onCitationSeek,
+  toolbarContainer,
 }: LensPanelProps) {
   if (!lens.summaryId) {
     return (
@@ -423,6 +433,7 @@ function LensPanel({
         summaryProfile={summaryProfile}
         summaryProfilesEnabled={summaryProfilesEnabled}
         onCitationSeek={onCitationSeek}
+        toolbarContainer={toolbarContainer}
       />
     )
   }
@@ -434,6 +445,7 @@ function LensPanel({
       summaryProfile={summaryProfile}
       summaryProfilesEnabled={summaryProfilesEnabled}
       onCitationSeek={onCitationSeek}
+      toolbarContainer={toolbarContainer}
     />
   )
 }
@@ -468,8 +480,7 @@ function BandHeader({
   const { t } = useTranslation('summary')
   return (
     <div className="flex flex-wrap items-center justify-between gap-4">
-      {/* Artboard: 24 px / 400 / 1.2 — `leading-tight` is 1.25. */}
-      <h2 id="briefing-pane-title" className="text-2xl font-normal leading-[1.2]">
+      <h2 id="briefing-pane-title" className="text-section font-normal">
         {t('briefing.title')}
       </h2>
       <div className="flex w-full flex-wrap items-center gap-3 sm:w-auto">
@@ -520,6 +531,9 @@ export function BriefingPane({
 }: BriefingPaneProps) {
   const { t } = useTranslation('summary')
   const [selectedSummaryProfile, setSelectedSummaryProfile] = useState<SummaryProfile>()
+  // The tab row's tools slot, held in state so the open lens re-renders into
+  // it once it exists.
+  const [toolsSlot, setToolsSlot] = useState<HTMLDivElement | null>(null)
 
   const summaryProfile = selectedSummaryProfile ?? defaultSummaryProfile
   const active = lensFor(lenses, activeLens)
@@ -573,7 +587,7 @@ export function BriefingPane({
       id="briefing"
       data-testid="briefing-band"
       aria-labelledby="briefing-pane-title"
-      className="scroll-mt-20 space-y-6 pt-6"
+      className="scroll-mt-[calc(var(--app-header-h)_+_var(--reader-nav-h,0rem)_+_0.5rem)] space-y-6 pt-6"
     >
       <BandHeader
         briefing={briefing}
@@ -606,19 +620,28 @@ export function BriefingPane({
           onValueChange={(value) => onActiveLensChange(value as SummaryType)}
           className="space-y-6"
         >
-          <TabsList
-            aria-label={t('briefing.tabsLabel')}
-            className="flex h-auto w-full flex-nowrap justify-start gap-2 overflow-x-auto bg-transparent p-0 text-inherit sm:flex-wrap sm:overflow-x-visible"
-          >
-            {lenses.map((lens) => (
-              <LensTab
-                key={lens.type}
-                lens={lens}
-                isGenerating={briefing.generatingType === lens.type}
-                t={t}
-              />
-            ))}
-          </TabsList>
+          {/* The tab row carries the open briefing's tools at its right end,
+              so they read as belonging to the tab, not floating over the text. */}
+          <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
+            <TabsList
+              aria-label={t('briefing.tabsLabel')}
+              className="relative flex h-auto w-full min-w-0 flex-nowrap justify-start gap-2 overflow-x-auto bg-transparent p-0 text-inherit sm:w-auto sm:flex-wrap sm:overflow-x-visible"
+            >
+              {lenses.map((lens) => (
+                <LensTab
+                  key={lens.type}
+                  lens={lens}
+                  isGenerating={briefing.generatingType === lens.type}
+                  t={t}
+                />
+              ))}
+            </TabsList>
+            <div
+              ref={setToolsSlot}
+              data-testid="briefing-tools"
+              className="flex flex-wrap items-center gap-1 empty:hidden"
+            />
+          </div>
 
           {generateTypeError && (
             <p role="alert" className="text-sm text-destructive">
@@ -636,7 +659,7 @@ export function BriefingPane({
             <TabsContent
               key={lens.type}
               value={lens.type}
-              className="mt-0 max-w-[78ch] text-ink-body dark:text-foreground"
+              className="mt-0 max-w-[70ch] text-ink-body dark:text-foreground"
             >
               <div id={sectionId(lens.type)}>
                 <LensPanel
@@ -645,6 +668,7 @@ export function BriefingPane({
                   summaryProfile={summaryProfile}
                   summaryProfilesEnabled={summaryProfilesEnabled}
                   onCitationSeek={onCitationSeek}
+                  toolbarContainer={toolsSlot}
                 />
               </div>
             </TabsContent>
@@ -669,11 +693,11 @@ function LensTab({
     <TabsTrigger
       value={lens.type}
       className={cn(
-        'group min-h-11 shrink-0 gap-2 rounded-[6px] border-secondary bg-paper-soft px-4 py-2.5 text-[13px] font-normal text-ink-muted',
+        'group min-h-11 shrink-0 gap-2 rounded-[6px] border-secondary bg-paper-soft px-4 py-2.5 text-body font-normal text-ink-muted',
         'hover:text-foreground',
-        'data-[state=active]:border-forest data-[state=active]:bg-forest data-[state=active]:font-semibold data-[state=active]:text-white',
+        'data-[state=active]:border-primary data-[state=active]:bg-primary data-[state=active]:text-primary-foreground',
         'dark:border-border dark:bg-muted dark:text-muted-foreground',
-        'dark:data-[state=active]:border-white dark:data-[state=active]:bg-white dark:data-[state=active]:text-forest'
+        'dark:data-[state=active]:border-primary dark:data-[state=active]:bg-primary dark:data-[state=active]:text-primary-foreground'
       )}
     >
       {t(meta.labelKey)}

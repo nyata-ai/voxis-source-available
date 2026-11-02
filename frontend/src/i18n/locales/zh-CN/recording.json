@@ -115,8 +115,7 @@
     "tryAgain": "重试"
   },
   "upload": {
-    "saving": "正在保存…（{{n}} 个片段尚未发送）",
-    "saved": "已保存"
+    "saving": "正在保存…（{{n}} 个片段尚未发送）"
   },
   "toast": {
     "autoStop": "8小时后自动停止录音。",
@@ -150,5 +149,15 @@
     "mixed": "会议音频",
     "mixedHelp": "Chrome 和 Edge 可以共享标签页音频。全屏、本地应用和系统音频则取决于您的浏览器和操作系统。",
     "mixedUnsupported": "此浏览器无法打开共享选择器。请使用 Chrome 或 Edge 共享标签页音频。"
+  },
+  "tape": {
+    "caption": "每 30 秒发送一次，加密存储",
+    "count": "已保存 {{saved}}/{{total}}"
+  },
+  "micCheck": {
+    "test": "测试麦克风",
+    "listening": "正在聆听…",
+    "heard": "可以听到您的声音",
+    "silent": "尚未检测到声音。请检查麦克风。"
   }
 }

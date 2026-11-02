@@ -115,8 +115,7 @@
     "tryAgain": "Coba lagi"
   },
   "upload": {
-    "saving": "Menyimpan... ({{n}} belum terkirim)",
-    "saved": "Disimpan"
+    "saving": "Menyimpan... ({{n}} belum terkirim)"
   },
   "toast": {
     "autoStop": "Perekaman otomatis berhenti setelah 8 jam.",
@@ -150,5 +149,15 @@
     "mixed": "Audio rapat",
     "mixedHelp": "Chrome dan Edge dapat membagikan audio tab. Audio layar penuh, aplikasi native, dan sistem bergantung pada browser dan sistem operasi Anda.",
     "mixedUnsupported": "Browser ini tidak dapat membuka pemilih berbagi. Gunakan Chrome atau Edge untuk membagikan audio tab."
+  },
+  "tape": {
+    "caption": "Dikirim setiap 30 detik dan disimpan terenkripsi",
+    "count": "{{saved}} dari {{total}} tersimpan"
+  },
+  "micCheck": {
+    "test": "Uji mikrofon",
+    "listening": "Mendengarkan…",
+    "heard": "Suara Anda terdengar",
+    "silent": "Belum ada suara. Periksa mikrofon Anda."
   }
 }

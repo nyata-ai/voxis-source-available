@@ -15,6 +15,8 @@ export const ALLOWED_AUDIO_TYPES = new Set([
 
 export const MAX_FILE_SIZE = 1024 * 1024 * 1024 // 1 GB
 
+// Browsers disagree on the MIME type of the same audio file. Windows registers
+// .aac as audio/vnd.dlna.adts, so Chrome/Edge report that as File.type.
 const MIME_ALIASES: Record<string, string> = {
   'audio/vnd.dlna.adts': 'audio/aac',
   'audio/x-aac': 'audio/aac',
@@ -26,6 +28,7 @@ const MIME_ALIASES: Record<string, string> = {
   'audio/x-opus+ogg': 'audio/opus',
 }
 
+// Fallback when the browser reports no type at all (or a generic one).
 const EXTENSION_TO_MIME: Record<string, string> = {
   mp3: 'audio/mpeg',
   wav: 'audio/wav',
@@ -37,17 +40,22 @@ const EXTENSION_TO_MIME: Record<string, string> = {
   opus: 'audio/opus',
 }
 
-// canonicalAudioType accepts browser and operating-system aliases before the
-// upload is constructed. This keeps the multipart type consistent with the
-// server's extension and signature checks.
+/**
+ * Returns the canonical allowed MIME type for a file, or null when the file is
+ * not a supported audio file. Aliases are mapped first; if the result is still
+ * unknown (or the browser reported nothing), the file extension decides.
+ */
 export function canonicalAudioType(file: File): string | null {
   const declared = file.type.toLowerCase()
   const aliased = MIME_ALIASES[declared] ?? declared
-  if (ALLOWED_AUDIO_TYPES.has(aliased)) return aliased
+  if (ALLOWED_AUDIO_TYPES.has(aliased)) {
+    return aliased
+  }
 
   const dot = file.name.lastIndexOf('.')
   if (dot < 0) return null
-  return EXTENSION_TO_MIME[file.name.slice(dot + 1).toLowerCase()] ?? null
+  const ext = file.name.slice(dot + 1).toLowerCase()
+  return EXTENSION_TO_MIME[ext] ?? null
 }
 
 export interface UploadItem {
@@ -120,12 +128,15 @@ export const useUploadStore = create<UploadState>((set) => ({
         continue
       }
 
-      const file = canonical === original.type
-        ? original
-        : new File([original], original.name, {
-            type: canonical,
-            lastModified: original.lastModified,
-          })
+      // Re-type the file so the multipart part carries the canonical
+      // Content-Type the backend expects. File([file], ...) is a lazy wrapper.
+      const file =
+        canonical === original.type
+          ? original
+          : new File([original], original.name, {
+              type: canonical,
+              lastModified: original.lastModified,
+            })
 
       accepted.push({
         id: generateId(),
