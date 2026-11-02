@@ -69,7 +69,7 @@
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
       "status_notes": "Review when the derived runtime image, runtime Dockerfile, Compose model service, model environment, or Gemma request builder changes.",
-      "impact_statement": "The advisory requires the curl command with a schemeless URL and --proto-default set to sftp or scp. The only retained curl command has a fixed HTTPS model URL and no such option; the running server has no model-download argument."
+      "impact_statement": "The advisory requires the curl command with a schemeless URL and --proto-default set to sftp or scp. The retained curl commands, the model download and the local health check, use fixed URLs with a scheme and no such option; the running server has no model-download argument."
     },
     {
       "vulnerability": {

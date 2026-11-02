@@ -224,10 +224,8 @@ jobs:
           case "$IMAGE" in
             caddy|web)
               # The go-jose v3 statement holds only while no Caddy config runs the ACME server or PKI app.
-              if grep -nE '(^|[[:space:]])(acme_server|pki)([[:space:]{]|$)' infra/oss/caddy/Caddyfile infra/oss/caddy/Caddyfile.smoke editions/oss/runtime/web/Dockerfile; then
-                printf 'A Caddy config enables the ACME server or PKI app. Review the go-jose statement.\n' >&2
-                exit 1
-              fi
+              bash infra/oss/scripts/verify-caddy-attack-surface.sh
+              bash infra/oss/scripts/test-caddy-attack-surface.sh
               vex="$RUNNER_TEMP/caddy.openvex.json"
               python3 infra/oss/scripts/render-vex-for-image.py "$tools/trivy" "$image" infra/oss/security/caddy-2.11.7.openvex.json "$vex" \
                 --package-products

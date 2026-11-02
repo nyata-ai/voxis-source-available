@@ -43,12 +43,11 @@ images, the runtime Dockerfile, and the exact Compose, realm, and Caddy inputs.
 Review the VEX again whenever that guard fails, before changing its statements,
 or when a vendor publishes a replacement advisory.
 
-Trivy 0.74 scanned the guarded runtime image
-`sha256:a6250ea769b3acda9a52dacedb4c25445a4a68f1c6cef6c2035b63d65bfcd201`
-without a VEX. It reported one HIGH or CRITICAL result: mssql-jdbc for
-CVE-2025-59250. The statement names only that exact Maven package PURL, so a
-different package or finding fails the final scan. The scan found no HIGH or
-CRITICAL operating-system package result.
+Trivy 0.74 reports two HIGH or CRITICAL results for the guarded runtime image:
+mssql-jdbc for CVE-2025-59250, and Guava for CVE-2026-102554, covered below. Each
+statement names only that exact Maven package PURL, so a different package or
+finding fails the final scan. The scan reports no HIGH or CRITICAL
+operating-system package result.
 
 Keycloak 26.7.5 ships `org.freemarker:freemarker` 2.3.35, which fixes
 CVE-2026-84939 in the 2.3.32 library that 26.7.4 bundled. It also ships
@@ -57,9 +56,8 @@ for CVE-2026-75595, CVE-2026-13506, and CVE-2026-8763 were removed rather than
 carried forward. The 26.7.5 release also fixes Keycloak advisories including
 CVE-2026-89298, CVE-2026-18206, and CVE-2026-18211; see the
 [release notes](https://github.com/keycloak/keycloak/releases/tag/26.7.5).
-The Temurin 21 JRE image was re-locked to a current build because the earlier
-digest carried OpenSSL 3.0.13-0ubuntu3.15 (CVE-2026-84782, HIGH); the locked
-image has 3.0.13-0ubuntu3.16.
+The Temurin 21 JRE image is re-locked when its packages gain a finding. The
+current digest clears `libbrotli1` CVE-2026-111497.
 
 The upstream `26.7.5` source tag resolves to commit
 `44299f39868f252ea02236134618c8c5c70a6e9d`. The runtime contains
@@ -77,8 +75,8 @@ advisory needs Java native deserialization of an attacker-supplied
 
 Among Keycloak's own jars, only Kerberos federation, the Twitter identity
 provider, and two principal classes use `ObjectInputStream`. The reviewed realm
-defines no federation or identity providers, and Keycloak is reachable only
-through the proxy on internal Compose networks. This review did not trace every
+defines no federation or identity providers, and only the proxy and the API can
+reach Keycloak, on internal Compose networks. This review did not trace every
 one of the 50 bundled jars that use `ObjectInputStream`, so it is a judgement
 about this deployment and not a proof. Replace the statement when Keycloak ships
 Guava 33.7.2 or later.
@@ -129,8 +127,10 @@ The build raises go-jose v4 to 4.1.7, so only v3 remains.
 The code is linked into `caddy`, because the embedded Smallstep authority used
 by `caddypki` depends on it. JWK parsing belongs to the ACME server and PKI app.
 No reviewed configuration runs either, and the admin API is off. The security
-job fails if `acme_server` or `pki` appears in a Caddy configuration. An operator
-who enables them is outside this review.
+job runs `verify-caddy-attack-surface.sh`, which fails if `acme_server` or `pki`
+appears in a Caddy configuration, including the one the web image writes from its
+Dockerfile, or if any of those inputs change. It cannot see a configuration an
+operator adds at deployment. An operator who enables them is outside this review.
 
 ## Local model image dispositions
 
@@ -140,9 +140,10 @@ stage. Two earlier Curl rows, CVE-2026-8286 and CVE-2026-8927, no longer match
 now that the image installs Curl `8.14.1-2+deb13u7`. CVE-2026-119373 is new.
 The attack-surface guard binds this review to the Dockerfile, Compose file,
 model environment, and Gemma request builder.
-Before each scan, `render-vex-for-image.py` replaces only the VEX product with
-Trivy's OCI package identifier for that image. The reviewed package PURLs stay
-exact, so a package-version change or a new CVE fails the scan.
+Before each scan, `render-vex-for-image.py` replaces each statement's product
+with the exact package PURLs found in that image, so the rendered document is
+scoped by package and not by image. The workflow uses it only for the image it
+was rendered from. A package-version change or a new CVE fails the scan.
 
 The reviewed runtime uses a local model path and the private Compose `model`
 network, which only the API shares and which has no internet access. It has

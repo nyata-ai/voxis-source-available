@@ -41,7 +41,7 @@
       "status": "not_affected",
       "justification": "vulnerable_code_not_in_execute_path",
       "status_notes": "Guava 33.5.0 is present, and Keycloak 26.8.1 still ships an affected Guava. This rests on a review of the deployment and of Keycloak's own classes, not a proof across every library. Review when the Keycloak distribution, realm, proxy, or Compose networks change.",
-      "impact_statement": "The advisory needs Java native deserialization of an attacker-supplied Guava collection. The reviewed realm has no Kerberos federation or identity providers, which are the Keycloak features that read Java-serialized request data, and Keycloak is reachable only through the proxy on internal Compose networks."
+      "impact_statement": "The advisory needs Java native deserialization of an attacker-supplied Guava collection. The reviewed realm has no Kerberos federation or identity providers, which are the Keycloak features that read Java-serialized request data, and only the proxy and the API can reach Keycloak, on internal Compose networks."
     }
   ]
 }
