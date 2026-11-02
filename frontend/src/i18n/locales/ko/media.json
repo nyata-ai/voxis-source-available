@@ -17,8 +17,6 @@
     "rejectedTitle": "거부된 파일",
     "rejectedLabel": "거부된 파일",
     "uploading": "{{name}} 업로드 중",
-    "processing": "서버에서 처리 중...",
-    "complete": "업로드 완료",
     "viewFile": "파일 보기",
     "viewFileNamed": "파일 보기: {{name}}",
     "remove": "{{name}} 제거",
@@ -29,6 +27,14 @@
       "unsupportedType": "지원되지 않는 파일 형식",
       "tooLarge": "파일이 최대 크기인 1GB를 초과합니다.",
       "storageQuota": "이 파일은 남은 저장소 할당량을 초과합니다"
+    },
+    "step": {
+      "waiting": "대기 중",
+      "uploading": "업로드 중",
+      "encrypting": "암호화 중",
+      "encryptFailed": "암호화 실패",
+      "scanning": "악성코드 검사 중",
+      "ready": "준비됨"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "{{seconds}}초 앞으로",
     "dock": "오디오 플레이어",
     "backToTranscript": "전사로 돌아가기",
-    "speedPill": "{{speed}}배속"
+    "speedPill": "{{speed}}배속",
+    "speakingTime": "발화 시간: {{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "편집하려면 클릭하세요"

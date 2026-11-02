@@ -152,7 +152,7 @@ export function AdminRecordingRetentionPanel() {
 
         {enabled && (
           <div className="rounded-md border bg-muted/30 p-3 text-sm">
-            <p className="font-medium">
+            <p className="font-semibold">
               {immediateCount} live {immediateCount === 1 ? 'recording has' : 'recordings have'} audio eligible for immediate deletion.
             </p>
             {preview?.oldest_completed_at && (

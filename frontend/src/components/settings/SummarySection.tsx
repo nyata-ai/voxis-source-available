@@ -76,7 +76,7 @@ export function SummarySection() {
     return (
       <div className="space-y-6">
         <div>
-          <h3 className="text-lg font-medium">{t('summary.title')}</h3>
+          <h3 className="text-section font-normal">{t('summary.title')}</h3>
           <p className="text-sm text-muted-foreground">{t('summary.description')}</p>
         </div>
         <div className="space-y-4 rounded-lg border p-4">
@@ -92,7 +92,7 @@ export function SummarySection() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{t('summary.title')}</h3>
+        <h3 className="text-section font-normal">{t('summary.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('summary.description')}</p>
       </div>
 

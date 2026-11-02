@@ -91,9 +91,9 @@
       "title": "In motion"
     },
     "stage": {
-      "stitching": "Processing recording…",
-      "transcribing": "Transcribing…",
-      "summarizing": "Summarizing… {{terminal}} of {{total}}",
+      "stitching": "Saving",
+      "transcribing": "Transcribing",
+      "summarizing": "Briefing {{terminal}} of {{total}}",
       "ready": "Ready"
     },
     "failed": {
@@ -126,8 +126,8 @@
     "speaker_one": "{{count}} speaker",
     "speaker_other": "{{count}} speakers",
     "words": "{{n}} words",
-    "lens_one": "{{count}} lens",
-    "lens_other": "{{count}} lenses",
+    "lens_one": "{{count}} briefing",
+    "lens_other": "{{count}} briefings",
     "languages": "Languages: {{codes}}",
     "untitled": "Untitled session"
   }

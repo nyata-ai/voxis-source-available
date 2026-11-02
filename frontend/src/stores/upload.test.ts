@@ -1,5 +1,10 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { canonicalAudioType, useUploadStore, ALLOWED_AUDIO_TYPES, MAX_FILE_SIZE } from './upload'
+import {
+  useUploadStore,
+  canonicalAudioType,
+  ALLOWED_AUDIO_TYPES,
+  MAX_FILE_SIZE,
+} from './upload'
 
 function createFile(name: string, type: string, size: number): File {
   // For large sizes (>10MB), use Object.defineProperty to fake size
@@ -28,7 +33,9 @@ describe('canonicalAudioType', () => {
   })
 
   it('falls back to the extension for a generic type', () => {
-    expect(canonicalAudioType(createFile('clip.M4A', 'application/octet-stream', 16))).toBe('audio/mp4')
+    expect(canonicalAudioType(createFile('clip.M4A', 'application/octet-stream', 16))).toBe(
+      'audio/mp4'
+    )
   })
 
   it('returns null when neither type nor extension is audio', () => {
@@ -125,17 +132,19 @@ describe('useUploadStore', () => {
       expect(rejected).toEqual([{ file: files[1], reason: 'storageQuota' }])
     })
 
-    it('accepts .aac reported by Windows and sends the canonical MIME type', () => {
+    it('accepts .aac reported by Windows as audio/vnd.dlna.adts and re-types it', () => {
       const file = createFile('interview.aac', 'audio/vnd.dlna.adts', 1024)
 
       const rejected = useUploadStore.getState().addFiles([file])
 
       expect(rejected).toHaveLength(0)
-      expect(useUploadStore.getState().queue[0].file.type).toBe('audio/aac')
-      expect(useUploadStore.getState().queue[0].file.name).toBe('interview.aac')
+      const queue = useUploadStore.getState().queue
+      expect(queue).toHaveLength(1)
+      expect(queue[0].file.type).toBe('audio/aac')
+      expect(queue[0].file.name).toBe('interview.aac')
     })
 
-    it('uses an audio extension when the browser provides no MIME type', () => {
+    it('accepts a file the browser reports with no type, using the extension', () => {
       const file = createFile('interview.aac', '', 1024)
 
       const rejected = useUploadStore.getState().addFiles([file])
@@ -144,13 +153,21 @@ describe('useUploadStore', () => {
       expect(useUploadStore.getState().queue[0].file.type).toBe('audio/aac')
     })
 
-    it('rejects a non-audio extension when the browser provides no MIME type', () => {
+    it('rejects a non-audio extension when the browser reports no type', () => {
       const file = createFile('notes.txt', '', 1024)
 
       const rejected = useUploadStore.getState().addFiles([file])
 
       expect(rejected).toEqual([{ file, reason: 'unsupportedType' }])
       expect(useUploadStore.getState().queue).toHaveLength(0)
+    })
+
+    it('keeps the original File object when the declared type is already canonical', () => {
+      const file = createFile('recording.mp3', 'audio/mpeg', 1024)
+
+      useUploadStore.getState().addFiles([file])
+
+      expect(useUploadStore.getState().queue[0].file).toBe(file)
     })
 
     it('should generate unique ids for each item', () => {

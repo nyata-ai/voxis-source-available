@@ -20,7 +20,9 @@
     "libraryTitle": "Ваша библиотека",
     "libraryBody": "В этой организации хранится {{files}} аудиофайлов.",
     "statsUnavailable": "Библиотека доступна, даже когда статистика панели недоступна.",
-    "openLibrary": "Открыть библиотеку"
+    "openLibrary": "Открыть библиотеку",
+    "recordCatalog": "Вживую",
+    "uploadCatalog": "Файл"
   },
   "library": {
     "title": "Библиотека",

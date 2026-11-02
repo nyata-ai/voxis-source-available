@@ -91,9 +91,9 @@
       "title": "Sedang diproses"
     },
     "stage": {
-      "stitching": "Memproses rekaman…",
-      "transcribing": "Mentranskripsikan…",
-      "summarizing": "Meringkas… {{terminal}} dari {{total}}",
+      "stitching": "Menyimpan",
+      "transcribing": "Mentranskripsikan",
+      "summarizing": "Ringkasan {{terminal}} dari {{total}}",
       "ready": "Siap"
     },
     "failed": {

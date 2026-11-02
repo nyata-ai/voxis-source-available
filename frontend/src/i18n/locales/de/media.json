@@ -17,8 +17,6 @@
     "rejectedTitle": "Abgelehnte Dateien",
     "rejectedLabel": "Abgelehnte Dateien",
     "uploading": "{{name}} wird hochgeladen",
-    "processing": "Wird auf dem Server verarbeitet…",
-    "complete": "Upload abgeschlossen",
     "viewFile": "Datei ansehen",
     "viewFileNamed": "Datei ansehen: {{name}}",
     "remove": "{{name}} entfernen",
@@ -29,6 +27,14 @@
       "unsupportedType": "Nicht unterstützter Dateityp",
       "tooLarge": "Die Datei überschreitet die maximale Größe von 1 GB",
       "storageQuota": "Diese Datei überschreitet das verbleibende Speicherlimit"
+    },
+    "step": {
+      "waiting": "Wartet",
+      "uploading": "Wird hochgeladen",
+      "encrypting": "Wird verschlüsselt",
+      "encryptFailed": "Verschlüsselung fehlgeschlagen",
+      "scanning": "Sicherheitsprüfung",
+      "ready": "Bereit"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "{{seconds}} Sekunden vor",
     "dock": "Audioplayer",
     "backToTranscript": "Zurück zum Transkript",
-    "speedPill": "Tempo {{speed}}x"
+    "speedPill": "Tempo {{speed}}x",
+    "speakingTime": "Redezeit: {{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "Klicken Sie zum Bearbeiten"

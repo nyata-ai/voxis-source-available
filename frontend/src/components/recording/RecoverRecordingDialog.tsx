@@ -159,7 +159,7 @@ function MultiSessionView({
             className="flex items-center justify-between rounded-lg border p-3"
           >
             <div className="space-y-0.5 text-sm">
-              <p className="font-medium">{formatters.date(session.created_at)}</p>
+              <p className="font-normal">{formatters.date(session.created_at)}</p>
               {duration && (
                 <p className="text-muted-foreground">{duration}</p>
               )}

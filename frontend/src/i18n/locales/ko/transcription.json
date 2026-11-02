@@ -3,6 +3,7 @@
     "label": "언어",
     "hint": "자동 감지는 권장되는 기본 설정이며 어떤 녹음에도 안전하게 사용할 수 있습니다. 예상되는 언어를 Voxis에 알려주기 위해 최대 {{max}}개 언어를 선택할 수 있습니다. 최종 기록은 항상 오디오에서 실제로 들리는 내용을 따릅니다.",
     "autoDetect": "자동 감지(권장)",
+    "chooseLanguages": "언어 선택(최대 {{max}}개)",
     "selectedCount": "{{selected}}/{{max}} 선택됨"
   },
   "expectedSpeakers": {
@@ -54,14 +55,22 @@
     "lowConfidence": "낮은 신뢰도",
     "confidenceTitle": "신뢰도: {{percent}}%",
     "noUtterances": "사용 가능한 발언이 없습니다.",
-    "ariaLabel": "성적 증명서",
+    "ariaLabel": "녹취록",
     "followLabel": "재생 팔로우",
-    "follow": "따르다"
+    "follow": "따르다",
+    "languageSwitch": "감지된 언어가 {{from}}에서 {{to}}(으)로 바뀝니다"
   },
   "row": {
     "actionsLabel": "{{title}}에 대한 작업",
     "retranscribe": "재기록",
     "delete": "삭제"
+  },
+  "list": {
+    "group": {
+      "today": "오늘",
+      "thisWeek": "이번 주",
+      "earlier": "이전"
+    }
   },
   "detail": {
     "loading": "스크립트 로드 중...",
@@ -94,6 +103,12 @@
     "library": "라이브러리",
     "more": "추가 작업",
     "uploadedLine": "{{date}} 업로드",
-    "followPlayback": "재생 따라가기"
+    "followPlayback": "재생 따라가기",
+    "sections": {
+      "label": "섹션",
+      "transcript": "녹취록",
+      "briefings": "요약",
+      "export": "내보내기"
+    }
   }
 }

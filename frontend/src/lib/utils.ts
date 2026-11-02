@@ -1,5 +1,16 @@
 import { type ClassValue, clsx } from 'clsx'
-import { twMerge } from 'tailwind-merge'
+import { extendTailwindMerge } from 'tailwind-merge'
+
+/**
+ * The seven named text roles from `styles/globals.css`. Without them
+ * tailwind-merge reads `text-caption` as a colour and drops it when a real
+ * colour class follows (`cn('text-caption', 'text-muted-foreground')`).
+ */
+export const TEXT_ROLES = ['display', 'page', 'section', 'title', 'reading', 'body', 'caption'] as const
+
+const twMerge = extendTailwindMerge({
+  extend: { theme: { text: [...TEXT_ROLES] } },
+})
 
 /**
  * Merge class names with Tailwind CSS conflict resolution

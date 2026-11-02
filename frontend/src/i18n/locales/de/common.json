@@ -91,9 +91,9 @@
       "title": "In Bearbeitung"
     },
     "stage": {
-      "stitching": "Aufnahme wird verarbeitet…",
-      "transcribing": "Transkription läuft…",
-      "summarizing": "Zusammenfassungen werden erstellt… {{terminal}} von {{total}}",
+      "stitching": "Wird gespeichert",
+      "transcribing": "Transkription",
+      "summarizing": "Zusammenfassung {{terminal}} von {{total}}",
       "ready": "Bereit"
     },
     "failed": {

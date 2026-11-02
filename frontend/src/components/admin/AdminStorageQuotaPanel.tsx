@@ -111,11 +111,11 @@ export function AdminStorageQuotaPanel() {
         <dl className="grid gap-2 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-muted-foreground">{t('storageQuota.admin.backend')}</dt>
-            <dd className="font-medium">{quota.backend}</dd>
+            <dd className="font-normal">{quota.backend}</dd>
           </div>
           <div>
             <dt className="text-muted-foreground">{t('storageQuota.admin.warningThreshold')}</dt>
-            <dd className="font-medium">85%</dd>
+            <dd className="font-normal">85%</dd>
           </div>
         </dl>
 

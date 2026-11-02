@@ -46,10 +46,10 @@ export function MicrophoneSelector({
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex w-full items-center gap-2">
       <Mic className="h-4 w-4 text-muted-foreground shrink-0" />
       <Select value={selectedDeviceId} onValueChange={onDeviceChange} disabled={disabled}>
-        <SelectTrigger className="w-64" aria-label={t('mic.select')}>
+        <SelectTrigger className="w-full min-w-0" aria-label={t('mic.select')}>
           <SelectValue placeholder={t('mic.select')} />
         </SelectTrigger>
         <SelectContent>

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import type { ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { AlertCircle, Copy, Check, Loader2, Quote } from 'lucide-react'
@@ -31,10 +32,14 @@ interface SummaryViewerProps {
   actions?: ReactNode
   /** Lets an enclosing reader seek its transcript when a citation has a timestamp. */
   onCitationSeek?: (startSeconds: number) => void
+  /** Headless only: an element elsewhere on the page (the briefing pane's tab
+   *  row) to draw Copy, Show sources and `actions` into, instead of a row
+   *  above the text. */
+  toolbarContainer?: HTMLElement | null
 }
 
 /** The general lens's prose column. The reader's briefing panel already caps the
- *  band at 78ch (artboard); a second 65ch cap inside it would render the body
+ *  band at 70ch; a second 65ch cap inside it would render the body
  *  narrower than the design. The standalone card has no such frame, so it keeps
  *  `max-w-prose`. */
 function generalBodyClass(headless?: boolean): string {
@@ -46,7 +51,7 @@ function renderGeneralContent(content: string, bodyClass: string) {
   return (
     <div className={bodyClass}>
       {paragraphs.map((paragraph, i) => (
-        <p key={i} className="text-base leading-7">
+        <p key={i} className="text-reading">
           {paragraph}
         </p>
       ))}
@@ -148,7 +153,7 @@ function renderStructuredContent(
       <div className={bodyClass}>
         {content.paragraphs.map((paragraph) => (
           <div key={paragraph.id}>
-            <p className="text-base leading-7">{paragraph.text}</p>
+            <p className="text-reading">{paragraph.text}</p>
             <CitationChips
               show={showSources}
               citationIDs={paragraph.citation_ids}
@@ -167,7 +172,7 @@ function renderStructuredContent(
     return (
       <div className="space-y-3" role="list">
         {content.items.map((item) => (
-          <div key={item.id} className="flex gap-3 text-base leading-7" role="listitem">
+          <div key={item.id} className="flex gap-3 text-reading" role="listitem">
             <span
               className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground"
               aria-hidden="true"
@@ -193,11 +198,11 @@ function renderStructuredContent(
     return (
       <div className="space-y-3" role="list">
         {content.items.map((item, index) => (
-          <div key={item.id} className="rounded-lg border p-4 text-base leading-7" role="listitem">
+          <div key={item.id} className="rounded-lg border p-4 text-reading" role="listitem">
             <div className="flex items-start gap-2">
-              <span className="font-medium text-muted-foreground">{index + 1}.</span>
+              <span className="font-normal text-muted-foreground">{index + 1}.</span>
               <div className="min-w-0 flex-1">
-                <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <div className="kicker mb-1">
                   {t(`viewer.actionKinds.${item.kind}`)}
                 </div>
                 <p className="break-words">{item.text}</p>
@@ -230,7 +235,7 @@ function renderStructuredContent(
       <div className="space-y-4" role="list">
         {content.items.map((item) => (
           <div key={item.id} className="space-y-3 rounded-lg border p-4" role="listitem">
-            <div className="flex gap-3 text-base leading-7">
+            <div className="flex gap-3 text-reading">
               <span className="font-semibold text-primary" aria-hidden="true">
                 {t('viewer.questionMarker')}
               </span>
@@ -240,7 +245,7 @@ function renderStructuredContent(
                 {item.question}
               </p>
             </div>
-            <div className="flex gap-3 text-base leading-7">
+            <div className="flex gap-3 text-reading">
               <span className="font-semibold text-muted-foreground" aria-hidden="true">
                 {t('viewer.answerMarker')}
               </span>
@@ -298,7 +303,7 @@ function renderKeyPoints(content: string, t: TranslateFn) {
   return (
     <div className="space-y-3" role="list">
       {items.map((item, i) => (
-        <div key={i} className="flex gap-3 text-base leading-7" role="listitem">
+        <div key={i} className="flex gap-3 text-reading" role="listitem">
           <span
             className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 rounded-full bg-foreground"
             aria-hidden="true"
@@ -369,14 +374,14 @@ function renderActionItems(content: string, t: TranslateFn) {
       {items.map((item) => (
         <div
           key={item.number}
-          className="rounded-lg border p-4 text-base leading-7"
+          className="rounded-lg border p-4 text-reading"
           role="listitem"
         >
           <div className="flex items-start gap-2">
-            <span className="font-medium text-muted-foreground">{item.number}.</span>
+            <span className="font-normal text-muted-foreground">{item.number}.</span>
             <div className="min-w-0 flex-1">
               {item.action.type && (
-                <div className="mb-1 text-xs font-medium uppercase tracking-wide text-muted-foreground">
+                <div className="kicker mb-1">
                   {item.action.type}
                 </div>
               )}
@@ -416,14 +421,14 @@ function renderQuestionAnswer(content: string, t: TranslateFn, bodyClass: string
     <div className="space-y-4" role="list">
       {items.map((item, i) => (
         <div key={i} className="space-y-3 rounded-lg border p-4" role="listitem">
-          <div className="flex gap-3 text-base leading-7">
+          <div className="flex gap-3 text-reading">
             <span className="font-semibold text-primary" aria-hidden="true">
               {t('viewer.questionMarker')}
             </span>
             <span className="sr-only">{t('viewer.questionPrefix')}</span>
             <p className="min-w-0 whitespace-pre-wrap break-words">{item.question}</p>
           </div>
-          <div className="flex gap-3 text-base leading-7">
+          <div className="flex gap-3 text-reading">
             <span className="font-semibold text-muted-foreground" aria-hidden="true">
               {t('viewer.answerMarker')}
             </span>
@@ -486,16 +491,18 @@ function StatusFrame({
   headless,
   className,
   actions,
+  toolbarContainer,
   children,
 }: {
   headless?: boolean
   className: string
   actions?: ReactNode
+  toolbarContainer?: HTMLElement | null
   children: ReactNode
 }) {
   const body = (
     <>
-      {actions && <div className="flex flex-row items-center justify-end gap-2">{actions}</div>}
+      {actions && <Toolbar container={headless ? toolbarContainer : null}>{actions}</Toolbar>}
       <div className={className}>{children}</div>
     </>
   )
@@ -507,12 +514,20 @@ function StatusFrame({
   )
 }
 
+/** The viewer's tool row: drawn in place, or into the host's slot when it
+ *  gave one (a portal keeps the buttons' React handlers and state here). */
+function Toolbar({ container, children }: { container?: HTMLElement | null; children: ReactNode }) {
+  if (container) return createPortal(children, container)
+  return <div className="flex flex-row items-center justify-end gap-2">{children}</div>
+}
+
 export function SummaryViewer({
   summary,
   isLoading,
   headless,
   actions,
   onCitationSeek,
+  toolbarContainer,
 }: SummaryViewerProps) {
   const { t } = useTranslation('summary')
   const [copied, setCopied] = useState(false)
@@ -538,6 +553,7 @@ export function SummaryViewer({
       <StatusFrame
         headless={headless}
         actions={actions}
+        toolbarContainer={toolbarContainer}
         className="flex items-center justify-center gap-2 py-12"
       >
         <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
@@ -548,7 +564,12 @@ export function SummaryViewer({
 
   if (!summary) {
     return (
-      <StatusFrame headless={headless} actions={actions} className="py-8">
+      <StatusFrame
+        headless={headless}
+        actions={actions}
+        toolbarContainer={toolbarContainer}
+        className="py-8"
+      >
         <p className="text-sm text-muted-foreground">{t('viewer.noContent')}</p>
       </StatusFrame>
     )
@@ -559,6 +580,7 @@ export function SummaryViewer({
       <StatusFrame
         headless={headless}
         actions={actions}
+        toolbarContainer={toolbarContainer}
         className="flex items-center justify-center gap-2 py-12"
       >
         <Loader2 className="h-5 w-5 animate-spin text-muted-foreground" />
@@ -568,11 +590,15 @@ export function SummaryViewer({
   }
 
   if (summary.status === 'failed') {
-    // Inside the reader's briefing band the artboard specifies coral for the
-    // failed lens; the standalone card keeps the app's destructive red.
-    const failTone = headless ? 'text-coral' : 'text-destructive'
+    // Failure is always the error colour; coral means "look here", never "broken".
+    const failTone = 'text-destructive'
     return (
-      <StatusFrame headless={headless} actions={actions} className="flex items-center gap-2 py-8">
+      <StatusFrame
+        headless={headless}
+        actions={actions}
+        toolbarContainer={toolbarContainer}
+        className="flex items-center gap-2 py-8"
+      >
         <AlertCircle className={cn('h-5 w-5', failTone)} />
         <span className={cn('text-sm', failTone)}>
           {summary.error_message ?? t('viewer.unknownError')}
@@ -625,9 +651,7 @@ export function SummaryViewer({
   if (headless) {
     return (
       <div className="space-y-3">
-        {hasControls && (
-          <div className="flex flex-row items-center justify-end gap-2">{controls}</div>
-        )}
+        {hasControls && <Toolbar container={toolbarContainer}>{controls}</Toolbar>}
         {renderContent(summary, t, showSources, generalBodyClass(true), onCitationSeek)}
       </div>
     )
@@ -636,7 +660,7 @@ export function SummaryViewer({
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-3">
-        <CardTitle className="text-base font-medium">
+        <CardTitle>
           {t(getSummaryTypeMeta(summary.summary_type).labelKey)}
         </CardTitle>
         {hasControls && <div className="flex flex-row items-center gap-2">{controls}</div>}

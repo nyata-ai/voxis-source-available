@@ -3,6 +3,7 @@
     "label": "言語",
     "hint": "自動検出は推奨される初期設定で、どのような録音にも安心して使えます。想定される言語を Voxis に伝えるために、最大 {{max}} 言語まで選択できます。最終的な文字起こしは、常に音声で実際に話されている内容に従います。",
     "autoDetect": "自動検出 (推奨)",
+    "chooseLanguages": "言語を選ぶ（最大 {{max}} 件）",
     "selectedCount": "{{selected}}/{{max}}が選択されました"
   },
   "expectedSpeakers": {
@@ -54,14 +55,22 @@
     "lowConfidence": "低い信頼性",
     "confidenceTitle": "信頼度: {{percent}}%",
     "noUtterances": "利用可能な発言はありません。",
-    "ariaLabel": "成績証明書",
+    "ariaLabel": "文字起こし",
     "followLabel": "再生をフォローする",
-    "follow": "フォローする"
+    "follow": "フォローする",
+    "languageSwitch": "検出された言語が{{from}}から{{to}}に切り替わります"
   },
   "row": {
     "actionsLabel": "{{title}} のアクション",
     "retranscribe": "再転写",
     "delete": "消去"
+  },
+  "list": {
+    "group": {
+      "today": "今日",
+      "thisWeek": "今週",
+      "earlier": "それ以前"
+    }
   },
   "detail": {
     "loading": "文字起こしを読み込んでいます...",
@@ -94,6 +103,12 @@
     "library": "ライブラリ",
     "more": "その他の操作",
     "uploadedLine": "{{date}} にアップロード",
-    "followPlayback": "再生に追従"
+    "followPlayback": "再生に追従",
+    "sections": {
+      "label": "セクション",
+      "transcript": "文字起こし",
+      "briefings": "要約",
+      "export": "エクスポート"
+    }
   }
 }

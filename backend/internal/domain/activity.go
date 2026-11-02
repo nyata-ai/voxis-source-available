@@ -40,11 +40,12 @@ type ActivityDetail struct {
 
 // ActivityItem is one row in the activity feed.
 type ActivityItem struct {
-	Kind         string
-	RefID        string
-	Link         string
-	Title        string
-	Stage        string
+	Kind  string
+	RefID string
+	Link  string
+	Title string
+	Stage string
+	// ErrorMessage is the stored failure reason, set only on failed items.
 	ErrorMessage string
 	Status       string
 	Detail       *ActivityDetail

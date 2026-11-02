@@ -81,9 +81,9 @@
   },
   "activity": {
     "title": "Activity",
-    "count": "{{count}} processing",
-    "more": "+{{count}} more",
-    "ready": "Ready",
+    "count": "{{count}} en cours",
+    "more": "+{{count}} de plus",
+    "ready": "Prêt",
     "view": "View",
     "dismiss": "Dismiss",
     "recordingTitle": "Live recording",
@@ -91,14 +91,14 @@
       "title": "En cours"
     },
     "stage": {
-      "stitching": "Processing recording…",
-      "transcribing": "Transcribing…",
-      "summarizing": "Summarizing… {{terminal}} of {{total}}",
-      "ready": "Ready"
+      "stitching": "Enregistrement",
+      "transcribing": "Transcription",
+      "summarizing": "Synthèse {{terminal}} sur {{total}}",
+      "ready": "Prêt"
     },
     "failed": {
-      "recording": "Recording couldn't be processed",
-      "transcription": "Transcription failed"
+      "recording": "Impossible de traiter l’enregistrement",
+      "transcription": "Échec de la transcription"
     },
     "toast": {
       "recordingReady": "Recording ready",
@@ -126,8 +126,8 @@
     "speaker_one": "{{count}} intervenant",
     "speaker_other": "{{count}} intervenants",
     "words": "{{n}} mots",
-    "lens_one": "{{count}} lentille",
-    "lens_other": "{{count}} lentilles",
+    "lens_one": "{{count}} synthèse",
+    "lens_other": "{{count}} synthèses",
     "languages": "Langues : {{codes}}",
     "untitled": "Session sans titre"
   }

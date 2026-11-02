@@ -49,13 +49,14 @@ export function MiniDock({
   return (
     // z-30 keeps the dock under the floating ActivityTray (z-50, bottom-4
     // right-4, w-80): the 21rem of right padding is that tray plus its inset,
-    // and it starts at `md` because that is where the dock stops being full
+    // applied only while the tray is on screen (it marks itself with
+    // `data-activity-tray`), and from `md`, where the dock stops being full
     // width. The left inset clears MainLayout's sidebar, whose width is a token.
     <div
       role="region"
       aria-label={t('media:player.dock')}
       data-testid="reader-mini-dock"
-      className="fixed bottom-0 left-0 right-0 z-30 h-14 border-t bg-background/95 backdrop-blur md:left-[var(--app-sidebar-w)] md:pr-[21rem]"
+      className="fixed bottom-0 left-0 right-0 z-30 h-14 border-t bg-background/95 backdrop-blur md:left-[var(--app-sidebar-w)] md:[body:has([data-activity-tray])_&]:pr-[21rem]"
     >
       <div className="mx-auto flex h-full max-w-[1280px] items-center gap-3 px-4 sm:gap-4 sm:px-6">
         <Button

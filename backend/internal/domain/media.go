@@ -63,9 +63,9 @@ func IsAllowedAudioType(ct string) bool {
 	return allowedAudioTypes[mediaType]
 }
 
-// audioTypeAliases maps MIME types reported by browsers and operating systems
-// onto the canonical types this service accepts. Windows registers .aac as
-// audio/vnd.dlna.adts, which Chrome and Edge send verbatim.
+// audioTypeAliases maps MIME types browsers and operating systems report for
+// audio files onto the canonical types this service accepts. Windows registers
+// .aac as audio/vnd.dlna.adts, which Chrome and Edge send verbatim.
 var audioTypeAliases = map[string]string{
 	"audio/vnd.dlna.adts": "audio/aac",
 	"audio/x-aac":         "audio/aac",
@@ -77,9 +77,9 @@ var audioTypeAliases = map[string]string{
 	"audio/x-opus+ogg":    "audio/opus",
 }
 
-// NormalizeAudioContentType maps a declared content type to its canonical
-// equivalent and drops MIME parameters. Unknown values remain unchanged so
-// validation can report the original declaration.
+// NormalizeAudioContentType maps a declared content type onto its canonical
+// equivalent, dropping MIME parameters. Unknown or unparseable types are
+// returned unchanged so the caller's validation reports the original value.
 func NormalizeAudioContentType(ct string) string {
 	mediaType, _, err := mime.ParseMediaType(ct)
 	if err != nil {

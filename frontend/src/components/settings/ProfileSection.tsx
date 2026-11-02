@@ -14,7 +14,7 @@ export function ProfileSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{t('profile.title')}</h3>
+        <h3 className="text-section font-normal">{t('profile.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('profile.description')}</p>
       </div>
       {isLoading || !user ? (
@@ -47,7 +47,7 @@ export function ProfileSection() {
         </div>
       )}
       <div>
-        <h3 className="text-lg font-medium">{t('profile.usage.title')}</h3>
+        <h3 className="text-section font-normal">{t('profile.usage.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('profile.usage.description')}</p>
       </div>
       {usage.isLoading ? (
@@ -69,7 +69,7 @@ export function ProfileSection() {
             )}
           />
           <div className="rounded-lg border p-4 sm:col-span-2">
-            <p className="text-sm font-medium">{t('profile.usage.storage')}</p>
+            <p className="text-sm font-semibold">{t('profile.usage.storage')}</p>
             <StorageQuotaNotice storage={usage.data.user_storage} className="mt-2" />
           </div>
         </div>

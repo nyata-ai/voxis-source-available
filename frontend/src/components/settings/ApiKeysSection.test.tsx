@@ -101,6 +101,24 @@ describe('ApiKeysSection', () => {
     expect(revokeButtons).toHaveLength(2)
   })
 
+  it('lets a key row wrap instead of pushing the page sideways', () => {
+    setupDefaultMocks([
+      {
+        id: 'key-1',
+        name: 'Production Key',
+        key_prefix: 'vx_prod',
+        scopes: ['media:read'],
+        last_used_at: null,
+        expires_at: null,
+        created_at: '2026-02-10T10:00:00Z',
+      },
+    ])
+    render(<ApiKeysSection />)
+    const row = screen.getByText('Production Key').closest('.rounded-lg')
+    expect(row).toHaveClass('flex-wrap', 'gap-3')
+    expect(row?.firstElementChild).toHaveClass('min-w-0')
+  })
+
   it('shows "Never" for keys that have not been used', () => {
     const keys: APIKey[] = [
       {

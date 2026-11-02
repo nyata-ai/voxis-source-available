@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
+import { Page, PageHeader } from '@/components/layout/Page'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -16,22 +17,43 @@ import { useAdminOpsStats, type AdminOpsEntityStats } from '@/hooks/useAdminOpsS
 import { useAdminSystemStats } from '@/hooks/useAdminSystemStats'
 
 export function AdminPage() {
-  const { t } = useTranslation('oss')
+  const { t } = useTranslation(['oss', 'auth'])
   const system = useAdminSystemStats()
   const operations = useAdminOpsStats()
   const prompts = useAdminLLMPrompts()
   const update = useUpdateAdminLLMPrompt()
   const reset = useResetAdminLLMPrompt()
+  const jumps = [
+    { id: 'admin-system', label: t('admin.system') },
+    { id: 'admin-pipeline', label: t('admin.pipeline') },
+    { id: 'admin-retention', label: t('admin.retention') },
+    { id: 'admin-quota', label: t('admin.storageQuota') },
+    { id: 'admin-prompts', label: t('admin.prompts') },
+  ]
   return (
-    <div className="mx-auto max-w-5xl space-y-6">
-      <header>
-        <h1 className="text-2xl font-semibold">{t('admin.title')}</h1>
-        <p className="text-muted-foreground">{t('admin.description')}</p>
-      </header>
-      <section className="space-y-3">
+    <Page header={<PageHeader title={t('admin.title')} description={t('admin.description')} />}>
+      {/* Pinned under the app header while the long page scrolls. */}
+      <nav
+        aria-label={t('auth:layout.nav.adminSections')}
+        className="sticky top-14 z-10 overflow-x-auto border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80"
+      >
+        <ul className="flex gap-1 py-2">
+          {jumps.map((jump) => (
+            <li key={jump.id} className="shrink-0">
+              <a
+                href={`#${jump.id}`}
+                className="inline-flex min-h-11 items-center rounded-md px-3 text-body text-muted-foreground transition-colors hover:bg-accent/40 hover:text-foreground"
+              >
+                {jump.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+      <section id="admin-system" className="scroll-mt-32 space-y-3">
         <div className="flex items-center justify-between">
           <div>
-            <h2 className="text-xl font-semibold">{t('admin.system')}</h2>
+            <h2 className="text-section font-normal">{t('admin.system')}</h2>
             <p className="text-sm text-muted-foreground">{t('admin.systemDescription')}</p>
           </div>
           <Button
@@ -69,8 +91,8 @@ export function AdminPage() {
           </p>
         )}
       </section>
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold">{t('admin.pipeline')}</h2>
+      <section id="admin-pipeline" className="scroll-mt-32 space-y-3">
+        <h2 className="text-section font-normal">{t('admin.pipeline')}</h2>
         {operations.data ? (
           <>
             <div className="grid gap-3 md:grid-cols-3">
@@ -105,7 +127,7 @@ export function AdminPage() {
             {operations.data.summary_model && (
               <Card>
                 <CardHeader>
-                  <CardTitle className="text-base">{t('admin.localModel')}</CardTitle>
+                  <CardTitle>{t('admin.localModel')}</CardTitle>
                   <CardDescription>{t('admin.modelDescription')}</CardDescription>
                 </CardHeader>
                 <CardContent className="grid gap-2 text-sm sm:grid-cols-2">
@@ -135,17 +157,17 @@ export function AdminPage() {
           </p>
         )}
       </section>
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold">{t('admin.retention')}</h2>
+      <section id="admin-retention" className="scroll-mt-32 space-y-3">
+        <h2 className="text-section font-normal">{t('admin.retention')}</h2>
         <AdminRecordingRetentionPanel />
       </section>
-      <section className="space-y-3">
-        <h2 className="text-xl font-semibold">{t('admin.storageQuota')}</h2>
+      <section id="admin-quota" className="scroll-mt-32 space-y-3">
+        <h2 className="text-section font-normal">{t('admin.storageQuota')}</h2>
         <AdminStorageQuotaPanel />
       </section>
-      <section className="space-y-3">
+      <section id="admin-prompts" className="scroll-mt-32 space-y-3">
         <div>
-          <h2 className="text-xl font-semibold">{t('admin.prompts')}</h2>
+          <h2 className="text-section font-normal">{t('admin.prompts')}</h2>
           <p className="text-sm text-muted-foreground">{t('admin.promptsDescription')}</p>
         </div>
         {prompts.isLoading ? (
@@ -164,7 +186,7 @@ export function AdminPage() {
           ))
         )}
       </section>
-    </div>
+    </Page>
   )
 }
 
@@ -172,10 +194,10 @@ function Metric({ title, value, detail }: { title: string; value: string; detail
   return (
     <Card>
       <CardHeader className="pb-2">
-        <CardTitle className="text-base">{title}</CardTitle>
+        <CardTitle>{title}</CardTitle>
       </CardHeader>
       <CardContent>
-        <p className="font-medium">{value}</p>
+        <p className="font-semibold">{value}</p>
         {detail && <p className="mt-1 text-sm text-muted-foreground">{detail}</p>}
       </CardContent>
     </Card>
@@ -244,7 +266,7 @@ function PromptCard({
   return (
     <Card>
       <CardHeader>
-        <CardTitle className="text-base">{prompt.label}</CardTitle>
+        <CardTitle>{prompt.label}</CardTitle>
         <CardDescription>
           {prompt.summary_type} · {prompt.prompt_version}
           {prompt.runtime ? ` · ${prompt.runtime}` : ''}

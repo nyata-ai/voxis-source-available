@@ -115,8 +115,7 @@
     "tryAgain": "Intentar otra vez"
   },
   "upload": {
-    "saving": "Guardando... ({{n}} no enviado)",
-    "saved": "Guardado"
+    "saving": "Guardando... ({{n}} no enviado)"
   },
   "toast": {
     "autoStop": "La grabación se detuvo automáticamente después de 8 horas.",
@@ -150,5 +149,15 @@
     "mixed": "Meeting audio",
     "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
     "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  },
+  "tape": {
+    "caption": "Se envía cada 30 segundos y se guarda cifrado",
+    "count": "{{saved}} de {{total}} guardados"
+  },
+  "micCheck": {
+    "test": "Probar micrófono",
+    "listening": "Escuchando…",
+    "heard": "Le oímos bien",
+    "silent": "Aún no hay sonido. Revise el micrófono."
   }
 }

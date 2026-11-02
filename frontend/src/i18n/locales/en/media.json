@@ -17,8 +17,6 @@
     "rejectedTitle": "Rejected files",
     "rejectedLabel": "Rejected files",
     "uploading": "Uploading {{name}}",
-    "processing": "Processing on server...",
-    "complete": "Upload complete",
     "viewFile": "View file",
     "viewFileNamed": "View file: {{name}}",
     "remove": "Remove {{name}}",
@@ -29,6 +27,14 @@
       "unsupportedType": "Unsupported file type",
       "tooLarge": "File exceeds maximum size of 1 GB",
       "storageQuota": "This file exceeds the remaining storage quota"
+    },
+    "step": {
+      "waiting": "Waiting",
+      "uploading": "Uploading",
+      "encrypting": "Encrypting",
+      "encryptFailed": "Encrypting failed",
+      "scanning": "Scanning for malware",
+      "ready": "Ready"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "Forward {{seconds}} seconds",
     "dock": "Audio player",
     "backToTranscript": "Back to transcript",
-    "speedPill": "{{speed}}x speed"
+    "speedPill": "{{speed}}x speed",
+    "speakingTime": "Speaking time: {{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "Click to edit"

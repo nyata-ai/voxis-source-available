@@ -14,7 +14,7 @@ export function TranscriptionSection() {
     return (
       <div className="space-y-6">
         <div>
-          <h3 className="text-lg font-medium">{t('transcription.title')}</h3>
+          <h3 className="text-section font-normal">{t('transcription.title')}</h3>
           <p className="text-sm text-muted-foreground">{t('transcription.description')}</p>
         </div>
         <div className="space-y-4 rounded-lg border p-4">
@@ -28,7 +28,7 @@ export function TranscriptionSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{t('transcription.title')}</h3>
+        <h3 className="text-section font-normal">{t('transcription.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('transcription.description')}</p>
       </div>
 

@@ -161,7 +161,9 @@ describe('ReaderWorkspace', () => {
   })
 
   describe('left rail', () => {
-    it('puts the audio card, export, speakers and provenance in order', () => {
+    // Working order: people name the speakers before they export, and the
+    // integrity checks are reference, so they come last.
+    it('puts the audio card, speakers, export and provenance in working order', () => {
       renderWorkspace(
         makeSession({
           forensics: { analysis: { checks: [], trust: 'high' } as never, fileHash: 'abc' },
@@ -169,10 +171,26 @@ describe('ReaderWorkspace', () => {
         <div data-testid="audio-card">Player</div>
       )
 
-      expect(screen.getByTestId('audio-card')).toBeInTheDocument()
+      const order = ['audio-card', 'speaker-editor', 'reader-export', 'audio-analysis'].map((id) =>
+        screen.getByTestId(id),
+      )
+      for (let i = 1; i < order.length; i++) {
+        expect(
+          order[i - 1]!.compareDocumentPosition(order[i]!) & Node.DOCUMENT_POSITION_FOLLOWING,
+        ).toBeTruthy()
+      }
       expect(screen.getByTestId('reader-export')).toHaveTextContent('general')
-      expect(screen.getByTestId('speaker-editor')).toBeInTheDocument()
-      expect(screen.getByTestId('audio-analysis')).toBeInTheDocument()
+    })
+
+    it('uses a fixed 300-360 px rail beside a flexible transcript', () => {
+      const { container } = renderWorkspace(makeSession(), <div data-testid="audio-card">Player</div>)
+      expect(container.firstElementChild).toHaveClass('lg:grid-cols-[minmax(300px,360px)_minmax(0,1fr)]')
+    })
+
+    it('gives the transcript and export panel the ids the section links jump to', () => {
+      renderWorkspace(makeSession(), <div data-testid="audio-card">Player</div>)
+      expect(screen.getByTestId('transcript-scroll-container').closest('#transcript')).not.toBeNull()
+      expect(screen.getByTestId('reader-export').closest('#export')).not.toBeNull()
     })
 
     // The phone artboard reads: audio card, transcript, then Export, Speakers
@@ -212,7 +230,8 @@ describe('ReaderWorkspace', () => {
       renderWorkspace(makeSession(), <div data-testid="audio-card">Player</div>)
       const column = screen.getByTestId('transcript-scroll-container').closest('.order-2')
       expect(column).toHaveClass('lg:sticky')
-      expect(column).toHaveClass('lg:top-[var(--app-header-h)]')
+      // Under the app header and, when the page draws them, the section links.
+      expect(column).toHaveClass('lg:top-[calc(var(--app-header-h)_+_var(--reader-nav-h,0rem))]')
       expect(column).toHaveClass('lg:pt-4')
       expect(column).toHaveClass('lg:bg-background')
     })
@@ -312,17 +331,39 @@ describe('ReaderWorkspace', () => {
       expect(screen.getByTestId('reader-find-count')).toHaveTextContent('1 of 2')
     })
 
-    it('steps to the next match on Enter and wraps', async () => {
+    it('goes to the first match on the first Enter, then steps and wraps', async () => {
       renderWorkspace(makeSession())
       const user = userEvent.setup()
 
       await user.type(findField(), 'the')
+      expect(screen.getByTestId('viewer-active-match')).toHaveTextContent('-1')
+
+      await user.type(findField(), '{Enter}')
+      expect(screen.getByTestId('reader-find-count')).toHaveTextContent('1 of 2')
+      expect(screen.getByTestId('viewer-active-match')).toHaveTextContent('0')
+
       await user.type(findField(), '{Enter}')
       expect(screen.getByTestId('reader-find-count')).toHaveTextContent('2 of 2')
       expect(screen.getByTestId('viewer-active-match')).toHaveTextContent('1')
 
       await user.type(findField(), '{Enter}')
       expect(screen.getByTestId('reader-find-count')).toHaveTextContent('1 of 2')
+    })
+
+    // Below `lg` the page is the one scroll: without this the Next button left
+    // the screen on the second step (y 714, 104, -163, -324 at 375x812).
+    it('pins the find row under the bars below lg, opaque, with 44 px buttons on phones', async () => {
+      renderWorkspace(makeSession())
+      const user = userEvent.setup()
+      await user.type(findField(), 'the')
+
+      const row = screen.getByTestId('reader-find-count').closest('[data-reader-find]')
+      expect(row).toHaveClass(
+        'max-lg:sticky',
+        'max-lg:top-[calc(var(--app-header-h)_+_var(--reader-nav-h,0rem))]',
+        'max-lg:bg-background',
+      )
+      expect(screen.getByRole('button', { name: 'Next match' })).toHaveClass('h-11', 'w-11', 'sm:h-7', 'sm:w-7')
     })
 
     it('steps backward on Shift+Enter', async () => {
@@ -363,7 +404,7 @@ describe('ReaderWorkspace', () => {
       expect(findField()).toHaveValue('the')
 
       fireEvent.keyDown(findField(), { key: 'Enter' })
-      expect(screen.getByTestId('reader-find-count')).toHaveTextContent('2 of 2')
+      expect(screen.getByTestId('viewer-active-match')).toHaveTextContent('0')
     })
 
     it('reports no matches without disabling the field', async () => {

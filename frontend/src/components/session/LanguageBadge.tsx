@@ -24,7 +24,7 @@ export function LanguageBadge({ languages, className }: LanguageBadgeProps) {
 
   return (
     <span
-      className={cn('text-[0.68rem] font-medium uppercase tracking-wide text-muted-foreground', className)}
+      className={cn('text-caption uppercase tracking-wide text-muted-foreground', className)}
       aria-label={t('session.languages', { codes: commaCodes })}
     >
       {dotCodes}

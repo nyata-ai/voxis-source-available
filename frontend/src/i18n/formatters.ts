@@ -8,9 +8,11 @@ function toValidDate(value: DateInput): Date | null {
   return Number.isNaN(date.getTime()) ? null : date
 }
 
-function dayDiffUTC(date: Date, now: Date): number {
-  const dateDay = Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
-  const nowDay = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate())
+/** Whole calendar days from `now` to `date` on the viewer's own calendar, so
+ *  "yesterday" agrees with the Library's local-time date groups. */
+function localDayDiff(date: Date, now: Date): number {
+  const dateDay = Date.UTC(date.getFullYear(), date.getMonth(), date.getDate())
+  const nowDay = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate())
   return Math.round((dateDay - nowDay) / 86_400_000)
 }
 
@@ -38,6 +40,14 @@ export function createFormatters(locale: string = DEFAULT_LOCALE) {
     minute: '2-digit',
   })
   const longDateFormatter = new Intl.DateTimeFormat(resolvedLocale, {
+    weekday: 'long',
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+  })
+  // For a date with no time of its own ("2026-09-03" parses as UTC midnight):
+  // in a local zone west of Greenwich it would print the day before.
+  const longDateUTCFormatter = new Intl.DateTimeFormat(resolvedLocale, {
     weekday: 'long',
     day: 'numeric',
     month: 'long',
@@ -82,6 +92,10 @@ export function createFormatters(locale: string = DEFAULT_LOCALE) {
       const date = toValidDate(value)
       return date ? longDateFormatter.format(date) : ''
     },
+    longDateUTC(value: DateInput): string {
+      const date = toValidDate(value)
+      return date ? longDateUTCFormatter.format(date) : ''
+    },
     asOfDate(value: DateInput): string {
       const date = toValidDate(value)
       return date ? asOfDateFormatter.format(date).toLocaleUpperCase(resolvedLocale) : ''
@@ -89,7 +103,7 @@ export function createFormatters(locale: string = DEFAULT_LOCALE) {
     relativeDate(value: DateInput, now: Date = new Date()): string {
       const date = toValidDate(value)
       if (!date) return ''
-      const diffDays = dayDiffUTC(date, now)
+      const diffDays = localDayDiff(date, now)
       if (Math.abs(diffDays) <= 6) {
         return relativeTimeFormatter.format(diffDays, 'day')
       }

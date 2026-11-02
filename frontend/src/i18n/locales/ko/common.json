@@ -81,9 +81,9 @@
   },
   "activity": {
     "title": "Activity",
-    "count": "{{count}} processing",
-    "more": "+{{count}} more",
-    "ready": "Ready",
+    "count": "{{count}}개 처리 중",
+    "more": "외 {{count}}개",
+    "ready": "준비됨",
     "view": "View",
     "dismiss": "Dismiss",
     "recordingTitle": "Live recording",
@@ -91,14 +91,14 @@
       "title": "처리 중"
     },
     "stage": {
-      "stitching": "Processing recording…",
-      "transcribing": "Transcribing…",
-      "summarizing": "Summarizing… {{terminal}} of {{total}}",
-      "ready": "Ready"
+      "stitching": "저장 중",
+      "transcribing": "전사 중",
+      "summarizing": "요약 {{terminal}}/{{total}}",
+      "ready": "준비됨"
     },
     "failed": {
-      "recording": "Recording couldn't be processed",
-      "transcription": "Transcription failed"
+      "recording": "녹음을 처리할 수 없습니다",
+      "transcription": "전사 실패"
     },
     "toast": {
       "recordingReady": "Recording ready",
@@ -126,8 +126,8 @@
     "speaker_one": "화자 {{count}}명",
     "speaker_other": "화자 {{count}}명",
     "words": "단어 {{n}}개",
-    "lens_one": "렌즈 {{count}}개",
-    "lens_other": "렌즈 {{count}}개",
+    "lens_one": "요약 {{count}}개",
+    "lens_other": "요약 {{count}}개",
     "languages": "언어: {{codes}}",
     "untitled": "제목 없는 세션"
   }

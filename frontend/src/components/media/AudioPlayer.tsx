@@ -1,4 +1,13 @@
-import { forwardRef, useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react'
+import {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+} from 'react'
 import { useTranslation } from 'react-i18next'
 import { Pause, Play, RotateCcw, RotateCw, Volume2, VolumeX } from 'lucide-react'
 import { Button } from '@/components/ui/button'
@@ -33,7 +42,7 @@ const SKIP_SECONDS = 5
  * dock's paper variant — so this holds only what the two share.
  */
 export const THIN_SLIDER =
-  'py-2 [&>span:first-child]:h-[3px] [&>span:first-child>span]:bg-coral ' +
+  'py-2 [&>span:first-child]:h-[3px] [&>span:first-child>span]:bg-coral-mark ' +
   '[&_[role=slider]]:h-3 [&_[role=slider]]:w-3'
 
 /** `THIN_SLIDER` on ink: translucent track, white handle. */
@@ -61,6 +70,7 @@ interface PlayerViewProps {
   onScrub: (value: number[]) => void
   onSpeedChange: (rate: number) => void
   onToggleMute: () => void
+  belowScrubber?: ReactNode
 }
 
 export interface SpeedSelectProps {
@@ -112,7 +122,7 @@ function CardLayout(props: PlayerViewProps) {
   const skipClass = `h-11 w-11 rounded-full text-white/80 hover:bg-white/10 hover:text-white sm:h-9 sm:w-9 ${INK_FOCUS}`
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg bg-ink p-5 text-white dark:bg-card">
+    <div className="on-ink flex flex-col gap-4 rounded-lg bg-ink p-5 text-white dark:bg-card">
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-2 sm:gap-3">
           <Button
@@ -163,6 +173,8 @@ function CardLayout(props: PlayerViewProps) {
         className={INK_SLIDER}
       />
 
+      {props.belowScrubber}
+
       <div className="flex items-center justify-between gap-3">
         <SpeedSelect
           speed={props.speed}
@@ -202,6 +214,8 @@ interface AudioPlayerProps {
   /** Reports the playback rate, so a second control cannot show a speed the
    *  audio is not playing at. */
   onSpeedChange?: (rate: number) => void
+  /** Drawn on the card under the scrubber — the reader's speaker strip. */
+  belowScrubber?: ReactNode
 }
 
 export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(function AudioPlayer(
@@ -214,6 +228,7 @@ export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(funct
     onPlayStateChange,
     onDurationChange,
     onSpeedChange,
+    belowScrubber,
   },
   ref,
 ) {
@@ -347,6 +362,7 @@ export const AudioPlayer = forwardRef<AudioPlayerHandle, AudioPlayerProps>(funct
     onScrub: handleScrub,
     onSpeedChange: changeSpeed,
     onToggleMute: toggleMute,
+    belowScrubber,
   }
 
   return (

@@ -24,7 +24,7 @@ import type { SessionView } from './session-view'
  */
 const FORMAT_PILL = cn(
   PILL_CLASS,
-  'h-11 px-3.5 text-[13px] sm:h-8 sm:px-2.5 sm:text-xs',
+  'h-11 px-3.5 text-body sm:h-8 sm:px-2.5 sm:text-xs',
   'disabled:cursor-not-allowed disabled:opacity-50',
   'aria-disabled:cursor-not-allowed aria-disabled:opacity-50',
   // Cancelling the coral hover takes a per-theme pair: the light theme's resting
@@ -91,7 +91,7 @@ function FormatPill({
   return (
     <button
       type="button"
-      className={cn(FORMAT_PILL, busy && 'border-coral text-coral')}
+      className={cn(FORMAT_PILL, busy && 'border-coral-mark text-coral-mark')}
       // `blocked` is aria-disabled and not `disabled`: a disabled button cannot
       // take focus, so neither the tooltip nor the hint below would ever reach
       // a keyboard or screen-reader user. The click is refused instead.

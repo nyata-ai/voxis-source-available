@@ -1,12 +1,12 @@
-import { useCallback, useRef, type MouseEvent } from 'react'
+import { useCallback, useRef, type MouseEvent, type ReactNode } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
 import { useDropzone } from 'react-dropzone'
-import { Upload, X, CheckCircle, AlertCircle, FileAudio, Loader2 } from 'lucide-react'
+import { Upload, X, AlertCircle, FileAudio } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useUploadStore, type UploadItem } from '@/stores/upload'
 import { dismissCapture, useCaptureStore } from '@/stores/capture'
-import { useUploadMedia } from '@/hooks/useMedia'
+import { useMediaDetail, useUploadMedia } from '@/hooks/useMedia'
 import { useUsageStats } from '@/hooks/useUsageStats'
 import { cn, formatBytes } from '@/lib/utils'
 import {
@@ -14,7 +14,10 @@ import {
   isUploadCapacityError,
   uploadRetryDelayMs,
   uploadScheduler,
+  uploadSteps,
+  type UploadStepView,
 } from './upload-utils'
+import { StepTrack } from '@/components/activity/StepTrack'
 import { StorageQuotaNotice } from './StorageQuotaNotice'
 
 const ACCEPTED_TYPES = {
@@ -193,7 +196,7 @@ export function UploadDropzone() {
       >
         <input {...getInputProps()} />
         <Upload className="mb-4 h-10 w-10 text-muted-foreground" />
-        <p className="mb-2 text-lg font-medium">
+        <p className="mb-2 text-lg font-normal">
           {t('upload.dropzone')}
         </p>
         <Button
@@ -225,11 +228,11 @@ export function UploadDropzone() {
 
       {rejected.length > 0 && (
         <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3">
-          <p className="text-sm font-medium text-destructive">{t('upload.rejectedTitle')}</p>
+          <p className="text-sm font-semibold text-destructive">{t('upload.rejectedTitle')}</p>
           <ul className="mt-2 space-y-1 text-xs text-destructive" aria-label={t('upload.rejectedLabel')}>
             {rejected.map((item) => (
               <li key={`${item.file.name}-${item.reason}`}>
-                <span className="font-medium">{item.file.name}</span> — {t(`upload.rejectionReasons.${item.reason}`)}
+                <span className="font-semibold">{item.file.name}</span> — {t(`upload.rejectionReasons.${item.reason}`)}
               </li>
             ))}
           </ul>
@@ -261,7 +264,7 @@ function UploadQueueItem({ item, onRemove }: UploadQueueItemProps) {
       <FileAudio className="h-5 w-5 shrink-0 text-muted-foreground" />
       <div className="min-w-0 flex-1">
         <div className="flex min-w-0 items-center justify-between gap-2">
-          <p className="min-w-0 flex-1 truncate text-sm font-medium" title={item.file.name}>
+          <p className="min-w-0 flex-1 truncate text-sm font-semibold" title={item.file.name}>
             {item.file.name}
           </p>
           <span className="shrink-0 text-xs text-muted-foreground">
@@ -285,13 +288,6 @@ function UploadQueueItem({ item, onRemove }: UploadQueueItemProps) {
           </div>
         )}
 
-        {item.status === 'processing' && (
-          <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
-            <Loader2 className="h-3 w-3 animate-spin" />
-            {t('upload.processing')}
-          </p>
-        )}
-
         {item.status === 'error' && item.error && (
           <p className="mt-1 flex items-center gap-1 text-xs text-destructive">
             <AlertCircle className="h-3 w-3" />
@@ -299,21 +295,10 @@ function UploadQueueItem({ item, onRemove }: UploadQueueItemProps) {
           </p>
         )}
 
-        {item.status === 'complete' && (
-          <p className="mt-1 flex items-center gap-1 text-xs text-success">
-            <CheckCircle className="h-3 w-3" />
-            {t('upload.complete')}
-            {item.mediaId && (
-              <Link
-                to={`/media/${item.mediaId}`}
-                onClick={dismissOnPlainClick}
-                className="ml-1 font-medium underline underline-offset-2"
-                aria-label={t('upload.viewFileNamed', { name: item.file.name })}
-              >
-                {t('upload.viewFile')}
-              </Link>
-            )}
-          </p>
+        {item.status === 'complete' && item.mediaId ? (
+          <UploadedSteps fileName={item.file.name} mediaId={item.mediaId} />
+        ) : (
+          item.status !== 'error' && <UploadSteps view={uploadSteps(item.status)} />
         )}
       </div>
 
@@ -327,5 +312,40 @@ function UploadQueueItem({ item, onRemove }: UploadQueueItemProps) {
         <X className="h-4 w-4" />
       </Button>
     </li>
+  )
+}
+
+function UploadSteps({ view, children }: { view: UploadStepView; children?: ReactNode }) {
+  const { t } = useTranslation(['media', 'common'])
+  return (
+    <p className="mt-1.5 flex min-w-0 items-center gap-2 text-xs">
+      <StepTrack
+        steps={view.steps}
+        label={t(view.labelKey)}
+        labelClassName={view.failed ? 'font-semibold text-destructive' : 'text-muted-foreground'}
+      />
+      {children}
+    </p>
+  )
+}
+
+/**
+ * A finished upload keeps reading its media row, which the media hooks poll
+ * while the malware scan runs, so the track walks on to Ready by itself.
+ */
+function UploadedSteps({ fileName, mediaId }: { fileName: string; mediaId: string }) {
+  const { t } = useTranslation('media')
+  const { data: media } = useMediaDetail(mediaId)
+  return (
+    <UploadSteps view={uploadSteps('complete', media)}>
+      <Link
+        to={`/media/${mediaId}`}
+        onClick={dismissOnPlainClick}
+        className="shrink-0 font-normal text-foreground underline underline-offset-2"
+        aria-label={t('upload.viewFileNamed', { name: fileName })}
+      >
+        {t('upload.viewFile')}
+      </Link>
+    </UploadSteps>
   )
 }

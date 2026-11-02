@@ -43,6 +43,10 @@
   --color-ink: #181d26;
   --color-cream: #f5e9d4;
   --color-cream-foreground: #181d26;
+  /* The link intake disc: cream almost vanishes on white (1.2:1), so it
+     carries a cream-hair ring and its icon in cream-ink (5.2:1 on cream). */
+  --color-cream-ink: #6b5f45;
+  --color-cream-hair: #e8d9bb;
   --color-paper-soft: #f8fafc;
   --color-ink-muted: #41454d;
   --color-ink-body: #333840;
@@ -50,6 +54,12 @@
   --color-peach-foreground: #181d26;
   --color-mint: #a8d8c4;
   --color-mint-foreground: #181d26;
+  /* Speaker palette (with peach and mint): identity discs and the speaker
+     strip only, never text, buttons or backgrounds. Fixed in both themes; the
+     order lives in `lib/speaker-tone.ts`. Ink initials: 9.1 / 11.4 / 7.9:1. */
+  --color-lilac: #c9b6e4;
+  --color-butter: #f0d27a;
+  --color-sky: #8db4ea;
   /* Live/recording indicator — fixed, not theme-driven. Per-theme --destructive
      is tuned for error surfaces and isn't guaranteed to stay vivid in both
      themes; the recording dot is a safety-relevant glance signal and must
@@ -59,12 +69,104 @@
 
   --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
 
+  /* Seven named text roles. App code uses these instead of arbitrary
+     `text-[…rem|px]` sizes (guarded by src/styles/type-roles.test.ts).
+     Line heights are in rem or unitless so text grows with browser zoom. */
+  --text-display: 2.25rem;
+  --text-display--line-height: 1.15;
+  --text-page: 1.75rem;
+  --text-page--line-height: 1.2;
+  --text-section: 1.25rem;
+  --text-section--line-height: 1.4;
+  --text-title: 1rem;
+  --text-title--line-height: 1.375;
+  --text-title--font-weight: 600;
+  --text-reading: 1rem;
+  --text-reading--line-height: 1.65;
+  --text-body: 0.875rem;
+  --text-body--line-height: 1.375rem;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1rem;
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
   --animate-accordion-down: accordion-down 0.2s ease-out;
   --animate-accordion-up: accordion-up 0.2s ease-out;
+}
+
+/* Theme-aware tokens that a subtree can re-point. `inline` makes the utility
+   read the variable where it is used, so `.on-ink` below can swap the coral
+   mark for the ink audio card in both themes. */
+@theme inline {
+  /* Thin coral marks and coral text. Coral SURFACES stay `coral` (#aa2d00);
+     on dark surfaces a hairline of #aa2d00 is 2.5:1, so marks lighten there. */
+  --color-coral-mark: var(--coral-mark);
+  /* Quiet small text: 5.0:1 on white, 6.1:1 on the night card. */
+  --color-ink-faint: var(--ink-faint);
+  /* Error text on the inverted activity-tray card (ink in light, white in dark). */
+  --color-destructive-inverse: var(--destructive-inverse);
+}
+
+/* Short uppercase labels (group labels, page kickers). Three words or fewer,
+   never a sentence. CJK has no capitals, so the guard below drops both the
+   case change and the spacing. */
+@utility kicker {
+  font-size: var(--text-caption);
+  line-height: var(--text-caption--line-height);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+}
+
+/* Two content widths. Standard holds every app page; wide is the reader's.
+   Pages use these (or the Page component) instead of hand-typed max-widths. */
+@utility page-standard {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
+@utility page-wide {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+/* Section rhythm: 32px between sections on phones, 40px from md. A flex gap
+   rather than margins, so absolutely positioned helpers (sr-only live
+   regions) add no space of their own. */
+@utility page-stack {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  @media (width >= 48rem) {
+    row-gap: 2.5rem;
+  }
+}
+
+/* The Desk's one "real change" motion: a session that just finished lands in
+   Recent with a soft tint that fades out once. Nothing moves on page load. */
+@keyframes desk-arrival {
+  0%,
+  20% {
+    background-color: hsl(var(--accent));
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+.desk-arrival {
+  animation: desk-arrival 1.5s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .desk-arrival {
+    animation: none;
+  }
 }
 
 @keyframes accordion-down {
@@ -82,17 +184,6 @@
   }
   to {
     height: 0;
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(8px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 
@@ -322,6 +413,9 @@
   --info: 206 58% 34%;
   --info-foreground: 0 0% 100%;
   --radius: 0.75rem;
+  --coral-mark: #aa2d00;
+  --ink-faint: #6a6f78;
+  --destructive-inverse: #fca5a5;
 
   /* App chrome dimensions, so a sticky offset elsewhere cannot drift from the
      bar it hides behind. `Header` is `h-14` and `MainLayout`'s sidebar is
@@ -355,7 +449,7 @@
   --accent: 219 21% 17%;
   --accent-foreground: 220 16% 96%;
   --destructive: 354 46% 66%;
-  --destructive-foreground: 24 25% 92%;
+  --destructive-foreground: 0 0% 8%;
   --border: 218 15% 22%;
   --input: 218 15% 22%;
   --ring: 218 8% 62%;
@@ -366,22 +460,109 @@
   --info: 206 52% 64%;
   --info-foreground: 0 0% 8%;
   --radius: 0.75rem;
+  --coral-mark: #e8794d;
+  --ink-faint: #969ba3;
+  --destructive-inverse: #991b1b;
+}
+
+/* The ink audio card is dark in both themes, so its coral marks always use
+   the dark-surface value (5.85:1 on #181d26). */
+.on-ink {
+  --coral-mark: #e8794d;
+}
+
+/* Reader: a briefing citation lands on its transcript turn. The ring is
+   mounted for 1.2 s by the page and fades out once; with reduced motion it
+   holds still for the same 1.2 s and then disappears. */
+.citation-landing {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 2px var(--coral-mark);
+  animation: citation-landing-fade 1.2s ease-out forwards;
+}
+
+@keyframes citation-landing-fade {
+  0%,
+  40% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .citation-landing {
+    animation: none;
+  }
 }
 
 /* ═══════════════════════════════════════════════════════════
    BASE STYLES — Editorial foundations
    ═══════════════════════════════════════════════════════════ */
 
-* {
-  border-color: hsl(var(--border));
+/* In the base layer, not unlayered: an unlayered rule beats every utility,
+   so `border-transparent` / `border-l-transparent` used to paint a grey
+   hairline (idle sidebar items showed a grey left edge). */
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
 }
 
 body {
   background-color: hsl(var(--background));
   color: hsl(var(--foreground));
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, 'Noto Sans SC', 'Noto Sans JP', 'Noto Sans KR', sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Per-language CJK fonts. The stack picks the glyph shapes: Japanese must not get Simplified Chinese forms, and
+   Windows (no Noto installed) needs its own named fonts. Matches both the
+   page language (`html[lang]`, so `body` too) and a transcript turn that
+   carries its own `lang`. */
+[lang|='zh'],
+[lang|='zh'] body {
+  font-family: 'PingFang SC', 'Microsoft YaHei', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+[lang|='ja'],
+[lang|='ja'] body {
+  font-family: 'Hiragino Sans', 'Yu Gothic', 'Noto Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+[lang|='ko'],
+[lang|='ko'] body {
+  font-family: 'Apple SD Gothic Neo', 'Malgun Gothic', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+}
+
+/* CJK reads better with more air between lines. */
+.text-reading:lang(zh),
+.text-reading:lang(ja),
+.text-reading:lang(ko) {
+  line-height: 1.8;
+}
+
+.kicker:lang(zh),
+.kicker:lang(ja),
+.kicker:lang(ko) {
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
 ::selection {

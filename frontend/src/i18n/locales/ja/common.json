@@ -81,9 +81,9 @@
   },
   "activity": {
     "title": "Activity",
-    "count": "{{count}} processing",
-    "more": "+{{count}} more",
-    "ready": "Ready",
+    "count": "{{count}} 件処理中",
+    "more": "他 {{count}} 件",
+    "ready": "完了",
     "view": "View",
     "dismiss": "Dismiss",
     "recordingTitle": "Live recording",
@@ -91,14 +91,14 @@
       "title": "処理中"
     },
     "stage": {
-      "stitching": "Processing recording…",
-      "transcribing": "Transcribing…",
-      "summarizing": "Summarizing… {{terminal}} of {{total}}",
-      "ready": "Ready"
+      "stitching": "保存中",
+      "transcribing": "文字起こし中",
+      "summarizing": "要約 {{terminal}}/{{total}}",
+      "ready": "完了"
     },
     "failed": {
-      "recording": "Recording couldn't be processed",
-      "transcription": "Transcription failed"
+      "recording": "録音を処理できませんでした",
+      "transcription": "文字起こしに失敗しました"
     },
     "toast": {
       "recordingReady": "Recording ready",
@@ -126,8 +126,8 @@
     "speaker_one": "話者{{count}}人",
     "speaker_other": "話者{{count}}人",
     "words": "{{n}}語",
-    "lens_one": "レンズ{{count}}件",
-    "lens_other": "レンズ{{count}}件",
+    "lens_one": "要約{{count}}件",
+    "lens_other": "要約{{count}}件",
     "languages": "言語：{{codes}}",
     "untitled": "無題のセッション"
   }

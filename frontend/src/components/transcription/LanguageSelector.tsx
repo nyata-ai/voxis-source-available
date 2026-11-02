@@ -7,9 +7,12 @@ import { cn } from '@/lib/utils'
 interface LanguageSelectorProps {
   languages: string[]
   onChange: (languages: string[]) => void
+  /** Take focus on mount: for a selector that just replaced the button that
+   *  opened it, which would otherwise drop focus to the dialog. */
+  focusOnMount?: boolean
 }
 
-export function LanguageSelector({ languages, onChange }: LanguageSelectorProps) {
+export function LanguageSelector({ languages, onChange, focusOnMount = false }: LanguageSelectorProps) {
   const { t } = useTranslation(['transcription', 'common'])
   const isAutoDetect = languages.length === 1 && languages[0] === 'auto'
   const specificCount = isAutoDetect ? 0 : languages.length
@@ -45,6 +48,7 @@ export function LanguageSelector({ languages, onChange }: LanguageSelectorProps)
         type="button"
         variant={isAutoDetect ? 'default' : 'outline'}
         className="w-full"
+        autoFocus={focusOnMount}
         onClick={handleAutoToggle}
       >
         {t('languageSelector.autoDetect')}
@@ -52,7 +56,7 @@ export function LanguageSelector({ languages, onChange }: LanguageSelectorProps)
       <div className={cn('space-y-3', isAutoDetect && 'opacity-50')}>
         {LANGUAGE_GROUPS.map((group) => (
           <div key={group.key}>
-            <p className="text-xs font-medium text-muted-foreground mb-1.5">
+            <p className="text-xs font-semibold text-muted-foreground mb-1.5">
               {t(`common:${group.nameKey}`)}
             </p>
             <div className="grid grid-cols-3 gap-1.5">

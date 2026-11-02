@@ -115,8 +115,7 @@
     "tryAgain": "다시 시도"
   },
   "upload": {
-    "saving": "저장 중...({{n}} 전송되지 않음)",
-    "saved": "저장됨"
+    "saving": "저장 중...({{n}} 전송되지 않음)"
   },
   "toast": {
     "autoStop": "8시간이 지나면 녹화가 자동으로 중지됩니다.",
@@ -150,5 +149,15 @@
     "mixed": "Meeting audio",
     "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
     "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  },
+  "tape": {
+    "caption": "30초마다 전송되어 암호화 저장됩니다",
+    "count": "{{total}}개 중 {{saved}}개 저장됨"
+  },
+  "micCheck": {
+    "test": "마이크 테스트",
+    "listening": "듣는 중…",
+    "heard": "소리가 잘 들립니다",
+    "silent": "아직 소리가 없습니다. 마이크를 확인하세요."
   }
 }

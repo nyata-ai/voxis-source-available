@@ -3,6 +3,7 @@
     "label": "Sprache",
     "hint": "Die automatische Erkennung ist die empfohlene Standardeinstellung und für jede Aufnahme sicher. Sie können bis zu {{max}} Sprachen auswählen, um Voxis mitzuteilen, was zu erwarten ist – das endgültige Transkript richtet sich immer danach, was tatsächlich in der Aufnahme zu hören ist.",
     "autoDetect": "Automatische Erkennung (empfohlen)",
+    "chooseLanguages": "Sprachen wählen (bis zu {{max}})",
     "selectedCount": "{{selected}}/{{max}} ausgewählt"
   },
   "expectedSpeakers": {
@@ -56,12 +57,20 @@
     "noUtterances": "Keine Äußerungen verfügbar.",
     "ariaLabel": "Transkript",
     "followLabel": "Wiedergabe folgen",
-    "follow": "Folgen"
+    "follow": "Folgen",
+    "languageSwitch": "Erkannte Sprache wechselt von {{from}} zu {{to}}"
   },
   "row": {
     "actionsLabel": "Aktionen für {{title}}",
     "retranscribe": "Neu transkribieren",
     "delete": "Löschen"
+  },
+  "list": {
+    "group": {
+      "today": "Heute",
+      "thisWeek": "Diese Woche",
+      "earlier": "Früher"
+    }
   },
   "detail": {
     "loading": "Transkript wird geladen...",
@@ -94,6 +103,12 @@
     "library": "Mediathek",
     "more": "Weitere Aktionen",
     "uploadedLine": "Hochgeladen am {{date}}",
-    "followPlayback": "Wiedergabe folgen"
+    "followPlayback": "Wiedergabe folgen",
+    "sections": {
+      "label": "Abschnitte",
+      "transcript": "Transkript",
+      "briefings": "Zusammenfassungen",
+      "export": "Export"
+    }
   }
 }

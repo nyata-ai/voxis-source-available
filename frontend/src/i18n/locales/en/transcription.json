@@ -3,6 +3,7 @@
     "label": "Language",
     "hint": "Auto-detect is the recommended default and safe for any recording. You can select up to {{max}} languages to tell Voxis what to expect — the final transcript always follows what is actually heard in the audio.",
     "autoDetect": "Auto-detect (recommended)",
+    "chooseLanguages": "Choose languages (up to {{max}})",
     "selectedCount": "{{selected}}/{{max}} selected"
   },
   "expectedSpeakers": {
@@ -56,12 +57,20 @@
     "noUtterances": "No utterances available.",
     "ariaLabel": "Transcript",
     "followLabel": "Follow playback",
-    "follow": "Follow"
+    "follow": "Follow",
+    "languageSwitch": "Detected language changes from {{from}} to {{to}}"
   },
   "row": {
     "actionsLabel": "Actions for {{title}}",
     "retranscribe": "Retranscribe",
     "delete": "Delete"
+  },
+  "list": {
+    "group": {
+      "today": "Today",
+      "thisWeek": "This week",
+      "earlier": "Earlier"
+    }
   },
   "detail": {
     "loading": "Loading transcription...",
@@ -94,6 +103,12 @@
     "library": "Library",
     "more": "More actions",
     "uploadedLine": "Uploaded {{date}}",
-    "followPlayback": "Follow playback"
+    "followPlayback": "Follow playback",
+    "sections": {
+      "label": "Sections",
+      "transcript": "Transcript",
+      "briefings": "Briefings",
+      "export": "Export"
+    }
   }
 }

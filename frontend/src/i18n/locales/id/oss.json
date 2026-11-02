@@ -20,7 +20,9 @@
     "libraryTitle": "Pustaka Anda",
     "libraryBody": "{{files}} berkas audio tersimpan di organisasi ini.",
     "statsUnavailable": "Pustaka tetap tersedia saat jumlah dasbor belum tersedia.",
-    "openLibrary": "Buka pustaka"
+    "openLibrary": "Buka pustaka",
+    "recordCatalog": "Langsung",
+    "uploadCatalog": "Unggahan"
   },
   "library": {
     "title": "Pustaka",

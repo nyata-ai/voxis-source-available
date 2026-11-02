@@ -1,6 +1,9 @@
 import { ApiError } from '@/lib/api-client'
 import { getApiErrorCode, getApiErrorMessage } from '@/lib/api-errors'
 import type { TFunction } from 'i18next'
+import type { StepState } from '@/components/activity/StepTrack'
+import type { UploadItem } from '@/stores/upload'
+import type { MediaItem } from '@/types/media'
 
 export function getUploadErrorMessage(
   err: unknown,
@@ -58,4 +61,58 @@ export const uploadScheduler = {
 export function resetUploadSchedulerForTests(): void {
   uploadScheduler.started.clear()
   uploadScheduler.inFlight = 0
+}
+
+export interface UploadStepView {
+  steps: StepState[]
+  /** i18n key (media namespace unless it starts with `common:`). */
+  labelKey: string
+  failed: boolean
+}
+
+/**
+ * The step track for one upload row: Uploading → Encrypting → Scanning →
+ * Ready. "Encrypting" is the server's encrypt-and-store pass, which runs while
+ * the browser waits for the upload's answer; "Scanning" is the malware scan
+ * the media row reports afterwards. A deployment without a scanner reports
+ * `scan_skipped`, and its track simply has no Scanning step. Until the media
+ * row has been read (still loading, or a lost connection or deleted file has
+ * stopped the polling), the row claims only what it knows: the upload finished.
+ * It cannot yet know whether this deployment scans at all.
+ */
+export function uploadSteps(
+  status: Exclude<UploadItem['status'], 'error'>,
+  media?: Pick<MediaItem, 'status' | 'scan_status'>,
+): UploadStepView {
+  switch (status) {
+    case 'queued':
+      return { steps: ['current', 'pending', 'pending', 'pending'], labelKey: 'upload.step.waiting', failed: false }
+    case 'uploading':
+      return { steps: ['current', 'pending', 'pending', 'pending'], labelKey: 'upload.step.uploading', failed: false }
+    case 'processing':
+      return { steps: ['done', 'current', 'pending', 'pending'], labelKey: 'upload.step.encrypting', failed: false }
+    case 'complete':
+      if (!media) {
+        return { steps: ['done', 'done', 'pending', 'pending'], labelKey: 'common:status.completed', failed: false }
+      }
+      return completedUploadSteps(media)
+  }
+}
+
+function completedUploadSteps(media: Pick<MediaItem, 'status' | 'scan_status'>): UploadStepView {
+  if (media.status === 'failed') {
+    return { steps: ['done', 'failed', 'pending', 'pending'], labelKey: 'upload.step.encryptFailed', failed: true }
+  }
+  switch (media.scan_status) {
+    case 'scan_clean':
+      return { steps: ['done', 'done', 'done', 'done'], labelKey: 'upload.step.ready', failed: false }
+    case 'scan_skipped':
+      return { steps: ['done', 'done', 'done'], labelKey: 'upload.step.ready', failed: false }
+    case 'scan_infected':
+      return { steps: ['done', 'done', 'failed', 'pending'], labelKey: 'common:status.scanInfected', failed: true }
+    case 'scan_error':
+      return { steps: ['done', 'done', 'failed', 'pending'], labelKey: 'common:status.scanError', failed: true }
+    default:
+      return { steps: ['done', 'done', 'current', 'pending'], labelKey: 'upload.step.scanning', failed: false }
+  }
 }

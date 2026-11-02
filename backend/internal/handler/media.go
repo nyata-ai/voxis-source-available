@@ -431,6 +431,9 @@ func (h *MediaHandler) Upload(c *gin.Context) {
 		h.handleError(c, fmt.Errorf("content type is required: %w", domain.ErrInvalidInput))
 		return
 	}
+	// Browsers disagree on the MIME type of the same audio file (Windows reports
+	// .aac as audio/vnd.dlna.adts). Canonicalise once, so the extension check,
+	// signature check, stored content_type and stream responses all agree.
 	contentType = domain.NormalizeAudioContentType(contentType)
 
 	if mimeErr := domain.ValidateExtensionMIME(filename, contentType); mimeErr != nil {

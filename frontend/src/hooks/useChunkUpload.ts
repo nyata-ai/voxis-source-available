@@ -12,7 +12,7 @@ import { uploadChunk } from './useRecordingSession'
 import { useRecordingStore, type RecordingFlushFailureCode } from '@/stores/recording'
 
 /** Maximum unsent chunks before auto-pause. */
-const BACKLOG_LIMIT = 10
+export const BACKLOG_LIMIT = 10
 
 /** Retry delays: 1s, 2s, 4s, 8s, capped at 15s. */
 const RETRY_DELAYS = [1000, 2000, 4000, 8000, 15000]

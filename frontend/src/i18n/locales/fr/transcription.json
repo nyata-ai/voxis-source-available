@@ -3,6 +3,7 @@
     "label": "Langue",
     "hint": "La détection automatique est l'option recommandée par défaut et convient à tous les enregistrements. Vous pouvez sélectionner jusqu'à {{max}} langues pour indiquer à Voxis ce qu'il doit attendre — la transcription finale suit toujours ce qui est réellement entendu dans l'audio.",
     "autoDetect": "Détection automatique (recommandé)",
+    "chooseLanguages": "Choisir les langues (jusqu’à {{max}})",
     "selectedCount": "{{selected}}/{{max}} sélectionné"
   },
   "expectedSpeakers": {
@@ -56,12 +57,20 @@
     "noUtterances": "Aucun énoncé disponible.",
     "ariaLabel": "Transcription",
     "followLabel": "Suivre la lecture",
-    "follow": "Suivre"
+    "follow": "Suivre",
+    "languageSwitch": "La langue détectée passe de {{from}} à {{to}}"
   },
   "row": {
     "actionsLabel": "Actions pour {{title}}",
     "retranscribe": "Retranscrire",
     "delete": "Supprimer"
+  },
+  "list": {
+    "group": {
+      "today": "Aujourd’hui",
+      "thisWeek": "Cette semaine",
+      "earlier": "Plus ancien"
+    }
   },
   "detail": {
     "loading": "Chargement de la transcription...",
@@ -94,6 +103,12 @@
     "library": "Bibliothèque",
     "more": "Autres actions",
     "uploadedLine": "Importé le {{date}}",
-    "followPlayback": "Suivre la lecture"
+    "followPlayback": "Suivre la lecture",
+    "sections": {
+      "label": "Sections",
+      "transcript": "Transcription",
+      "briefings": "Synthèses",
+      "export": "Exporter"
+    }
   }
 }

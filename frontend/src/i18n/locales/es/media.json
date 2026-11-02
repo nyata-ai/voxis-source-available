@@ -17,8 +17,6 @@
     "rejectedTitle": "Archivos rechazados",
     "rejectedLabel": "Archivos rechazados",
     "uploading": "Subiendo {{name}}",
-    "processing": "Procesando en el servidor...",
-    "complete": "Subida completa",
     "viewFile": "Ver archivo",
     "viewFileNamed": "Ver archivo: {{name}}",
     "remove": "Quitar {{name}}",
@@ -29,6 +27,14 @@
       "unsupportedType": "Tipo de archivo no compatible",
       "tooLarge": "El archivo supera el tamaño máximo de 1 GB",
       "storageQuota": "Este archivo supera la cuota de almacenamiento restante"
+    },
+    "step": {
+      "waiting": "En espera",
+      "uploading": "Subiendo",
+      "encrypting": "Cifrando",
+      "encryptFailed": "Error al cifrar",
+      "scanning": "Buscando malware",
+      "ready": "Listo"
     }
   },
   "storageQuota": {
@@ -68,7 +74,8 @@
     "skipForward": "Avanzar {{seconds}} segundos",
     "dock": "Reproductor de audio",
     "backToTranscript": "Volver a la transcripción",
-    "speedPill": "Velocidad {{speed}}x"
+    "speedPill": "Velocidad {{speed}}x",
+    "speakingTime": "Tiempo de habla: {{shares}}"
   },
   "inlineEdit": {
     "clickToEdit": "Haga clic para editar"

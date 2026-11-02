@@ -1,6 +1,28 @@
 import { describe, it, expect } from 'vitest'
 import { ApiError } from '@/lib/api-client'
-import { getUploadErrorMessage, isUploadCapacityError } from './upload-utils'
+import { getUploadErrorMessage, isUploadCapacityError, uploadSteps } from './upload-utils'
+
+describe('uploadSteps', () => {
+  it('claims no scan until the media row has been read, as a deployment may not scan', () => {
+    const view = uploadSteps('complete')
+    expect(view.labelKey).toBe('common:status.completed')
+    expect(view.steps).toEqual(['done', 'done', 'pending', 'pending'])
+    expect(view.failed).toBe(false)
+  })
+
+  it('shows the scan once the row says one is running', () => {
+    const view = uploadSteps('complete', { status: 'ready', scan_status: 'scan_pending' })
+    expect(view.labelKey).toBe('upload.step.scanning')
+    expect(view.steps).toEqual(['done', 'done', 'current', 'pending'])
+  })
+
+  it('names the step that failed when the bytes arrived but were not stored', () => {
+    const view = uploadSteps('complete', { status: 'failed', scan_status: 'scan_pending' })
+    expect(view.labelKey).toBe('upload.step.encryptFailed')
+    expect(view.steps).toEqual(['done', 'failed', 'pending', 'pending'])
+    expect(view.failed).toBe(true)
+  })
+})
 
 const messages: Record<string, string> = {
   'errors:codes.validation_error': 'Some details need attention.',

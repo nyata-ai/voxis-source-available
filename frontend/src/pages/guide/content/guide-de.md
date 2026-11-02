@@ -21,6 +21,10 @@ Ihre Installation verwendet den gebündelten Keycloak-Realm `voxis-oss` und den 
 
 Wählen Sie Hochladen im Dashboard oder in der Seitenleiste. Wählen Sie eine Audiodatei, warten Sie auf Scan und verschlüsselte Speicherung und starten Sie dann die Transkription im Dateileser.
 
+Sobald ein fertiges Transkript vorliegt, zeigt das Dashboard zuerst **Letzte Sitzung**: die neueste abgeschlossene Sitzung in Ihrer Organisation mit Titel, Länge, Anzahl der Sprecher und den fertigen Zusammenfassungen (auf dem Bildschirm heißen sie Briefings). Mit **Öffnen** öffnen Sie sie.
+
+Während des Hochladens zeigt die Zeile der Datei eine kleine Schrittanzeige und nennt den aktuellen Schritt: **Wird hochgeladen**, **Wird verschlüsselt**, **Sicherheitsprüfung**, dann **Bereit**.
+
 In der Bibliothek können Sie Dateidetails ändern, den Leser öffnen, Audio und Transkripte durchsuchen und eigene Medien löschen. Bei der Suche im Transkriptinhalt prüft Voxis abgeschlossene Transkripte seitenweise in begrenzten Schritten. Verwenden Sie **Weitere Transkripttreffer laden**, wenn die Schaltfläche erscheint, um mit älteren abgeschlossenen Transkripten fortzufahren.
 
 Das Löschen einer Datei ist endgültig. Audio, Transkripte, Zusammenfassungen sowie Name, Titel und Beschreibung der Datei werden vom Server entfernt. Das lässt sich nicht rückgängig machen. Kopien in bereits vorhandenen Sicherungen Ihrer Organisation bleiben erhalten, bis diese Sicherungen gelöscht werden.
@@ -34,6 +38,8 @@ Benutzerdefinierte Wörterbücher und Vokabelpakete sind mit Speechmatics Melia 
 ## {#record} Aufnehmen und wiederherstellen
 
 Wählen Sie Aufnehmen, um Mikrofon- oder unterstütztes Geräteaudio im Browser aufzunehmen. Wenn die Seite geschlossen wird oder das Netzwerk ausfällt, bietet der Rekorder bei Ihrer Rückkehr an, die unterbrochene Sitzung wiederherzustellen.
+
+Vor dem Start können Sie **Mikrofon testen** drücken und sprechen, um zu prüfen, ob Voxis Sie hört. Während des Tests wird nichts aufgenommen.
 
 Bis zum Upload bleiben Teile Ihrer Aufnahme in diesem Browser gespeichert. Sie sind verschlüsselt, aber der Schlüssel liegt im selben Browser. Das schützt also nur vor einem flüchtigen Blick. Beim Abmelden löscht Voxis diese Teile. Wenn noch nicht alle Teile hochgeladen sind, warnt Voxis Sie vorher. Die Teile werden auch gelöscht, wenn sich eine andere Person in diesem Browser anmeldet. Warten Sie an einem gemeinsam genutzten Computer, bis der Upload fertig ist, und melden Sie sich dann ab.
 

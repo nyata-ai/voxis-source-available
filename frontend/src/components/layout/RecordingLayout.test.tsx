@@ -1,6 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import { MemoryRouter } from 'react-router-dom'
+import userEvent from '@testing-library/user-event'
+import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import type { ReactNode } from 'react'
 import { RecordingLayout } from './RecordingLayout'
 
@@ -17,7 +18,7 @@ describe('RecordingLayout', () => {
     mockProtectedShouldRender = true
   })
 
-  it('renders branding, cancel link, and children', () => {
+  it('renders branding, a Cancel button, and children', () => {
     render(
       <MemoryRouter>
         <RecordingLayout>
@@ -27,8 +28,51 @@ describe('RecordingLayout', () => {
     )
 
     expect(screen.getByText('Voxis Source-Available')).toBeInTheDocument()
-    expect(screen.getByRole('link', { name: 'Cancel' })).toHaveAttribute('href', '/library')
+    expect(screen.getByRole('button', { name: 'Cancel' })).toBeInTheDocument()
     expect(screen.getByText('Recording child')).toBeInTheDocument()
+  })
+
+  it('Cancel goes back to the page the user came from', async () => {
+    render(
+      <MemoryRouter initialEntries={['/dashboard', '/record']} initialIndex={1}>
+        <Routes>
+          <Route path="/dashboard" element={<div>Desk page</div>} />
+          <Route
+            path="/record"
+            element={
+              <RecordingLayout>
+                <div>Recording child</div>
+              </RecordingLayout>
+            }
+          />
+          <Route path="/library" element={<div>Library page</div>} />
+        </Routes>
+      </MemoryRouter>,
+    )
+
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
+    expect(await screen.findByText('Desk page')).toBeInTheDocument()
+  })
+
+  it('Cancel falls back to the Library when the record page was opened directly', async () => {
+    render(
+      <MemoryRouter initialEntries={['/record']}>
+        <Routes>
+          <Route
+            path="/record"
+            element={
+              <RecordingLayout>
+                <div>Recording child</div>
+              </RecordingLayout>
+            }
+          />
+          <Route path="/library" element={<div>Library page</div>} />
+        </Routes>
+      </MemoryRouter>,
+    )
+
+    await userEvent.click(screen.getByRole('button', { name: 'Cancel' }))
+    expect(await screen.findByText('Library page')).toBeInTheDocument()
   })
 
   // RecordingLayout is deliberately a separate, minimal layout for the

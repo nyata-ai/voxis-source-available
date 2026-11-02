@@ -12,11 +12,18 @@ import { useFeatures } from '@/hooks/useFeatures'
 import { usePreferences } from '@/hooks/useSettings'
 import { normalizeSummaryProfile } from '@/types/settings'
 import type { SummaryType } from '@/types/summary'
+import type { CitationLanding } from '@/components/transcription/TranscriptViewer'
 import { AudioCard } from './AudioCard'
 import { BriefingPane } from './BriefingPane'
 import { MiniDock } from './MiniDock'
 import { ReaderHeader } from './ReaderHeader'
-import { ReaderFilePanels, ReaderWorkspace } from './ReaderWorkspace'
+import type { ReaderSection } from './ReaderSectionLinks'
+import {
+  READER_SECTION_ID,
+  ReaderFilePanels,
+  ReaderWorkspace,
+} from './ReaderWorkspace'
+import { SpeakerStrip } from './SpeakerStrip'
 import { useReaderPlayback } from './useReaderPlayback'
 import type { SessionAudio, SessionLens, SessionView } from './session-view'
 
@@ -35,6 +42,9 @@ const AUDIO_STATE_MESSAGE: Record<SessionAudio['state'], string | null> = {
 
 /** The DOM id of the briefing band, so `?lens=` deep links can scroll to it. */
 const BRIEFING_ANCHOR = 'briefing'
+
+/** How long a citation's ring stays on its transcript turn. */
+const CITATION_LANDING_MS = 1200
 
 export interface SessionReaderPageProps {
   session: SessionView
@@ -141,6 +151,54 @@ function AudioStateNotice({ audio }: { audio: SessionAudio }) {
   )
 }
 
+/**
+ * Seeks to a citation and rings the turn it lands on for 1.2 s. The timer
+ * lives here, not in a CSS animation's end, so the ring also disappears on
+ * time under reduced motion, where it does not fade.
+ */
+function useCitationLanding(seek: (time: number) => void) {
+  const [landing, setLanding] = useState<CitationLanding | null>(null)
+  const timer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  // Never reused: TranscriptViewer scrolls once per nonce, and `landing` is
+  // cleared between citations, so counting from it would repeat a spent nonce.
+  const nonce = useRef(0)
+
+  useEffect(
+    () => () => {
+      if (timer.current) clearTimeout(timer.current)
+    },
+    [],
+  )
+
+  const land = useCallback(
+    (time: number) => {
+      seek(time)
+      nonce.current += 1
+      setLanding({ time, nonce: nonce.current })
+      if (timer.current) clearTimeout(timer.current)
+      timer.current = setTimeout(() => setLanding(null), CITATION_LANDING_MS)
+    },
+    [seek],
+  )
+
+  return { landing, land }
+}
+
+/** The in-page sections this session actually has, in page order. */
+function sectionsFor(session: SessionView, showWorkspace: boolean): ReaderSection[] {
+  if (!showWorkspace) return []
+  const sections: ReaderSection[] = [
+    { id: READER_SECTION_ID.transcript, labelKey: 'transcription:reader.sections.transcript' },
+  ]
+  if (session.can.briefings) {
+    sections.push({ id: BRIEFING_ANCHOR, labelKey: 'transcription:reader.sections.briefings' })
+  }
+  if (session.can.export || session.can.downloadAudio) {
+    sections.push({ id: READER_SECTION_ID.export, labelKey: 'transcription:reader.sections.export' })
+  }
+  return sections
+}
+
 /** The two confirmations the header's More menu opens. Kept out of the page's
  *  return so what is left there reads as composition. */
 function ReaderDialogs({
@@ -211,6 +269,8 @@ function ReaderBody({ session }: SessionReaderPageProps) {
     (session.audio.streamUrl !== null || session.audio.isLoading === true)
 
   const playback = useReaderPlayback(showPlayer)
+  const citation = useCitationLanding(playback.handlers.seek)
+  const sections = sectionsFor(session, showWorkspace)
 
   /** Puts the open lens in the URL, so a refresh or a bookmark comes back to
    *  the briefing that was being read. `replace`, because stepping through tabs
@@ -279,11 +339,15 @@ function ReaderBody({ session }: SessionReaderPageProps) {
     session.lenses.some((lens) => lens.type === 'q_and_a' && lens.status === 'completed')
 
   return (
-    <div className="mx-auto max-w-[1280px] space-y-8 pb-20">
+    // `--reader-nav-h` is the sticky bar's height (44 px on a phone, a touch
+    // target; 36 px from `lg`): the bar, the sticky transcript column and the
+    // section anchors all read it, so they cannot disagree.
+    <div className="mx-auto max-w-[1280px] space-y-8 pb-20 [--reader-nav-h:2.75rem] lg:[--reader-nav-h:2.25rem]">
       <ReaderHeader
         session={session}
         onDelete={() => setShowDelete(true)}
         onRetranscribe={() => setShowRetranscribe(true)}
+        sections={sections}
       />
 
       {!showWorkspace && (
@@ -311,6 +375,8 @@ function ReaderBody({ session }: SessionReaderPageProps) {
           bapEligible={bapEligible}
           columnRef={playback.transcriptRef}
           dockVisible={playback.dockVisible}
+          landing={citation.landing}
+          isPlaying={playback.isPlaying}
           audioCard={
             showPlayer ? (
               <AudioCard
@@ -321,6 +387,15 @@ function ReaderBody({ session }: SessionReaderPageProps) {
                 onPlayStateChange={playback.handlers.onPlayStateChange}
                 onDurationChange={playback.handlers.onDurationChange}
                 onSpeedChange={playback.handlers.onSpeedChange}
+                speakerStrip={
+                  <SpeakerStrip
+                    utterances={session.utterances}
+                    speakerMap={session.speakerMap}
+                    duration={playback.duration}
+                    currentTime={playback.currentTime}
+                    onSeek={playback.handlers.seek}
+                  />
+                }
               />
             ) : null
           }
@@ -333,7 +408,7 @@ function ReaderBody({ session }: SessionReaderPageProps) {
           briefing={session.briefing}
           defaultSummaryProfile={normalizeSummaryProfile(preferences?.summary_profile)}
           summaryProfilesEnabled={features?.summary_profiles === true}
-          onCitationSeek={session.audio.state === 'available' ? playback.handlers.seek : undefined}
+          onCitationSeek={session.audio.state === 'available' ? citation.land : undefined}
           // B contract, see plan C2: the tab is controlled from here so a
           // `?lens=` link and the export panel agree on which briefing is open.
           activeLens={activeLens}

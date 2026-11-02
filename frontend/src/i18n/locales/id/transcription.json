@@ -3,6 +3,7 @@
     "label": "Bahasa",
     "hint": "Deteksi otomatis adalah pilihan bawaan yang disarankan dan aman untuk semua rekaman. Anda dapat memilih hingga {{max}} bahasa untuk memberi tahu Voxis bahasa apa yang diperkirakan muncul — transkrip akhir selalu mengikuti apa yang benar-benar terdengar dalam audio.",
     "autoDetect": "Deteksi otomatis (disarankan)",
+    "chooseLanguages": "Pilih bahasa (maksimal {{max}})",
     "selectedCount": "{{selected}}/{{max}} dipilih"
   },
   "expectedSpeakers": {
@@ -56,12 +57,20 @@
     "noUtterances": "Tidak ada ucapan yang tersedia.",
     "ariaLabel": "Transkrip",
     "followLabel": "Ikuti pemutaran",
-    "follow": "Mengikuti"
+    "follow": "Mengikuti",
+    "languageSwitch": "Bahasa yang terdeteksi berganti dari {{from}} ke {{to}}"
   },
   "row": {
     "actionsLabel": "Tindakan untuk {{title}}",
     "retranscribe": "Transkripsikan ulang",
     "delete": "Hapus"
+  },
+  "list": {
+    "group": {
+      "today": "Hari ini",
+      "thisWeek": "Minggu ini",
+      "earlier": "Sebelumnya"
+    }
   },
   "detail": {
     "loading": "Memuat transkripsi...",
@@ -94,6 +103,12 @@
     "library": "Pustaka",
     "more": "Tindakan lain",
     "uploadedLine": "Diunggah {{date}}",
-    "followPlayback": "Ikuti pemutaran"
+    "followPlayback": "Ikuti pemutaran",
+    "sections": {
+      "label": "Bagian",
+      "transcript": "Transkrip",
+      "briefings": "Ringkasan",
+      "export": "Ekspor"
+    }
   }
 }

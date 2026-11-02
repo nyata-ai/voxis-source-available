@@ -20,7 +20,9 @@
     "libraryTitle": "您的资料库",
     "libraryBody": "此组织已存储 {{files}} 个音频文件。",
     "statsUnavailable": "即使仪表板统计不可用，资料库仍可使用。",
-    "openLibrary": "打开资料库"
+    "openLibrary": "打开资料库",
+    "recordCatalog": "实时录音",
+    "uploadCatalog": "文件"
   },
   "library": {
     "title": "资料库",

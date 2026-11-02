@@ -32,6 +32,8 @@
       "remainingToday": "Осталось сегодня: {{count}}",
       "liveRecordingRetention": "Срок хранения живых записей (дни)",
       "retentionDays_one": "{{count}} день",
+      "retentionDays_few": "{{count}} дня",
+      "retentionDays_many": "{{count}} дней",
       "retentionDays_other": "{{count}} дней",
       "notEnabled": "Не включено",
       "storage": "Использование / лимит хранилища",

@@ -20,7 +20,9 @@
     "libraryTitle": "내 라이브러리",
     "libraryBody": "이 조직에는 오디오 파일 {{files}}개가 저장되어 있습니다.",
     "statsUnavailable": "대시보드 통계를 사용할 수 없어도 라이브러리는 사용할 수 있습니다.",
-    "openLibrary": "라이브러리 열기"
+    "openLibrary": "라이브러리 열기",
+    "recordCatalog": "실시간",
+    "uploadCatalog": "파일"
   },
   "library": {
     "title": "라이브러리",

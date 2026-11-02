@@ -30,7 +30,7 @@ export function StatusChip({ status, label, className }: StatusChipProps) {
   return (
     <span
       className={cn(
-        'inline-flex h-5 items-center gap-1.5 rounded-full border px-2 text-[0.68rem] font-medium uppercase tracking-wide',
+        'inline-flex h-5 items-center gap-1.5 whitespace-nowrap rounded-full border px-2 text-caption font-semibold',
         TONE_CLASS[tone],
         className,
       )}

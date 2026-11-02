@@ -8,12 +8,17 @@ import { ApiError } from '@/lib/api-client'
 import { resetUploadSchedulerForTests } from './upload-utils'
 import { UploadDropzone } from './UploadDropzone'
 
-const { mockMutateAsync } = vi.hoisted(() => ({ mockMutateAsync: vi.fn() }))
+const { mockMutateAsync, mockUseMediaDetail } = vi.hoisted(() => ({
+  mockMutateAsync: vi.fn(),
+  mockUseMediaDetail: vi.fn(),
+}))
 vi.mock('@/hooks/useMedia', () => ({
   useUploadMedia: () => ({
     mutateAsync: mockMutateAsync,
     isPending: false,
   }),
+  // A finished row keeps reading its media while the malware scan runs.
+  useMediaDetail: mockUseMediaDetail,
 }))
 
 const { mockUseUsageStats } = vi.hoisted(() => ({ mockUseUsageStats: vi.fn() }))
@@ -35,6 +40,12 @@ function renderDropzone() {
   )
 }
 
+/** The dot states of the first row's step track, in order. */
+function stepStates(): (string | null)[] {
+  const track = screen.getAllByTestId('step-track')[0]
+  return [...track.querySelectorAll('[data-step]')].map((dot) => dot.getAttribute('data-step'))
+}
+
 function dropEvent(files: File[]) {
   return {
     dataTransfer: {
@@ -53,6 +64,8 @@ describe('UploadDropzone', () => {
   beforeEach(() => {
     useUploadStore.getState().reset()
     resetUploadSchedulerForTests()
+    mockUseMediaDetail.mockReset()
+    mockUseMediaDetail.mockReturnValue({ data: undefined })
     useCaptureStore.setState({ open: false, tab: 'upload' })
     mockMutateAsync.mockReset()
     mockUseUsageStats.mockReturnValue({
@@ -168,7 +181,7 @@ describe('UploadDropzone', () => {
     expect(useUploadStore.getState().queue).toHaveLength(0)
   })
 
-  it('shows processing state with spinner text', () => {
+  it('names the encrypt-and-store step once the bytes are sent', () => {
     const file = new File(['audio-data'], 'recording.mp3', {
       type: 'audio/mpeg',
     })
@@ -178,9 +191,49 @@ describe('UploadDropzone', () => {
 
     renderDropzone()
 
-    expect(
-      screen.getByText('Processing on server...')
-    ).toBeInTheDocument()
+    expect(screen.getByText('Encrypting')).toBeInTheDocument()
+    expect(stepStates()).toEqual(['done', 'current', 'pending', 'pending'])
+  })
+
+  it('walks a finished upload through the malware scan to Ready', () => {
+    const file = new File(['audio-data'], 'recording.mp3', { type: 'audio/mpeg' })
+    useUploadStore.getState().addFiles([file])
+    useUploadStore.getState().setComplete(useUploadStore.getState().queue[0].id, 'media-42')
+
+    mockUseMediaDetail.mockReturnValue({ data: { status: 'ready', scan_status: 'scan_pending' } })
+    const { unmount } = renderDropzone()
+    expect(mockUseMediaDetail).toHaveBeenCalledWith('media-42')
+    expect(screen.getByText('Scanning for malware')).toBeInTheDocument()
+    expect(stepStates()).toEqual(['done', 'done', 'current', 'pending'])
+    unmount()
+
+    mockUseMediaDetail.mockReturnValue({ data: { status: 'ready', scan_status: 'scan_clean' } })
+    renderDropzone()
+    expect(screen.getByText('Ready')).toBeInTheDocument()
+    expect(stepStates()).toEqual(['done', 'done', 'done', 'done'])
+  })
+
+  it('draws no scan step on a deployment without a scanner', () => {
+    const file = new File(['audio-data'], 'recording.mp3', { type: 'audio/mpeg' })
+    useUploadStore.getState().addFiles([file])
+    useUploadStore.getState().setComplete(useUploadStore.getState().queue[0].id, 'media-42')
+    mockUseMediaDetail.mockReturnValue({ data: { status: 'ready', scan_status: 'scan_skipped' } })
+
+    renderDropzone()
+
+    expect(stepStates()).toEqual(['done', 'done', 'done'])
+  })
+
+  it('marks a failed malware scan in the error colour', () => {
+    const file = new File(['audio-data'], 'recording.mp3', { type: 'audio/mpeg' })
+    useUploadStore.getState().addFiles([file])
+    useUploadStore.getState().setComplete(useUploadStore.getState().queue[0].id, 'media-42')
+    mockUseMediaDetail.mockReturnValue({ data: { status: 'ready', scan_status: 'scan_infected' } })
+
+    renderDropzone()
+
+    expect(screen.getByText('Infected')).toHaveClass('text-destructive')
+    expect(stepStates()).toEqual(['done', 'done', 'failed', 'pending'])
   })
 
   it('shows rejected files with reasons', () => {
@@ -191,6 +244,16 @@ describe('UploadDropzone', () => {
 
     expect(screen.getByText('notes.txt')).toBeInTheDocument()
     expect(screen.getByText(/unsupported file type/i)).toBeInTheDocument()
+  })
+
+  it('does not claim a scan is running when the media row cannot be read', () => {
+    const file = new File(['audio-data'], 'recording.mp3', { type: 'audio/mpeg' })
+    useUploadStore.getState().addFiles([file])
+    useUploadStore.getState().setComplete(useUploadStore.getState().queue[0].id, 'media-42')
+    mockUseMediaDetail.mockReturnValue({ data: undefined, isError: true })
+    renderDropzone()
+    expect(screen.queryByText('Scanning for malware')).not.toBeInTheDocument()
+    expect(screen.getByText('Completed')).toBeInTheDocument()
   })
 
   it('links a completed row to its media page', () => {

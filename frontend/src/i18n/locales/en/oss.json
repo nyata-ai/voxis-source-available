@@ -20,7 +20,9 @@
     "libraryTitle": "Your library",
     "libraryBody": "{{files}} audio files are stored in this organization.",
     "statsUnavailable": "The library is still available while dashboard counts are unavailable.",
-    "openLibrary": "Open library"
+    "openLibrary": "Open library",
+    "recordCatalog": "Live",
+    "uploadCatalog": "File"
   },
   "library": {
     "title": "Library",

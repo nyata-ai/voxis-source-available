@@ -26,4 +26,11 @@ describe('StatusChip', () => {
     expect(screen.getByText('Custom label')).toBeInTheDocument()
     expect(screen.queryByText('Ready')).not.toBeInTheDocument()
   })
+
+  it('sets the label at 12px semibold in sentence case, not shouted caps', () => {
+    render(<StatusChip status="scan_pending" />)
+    const chip = screen.getByText('Scan pending')
+    expect(chip).toHaveClass('text-caption', 'font-semibold')
+    expect(chip).not.toHaveClass('uppercase')
+  })
 })

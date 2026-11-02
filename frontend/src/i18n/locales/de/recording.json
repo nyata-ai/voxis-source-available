@@ -115,8 +115,7 @@
     "tryAgain": "Erneut versuchen"
   },
   "upload": {
-    "saving": "Speichern... ({{n}} nicht gesendet)",
-    "saved": "Gespeichert"
+    "saving": "Speichern... ({{n}} nicht gesendet)"
   },
   "toast": {
     "autoStop": "Die Aufnahme wird nach 8 Stunden automatisch gestoppt.",
@@ -150,5 +149,15 @@
     "mixed": "Meeting-Audio",
     "mixedHelp": "Chrome und Edge können Tab-Audio freigeben. Vollbild-, App- und System-Audio hängen von Ihrem Browser und Betriebssystem ab.",
     "mixedUnsupported": "Dieser Browser kann keine Freigabeauswahl öffnen. Verwenden Sie Chrome oder Edge, um Tab-Audio freizugeben."
+  },
+  "tape": {
+    "caption": "Alle 30 Sekunden gesendet und verschlüsselt gespeichert",
+    "count": "{{saved}} von {{total}} gespeichert"
+  },
+  "micCheck": {
+    "test": "Mikrofon testen",
+    "listening": "Hört zu…",
+    "heard": "Wir hören Sie",
+    "silent": "Noch kein Ton. Prüfen Sie das Mikrofon."
   }
 }

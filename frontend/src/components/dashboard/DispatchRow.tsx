@@ -84,31 +84,27 @@ interface CellProps {
   value: string
   unit: string
   lede: string
-  delayMs?: number
 }
 
-function DispatchCell({ eyebrow, value, unit, lede, delayMs = 0 }: CellProps) {
+function DispatchCell({ eyebrow, value, unit, lede }: CellProps) {
   return (
-    <div
-      className="flex flex-col gap-3 px-6 py-6 animate-[fadeInUp_0.5s_ease-out_both]"
-      style={delayMs ? { animationDelay: `${delayMs}ms` } : undefined}
-    >
-      <p className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-muted-foreground/70">
+    <div className="flex flex-col gap-2 px-4 py-5 sm:px-6">
+      <p className="kicker">
         {eyebrow}
       </p>
 
       <div className="flex items-baseline gap-2">
-        <span className="text-[2.25rem] font-normal leading-none text-foreground sm:text-[2.6rem]">
+        <span className="text-page font-normal leading-none tabular-nums text-foreground">
           {value}
         </span>
         {unit && (
-          <span className="text-sm font-medium uppercase tracking-[0.14em] text-muted-foreground/80">
+          <span className="kicker">
             {unit}
           </span>
         )}
       </div>
 
-      <p className="text-[0.85rem] leading-snug text-muted-foreground/85">
+      <p className="text-body text-muted-foreground">
         {lede}
       </p>
     </div>
@@ -125,23 +121,20 @@ export function DispatchRow({ stats }: DispatchRowProps) {
   const output = formatOutput(stats.completed_this_month, t, formatters)
 
   return (
-    <section
-      aria-labelledby="dispatch-heading"
-      className="animate-[fadeInUp_0.5s_ease-out_both]"
-    >
+    <section aria-labelledby="dispatch-heading">
       <div className="mb-3 flex items-baseline justify-between">
         <h2
           id="dispatch-heading"
-          className="text-[0.68rem] font-semibold uppercase tracking-[0.22em] text-muted-foreground/70"
+          className="kicker"
         >
           {t('dashboard.dispatch.thisMonth')}
         </h2>
-        <p className="text-[0.85rem] text-muted-foreground/70">
+        <p className="text-body text-muted-foreground">
           {formatMonthRange(now, formatters)}
         </p>
       </div>
 
-      <div className="grid grid-cols-1 overflow-hidden rounded-lg border border-border bg-card md:grid-cols-2 md:divide-x md:divide-border/60 divide-y divide-border/60 md:divide-y-0">
+      <div className="grid grid-cols-2 divide-x divide-border/60 overflow-hidden rounded-lg border border-border bg-card">
         <DispatchCell
           eyebrow={t('dashboard.dispatch.volume')}
           value={hours.value}
@@ -159,7 +152,6 @@ export function DispatchRow({ stats }: DispatchRowProps) {
             t,
             formatters,
           )}
-          delayMs={80}
         />
       </div>
     </section>

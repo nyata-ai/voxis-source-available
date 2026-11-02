@@ -44,7 +44,7 @@ export function LanguageSwitcher() {
         <button
           type="button"
           aria-label={t('language.title')}
-          className="flex h-8 items-center gap-1.5 border bg-card/60 px-2.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+          className="flex h-8 items-center gap-1.5 rounded-md border bg-card/60 px-2.5 text-xs font-normal text-muted-foreground transition-colors hover:bg-accent hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
           <Globe className="h-3.5 w-3.5" aria-hidden="true" />
           <span>{current.shortCode}</span>
@@ -55,7 +55,7 @@ export function LanguageSwitcher() {
         <DropdownMenuRadioGroup value={active} onValueChange={handleChange}>
           {LOCALES.map(({ code, shortCode, nativeLabel }) => (
             <DropdownMenuRadioItem key={code} value={code} className="gap-2">
-              <span className="w-7 shrink-0 text-xs font-medium text-muted-foreground">
+              <span className="w-7 shrink-0 text-xs font-normal text-muted-foreground">
                 {shortCode}
               </span>
               <span>{nativeLabel}</span>

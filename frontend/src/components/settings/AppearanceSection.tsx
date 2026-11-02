@@ -23,7 +23,7 @@ export function AppearanceSection() {
   return (
     <div className="space-y-6">
       <div>
-        <h3 className="text-lg font-medium">{t('appearance.title')}</h3>
+        <h3 className="text-section font-normal">{t('appearance.title')}</h3>
         <p className="text-sm text-muted-foreground">{t('appearance.description')}</p>
       </div>
 
@@ -41,7 +41,7 @@ export function AppearanceSection() {
               )}
             >
               <Icon className="h-6 w-6" />
-              <span className="text-sm font-medium">{t(labelKey)}</span>
+              <span className="text-sm font-semibold">{t(labelKey)}</span>
               <span className="text-xs text-muted-foreground text-center">{t(descriptionKey)}</span>
             </button>
           )

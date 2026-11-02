@@ -3,6 +3,7 @@
     "label": "语言",
     "hint": "自动检测是推荐的默认选项，适用于任何录音。您最多可以选择 {{max}} 种语言，告诉 Voxis 预计会出现哪些语言；最终转写稿始终以音频中实际听到的内容为准。",
     "autoDetect": "自动检测（推荐）",
+    "chooseLanguages": "选择语言（最多 {{max}} 种）",
     "selectedCount": "已选择 {{selected}}/{{max}}"
   },
   "expectedSpeakers": {
@@ -56,12 +57,20 @@
     "noUtterances": "暂无转写内容。",
     "ariaLabel": "转写稿",
     "followLabel": "跟随播放",
-    "follow": "跟随"
+    "follow": "跟随",
+    "languageSwitch": "检测到的语言由{{from}}切换为{{to}}"
   },
   "row": {
     "actionsLabel": "{{title}} 的操作",
     "retranscribe": "重新转写",
     "delete": "删除"
+  },
+  "list": {
+    "group": {
+      "today": "今天",
+      "thisWeek": "本周",
+      "earlier": "更早"
+    }
   },
   "detail": {
     "loading": "正在加载转写稿…",
@@ -94,6 +103,12 @@
     "library": "媒体库",
     "more": "更多操作",
     "uploadedLine": "上传于 {{date}}",
-    "followPlayback": "跟随播放"
+    "followPlayback": "跟随播放",
+    "sections": {
+      "label": "页面导航",
+      "transcript": "转写稿",
+      "briefings": "摘要",
+      "export": "导出"
+    }
   }
 }

@@ -115,8 +115,7 @@
     "tryAgain": "もう一度やり直してください"
   },
   "upload": {
-    "saving": "保存中... ({{n}} 未送信)",
-    "saved": "保存されました"
+    "saving": "保存中... ({{n}} 未送信)"
   },
   "toast": {
     "autoStop": "録画は 8 時間後に自動的に停止します。",
@@ -150,5 +149,15 @@
     "mixed": "Meeting audio",
     "mixedHelp": "Chrome and Edge can share tab audio. Full-screen, native-app, and system audio depend on your browser and operating system.",
     "mixedUnsupported": "This browser cannot open a sharing picker. Use Chrome or Edge to share tab audio."
+  },
+  "tape": {
+    "caption": "30 秒ごとに送信し、暗号化して保存",
+    "count": "{{total}} 件中 {{saved}} 件保存済み"
+  },
+  "micCheck": {
+    "test": "マイクをテスト",
+    "listening": "確認中…",
+    "heard": "音声を確認できました",
+    "silent": "まだ音声がありません。マイクを確認してください。"
   }
 }

@@ -45,6 +45,12 @@ describe('cn (class name utility)', () => {
     expect(cn('text-red-500', 'text-blue-500')).toBe('text-blue-500')
   })
 
+  it('treats the named text roles as sizes, not colours', () => {
+    expect(cn('text-caption', 'text-muted-foreground')).toBe('text-caption text-muted-foreground')
+    expect(cn('text-title', 'text-base')).toBe('text-base')
+    expect(cn('text-sm', 'text-reading')).toBe('text-reading')
+  })
+
   it('handles array of classes', () => {
     expect(cn(['foo', 'bar'])).toBe('foo bar')
   })

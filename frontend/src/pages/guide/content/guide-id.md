@@ -21,6 +21,10 @@ Instalasi Anda memakai realm Keycloak bawaan `voxis-oss` dan klien `voxis-oss-we
 
 Pilih Unggah dari dasbor atau bilah samping. Pilih berkas audio, tunggu hingga pemindaian dan penyimpanan terenkripsi selesai, lalu mulai transkripsi dari pembaca berkas.
 
+Setelah ada transkrip yang selesai, dasbor dibuka dengan **Sesi terbaru**, yaitu sesi terbaru yang sudah selesai di organisasi Anda, lengkap dengan judul, durasi, jumlah pembicara, dan ringkasan yang sudah siap (di layar disebut briefing). Tekan **Buka** untuk membukanya.
+
+Selama berkas diunggah, barisnya menampilkan deretan langkah kecil dan menyebut langkah yang sedang berjalan: **Mengunggah**, **Mengenkripsi**, **Memindai malware**, lalu **Siap**.
+
 Di pustaka, Anda dapat mengubah rincian berkas, membuka pembaca, mencari audio dan transkrip, serta menghapus media milik Anda. Saat mencari isi transkrip, Voxis memeriksa transkrip yang sudah selesai per halaman terbatas. Gunakan **Muat lebih banyak kecocokan transkrip** saat tombol itu muncul untuk melanjutkan ke transkrip lama yang sudah selesai.
 
 Menghapus berkas bersifat permanen. Audio, transkrip, rangkuman, serta nama, judul, dan deskripsi berkas dihapus dari server. Tindakan ini tidak dapat dibatalkan. Salinan dalam cadangan organisasi yang sudah ada tetap tersimpan sampai cadangan itu dihapus.
@@ -34,6 +38,8 @@ Kamus kustom dan paket kosakata tidak tersedia dengan Speechmatics Melia 1.
 ## {#record} Rekam dan pulihkan
 
 Pilih Rekam untuk merekam mikrofon atau audio perangkat yang didukung di peramban. Jika halaman tertutup atau jaringan terputus, perekam menawarkan pemulihan sesi yang terputus saat Anda kembali.
+
+Sebelum mulai, Anda dapat menekan **Uji mikrofon** lalu berbicara untuk memastikan Voxis dapat mendengar Anda. Selama pengujian ini, tidak ada yang direkam.
 
 Sebelum terunggah, potongan rekaman Anda disimpan di peramban ini. Potongan itu dienkripsi, tetapi kuncinya disimpan di peramban yang sama, sehingga perlindungannya hanya mencegah intipan sekilas. Saat Anda keluar, Voxis menghapusnya. Jika masih ada potongan yang belum terunggah, Voxis memperingatkan Anda terlebih dahulu. Potongan itu juga dihapus saat orang lain masuk di peramban ini. Di komputer bersama, tunggu hingga unggahan selesai, lalu keluar.
 
