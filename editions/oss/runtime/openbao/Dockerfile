@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 
-ARG OPENBAO_IMAGE=quay.io/openbao/openbao@sha256:a60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889
+ARG OPENBAO_IMAGE=quay.io/openbao/openbao@sha256:09f1eaaee351c329d75a5a89654d6e1ad4792998650c3cbf0c3513a76d9d9b6e
 FROM ${OPENBAO_IMAGE}
 
 LABEL org.opencontainers.image.title="Voxis-OSS OpenBao runtime" \

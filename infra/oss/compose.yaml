@@ -18,14 +18,14 @@ x-postgres-runtime: &postgres-runtime
 x-caddy-runtime: &caddy-runtime
   build:
     context: ../../editions/oss/runtime/caddy
-  image: ${VOXIS_OSS_CADDY_IMAGE:-voxis-oss-caddy:2.11.4-voxis.1-e2eee6a7}
+  image: ${VOXIS_OSS_CADDY_IMAGE:-voxis-oss-caddy:2.11.7-voxis.1-72dd0fb0}
 
 x-openbao-runtime: &openbao-runtime
   build:
     context: ../../editions/oss/runtime/openbao
     args:
       OPENBAO_IMAGE: ${OPENBAO_IMAGE:?set OPENBAO_IMAGE to a locked digest}
-  image: ${VOXIS_OSS_OPENBAO_IMAGE:-voxis-oss-openbao:2.6.3-security}
+  image: ${VOXIS_OSS_OPENBAO_IMAGE:-voxis-oss-openbao:2.6.5-security}
 
 x-clamav-runtime: &clamav-runtime
   build:

@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1.7
 
 ARG NODE_IMAGE=node@sha256:6dac556d980b7f0e5498d08f08cee0ca67798b4ad6c23964a9214920e67758d0
-ARG CADDY_IMAGE=voxis-oss-caddy:2.11.4-voxis.1-e2eee6a7
+ARG CADDY_IMAGE=voxis-oss-caddy:2.11.7-voxis.1-72dd0fb0
 
 FROM ${NODE_IMAGE} AS build
 WORKDIR /src

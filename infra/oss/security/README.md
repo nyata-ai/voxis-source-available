@@ -31,8 +31,8 @@ and license text in `THIRD_PARTY_NOTICES.md` when preparing a release.
 
 ## Keycloak image dispositions
 
-`keycloak-26.7.5.openvex.json` records the one reviewed HIGH or CRITICAL
-Keycloak library match from the runtime built from the locked Keycloak
+`keycloak-26.7.5.openvex.json` records the two reviewed HIGH or CRITICAL
+Keycloak library matches from the runtime built from the locked Keycloak
 distribution and Temurin 21 JRE images. Before scanning, the workflow binds
 the statement to a package found in that runtime's SBOM. It fails if the
 reviewed package disappears, changes, or a new HIGH or CRITICAL match appears.
@@ -68,30 +68,46 @@ The upstream `26.7.5` source tag resolves to commit
 list as the fixed build for CVE-2025-59250. Trivy normalizes that package
 version to 13.2.1 and still matches the advisory range.
 
+### Guava CVE-2026-102554
+
+Keycloak 26.7.5 ships Guava 33.5.0. The fix is in 33.7.2, and Keycloak 26.8.1
+still ships an affected 33.6.0, so upgrading would not clear this match. The
+advisory needs Java native deserialization of an attacker-supplied
+`CompactHashMap`, `CompactHashSet`, or `MapMakerInternalMap`.
+
+Among Keycloak's own jars, only Kerberos federation, the Twitter identity
+provider, and two principal classes use `ObjectInputStream`. The reviewed realm
+defines no federation or identity providers, and Keycloak is reachable only
+through the proxy on internal Compose networks. This review did not trace every
+one of the 50 bundled jars that use `ObjectInputStream`, so it is a judgement
+about this deployment and not a proof. Replace the statement when Keycloak ships
+Guava 33.7.2 or later.
+
 ## OpenBao image dispositions
 
-`openbao-2.6.3.openvex.json` records the five HIGH matches that Trivy 0.74
-reports for the runtime built from the locked OpenBao 2.6.3 image
-(`quay.io/openbao/openbao@sha256:a60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889`,
-amd64 manifest `sha256:99c8dd178200d9a5f1a0420d6b1923514280e31e9271bdd92c69f765738c42aa`).
-All five are on the OpenBao module itself, which Trivy names by the pseudo-version
-`v0.0.0-20260923163753-63a65e6b9075` of release commit
-`63a65e6b907589dbb952c371a70260a065bf8bd7`. Each advisory was fixed in an
-earlier release (CVE-2024-8185 and CVE-2024-9180 in 2.0.3, CVE-2025-59043 in
-2.4.1, CVE-2025-64761 in 2.4.4, CVE-2026-45808 in 2.5.4), so 2.6.3 does not
-contain the vulnerable code. The scan found no CRITICAL row. The Go dependency
-findings that 2.6.2 carried (go-archive, x/crypto SSH, and two gRPC advisories)
-are gone: 2.6.3 ships the fixed module versions.
+`openbao-2.6.5.openvex.json` records the HIGH matches that Trivy 0.74 reports
+for the locked OpenBao 2.6.5 image
+(`quay.io/openbao/openbao@sha256:09f1eaaee351c329d75a5a89654d6e1ad4792998650c3cbf0c3513a76d9d9b6e`,
+amd64 manifest `sha256:f97a61a1814dccc70d04d45d15fed1827442f82d3848c3579a5e951c979d045b`).
 
-2.6.3 fixes GHSA-j6wc-jpvg-xfxq (plugin command path), GHSA-cg72-x35g-xfp8,
-GHSA-hr5j-3j78-4vh2, GHSA-mjch-vcw3-hhmf, and further advisories listed in the
-[2.6.3 release notes](https://github.com/openbao/openbao/releases/tag/v2.6.3).
+Five are on the OpenBao module itself, which Trivy names by the pseudo-version
+`v0.0.0-20261026193202-b814361ea234` of release commit
+`b814361ea23440b881b43882e9d1bd950342471c`. Each advisory was fixed in an
+earlier release (CVE-2024-8185 and CVE-2024-9180 in 2.0.3, CVE-2025-59043 in
+2.4.1, CVE-2025-64761 in 2.4.4, CVE-2026-45808 in 2.5.4), so 2.6.5 does not
+contain the vulnerable code.
+
+The sixth is CVE-2026-116587, on go-jose v3.0.5 and v4.1.4. Unlike the others,
+this code is linked into `bao`, and OpenBao 2.7.2 also still ships these
+versions. The advisory needs an attacker-supplied RSA JWK. The initialization
+policy enables only the transit engine and AppRole auth, so no JWT or OIDC auth
+method parses external JWKs. Replace this statement when OpenBao ships go-jose
+4.1.6 or later. An operator who enables JWT or OIDC auth is outside this review.
 
 Before each scan, `render-vex-for-image.py` binds every statement to the exact
 package PURL found in the scanned runtime. A changed module version or a new
-finding fails the scan. The derived runtime measured for this review was
-`sha256:a91ffcb023fc9cfb5a5d21d71fbdf71315e717a2f54a0dce047a982e54b276be`; a
-rebuild refreshes Alpine packages and gets a new image ID.
+finding fails the scan. A rebuild refreshes Alpine packages and gets a new image
+ID.
 
 The runtime is hardened in Compose: UID 100, read-only root filesystem, no Linux
 capabilities, and only the `secrets` network, which the API alone shares. The
@@ -104,21 +120,26 @@ Dockerfile, Compose file, listener configuration, and initialization policy
 (`scripts/init-openbao.sh` and `scripts/lib/openbao.sh`). Review every
 statement if that guard fails.
 
+## Caddy image dispositions
+
+`caddy-2.11.7.openvex.json` records one HIGH match for the Caddy and web images:
+CVE-2026-116587 on go-jose v3.0.5. That major version has no fixed release.
+The build raises go-jose v4 to 4.1.7, so only v3 remains.
+
+The code is linked into `caddy`, because the embedded Smallstep authority used
+by `caddypki` depends on it. JWK parsing belongs to the ACME server and PKI app.
+No reviewed configuration runs either, and the admin API is off. The security
+job fails if `acme_server` or `pki` appears in a Caddy configuration. An operator
+who enables them is outside this review.
+
 ## Local model image dispositions
 
-The release review covers 51 raw HIGH or CRITICAL matches across 12 CVEs from
-derived model image ID
-`sha256:21389eaa2d93f68c5d25f406be81f9700d8cb2124769bb4ab2bded07ebefd743`.
-The raw report remains separate; its SHA-256 is
-`d0d96adad9fd77dde4d360e22299e5d9921fe2990a2e882850c3a7c8f9c0ad1b`.
-This evidence applies to Dockerfile SHA-256
-`2ded27b51d165853a07877b3241904b7bc27522662d75f2cd434ffde6053818f`,
-Compose SHA-256
-`f17cbf02ea783b5d92596a8160661a2e956aec6f39268c0ff028b4176a1e98a9`,
-model environment SHA-256
-`16a29ecc93d9ba599f3e302f008e665f8545574fa643cd9a40f76369d0f8b95e`,
-and Gemma request builder SHA-256
-`2c0ed26ef67cc9c828659091444eab802a138c3a57c9612965e8ed8bfc58c941`.
+The 2 November 2026 review covers the 11 CVEs that Trivy 0.74 reports for the
+packages this Dockerfile installs on Debian 13.7, measured from its runtime
+stage. Two earlier Curl rows, CVE-2026-8286 and CVE-2026-8927, no longer match
+now that the image installs Curl `8.14.1-2+deb13u7`. CVE-2026-119373 is new.
+The attack-surface guard binds this review to the Dockerfile, Compose file,
+model environment, and Gemma request builder.
 Before each scan, `render-vex-for-image.py` replaces only the VEX product with
 Trivy's OCI package identifier for that image. The reviewed package PURLs stay
 exact, so a package-version change or a new CVE fails the scan.
@@ -136,10 +157,11 @@ role-and-content text messages in
 transcript cannot add an `image_url`, file, or model-download field.
 
 The Curl rows require the missing options or protocols described in
-[CVE-2026-12064](https://curl.se/docs/CVE-2026-12064.html),
-[CVE-2026-8286](https://curl.se/docs/CVE-2026-8286.html),
-[CVE-2026-8458](https://curl.se/docs/CVE-2026-8458.html), and
-[CVE-2026-8927](https://curl.se/docs/CVE-2026-8927.html). The remaining rows
+[CVE-2026-12064](https://curl.se/docs/CVE-2026-12064.html) and
+[CVE-2026-8458](https://curl.se/docs/CVE-2026-8458.html). CVE-2026-119373 needs
+crafted SQLite FTS5 data: only `liblastlog2` depends on `libsqlite3` here,
+`libcurl` and `libgomp` do not link it, and llama.cpp has no SQLite code at the
+reviewed revision. The remaining rows
 require `infocmp` [CVE-2025-69720](https://ubuntu.com/security/CVE-2025-69720),
 the absent `systemd-homed` daemon, pathname-based libacl use
 [CVE-2026-54369](https://linux.oracle.com/errata/ELSA-2026-42736.html), local

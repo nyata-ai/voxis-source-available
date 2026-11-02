@@ -2,7 +2,7 @@
 
 # This image deliberately differs from the commercial distroless image. OSS
 # production requires bubblewrap to isolate ffprobe, ffmpeg, and DeepFilterNet.
-ARG GO_IMAGE=golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+ARG GO_IMAGE=golang@sha256:23ce71337b726608afb1bc00986e630a05034a87a87ea1fc2cd1ae5cf33387eb
 ARG ALPINE_IMAGE=alpine@sha256:79ff19e9084a00eece421b2523fb93e22d730e2c0e525905de047e848e56d95f
 ARG FFMPEG_IMAGE=mwader/static-ffmpeg:9.0.1@sha256:54e55b0cb8f672870fc38ceb2e6c411855cb3b39c505f5f3b2505ee01ed5f2b7
 ARG BWRAP_VERSION=0.12.0

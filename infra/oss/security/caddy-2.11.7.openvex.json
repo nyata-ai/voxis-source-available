@@ -1,0 +1,28 @@
+{
+  "@context": "https://openvex.dev/ns/v0.2.0",
+  "@id": "https://github.com/nyata-ai/voxis-source-available/blob/main/infra/oss/security/caddy-2.11.7.openvex.json",
+  "author": "Voxis Source-Available maintainers",
+  "timestamp": "2026-11-02T00:00:00Z",
+  "version": 1,
+  "statements": [
+    {
+      "vulnerability": {
+        "name": "CVE-2026-116587"
+      },
+      "products": [
+        {
+          "@id": "pkg:oci/voxis-oss-caddy?arch=amd64",
+          "subcomponents": [
+            {
+              "@id": "pkg:golang/github.com/go-jose/go-jose/v3@v3.0.5"
+            }
+          ]
+        }
+      ],
+      "status": "not_affected",
+      "justification": "vulnerable_code_not_in_execute_path",
+      "status_notes": "The code is linked into caddy, and go-jose v3 has no fixed release. Review when Caddy, either Caddy configuration, or this module changes. The security job fails if a configuration enables the ACME server or PKI app.",
+      "impact_statement": "Caddy links go-jose v3 through its embedded Smallstep authority, which caddypki uses. No reviewed configuration runs the ACME server or PKI app that would parse JWKs, and the Caddy admin API is off."
+    }
+  ]
+}

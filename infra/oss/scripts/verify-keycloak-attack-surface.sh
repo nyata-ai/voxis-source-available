@@ -8,11 +8,11 @@ caddy_file="$root/caddy/Caddyfile"
 env_file="$root/.env.example"
 runtime_dockerfile=${OSS_KEYCLOAK_RUNTIME_DOCKERFILE:-"$root/../../editions/oss/runtime/keycloak/Dockerfile"}
 expected_image='quay.io/keycloak/keycloak@sha256:6529db34610ce6328824218dce3bbe55c4ba4757bc5c8a09b5a4c746e28b6e9d'
-expected_temurin_image='eclipse-temurin@sha256:7fd597bf48c8bb13a7a3fb227f8366dec0423f78775d4b4f7e30409204af8627'
-expected_compose_sha256='f2ae807555069e8da0a090c4729f9e308fa3509752cf08466060842fc3b8f5dd'
+expected_temurin_image='eclipse-temurin@sha256:db724162e4ff5f71fa0a2815026314d9e5e0e9a139f49be1d4717e6930e93341'
+expected_compose_sha256='898e80c60a3177c7ffaf0c761691c0c82bcd7492ea334afe6bb24c0decbd35d4'
 expected_realm_sha256='c287ba158d3f807d3a2636d18fb04be723638a587846fb6e3699279159b3f88b'
 expected_caddy_sha256='12f5e85785161f2f7d88c04efd69659b0c52e6e1ba2b91f57ff8ab82b039bc3b'
-expected_runtime_dockerfile_sha256='3b773d2b98d39d70a3beb3cd9a44ff91014733c173c9a03c2a6a8a94011c7e6d'
+expected_runtime_dockerfile_sha256='cf45d9fe7c2e2f799c791b728e9160dba9ad639e113f62759a06f1cc0c1b022f'
 
 require_sha256() {
   local file=$1 expected=$2 description=$3 actual
