@@ -16,9 +16,9 @@ images:
     amd64_manifest: sha256:abc9cb88a5587630d7f915f47b23b0668fe250fbfc6457aa4d52b534c1bbf73f
     observed_on: 2026-09-14
   golang:
-    reference: golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
-    source_tag: golang:1.25-bookworm
-    observed_on: 2026-09-13
+    reference: golang@sha256:23ce71337b726608afb1bc00986e630a05034a87a87ea1fc2cd1ae5cf33387eb
+    source_tag: golang:1.26-bookworm
+    observed_on: 2026-11-02
   node:
     reference: node@sha256:6dac556d980b7f0e5498d08f08cee0ca67798b4ad6c23964a9214920e67758d0
     source_tag: node:24-bookworm
@@ -40,19 +40,19 @@ images:
     amd64_manifest: sha256:6529db34610ce6328824218dce3bbe55c4ba4757bc5c8a09b5a4c746e28b6e9d
     observed_on: 2026-10-02
   temurin_21_jre:
-    reference: eclipse-temurin@sha256:7fd597bf48c8bb13a7a3fb227f8366dec0423f78775d4b4f7e30409204af8627
+    reference: eclipse-temurin@sha256:db724162e4ff5f71fa0a2815026314d9e5e0e9a139f49be1d4717e6930e93341
     source_tag: eclipse-temurin:21-jre-noble
-    amd64_manifest: sha256:7fd597bf48c8bb13a7a3fb227f8366dec0423f78775d4b4f7e30409204af8627
-    observed_on: 2026-10-02
+    amd64_manifest: sha256:db724162e4ff5f71fa0a2815026314d9e5e0e9a139f49be1d4717e6930e93341
+    observed_on: 2026-11-02
   openbao:
-    reference: quay.io/openbao/openbao@sha256:a60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889
-    source_tag: quay.io/openbao/openbao:2.6.3
-    source_revision: 63a65e6b907589dbb952c371a70260a065bf8bd7
-    amd64_manifest: sha256:99c8dd178200d9a5f1a0420d6b1923514280e31e9271bdd92c69f765738c42aa
+    reference: quay.io/openbao/openbao@sha256:09f1eaaee351c329d75a5a89654d6e1ad4792998650c3cbf0c3513a76d9d9b6e
+    source_tag: quay.io/openbao/openbao:2.6.5
+    source_revision: b814361ea23440b881b43882e9d1bd950342471c
+    amd64_manifest: sha256:f97a61a1814dccc70d04d45d15fed1827442f82d3848c3579a5e951c979d045b
     runtime_security_floors:
       libcrypto3: 3.5.8-r0
       libssl3: 3.5.8-r0
-    observed_on: 2026-09-24
+    observed_on: 2026-11-02
   clamav:
     reference: clamav/clamav@sha256:71fbb76b397cd84a90043caf1178a7f81bd0c131a031e7b0619afd721fbfad41
     source_tag: clamav/clamav:1.4.6
@@ -61,21 +61,22 @@ images:
       libssl3: 3.5.8-r0
     observed_on: 2026-09-14
   caddy:
-    source_tag: v2.11.4
-    source_revision: e2eee6a7fce366321294c9c2a79f3146891dcbdf
-    source_archive: https://github.com/caddyserver/caddy/archive/e2eee6a7fce366321294c9c2a79f3146891dcbdf.tar.gz
-    source_sha256: a593bd7077c76102ca76d19287a5e247d4e359dd67eddbc933f865afd3c131eb
-    build_image: golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+    source_tag: v2.11.7
+    source_revision: 72dd0fb067f6d7826c7f79907670ba4a713bfe37
+    source_archive: https://github.com/caddyserver/caddy/archive/72dd0fb067f6d7826c7f79907670ba4a713bfe37.tar.gz
+    source_sha256: e86c49311c0c9f7e9b3b80527f0139e5739dfe28effeaa41c444dd743f0bbd7e
+    build_image: golang@sha256:23ce71337b726608afb1bc00986e630a05034a87a87ea1fc2cd1ae5cf33387eb
     runtime_image: alpine@sha256:79ff19e9084a00eece421b2523fb93e22d730e2c0e525905de047e848e56d95f
     module_floors:
-      golang.org/x/crypto: v0.55.0
-      golang.org/x/net: v0.58.0
-      golang.org/x/text: v0.41.0
+      github.com/go-jose/go-jose/v4: v4.1.7
+      golang.org/x/crypto: v0.58.0
+      golang.org/x/net: v0.62.0
+      golang.org/x/text: v0.43.0
       google.golang.org/grpc: v1.83.2
     runtime_security_floors:
       libcrypto3: 3.5.8-r0
       libssl3: 3.5.8-r0
-    observed_on: 2026-09-13
+    observed_on: 2026-11-02
 runtime:
   postgres:
     gosu:
@@ -83,7 +84,7 @@ runtime:
       source_archive: https://github.com/tianon/gosu/archive/6456aaa0f3c854d199d0f037f068eb97515b7513.tar.gz
       sha256: 33d7537d588ea49458b9509bcf4554bdf5ceacc66da71e5caa1058ea3b689c3b
       license: Apache-2.0
-      build_image: golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+      build_image: golang@sha256:23ce71337b726608afb1bc00986e630a05034a87a87ea1fc2cd1ae5cf33387eb
     runtime_security_floors:
       libcrypto3: 3.5.8-r0
       libssl3: 3.5.8-r0

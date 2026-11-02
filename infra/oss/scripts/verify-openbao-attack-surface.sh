@@ -8,13 +8,13 @@ config_file="$root/openbao/openbao.hcl"
 init_file="$root/scripts/init-openbao.sh"
 lib_file="$root/scripts/lib/openbao.sh"
 runtime_file=$(CDPATH= cd -- "$root/../../editions/oss/runtime/openbao" && pwd)/Dockerfile
-expected_image='quay.io/openbao/openbao@sha256:a60afafda36337abe833c4a63894bf1095098f29abea4091e7e555a33dd52889'
-expected_env_sha256='47470b479fb35ed2ac6b3cd6aab856b542f49771f98f23b229698baa7fcd512c'
-expected_compose_sha256='f2ae807555069e8da0a090c4729f9e308fa3509752cf08466060842fc3b8f5dd'
+expected_image='quay.io/openbao/openbao@sha256:09f1eaaee351c329d75a5a89654d6e1ad4792998650c3cbf0c3513a76d9d9b6e'
+expected_env_sha256='42881aef7fe23c973a814c449f7658197a3763e4498504c682ace2d99bcfb958'
+expected_compose_sha256='898e80c60a3177c7ffaf0c761691c0c82bcd7492ea334afe6bb24c0decbd35d4'
 expected_config_sha256='e6884ea2f45381e775eb15f1e33bacc097b0c15976ada30e52d36bbaf00af536'
 expected_init_sha256='f8ffba4c1c2be71d4d2a80f954f11ad90769de24ee71d193f73e428de3303feb'
 expected_lib_sha256='b330052fcff83b9babd0656f53404ec0a1a391fc8b4ffa68f5c11ff5e237c7e3'
-expected_runtime_sha256='30ab6d5a669783c1ab0b3023db4fdf7bcd11348f82335c33545984e901e78823'
+expected_runtime_sha256='39c3831e6dfef2e866267527ddcb75bb2f6622a11672cd9a2665fcea91de368c'
 
 require_sha256() {
   local file=$1 expected=$2 description=$3 actual
@@ -27,7 +27,7 @@ require_sha256() {
 
 openbao_image=$(awk -F= '$1 == "OPENBAO_IMAGE" { print $2; exit }' "$env_file")
 [[ "$openbao_image" == "$expected_image" ]] || {
-  printf 'The reviewed OpenBao attack surface applies only to the pinned 2.6.3 image.\n' >&2
+  printf 'The reviewed OpenBao attack surface applies only to the pinned 2.6.5 image.\n' >&2
   exit 1
 }
 

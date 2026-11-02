@@ -1,12 +1,12 @@
 # syntax=docker/dockerfile:1.7
 
-ARG GO_IMAGE=golang@sha256:3b4a11519ad929d1e1d261a12cff056f0c85b735253d7d861346b9c6f8b36437
+ARG GO_IMAGE=golang@sha256:23ce71337b726608afb1bc00986e630a05034a87a87ea1fc2cd1ae5cf33387eb
 ARG ALPINE_IMAGE=alpine@sha256:79ff19e9084a00eece421b2523fb93e22d730e2c0e525905de047e848e56d95f
-ARG CADDY_VERSION=2.11.4
-ARG CADDY_REVISION=e2eee6a7fce366321294c9c2a79f3146891dcbdf
-ARG CADDY_CUSTOM_VERSION=v2.11.4-voxis.1+e2eee6a7
-ARG CADDY_SOURCE_ARCHIVE=https://github.com/caddyserver/caddy/archive/e2eee6a7fce366321294c9c2a79f3146891dcbdf.tar.gz
-ARG CADDY_SOURCE_SHA256=a593bd7077c76102ca76d19287a5e247d4e359dd67eddbc933f865afd3c131eb
+ARG CADDY_VERSION=2.11.7
+ARG CADDY_REVISION=72dd0fb067f6d7826c7f79907670ba4a713bfe37
+ARG CADDY_CUSTOM_VERSION=v2.11.7-voxis.1+72dd0fb0
+ARG CADDY_SOURCE_ARCHIVE=https://github.com/caddyserver/caddy/archive/72dd0fb067f6d7826c7f79907670ba4a713bfe37.tar.gz
+ARG CADDY_SOURCE_SHA256=e86c49311c0c9f7e9b3b80527f0139e5739dfe28effeaa41c444dd743f0bbd7e
 
 FROM ${GO_IMAGE} AS build
 ARG CADDY_SOURCE_ARCHIVE
@@ -16,7 +16,7 @@ ENV GOTOOLCHAIN=local
 WORKDIR /src
 ADD --checksum=sha256:${CADDY_SOURCE_SHA256} ${CADDY_SOURCE_ARCHIVE} /tmp/caddy.tar.gz
 RUN tar -xzf /tmp/caddy.tar.gz --strip-components=1 \
-    && go get golang.org/x/crypto@v0.55.0 golang.org/x/net@v0.58.0 golang.org/x/text@v0.41.0 google.golang.org/grpc@v1.83.2 \
+    && go get github.com/go-jose/go-jose/v4@v4.1.7 golang.org/x/crypto@v0.58.0 golang.org/x/net@v0.62.0 golang.org/x/text@v0.43.0 google.golang.org/grpc@v1.83.2 \
     && go mod verify \
     && go mod tidy \
     && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -trimpath -ldflags="-s -w -X github.com/caddyserver/caddy/v2.CustomVersion=${CADDY_CUSTOM_VERSION}" -o /out/caddy ./cmd/caddy \
@@ -37,7 +37,7 @@ LABEL org.opencontainers.image.title="Voxis-OSS Caddy runtime" \
       org.opencontainers.image.licenses="Apache-2.0" \
       org.opencontainers.image.source="${CADDY_SOURCE_ARCHIVE}" \
       org.voxis.runtime.caddy.source-sha256="${CADDY_SOURCE_SHA256}" \
-      org.voxis.runtime.caddy.module-floors="golang.org/x/crypto=v0.55.0,golang.org/x/net=v0.58.0,golang.org/x/text=v0.41.0,google.golang.org/grpc=v1.83.2"
+      org.voxis.runtime.caddy.module-floors="github.com/go-jose/go-jose/v4=v4.1.7,golang.org/x/crypto=v0.58.0,golang.org/x/net=v0.62.0,golang.org/x/text=v0.43.0,google.golang.org/grpc=v1.83.2"
 
 RUN apk add --no-cache ca-certificates 'libcrypto3>=3.5.8-r0' 'libssl3>=3.5.8-r0' \
     && install -d --mode=0755 /etc/caddy /usr/share/licenses/caddy /usr/share/doc/caddy /usr/share/src/caddy \

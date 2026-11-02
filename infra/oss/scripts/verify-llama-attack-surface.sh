@@ -6,8 +6,8 @@ env_file="$root/.env.example"
 compose_file="$root/compose.yaml"
 runtime_file=$(CDPATH= cd -- "$root/../../editions/oss/runtime/llama" && pwd)/Dockerfile
 request_builder="$root/../../backend/internal/adapter/gemma/client.go"
-expected_env_sha256='47470b479fb35ed2ac6b3cd6aab856b542f49771f98f23b229698baa7fcd512c'
-expected_compose_sha256='f2ae807555069e8da0a090c4729f9e308fa3509752cf08466060842fc3b8f5dd'
+expected_env_sha256='42881aef7fe23c973a814c449f7658197a3763e4498504c682ace2d99bcfb958'
+expected_compose_sha256='898e80c60a3177c7ffaf0c761691c0c82bcd7492ea334afe6bb24c0decbd35d4'
 expected_runtime_sha256='2ded27b51d165853a07877b3241904b7bc27522662d75f2cd434ffde6053818f'
 expected_request_builder_sha256='a197020bf02fee12741035e95e654bd64d8e7139fc3ac07385c74a9adf8d403c'
 
